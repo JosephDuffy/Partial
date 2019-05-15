@@ -1,3 +1,4 @@
+import CoreGraphics
 import Quick
 import Nimble
 import Partial
@@ -7,6 +8,7 @@ final class Tests: QuickSpec {
     override func spec() {
         describe("Partial") {
             context("wrapping a CGSize") {
+                // TODO: Change to something in Foundation (to support Linux)
                 var partial: Partial<CGSize>!
                 
                 beforeEach {
