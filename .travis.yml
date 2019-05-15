@@ -1,0 +1,72 @@
+os: osx
+osx_image: xcode10.2
+language: objective-c
+
+cache:
+  bundler: true
+  directories:
+    - .build
+    - Carthage
+
+stages:
+  - "Prepare Cache"
+  - "Test"
+  - name: "Deploy"
+    if: branch = master AND tag IS present
+
+jobs:
+  include:
+    - stage: "Prepare Cache"
+      install:
+        - carthage bootstrap --platform iOS,macOS,tvOS --cache-builds
+        - swift build --skip-update --build-tests
+        - swift build --skip-update --configuration release --product danger-swift
+      script: skip
+    - stage: "Test"
+      name: "Unit tests (macOS, SPM)"
+      install: skip
+      script: swift test
+    - stage: "Test"
+      name: "Unit tests (iOS, Xcode)"
+      install: skip
+      xcode_project: Partial.xcodeproj
+      xcode_scheme: Partial-iOS
+      xcode_destination: platform=iOS Simulator,OS=12.1,name=iPhone XS
+    - stage: "Test"
+      name: "Unit tests (macOS, Xcode)"
+      install: skip
+      xcode_project: Partial.xcodeproj
+      xcode_scheme: Partial-macOS
+      xcode_destination: platform=macOS
+    - stage: "Test"
+      name: "Unit tests (tvOS, Xcode)"
+      install: skip
+      xcode_project: Partial.xcodeproj
+      xcode_scheme: Partial-tvOS
+      xcode_destination: platform=tvOS Simulator,OS=12.1,name=Apple TV 4K
+    - stage: "Test"
+      name: "pod lib lint"
+      if: type = pull_request
+      script: bundle exec pod lib lint
+    - stage: "Test"
+      name: "Danger"
+      if: type = pull_request
+      install: npm install -g danger
+      script: swift run danger-swift ci
+    - stage: "Deploy"
+      name: "GitHub Release"
+      install: skip
+      script: skip
+      before_deploy: carthage build --archive --cache-builds --platform iOS
+      deploy:
+        provider: releases
+        prerelease: true
+        api_key: $GITHUB_TOKEN
+        file: Partial.framework.zip
+        skip_cleanup: true
+    - stage: "Deploy"
+      name: "CocoaPods release"
+      script: skip
+      deploy:
+        provider: script
+        script: bundle exec pod trunk push
