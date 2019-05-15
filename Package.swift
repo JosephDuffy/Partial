@@ -7,9 +7,10 @@ let package = Package(
         .library(name: "Partial", type: .dynamic, targets: ["Partial"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/danger/swift.git", from: "1.0.0"),
-        .package(url: "https://github.com/Quick/Quick.git", from: "2.0.0"),
-        .package(url: "https://github.com/Quick/Nimble.git", from: "8.0.0"),
+        .package(url: "https://github.com/danger/swift.git", from: "1.0.0"), // dev
+        .package(url: "https://github.com/f-meloni/Rocket", from: "0.1.0"), // dev
+        .package(url: "https://github.com/Quick/Quick.git", from: "2.0.0"), // dev
+        .package(url: "https://github.com/Quick/Nimble.git", from: "8.0.0"), // dev
     ],
     targets: [
         .target(name: "Partial", path: "Source"),
