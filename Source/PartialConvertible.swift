@@ -6,7 +6,7 @@ public protocol PartialConvertible {
 
 extension Partial where Wrapped: PartialConvertible {
     
-    func unwrappedValue() throws -> Wrapped {
+    public func unwrappedValue() throws -> Wrapped {
         return try Wrapped(partial: self)
     }
     
@@ -46,13 +46,31 @@ extension Partial {
         throw Error.missingKey(key)
     }
     
+    public func partialValue<ValueType>(for key: KeyPath<Wrapped, ValueType>) throws -> Partial<ValueType> where ValueType: PartialConvertible {
+        if let value = try? self.value(for: key) {
+            return Partial<ValueType>(backingValue: value)
+        } else if let partial = values[key] as? Partial<ValueType> {
+            return partial
+        } else {
+            return Partial<ValueType>()
+        }
+    }
+    
+    public func partialValue<ValueType>(for key: KeyPath<Wrapped, ValueType?>) throws -> Partial<ValueType> where ValueType: PartialConvertible {
+        if let value = try? self.value(for: key) {
+            return Partial<ValueType>(backingValue: value)
+        } else if let partial = values[key] as? Partial<ValueType> {
+            return partial
+        } else {
+            return Partial<ValueType>()
+        }
+    }
+    
     public subscript<ValueType>(key: KeyPath<Wrapped, ValueType>) -> Partial<ValueType> where ValueType: PartialConvertible {
         get {
-            if let value = try? self.value(for: key) {
-                return Partial<ValueType>(backingValue: value)
-            } else if let partial = values[key] as? Partial<ValueType> {
-                return partial
-            } else {
+            do {
+                return try self.partialValue(for: key)
+            } catch {
                 return Partial<ValueType>()
             }
         }
@@ -63,11 +81,9 @@ extension Partial {
     
     public subscript<ValueType>(key: KeyPath<Wrapped, ValueType?>) -> Partial<ValueType> where ValueType: PartialConvertible {
         get {
-            if let value = try? self.value(for: key) {
-                return Partial<ValueType>(backingValue: value)
-            } else if let partial = values[key] as? Partial<ValueType> {
-                return partial
-            } else {
+            do {
+                return try self.partialValue(for: key)
+            } catch {
                 return Partial<ValueType>()
             }
         }
