@@ -11,8 +11,6 @@ public struct Partial<Wrapped>: CustomStringConvertible, CustomDebugStringConver
 
     internal var backingValue: Wrapped? = nil
 
-    internal var updateHandlers: [PartialKeyPath<Wrapped>: [(Any?) -> Void]] = [:]
-
     public init(backingValue: Wrapped? = nil) {
         self.backingValue = backingValue
     }
@@ -47,7 +45,6 @@ public struct Partial<Wrapped>: CustomStringConvertible, CustomDebugStringConver
 
     public mutating func set<Value>(value: Value, for key: KeyPath<Wrapped, Value>) {
         values[key] = value
-        updateHandlers[key]?.forEach { $0(value as Any) }
     }
 
     public mutating func set<Value>(value: Value?, for key: KeyPath<Wrapped, Value?>) {
@@ -58,12 +55,10 @@ public struct Partial<Wrapped>: CustomStringConvertible, CustomDebugStringConver
          a `backingValue` is set and a key is explicitly set to `nil`
          */
         values.updateValue(value, forKey: key)
-        updateHandlers[key]?.forEach { $0(value as Any) }
     }
 
     public mutating func removeValue<Value>(for key: KeyPath<Wrapped, Value>) {
         values.removeValue(forKey: key)
-        updateHandlers[key]?.forEach { $0(nil) }
     }
 
     public subscript<Value>(key: KeyPath<Wrapped, Value>) -> Value? {
