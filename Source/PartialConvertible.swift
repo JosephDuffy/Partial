@@ -57,7 +57,7 @@ extension Partial {
             }
         }
         set {
-            values.updateValue(newValue, forKey: key)
+            set(value: newValue, for: key)
         }
     }
     
@@ -72,7 +72,7 @@ extension Partial {
             }
         }
         set {
-            values.updateValue(newValue, forKey: key)
+            set(value: newValue, for: key)
         }
     }
     

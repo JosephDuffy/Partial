@@ -7,9 +7,11 @@ public struct Partial<Wrapped>: CustomStringConvertible, CustomDebugStringConver
         case invalidValueType(key: KeyPath<Wrapped, ValueType>, actualValue: Any)
     }
     
-    internal var values: [PartialKeyPath<Wrapped>: Any?] = [:]
+    internal private(set) var values: [PartialKeyPath<Wrapped>: Any?] = [:]
     
     internal var backingValue: Wrapped? = nil
+    
+    private var updateHandlers: [PartialKeyPath<Wrapped>: [(Any) -> Void]] = [:]
     
     public init(backingValue: Wrapped? = nil) {
         self.backingValue = backingValue
@@ -43,17 +45,37 @@ public struct Partial<Wrapped>: CustomStringConvertible, CustomDebugStringConver
         throw Error.missingKey(key)
     }
     
+    public mutating func set<Value>(value: Value, for key: KeyPath<Wrapped, Value>) {
+        values[key] = value
+        updateHandlers[key]?.forEach { $0(value as Any) }
+    }
+    
+    public mutating func set<Value>(value: Value?, for key: KeyPath<Wrapped, Value>) {
+        /**
+         Uses `updateValue(_:forKey:)` to ensure the value is set to `nil`.
+         When the subscript is used the key is removed from the dictionary.
+         This ensures that the `backingValue`'s value will not be used when
+         a `backingValue` is set and a key is explicitly set to `nil`
+         */
+        values.updateValue(value, forKey: key)
+        updateHandlers[key]?.forEach { $0(value as Any) }
+    }
+    
+    public mutating func set<Value>(value: Partial<Value>, for key: KeyPath<Wrapped, Value>) where Value: PartialConvertible {
+        values[key] = value
+        updateHandlers[key]?.forEach { $0(value as Any) }
+    }
+    
+    public mutating func set<Value>(value: Partial<Value>, for key: KeyPath<Wrapped, Value?>) where Value: PartialConvertible {
+        values[key] = value
+        updateHandlers[key]?.forEach { $0(value as Any) }
+    }
+    
     public subscript<ValueType>(key: KeyPath<Wrapped, ValueType>) -> ValueType? {
         get {
             return try? value(for: key)
         }
         set {
-            /**
-             Uses `updateValue(_:forKey:)` to ensure the value is set to `nil`.
-             When the subscript is used the key is removed from the dictionary.
-             This ensures that the `backingValue`'s value will not be used when
-             a `backingValue` is set and a key is explicitly set to `nil`
-             */
             values.updateValue(newValue, forKey: key)
         }
     }
