@@ -1,12 +1,12 @@
-class PartialBuilder<Wrapped> {
+public class PartialBuilder<Wrapped> {
     
-    var partial: Partial<Wrapped>
+    public var partial: Partial<Wrapped>
     
-    init(partial: Partial<Wrapped> = Partial<Wrapped>()) {
+    public init(partial: Partial<Wrapped> = Partial<Wrapped>()) {
         self.partial = partial
     }
     
-    init(backingValue: Wrapped) {
+    public init(backingValue: Wrapped) {
         partial = Partial(backingValue: backingValue)
     }
     
@@ -14,7 +14,7 @@ class PartialBuilder<Wrapped> {
 
 extension PartialBuilder where Wrapped: PartialConvertible {
     
-    func unwrappedValue() throws -> Wrapped {
+    public func unwrappedValue() throws -> Wrapped {
         return try Wrapped(partial: partial)
     }
     
