@@ -2,9 +2,9 @@ import Foundation
 
 public struct Partial<Wrapped>: CustomStringConvertible, CustomDebugStringConvertible {
     
-    public enum Error<ValueType>: Swift.Error {
-        case missingKey(KeyPath<Wrapped, ValueType>)
-        case invalidValueType(key: KeyPath<Wrapped, ValueType>, actualValue: Any)
+    public enum Error<Value>: Swift.Error {
+        case missingKey(KeyPath<Wrapped, Value>)
+        case invalidValue(key: KeyPath<Wrapped, Value>, actualValue: Any)
     }
     
     internal private(set) var values: [PartialKeyPath<Wrapped>: Any?] = [:]
@@ -17,12 +17,12 @@ public struct Partial<Wrapped>: CustomStringConvertible, CustomDebugStringConver
         self.backingValue = backingValue
     }
     
-    public func value<ValueType>(for key: KeyPath<Wrapped, ValueType>) throws -> ValueType {
+    public func value<Value>(for key: KeyPath<Wrapped, Value>) throws -> Value {
         if let value = values[key] {
-            if let value = value as? ValueType {
+            if let value = value as? Value {
                 return value
             } else if let value = value {
-                throw Error.invalidValueType(key: key, actualValue: value)
+                throw Error.invalidValue(key: key, actualValue: value)
             }
         } else if let value = backingValue?[keyPath: key] {
             return value
@@ -31,12 +31,12 @@ public struct Partial<Wrapped>: CustomStringConvertible, CustomDebugStringConver
         throw Error.missingKey(key)
     }
     
-    public func value<ValueType>(for key: KeyPath<Wrapped, ValueType?>) throws -> ValueType {
+    public func value<Value>(for key: KeyPath<Wrapped, Value?>) throws -> Value {
         if let value = values[key] {
-            if let value = value as? ValueType {
+            if let value = value as? Value {
                 return value
             } else if let value = value {
-                throw Error.invalidValueType(key: key, actualValue: value)
+                throw Error.invalidValue(key: key, actualValue: value)
             }
         } else if let value = backingValue?[keyPath: key] {
             return value
@@ -71,7 +71,7 @@ public struct Partial<Wrapped>: CustomStringConvertible, CustomDebugStringConver
         updateHandlers[key]?.forEach { $0(value as Any) }
     }
     
-    public subscript<ValueType>(key: KeyPath<Wrapped, ValueType>) -> ValueType? {
+    public subscript<Value>(key: KeyPath<Wrapped, Value>) -> Value? {
         get {
             return try? value(for: key)
         }
@@ -80,7 +80,7 @@ public struct Partial<Wrapped>: CustomStringConvertible, CustomDebugStringConver
         }
     }
     
-    public subscript<ValueType>(key: KeyPath<Wrapped, ValueType?>) -> ValueType? {
+    public subscript<Value>(key: KeyPath<Wrapped, Value?>) -> Value? {
         get {
             return try? value(for: key)
         }
