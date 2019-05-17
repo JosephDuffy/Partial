@@ -80,12 +80,10 @@ extension Partial {
     
     public mutating func set<Value>(value: Partial<Value>, for key: KeyPath<Wrapped, Value>) where Value: PartialConvertible {
         values[key] = value
-        updateHandlers[key]?.forEach { $0(value as Any) }
     }
     
     public mutating func set<Value>(value: Partial<Value>, for key: KeyPath<Wrapped, Value?>) where Value: PartialConvertible {
         values[key] = value
-        updateHandlers[key]?.forEach { $0(value as Any) }
     }
     
     public subscript<Value>(key: KeyPath<Wrapped, Value>) -> Partial<Value> where Value: PartialConvertible {
