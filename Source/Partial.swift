@@ -4,14 +4,14 @@ public struct Partial<Wrapped>: CustomStringConvertible, CustomDebugStringConver
     
     public enum Error<Value>: Swift.Error {
         case missingKey(KeyPath<Wrapped, Value>)
-        case invalidValue(key: KeyPath<Wrapped, Value>, actualValue: Any)
+        case invalidValue(key: KeyPath<Wrapped, Value>, actualValue: Any?)
     }
     
-    internal private(set) var values: [PartialKeyPath<Wrapped>: Any?] = [:]
+    internal var values: [PartialKeyPath<Wrapped>: Any?] = [:]
     
     internal var backingValue: Wrapped? = nil
     
-    private var updateHandlers: [PartialKeyPath<Wrapped>: [(Any) -> Void]] = [:]
+    internal var updateHandlers: [PartialKeyPath<Wrapped>: [(Any?) -> Void]] = [:]
     
     public init(backingValue: Wrapped? = nil) {
         self.backingValue = backingValue
@@ -50,10 +50,10 @@ public struct Partial<Wrapped>: CustomStringConvertible, CustomDebugStringConver
         updateHandlers[key]?.forEach { $0(value as Any) }
     }
     
-    public mutating func set<Value>(value: Value?, for key: KeyPath<Wrapped, Value>) {
+    public mutating func set<Value>(value: Value?, for key: KeyPath<Wrapped, Value?>) {
         /**
-         Uses `updateValue(_:forKey:)` to ensure the value is set to `nil`.
-         When the subscript is used the key is removed from the dictionary.
+         Uses `updateValue(_:forKey:)` to ensure the value is set to `nil`, rather than
+         removed from the dictionary, which would happen if the subscript were used.
          This ensures that the `backingValue`'s value will not be used when
          a `backingValue` is set and a key is explicitly set to `nil`
          */
@@ -61,14 +61,9 @@ public struct Partial<Wrapped>: CustomStringConvertible, CustomDebugStringConver
         updateHandlers[key]?.forEach { $0(value as Any) }
     }
     
-    public mutating func set<Value>(value: Partial<Value>, for key: KeyPath<Wrapped, Value>) where Value: PartialConvertible {
-        values[key] = value
-        updateHandlers[key]?.forEach { $0(value as Any) }
-    }
-    
-    public mutating func set<Value>(value: Partial<Value>, for key: KeyPath<Wrapped, Value?>) where Value: PartialConvertible {
-        values[key] = value
-        updateHandlers[key]?.forEach { $0(value as Any) }
+    public mutating func removeValue<Value>(for key: KeyPath<Wrapped, Value>) {
+        values.removeValue(forKey: key)
+        updateHandlers[key]?.forEach { $0(nil) }
     }
     
     public subscript<Value>(key: KeyPath<Wrapped, Value>) -> Value? {
@@ -88,5 +83,5 @@ public struct Partial<Wrapped>: CustomStringConvertible, CustomDebugStringConver
             values.updateValue(newValue, forKey: key)
         }
     }
-    
+
 }

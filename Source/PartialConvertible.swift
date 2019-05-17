@@ -47,23 +47,45 @@ extension Partial {
     }
     
     public func partialValue<Value>(for key: KeyPath<Wrapped, Value>) throws -> Partial<Value> where Value: PartialConvertible {
-        if let value = try? self.value(for: key) {
+        if let value = values[key] {
+            if let value = value as? Value {
+                return Partial<Value>(backingValue: value)
+            } else if let value = value as? Partial<Value> {
+                return value
+            } else {
+                throw Error.invalidValue(key: key, actualValue: value)
+            }
+        } else if let value = backingValue?[keyPath: key] {
             return Partial<Value>(backingValue: value)
-        } else if let partial = values[key] as? Partial<Value> {
-            return partial
-        } else {
-            return Partial<Value>()
         }
+        
+        throw Error.missingKey(key)
     }
     
     public func partialValue<Value>(for key: KeyPath<Wrapped, Value?>) throws -> Partial<Value> where Value: PartialConvertible {
-        if let value = try? self.value(for: key) {
+        if let value = values[key] {
+            if let value = value as? Value {
+                return Partial<Value>(backingValue: value)
+            } else if let value = value as? Partial<Value> {
+                return value
+            } else {
+                throw Error.invalidValue(key: key, actualValue: value)
+            }
+        } else if let value = backingValue?[keyPath: key] {
             return Partial<Value>(backingValue: value)
-        } else if let partial = values[key] as? Partial<Value> {
-            return partial
-        } else {
-            return Partial<Value>()
         }
+        
+        throw Error.missingKey(key)
+    }
+    
+    public mutating func set<Value>(value: Partial<Value>, for key: KeyPath<Wrapped, Value>) where Value: PartialConvertible {
+        values[key] = value
+        updateHandlers[key]?.forEach { $0(value as Any) }
+    }
+    
+    public mutating func set<Value>(value: Partial<Value>, for key: KeyPath<Wrapped, Value?>) where Value: PartialConvertible {
+        values[key] = value
+        updateHandlers[key]?.forEach { $0(value as Any) }
     }
     
     public subscript<Value>(key: KeyPath<Wrapped, Value>) -> Partial<Value> where Value: PartialConvertible {

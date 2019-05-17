@@ -7,23 +7,6 @@ final class Tests: QuickSpec {
 
     override func spec() {
         describe("Partial") {
-            context("wrapping a CGSize") {
-                // TODO: Change to something in Foundation (to support Linux)
-                var partial: Partial<CGSize>!
-                
-                beforeEach {
-                    partial = Partial()
-                }
-                
-                context("with no values") {
-                    context("value(for:) function") {
-                        it("should throw missingKey error") {
-                            expect { try partial.value(for: \.height) }.to(throwError(Partial<CGSize>.Error.missingKey(\.height)))
-                        }
-                    }
-                }
-            }
-            
             context("wrapping a PartialConvertible type") {
                 struct MockPartialConvertible: PartialConvertible {
                     let stringProperty: String
@@ -40,8 +23,9 @@ final class Tests: QuickSpec {
                 
                 context("with no values") {
                     context("the unwrappedValue() function") {
-                        it("should throw an error") {
-                            expect { try partial.unwrappedValue() }.to(throwError())
+                        it("should throw a missingKey error") {
+                            let expectedError = Partial<MockPartialConvertible>.Error.missingKey(\.stringProperty)
+                            expect { try partial.unwrappedValue() }.to(throwError(expectedError))
                         }
                     }
                 }
@@ -89,6 +73,40 @@ final class Tests: QuickSpec {
                     context("the unwrappedValue() function") {
                         it("should not throw an error") {
                             expect { try partial.unwrappedValue() }.toNot(throwError())
+                        }
+                    }
+                    
+                    context("then set to nil") {
+                        beforeEach {
+                            partial[\.partialConvertibleProperty][\.stringProperty] = nil
+                        }
+                        
+                        context("the unwrappedValue() function") {
+                            it("should throw missingKey error") {
+                                let expectedError =
+                                    Partial<MockPartialConvertible.PartialConvertibleStringWrapper>
+                                        .Error
+                                        .missingKey(\.stringProperty)
+                                
+                                expect { try partial.unwrappedValue() }.to(throwError(expectedError))
+                            }
+                        }
+                    }
+                    
+                    context("then removed via removeValue(for:)") {
+                        beforeEach {
+                            partial[\.partialConvertibleProperty].removeValue(for: \.stringProperty)
+                        }
+                        
+                        context("the unwrappedValue() function") {
+                            it("should throw missingKey error") {
+                                let expectedError =
+                                    Partial<MockPartialConvertible.PartialConvertibleStringWrapper>
+                                        .Error
+                                        .missingKey(\.stringProperty)
+                                
+                                expect { try partial.unwrappedValue() }.to(throwError(expectedError))
+                            }
                         }
                     }
                 }

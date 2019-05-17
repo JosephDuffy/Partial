@@ -52,7 +52,7 @@ jobs:
       name: "Danger"
       if: type = pull_request
       install: npm install -g danger
-      script: swift run danger-swift ci
+      script: swift run --configuration release danger-swift ci
     - stage: "Deploy"
       name: "GitHub Release"
       install: skip
