@@ -12,6 +12,7 @@ addons:
   homebrew:
     packages:
       - yarn
+      - danger/tap/danger-swift
 
 stages:
   - "Cache Carthage Dependencies"
@@ -24,17 +25,13 @@ jobs:
     - stage: "Cache Carthage Dependencies"
       # PR checks do not rely on anything from Carthage
       if: type != pull_request
-      install:
-        - carthage bootstrap --platform iOS,macOS,tvOS --cache-builds
+      install: carthage bootstrap --platform iOS,macOS,tvOS --cache-builds
       script: skip
     - stage: "Test"
       name: "Danger"
       if: type = pull_request
-      announce: swift --version
-      install:
-        - yarn install
-        - swift build --skip-update --configuration release --product danger-swift
-      script: swift run --skip-update --configuration release danger-swift ci --danger-js-path $(yarn bin danger) --verbose
+      install: swift build --skip-update --configuration release --product danger-swift
+      script: swift run --skip-update --configuration release danger-swift ci --verbose
     - stage: "Test"
       name: "pod lib lint"
       if: type = pull_request
