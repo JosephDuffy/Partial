@@ -4,9 +4,15 @@ language: objective-c
 
 cache:
   bundler: true
+  yarn: true
   directories:
     - .build
     - Carthage
+
+addons:
+  homebrew:
+    packages:
+      - yarn
 
 stages:
   - "Prepare Cache"
@@ -19,19 +25,32 @@ jobs:
     - stage: "Prepare Cache"
       install:
         - carthage bootstrap --platform iOS,macOS,tvOS --cache-builds
+        - yarn install
+        # This is done to ensure the latest versions are checked out.
+        # I would expect `swift package resolve` to work, but it updates the Package.resolved instead
+        - rm -rf .build
         - swift build --skip-update --build-tests
         - swift build --skip-update --configuration release --product danger-swift
       script: skip
     - stage: "Test"
-      name: "Unit tests (macOS, SPM)"
-      install: skip
-      script: swift test
+      name: "Danger"
+      if: type = pull_request
+      install: yarn install
+      script: swift run --configuration release danger-swift ci --danger-js-path $(yarn bin danger) --verbose
+    - stage: "Test"
+      name: "pod lib lint"
+      if: type = pull_request
+      script: bundle exec pod lib lint
     - stage: "Test"
       name: "Unit tests (iOS, Xcode)"
       install: skip
       xcode_project: Partial.xcodeproj
       xcode_scheme: Partial-iOS
       xcode_destination: platform=iOS Simulator,OS=12.1,name=iPhone XS
+    - stage: "Test"
+      name: "Unit tests (macOS, SPM)"
+      install: skip
+      script: swift test
     - stage: "Test"
       name: "Unit tests (macOS, Xcode)"
       install: skip
@@ -44,15 +63,6 @@ jobs:
       xcode_project: Partial.xcodeproj
       xcode_scheme: Partial-tvOS
       xcode_destination: platform=tvOS Simulator,OS=12.1,name=Apple TV 4K
-    - stage: "Test"
-      name: "pod lib lint"
-      if: type = pull_request
-      script: bundle exec pod lib lint
-    - stage: "Test"
-      name: "Danger"
-      if: type = pull_request
-      install: npm install -g danger
-      script: swift run --configuration release danger-swift ci
     - stage: "Deploy"
       name: "GitHub Release"
       install: skip
