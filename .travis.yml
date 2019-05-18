@@ -6,7 +6,6 @@ cache:
   bundler: true
   yarn: true
   directories:
-    - .build
     - Carthage
 
 addons:
@@ -15,31 +14,29 @@ addons:
       - yarn
 
 stages:
-  - "Prepare Cache"
+  - "Cache Carthage Dependencies"
   - "Test"
   - name: "Deploy"
     if: branch = master AND tag IS present
 
 jobs:
   include:
-    - stage: "Prepare Cache"
+    - stage: "Cache Carthage Dependencies"
       install:
         - carthage bootstrap --platform iOS,macOS,tvOS --cache-builds
-        - yarn install
-        # This is done to ensure the latest versions are checked out.
-        # I would expect `swift package resolve` to work, but it updates the Package.resolved instead
-        - rm -rf .build
-        - swift build --skip-update --build-tests
-        - swift build --skip-update --configuration release --product danger-swift
       script: skip
     - stage: "Test"
       name: "Danger"
       if: type = pull_request
-      install: yarn install
-      script: swift run --configuration release danger-swift ci --danger-js-path $(yarn bin danger) --verbose
+      announce: swift --version
+      install:
+        - yarn install
+        - swift build --skip-update --configuration release --product danger-swift
+      script: swift run --skip-update --configuration release danger-swift ci --danger-js-path $(yarn bin danger) --verbose
     - stage: "Test"
       name: "pod lib lint"
       if: type = pull_request
+      install: bundle install
       script: bundle exec pod lib lint
     - stage: "Test"
       name: "Unit tests (iOS, Xcode)"
