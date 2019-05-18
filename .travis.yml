@@ -30,8 +30,10 @@ jobs:
     - stage: "Test"
       name: "Danger"
       if: type = pull_request
-      install: swift build --skip-update --configuration release --product danger-swift
-      script: swift run --skip-update --configuration release danger-swift ci --verbose
+      install:
+        - yarn install
+        - swift build --skip-update --configuration release --product danger-swift
+      script: swift run --skip-update --configuration release danger-swift ci --danger-js-path $(yarn bin danger) --verbose
     - stage: "Test"
       name: "pod lib lint"
       if: type = pull_request
