@@ -22,6 +22,8 @@ stages:
 jobs:
   include:
     - stage: "Cache Carthage Dependencies"
+      # PR checks do not rely on anything from Carthage
+      if: type != pull_request
       install:
         - carthage bootstrap --platform iOS,macOS,tvOS --cache-builds
       script: skip
@@ -40,22 +42,26 @@ jobs:
       script: bundle exec pod lib lint
     - stage: "Test"
       name: "Unit tests (iOS, Xcode)"
+      if: type != pull_request
       install: skip
       xcode_project: Partial.xcodeproj
       xcode_scheme: Partial-iOS
       xcode_destination: platform=iOS Simulator,OS=12.1,name=iPhone XS
     - stage: "Test"
       name: "Unit tests (macOS, SPM)"
+      if: type != pull_request
       install: skip
       script: swift test
     - stage: "Test"
       name: "Unit tests (macOS, Xcode)"
+      if: type != pull_request
       install: skip
       xcode_project: Partial.xcodeproj
       xcode_scheme: Partial-macOS
       xcode_destination: platform=macOS
     - stage: "Test"
       name: "Unit tests (tvOS, Xcode)"
+      if: type != pull_request
       install: skip
       xcode_project: Partial.xcodeproj
       xcode_scheme: Partial-tvOS
