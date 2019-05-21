@@ -1,8 +1,10 @@
 public final class PartialBuilder<Wrapped> {
     
+    public typealias UpdateListener = (Any?) -> Void
+    
     public private(set) var partial: Partial<Wrapped>
     
-    private var updateHandlers: [PartialKeyPath<Wrapped>: [(Any?) -> Void]] = [:]
+    private var updateListeners: [PartialKeyPath<Wrapped>: [UpdateListenerWrapper]] = [:]
     
     public init(partial: Partial<Wrapped> = Partial<Wrapped>()) {
         self.partial = partial
@@ -10,6 +12,38 @@ public final class PartialBuilder<Wrapped> {
     
     public init(backingValue: Wrapped) {
         partial = Partial(backingValue: backingValue)
+    }
+    
+    /**
+     Add a closure that will be called when the provided key's value has been
+     updated. The closure will be called with the new value.
+     
+     - returns: An opaque object that represents the listener. It must be passed
+                to `removeUpdateListener(_:)` to stop further updates
+     */
+    public func addUpdateListener<Value>(for key: KeyPath<Wrapped, Value>, updateListener: @escaping UpdateListener) -> AnyObject {
+        let wrapper = UpdateListenerWrapper(updateListener: updateListener)
+        
+        if var existingListeners = updateListeners[key] {
+            existingListeners += [wrapper]
+            updateListeners[key] = existingListeners
+        } else {
+            updateListeners[key] = [wrapper]
+        }
+        
+        return wrapper
+    }
+    
+    public func removeUpdateListener(_ updateListener: AnyObject) {
+        guard let updateListener = updateListener as? UpdateListenerWrapper else { return }
+        
+        for (key, wrappers) in updateListeners {
+            let filteredWrappers = wrappers.filter  { $0 !== updateListener }
+            if filteredWrappers.count != filteredWrappers.count {
+                updateListeners[key] = filteredWrappers
+                return
+            }
+        }
     }
     
     public func value<Value>(for key: KeyPath<Wrapped, Value>) throws -> Value {
@@ -38,22 +72,22 @@ public final class PartialBuilder<Wrapped> {
     
     public func set<Value>(value: Value, for key: KeyPath<Wrapped, Value>) {
         partial.set(value: value, for: key)
-        updateHandlers[key]?.forEach { $0(value as Any) }
+        updateListeners[key]?.forEach { $0.updateListener(value as Any) }
     }
     
     public func set<Value>(value: Value?, for key: KeyPath<Wrapped, Value?>) {
         partial.set(value: value, for: key)
-        updateHandlers[key]?.forEach { $0(value as Any) }
+        updateListeners[key]?.forEach { $0.updateListener(value as Any) }
     }
     
     public func set<Value>(value: Partial<Value>, for key: KeyPath<Wrapped, Value>) where Value: PartialConvertible {
         partial.set(value: value, for: key)
-        updateHandlers[key]?.forEach { $0(value as Any) }
+        updateListeners[key]?.forEach { $0.updateListener(value as Any) }
     }
     
     public func removeValue<Value>(for key: KeyPath<Wrapped, Value>) {
         partial.removeValue(for: key)
-        updateHandlers[key]?.forEach({ $0(nil) })
+        updateListeners[key]?.forEach({ $0.updateListener(nil) })
     }
     
     public subscript<Value>(key: KeyPath<Wrapped, Value>) -> Value? {
@@ -91,4 +125,18 @@ extension PartialBuilder where Wrapped: PartialConvertible {
         return try Wrapped(partial: partial)
     }
     
+}
+
+extension PartialBuilder {
+
+    private final class UpdateListenerWrapper {
+        
+        fileprivate let updateListener: UpdateListener
+        
+        fileprivate init(updateListener: @escaping UpdateListener) {
+            self.updateListener = updateListener
+        }
+        
+    }
+
 }
