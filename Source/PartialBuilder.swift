@@ -81,11 +81,11 @@ public final class PartialBuilder<Wrapped>: PartialProtocol {
         return try partial.value(for: key)
     }
     
-    public func partialValue<Value>(for key: KeyPath<Wrapped, Value>) throws -> Partial<Value> where Value: PartialConvertible {
+    public func partialValue<Value>(for key: KeyPath<Wrapped, Value>) throws -> Partial<Value> {
         return try partial.partialValue(for: key)
     }
     
-    public func partialValue<Value>(for key: KeyPath<Wrapped, Value?>) throws -> Partial<Value> where Value: PartialConvertible {
+    public func partialValue<Value>(for key: KeyPath<Wrapped, Value?>) throws -> Partial<Value> {
         return try partial.partialValue(for: key)
     }
     

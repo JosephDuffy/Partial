@@ -1,7 +1,7 @@
 import Foundation
 
 public struct Partial<Wrapped>: PartialProtocol, CustomStringConvertible, CustomDebugStringConvertible {
-
+    
     public enum Error<Value>: Swift.Error {
         case missingKey(KeyPath<Wrapped, Value>)
         case invalidValue(key: KeyPath<Wrapped, Value>, actualValue: Any?)
@@ -85,7 +85,7 @@ public struct Partial<Wrapped>: PartialProtocol, CustomStringConvertible, Custom
         throw Error.missingKey(key)
     }
     
-    public func partialValue<Value>(for key: KeyPath<Wrapped, Value>) throws -> Partial<Value> where Value: PartialConvertible {
+    public func partialValue<Value>(for key: KeyPath<Wrapped, Value>) throws -> Partial<Value> {
         if let value = values[key] {
             if let value = value as? Value {
                 return Partial<Value>(backingValue: value)
@@ -101,7 +101,7 @@ public struct Partial<Wrapped>: PartialProtocol, CustomStringConvertible, Custom
         throw Error.missingKey(key)
     }
     
-    public func partialValue<Value>(for key: KeyPath<Wrapped, Value?>) throws -> Partial<Value> where Value: PartialConvertible {
+    public func partialValue<Value>(for key: KeyPath<Wrapped, Value?>) throws -> Partial<Value> {
         if let value = values[key] {
             if let value = value as? Value {
                 return Partial<Value>(backingValue: value)
