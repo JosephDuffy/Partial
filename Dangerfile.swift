@@ -277,3 +277,4 @@ func check(fileProviders: [FileProvider] = [], files: [File] = [], versionKind: 
 
 checkSwiftVersions()
 checkPodspec()
+SwiftLint.lint(inline: true)

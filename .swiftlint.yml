@@ -1,0 +1,6 @@
+included:
+  - Source
+  - Tests
+
+trailing_comma:
+  mandatory_comma: true
