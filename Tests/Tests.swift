@@ -42,22 +42,22 @@ final class Tests: QuickSpec {
                     }
                 }
             }
-            
+
             context("wrapping a PartialConvertible type with an Optional property") {
                 struct MockPartialConvertible: PartialConvertible {
                     let optionalString: String?
-                    
+
                     init(partial: Partial<MockPartialConvertible>) throws {
                         optionalString = try partial.value(for: \.optionalString)
                     }
                 }
-                
+
                 var partial: Partial<MockPartialConvertible> = Partial()
-                
+
                 beforeEach {
                     partial = Partial()
                 }
-                
+
                 context("with the embedded value not set") {
                     context("the value(for:) function") {
                         it("should throw a missingKey error") {
@@ -66,17 +66,17 @@ final class Tests: QuickSpec {
                         }
                     }
                 }
-                
+
                 context("with the embedded value set to nil") {
                     beforeEach {
                         partial.set(value: nil, for: \.optionalString)
                     }
-                    
+
                     context("the value(for:) function") {
                         it("should not throw an error") {
                             expect { try partial.value(for: \.optionalString) }.toNot(throwError())
                         }
-                        
+
                         it("should return nil") {
                             expect { try partial.value(for: \.optionalString) }.to(beNil())
                         }
