@@ -66,6 +66,12 @@ jobs:
       xcode_project: Partial.xcodeproj
       xcode_scheme: Partial-tvOS
       xcode_destination: platform=tvOS Simulator,OS=12.1,name=Apple TV 4K
+    - stage: "Test"
+      name: "Unit tests (linux, SPM)"
+      os: linux
+      if: type != pull_request
+      install: eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
+      script: swift test
     - stage: "Deploy"
       name: "GitHub Release"
       install: skip
