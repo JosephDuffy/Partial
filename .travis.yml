@@ -32,6 +32,7 @@ jobs:
       if: type = pull_request
       install:
         - yarn install
+        - swift build --skip-update --configuration release --product swiftlint
         - swift build --skip-update --configuration release --product danger-swift
       script: swift run --skip-update --configuration release danger-swift ci --danger-js-path $(yarn bin danger) --verbose
     - stage: "Test"
