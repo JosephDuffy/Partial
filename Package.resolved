@@ -2,12 +2,30 @@
   "object": {
     "pins": [
       {
+        "package": "Commandant",
+        "repositoryURL": "https://github.com/Carthage/Commandant.git",
+        "state": {
+          "branch": null,
+          "revision": "2cd0210f897fe46c6ce42f52ccfa72b3bbb621a0",
+          "version": "0.16.0"
+        }
+      },
+      {
         "package": "Files",
         "repositoryURL": "https://github.com/JohnSundell/Files.git",
         "state": {
           "branch": null,
           "revision": "a84615f4558151fab52ac38df697ce2442991f93",
           "version": "2.3.0"
+        }
+      },
+      {
+        "package": "Logger",
+        "repositoryURL": "https://github.com/shibapm/Logger",
+        "state": {
+          "branch": null,
+          "revision": "53c3ecca5abe8cf46697e33901ee774236d94cce",
+          "version": "0.2.3"
         }
       },
       {
@@ -35,15 +53,6 @@
           "branch": null,
           "revision": "b63f2ec1b55f26c8e94159d81ad695aeb92f3d4e",
           "version": "0.9.0"
-        }
-      },
-      {
-        "package": "PackageConfig",
-        "repositoryURL": "https://github.com/shibapm/PackageConfig.git",
-        "state": {
-          "branch": null,
-          "revision": "912c12f0eb33577124e7bf16e51830ae0af49962",
-          "version": "0.10.0"
         }
       },
       {
@@ -83,12 +92,12 @@
         }
       },
       {
-        "package": "Rocket",
-        "repositoryURL": "https://github.com/f-meloni/Rocket",
+        "package": "Result",
+        "repositoryURL": "https://github.com/antitypical/Result.git",
         "state": {
           "branch": null,
-          "revision": "111050957c6457022794f7316836371b69b0c8e3",
-          "version": "0.9.1"
+          "revision": "2ca499ba456795616fbc471561ff1d963e6ae160",
+          "version": "4.1.0"
         }
       },
       {
@@ -101,30 +110,57 @@
         }
       },
       {
+        "package": "SourceKitten",
+        "repositoryURL": "https://github.com/jpsim/SourceKitten.git",
+        "state": {
+          "branch": null,
+          "revision": "fd9091759201473aa234c22322a3939615aef59a",
+          "version": "0.23.2"
+        }
+      },
+      {
         "package": "danger-swift",
         "repositoryURL": "https://github.com/danger/swift.git",
         "state": {
           "branch": null,
-          "revision": "4d1f4923696fd47d0402b7f45f4dcd00da02444f",
-          "version": "1.5.4"
+          "revision": "ba19f9f950457908355c739946243494a8d202e3",
+          "version": "1.5.6"
         }
       },
       {
-        "package": "SwiftShell",
-        "repositoryURL": "https://github.com/kareman/SwiftShell",
+        "package": "SwiftLint",
+        "repositoryURL": "https://github.com/Realm/SwiftLint",
         "state": {
           "branch": null,
-          "revision": "beebe43c986d89ea5359ac3adcb42dac94e5e08a",
-          "version": "4.1.2"
+          "revision": "6534946fe3f765bd31fc28b8aeb6c369de0b6791",
+          "version": "0.32.0"
+        }
+      },
+      {
+        "package": "SwiftyTextTable",
+        "repositoryURL": "https://github.com/scottrhoyt/SwiftyTextTable.git",
+        "state": {
+          "branch": null,
+          "revision": "c6df6cf533d120716bff38f8ff9885e1ce2a4ac3",
+          "version": "0.9.0"
+        }
+      },
+      {
+        "package": "SWXMLHash",
+        "repositoryURL": "https://github.com/drmohundro/SWXMLHash.git",
+        "state": {
+          "branch": null,
+          "revision": "f43166a8e18fdd0857f29e303b1bb79a5428bca0",
+          "version": "4.9.0"
         }
       },
       {
         "package": "Yams",
-        "repositoryURL": "https://github.com/jpsim/Yams",
+        "repositoryURL": "https://github.com/jpsim/Yams.git",
         "state": {
           "branch": null,
-          "revision": "b08dba4bcea978bf1ad37703a384097d3efce5af",
-          "version": "1.0.2"
+          "revision": "c947a306d2e80ecb2c0859047b35c73b8e1ca27f",
+          "version": "2.0.0"
         }
       }
     ]

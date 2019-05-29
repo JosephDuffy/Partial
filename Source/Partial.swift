@@ -9,7 +9,7 @@ public struct Partial<Wrapped>: PartialProtocol, CustomStringConvertible, Custom
 
     internal var values: [PartialKeyPath<Wrapped>: Any?] = [:]
 
-    internal var backingValue: Wrapped? = nil
+    internal var backingValue: Wrapped?
 
     public init(backingValue: Wrapped? = nil) {
         self.backingValue = backingValue
