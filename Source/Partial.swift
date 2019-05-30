@@ -132,11 +132,17 @@ public struct Partial<Wrapped>: PartialProtocol, CustomStringConvertible, Custom
         values.updateValue(value, forKey: key)
     }
 
-    public mutating func set<Value>(value: Partial<Value>, for key: KeyPath<Wrapped, Value>) where Value: PartialConvertible {
+    public mutating func set<Value>(
+        value: Partial<Value>,
+        for key: KeyPath<Wrapped, Value>
+    ) where Value: PartialConvertible {
         values[key] = value
     }
 
-    public mutating func set<Value>(value: Partial<Value>, for key: KeyPath<Wrapped, Value?>) where Value: PartialConvertible {
+    public mutating func set<Value>(
+        value: Partial<Value>,
+        for key: KeyPath<Wrapped, Value?>
+    ) where Value: PartialConvertible {
         values[key] = value
     }
 
