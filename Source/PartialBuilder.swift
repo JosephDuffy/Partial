@@ -1,4 +1,4 @@
-public final class PartialBuilder<Wrapped> {
+public final class PartialBuilder<Wrapped>: PartialProtocol {
 
     public typealias UpdateListener = (Partial<Wrapped>) -> Void
 
@@ -72,7 +72,7 @@ public final class PartialBuilder<Wrapped> {
         return try partial.value(for: key)
     }
 
-    public func value<Value>(for key: KeyPath<Wrapped, Value?>) throws -> Value {
+    public func value<Value>(for key: KeyPath<Wrapped, Value?>) throws -> Value? {
         return try partial.value(for: key)
     }
 
@@ -80,71 +80,50 @@ public final class PartialBuilder<Wrapped> {
         return try partial.value(for: key)
     }
 
-    public func value<Value>(for key: KeyPath<Wrapped, Value?>) throws -> Value where Value: PartialConvertible {
+    public func value<Value>(for key: KeyPath<Wrapped, Value?>) throws -> Value? where Value: PartialConvertible {
         return try partial.value(for: key)
     }
 
-    public func partialValue<Value>(
-        for key: KeyPath<Wrapped, Value>
-    ) throws -> Partial<Value> where Value: PartialConvertible {
+    public func partialValue<Value>(for key: KeyPath<Wrapped, Value>) throws -> Partial<Value> {
         return try partial.partialValue(for: key)
     }
 
-    public func partialValue<Value>(
-        for key: KeyPath<Wrapped, Value?>
-    ) throws -> Partial<Value> where Value: PartialConvertible {
+    public func partialValue<Value>(for key: KeyPath<Wrapped, Value?>) throws -> Partial<Value> {
         return try partial.partialValue(for: key)
     }
 
     public func set<Value>(value: Value, for key: KeyPath<Wrapped, Value>) {
         partial.set(value: value, for: key)
-        propertyUpdateListeners[key]?.forEach { $0.updateListener(value as Any) }
-        updateListeners.forEach { $0.updateListener(partial) }
+        notifyUpdateListeners(ofChangeTo: key, newValue: value)
     }
 
     public func set<Value>(value: Value?, for key: KeyPath<Wrapped, Value?>) {
         partial.set(value: value, for: key)
-        propertyUpdateListeners[key]?.forEach { $0.updateListener(value as Any) }
-        updateListeners.forEach { $0.updateListener(partial) }
+        if let value = value {
+            notifyUpdateListeners(ofChangeTo: key, newValue: value)
+        } else {
+            notifyUpdateListeners(ofChangeTo: key, newValue: nil)
+        }
     }
 
     public func set<Value>(value: Partial<Value>, for key: KeyPath<Wrapped, Value>) where Value: PartialConvertible {
         partial.set(value: value, for: key)
-        propertyUpdateListeners[key]?.forEach { $0.updateListener(value as Any) }
-        updateListeners.forEach { $0.updateListener(partial) }
+        notifyUpdateListeners(ofChangeTo: key, newValue: value)
+    }
+
+    public func set<Value>(value: Partial<Value>, for key: KeyPath<Wrapped, Value?>) where Value: PartialConvertible {
+        partial.set(value: value, for: key)
+        notifyUpdateListeners(ofChangeTo: key, newValue: value)
     }
 
     public func removeValue<Value>(for key: KeyPath<Wrapped, Value>) {
         partial.removeValue(for: key)
-        propertyUpdateListeners[key]?.forEach({ $0.updateListener(nil) })
+        notifyUpdateListeners(ofChangeTo: key, newValue: nil)
+    }
+
+    private func notifyUpdateListeners(ofChangeTo key: PartialKeyPath<Wrapped>, newValue: Any?) {
+        propertyUpdateListeners[key]?.forEach { $0.updateListener(newValue) }
         updateListeners.forEach { $0.updateListener(partial) }
-    }
-
-    public subscript<Value>(key: KeyPath<Wrapped, Value>) -> Value? {
-        get {
-            return partial[key]
-        }
-        set {
-            removeValue(for: key)
-        }
-    }
-
-    public subscript<Value>(key: KeyPath<Wrapped, Value?>) -> Value? {
-        get {
-            return partial[key]
-        }
-        set {
-            set(value: newValue, for: key)
-        }
-    }
-
-    public subscript<Value>(key: KeyPath<Wrapped, Value>) -> Partial<Value> where Value: PartialConvertible {
-        get {
-            return partial[key]
-        }
-        set {
-            set(value: newValue, for: key)
-        }
     }
 
 }
