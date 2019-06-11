@@ -24,8 +24,8 @@ public struct Partial<Wrapped>: PartialProtocol, CustomStringConvertible, Custom
             } else {
                 throw Error.invalidValue(key: key, actualValue: nil)
             }
-        } else if let value = backingValue?[keyPath: key] {
-            return value
+        } else if let backingValue = backingValue {
+            return backingValue[keyPath: key]
         }
 
         throw Error.missingKey(key)
@@ -41,8 +41,8 @@ public struct Partial<Wrapped>: PartialProtocol, CustomStringConvertible, Custom
                 // Key exists, but value has been set to nil
                 return nil
             }
-        } else if let value = backingValue?[keyPath: key] {
-            return value
+        } else if let backingValue = backingValue {
+            return backingValue[keyPath: key]
         }
 
         throw Error.missingKey(key)
@@ -59,8 +59,8 @@ public struct Partial<Wrapped>: PartialProtocol, CustomStringConvertible, Custom
             } else {
                 throw Error.invalidValue(key: key, actualValue: nil)
             }
-        } else if let value = backingValue?[keyPath: key] {
-            return value
+        } else if let backingValue = backingValue {
+            return backingValue[keyPath: key]
         }
 
         throw Error.missingKey(key)
@@ -78,8 +78,8 @@ public struct Partial<Wrapped>: PartialProtocol, CustomStringConvertible, Custom
                 // Key exists, but value has been set to nil
                 return nil
             }
-        } else if let value = backingValue?[keyPath: key] {
-            return value
+        } else if let backingValue = backingValue {
+            return backingValue[keyPath: key]
         }
 
         throw Error.missingKey(key)
@@ -94,7 +94,8 @@ public struct Partial<Wrapped>: PartialProtocol, CustomStringConvertible, Custom
             } else {
                 throw Error.invalidValue(key: key, actualValue: value)
             }
-        } else if let value = backingValue?[keyPath: key] {
+        } else if let backingValue = backingValue {
+            let value = backingValue[keyPath: key]
             return Partial<Value>(backingValue: value)
         }
 
@@ -110,8 +111,12 @@ public struct Partial<Wrapped>: PartialProtocol, CustomStringConvertible, Custom
             } else {
                 throw Error.invalidValue(key: key, actualValue: value)
             }
-        } else if let value = backingValue?[keyPath: key] {
-            return Partial<Value>(backingValue: value)
+        } else if let backingValue = backingValue {
+            if let value = backingValue[keyPath: key] {
+                return Partial<Value>(backingValue: value)
+            } else {
+                return Partial<Value>()
+            }
         }
 
         throw Error.missingKey(key)

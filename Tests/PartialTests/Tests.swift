@@ -82,6 +82,30 @@ final class Tests: QuickSpec {
                         }
                     }
                 }
+
+                #if swift(>=5.1)
+                context("with the embedded value set to 'test' via the dynamic member lookup") {
+                    beforeEach {
+                        partial.optionalString = "test"
+                    }
+
+                    context("the value(for:) function") {
+                        it("should not throw an error") {
+                            expect { try partial.value(for: \.optionalString) }.toNot(throwError())
+                        }
+
+                        it("should return 'test'") {
+                            expect { try partial.value(for: \.optionalString) }.to(equal("test"))
+                        }
+                    }
+
+                    context("accessing the value via the dynamic member lookup") {
+                        it("should return 'test'") {
+                            expect(partial.optionalString) == "test"
+                        }
+                    }
+                }
+                #endif
             }
 
             context("wrapping a PartialConvertible type with a PartialConvertible property") {
