@@ -73,8 +73,8 @@ public protocol PartialProtocol {
 
     /// Remove the stored value for the given key path
     ///
-    /// - Parameter key: The key path of the value to remove
-    mutating func removeValue(for key: PartialKeyPath<Wrapped>)
+    /// - Parameter keyPath: The key path of the value to remove
+    mutating func removeValue(for keyPath: PartialKeyPath<Wrapped>)
 
     subscript<Value>(key: KeyPath<Wrapped, Value>) -> Value? { get set }
 
@@ -108,6 +108,10 @@ extension PartialProtocol {
         } catch {
             return nil
         }
+    }
+
+    public mutating func removeValue<Value>(for keyPath: KeyPath<Wrapped, Value>) {
+        self.removeValue(for: keyPath as PartialKeyPath<Wrapped>)
     }
 
     public subscript<Value>(key: KeyPath<Wrapped, Value>) -> Value? {
