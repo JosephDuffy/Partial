@@ -64,7 +64,7 @@ jobs:
       name: "GitHub Release"
       install: skip
       script: skip
-      before_deploy: carthage build --archive --cache-builds --platform iOS
+      before_deploy: carthage build --archive --platform iOS,macOS,tvOS,watchOS
       deploy:
         provider: releases
         prerelease: true
