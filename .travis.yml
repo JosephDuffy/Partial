@@ -8,12 +8,6 @@ cache:
   directories:
     - Carthage
 
-addons:
-  homebrew:
-    packages:
-      - yarn
-      - danger/tap/danger-swift
-
 stages:
   - "Test"
   - name: "Deploy"
@@ -24,6 +18,11 @@ jobs:
     - stage: "Test"
       name: "Danger"
       if: type = pull_request
+      addons:
+        homebrew:
+          packages:
+            - yarn
+            - danger/tap/danger-swift
       install:
         - yarn install
         - swift build --skip-update --configuration release --product swiftlint
@@ -32,7 +31,6 @@ jobs:
     - stage: "Test"
       name: "pod lib lint"
       if: type = pull_request
-      install: bundle install
       script: bundle exec pod lib lint
     - stage: "Test"
       name: "Unit tests (iOS, Xcode)"
