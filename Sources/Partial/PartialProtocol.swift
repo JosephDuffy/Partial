@@ -26,7 +26,7 @@ public protocol PartialProtocol {
 
     mutating func set<Value>(value: Partial<Value>, for key: KeyPath<Wrapped, Value?>) where Value: PartialConvertible
 
-    mutating func removeValue<Value>(for key: KeyPath<Wrapped, Value>)
+    mutating func removeValue(for key: PartialKeyPath<Wrapped>)
 
     subscript<Value>(key: KeyPath<Wrapped, Value>) -> Value? { get set }
 

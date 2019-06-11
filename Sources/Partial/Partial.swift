@@ -146,8 +146,8 @@ public struct Partial<Wrapped>: PartialProtocol, CustomStringConvertible, Custom
         values[key] = value
     }
 
-    public mutating func removeValue<Value>(for key: KeyPath<Wrapped, Value>) {
-        values.removeValue(forKey: key)
+    public mutating func removeValue(for keyPath: PartialKeyPath<Wrapped>) {
+        values.removeValue(forKey: keyPath)
     }
 
 }
