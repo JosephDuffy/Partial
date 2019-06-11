@@ -19,5 +19,5 @@ let package = Package(
         .target(name: "Partial"),
         .testTarget(name: "PartialTests", dependencies: ["Partial", "Quick", "Nimble"]),
     ],
-    swiftLanguageVersions: [.v5, .version("5.1")]
+    swiftLanguageVersions: [.v5]
 )
