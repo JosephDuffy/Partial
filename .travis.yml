@@ -31,7 +31,6 @@ jobs:
     - stage: "Test"
       name: "pod lib lint"
       if: type = pull_request
-      install: bundle install
       script: bundle exec pod lib lint
     - stage: "Test"
       name: "Unit tests (iOS, Xcode)"
