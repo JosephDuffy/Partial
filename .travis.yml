@@ -78,11 +78,16 @@ jobs:
       xcode_project: Partial.xcodeproj
       xcode_scheme: Partial-tvOS
       xcode_destination: platform=tvOS Simulator,OS=12.1,name=Apple TV 4K
+    - <<: *linux_env
+      stage: "Test"
+      name: "Unit tests (linux, SwiftPM)"
+      if: type != pull_request
+      script: swift test
     - <<: *linux_env_beta
       stage: "Test"
       name: "Unit tests (linux, Swift Beta, SwiftPM)"
       if: type != pull_request
-      script: swift test --verbose
+      script: swift test
     - <<: *macos_env
       stage: "Deploy"
       name: "GitHub Release"
