@@ -116,9 +116,9 @@ public final class PartialBuilder<Wrapped>: PartialProtocol {
         notifyUpdateListeners(ofChangeTo: key, newValue: value)
     }
 
-    public func removeValue<Value>(for key: KeyPath<Wrapped, Value>) {
-        partial.removeValue(for: key)
-        notifyUpdateListeners(ofChangeTo: key, newValue: nil)
+    public func removeValue(for keyPath: PartialKeyPath<Wrapped>) {
+        partial.removeValue(for: keyPath)
+        notifyUpdateListeners(ofChangeTo: keyPath, newValue: nil)
     }
 
     private func notifyUpdateListeners(ofChangeTo key: PartialKeyPath<Wrapped>, newValue: Any?) {

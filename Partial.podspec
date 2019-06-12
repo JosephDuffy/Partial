@@ -10,6 +10,6 @@ Pod::Spec.new do |spec|
     :git => "https://github.com/JosephDuffy/Partial.git",
     :tag => "v#{spec.version}"
   }
-  spec.source_files = "Source/**/*.{swift,h,m}"
+  spec.source_files = "Sources/Partial/*.swift"
   spec.ios.deployment_target = '8.0'
 end

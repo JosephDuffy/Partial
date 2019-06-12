@@ -28,9 +28,13 @@ xcuserdata/
 
 # Swift Package Manager
 .build
+.swiftpm
 
 # Carthage
 Carthage
 
 # Node
 node_modules
+
+# macOS
+.DS_Store
