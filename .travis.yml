@@ -10,14 +10,22 @@ stages:
     if: branch = master AND tag IS present
 
 _base_envs:
+- &swiftenv_install
+  install: eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
+- &swift_beta_install
+  <<: *swiftenv_install
+  env: SWIFT_VERSION="DEVELOPMENT-SNAPSHOT-2019-05-29-a"
 - &macos_env
   os: osx
   osx_image: xcode10.2
   language: objective-c
 - &linux_env
+  <<: *swiftenv_install
   os: linux
   language: generic
-  install: eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
+- &linux_env_beta
+  <<: *linux_env
+  <<: *swift_beta_install
 
 jobs:
   include:
@@ -70,11 +78,11 @@ jobs:
       xcode_project: Partial.xcodeproj
       xcode_scheme: Partial-tvOS
       xcode_destination: platform=tvOS Simulator,OS=12.1,name=Apple TV 4K
-    - <<: *linux_env
+    - <<: *linux_env_beta
       stage: "Test"
-      name: "Unit tests (linux, SPM)"
+      name: "Unit tests (linux, Swift Beta, SwiftPM)"
       if: type != pull_request
-      script: swift test
+      script: swift test --verbose
     - <<: *macos_env
       stage: "Deploy"
       name: "GitHub Release"
