@@ -4,3 +4,6 @@ included:
 
 trailing_comma:
   mandatory_comma: true
+
+disabled_rules:
+  - line_length

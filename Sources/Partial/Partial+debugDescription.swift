@@ -4,7 +4,6 @@ extension Partial {
         if let backingValue = backingValue {
             return debugDescription(utilising: backingValue)
         } else {
-            // swiftlint:disable:next line_length
             return "<\(type(of: self)) values=\(values.debugDescription); backingValue=\(backingValue.debugDescription))>"
         }
     }
@@ -33,7 +32,6 @@ extension Partial {
             }
         }
 
-        // swiftlint:disable:next line_length
         return "<\(type(of: self)) values=\(namedValues.debugDescription), \(unnamedValues.debugDescription); backingValue=\(backingValue.debugDescription))>"
     }
 
@@ -45,7 +43,6 @@ extension Partial where Wrapped: PartialConvertible {
         if let instance = try? Wrapped(partial: self) {
             return debugDescription(utilising: instance)
         } else {
-            // swiftlint:disable:next line_length
             return "<\(type(of: self)) values=\(values.debugDescription); backingValue=\(backingValue.debugDescription))>"
         }
     }

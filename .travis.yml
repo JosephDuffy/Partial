@@ -8,28 +8,21 @@ cache:
   directories:
     - Carthage
 
-addons:
-  homebrew:
-    packages:
-      - yarn
-      - danger/tap/danger-swift
-
 stages:
-  - "Cache Carthage Dependencies"
   - "Test"
   - name: "Deploy"
     if: branch = master AND tag IS present
 
 jobs:
   include:
-    - stage: "Cache Carthage Dependencies"
-      # PR checks do not rely on anything from Carthage
-      if: type != pull_request
-      install: carthage bootstrap --platform iOS,macOS,tvOS --cache-builds
-      script: skip
     - stage: "Test"
       name: "Danger"
       if: type = pull_request
+      addons:
+        homebrew:
+          packages:
+            - yarn
+            - danger/tap/danger-swift
       install:
         - yarn install
         - swift build --skip-update --configuration release --product swiftlint
@@ -38,12 +31,11 @@ jobs:
     - stage: "Test"
       name: "pod lib lint"
       if: type = pull_request
-      install: bundle install
       script: bundle exec pod lib lint
     - stage: "Test"
       name: "Unit tests (iOS, Xcode)"
       if: type != pull_request
-      install: skip
+      install: carthage bootstrap --platform iOS --cache-builds
       xcode_project: Partial.xcodeproj
       xcode_scheme: Partial-iOS
       xcode_destination: platform=iOS Simulator,OS=12.1,name=iPhone XS
@@ -55,14 +47,14 @@ jobs:
     - stage: "Test"
       name: "Unit tests (macOS, Xcode)"
       if: type != pull_request
-      install: skip
+      install: carthage bootstrap --platform macOS --cache-builds
       xcode_project: Partial.xcodeproj
       xcode_scheme: Partial-macOS
       xcode_destination: platform=macOS
     - stage: "Test"
       name: "Unit tests (tvOS, Xcode)"
       if: type != pull_request
-      install: skip
+      install: carthage bootstrap --platform tvOS --cache-builds
       xcode_project: Partial.xcodeproj
       xcode_scheme: Partial-tvOS
       xcode_destination: platform=tvOS Simulator,OS=12.1,name=Apple TV 4K
@@ -76,7 +68,7 @@ jobs:
       name: "GitHub Release"
       install: skip
       script: skip
-      before_deploy: carthage build --archive --cache-builds --platform iOS
+      before_deploy: carthage build --archive --platform iOS,macOS,tvOS,watchOS
       deploy:
         provider: releases
         prerelease: true
