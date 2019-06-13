@@ -8,7 +8,7 @@ cache:
 stages:
   - "Test"
   - name: "Deploy"
-    if: branch = master AND tag IS present
+    if: tag IS present
 
 _base_envs:
 - &swiftenv_install
@@ -148,6 +148,9 @@ jobs:
         api_key: $GITHUB_TOKEN
         file: Partial.framework.zip
         skip_cleanup: true
+        on:
+          tags: true
+          branch: master
 
     - <<: *linux_env
       stage: "Deploy"
@@ -157,3 +160,6 @@ jobs:
       deploy:
         provider: script
         script: bundle exec pod trunk push
+        on:
+          tags: true
+          branch: master
