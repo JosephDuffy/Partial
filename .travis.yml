@@ -3,6 +3,7 @@ cache:
   yarn: true
   directories:
     - Carthage
+    - ~/.swiftenv
 
 stages:
   - "Test"
@@ -59,7 +60,7 @@ _base_envs:
 
 jobs:
   include:
-    - <<: *xcode_env
+    - <<: *macos_env
       stage: "Test"
       name: "Danger"
       if: type = pull_request
@@ -74,10 +75,11 @@ jobs:
         - swift build --skip-update --configuration release --product danger-swift
       script: swift run --skip-update --configuration release danger-swift ci --danger-js-path $(yarn bin danger) --verbose
 
-    - <<: *macos_env
+    - <<: *linux_env
       stage: "Test"
       name: "pod lib lint"
       if: type = pull_request
+      install: bundle install --deployment
       script: bundle exec pod lib lint
 
     - <<: *macos_env
@@ -150,9 +152,10 @@ jobs:
           tags: true
           branch: master
 
-    - <<: *macos_env
+    - <<: *linux_env
       stage: "Deploy"
       name: "CocoaPods release"
+      install: bundle install --deployment
       script: skip
       deploy:
         provider: script
