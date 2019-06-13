@@ -59,7 +59,7 @@ _base_envs:
 
 jobs:
   include:
-    - <<: *xcode_env
+    - <<: *linux_env
       stage: "Test"
       name: "Danger"
       if: type = pull_request
@@ -74,7 +74,7 @@ jobs:
         - swift build --skip-update --configuration release --product danger-swift
       script: swift run --skip-update --configuration release danger-swift ci --danger-js-path $(yarn bin danger) --verbose
 
-    - <<: *macos_env
+    - <<: *linux_env
       stage: "Test"
       name: "pod lib lint"
       if: type = pull_request
@@ -147,7 +147,7 @@ jobs:
         file: Partial.framework.zip
         skip_cleanup: true
 
-    - <<: *macos_env
+    - <<: *linux_env
       stage: "Deploy"
       name: "CocoaPods release"
       script: skip
