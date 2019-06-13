@@ -1,4 +1,3 @@
-import CoreGraphics
 import Quick
 import Nimble
 import Partial

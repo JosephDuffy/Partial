@@ -1,7 +1,8 @@
 import XCTest
+import Quick
 
-import PartialTests
+@testable import PartialTests
 
-var tests = [XCTestCaseEntry]()
-tests += PartialTests.allTests()
-XCTMain(tests)
+QCKMain([
+    Tests.self,
+])

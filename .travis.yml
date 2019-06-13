@@ -1,7 +1,3 @@
-os: osx
-osx_image: xcode10.2
-language: objective-c
-
 cache:
   bundler: true
   yarn: true
@@ -13,9 +9,58 @@ stages:
   - name: "Deploy"
     if: branch = master AND tag IS present
 
+_base_envs:
+- &swiftenv_install
+  before_install: eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
+- &swift_beta_install
+  <<: *swiftenv_install
+  env: SWIFT_VERSION="DEVELOPMENT-SNAPSHOT-2019-05-29-a"
+- &macos_env
+  os: osx
+  language: objective-c
+  osx_image: xcode10.2
+- &macos_swift_beta_env
+  <<: *macos_env
+  <<: *swift_beta_install
+- &xcode_env
+  <<: *macos_env
+  xcode_project: Partial.xcodeproj
+- &macos_xcode_env
+  <<: *xcode_env
+  install: carthage bootstrap --platform macOS --cache-builds
+  xcode_scheme: Partial-macOS
+  xcode_destination: platform=macOS
+- &macos_xcode_swift_beta_env
+  <<: *macos_xcode_env
+  <<: *swift_beta_install
+- &ios_env
+  <<: *xcode_env
+  install: carthage bootstrap --platform iOS --cache-builds
+  xcode_scheme: Partial-iOS
+  xcode_destination: platform=iOS Simulator,OS=12.1,name=iPhone XS
+- &ios_swift_beta_env
+  <<: *ios_env
+  <<: *swift_beta_install
+- &tvos_env
+  <<: *xcode_env
+  install: carthage bootstrap --platform tvOS --cache-builds
+  xcode_scheme: Partial-tvOS
+  xcode_destination: platform=tvOS Simulator,OS=12.1,name=Apple TV 4K
+- &tvos_swift_beta_env
+  <<: *tvos_env
+  <<: *swift_beta_install
+- &linux_env
+  <<: *swiftenv_install
+  os: linux
+  language: generic
+- &linux_env_beta
+  <<: *linux_env
+  <<: *swift_beta_install
+
 jobs:
   include:
-    - stage: "Test"
+    - <<: *xcode_env
+      stage: "Test"
       name: "Danger"
       if: type = pull_request
       addons:
@@ -28,37 +73,69 @@ jobs:
         - swift build --skip-update --configuration release --product swiftlint
         - swift build --skip-update --configuration release --product danger-swift
       script: swift run --skip-update --configuration release danger-swift ci --danger-js-path $(yarn bin danger) --verbose
-    - stage: "Test"
+
+    - <<: *macos_env
+      stage: "Test"
       name: "pod lib lint"
       if: type = pull_request
       script: bundle exec pod lib lint
-    - stage: "Test"
+
+    - <<: *macos_env
+      stage: "Test"
+      name: "Unit tests (macOS, SwiftPM)"
+      if: type != pull_request
+      script: swift test
+
+    - <<: *macos_swift_beta_env
+      stage: "Test"
+      name: "Unit tests (macOS, Swift Beta, SwiftPM)"
+      if: type != pull_request
+      script: swift test
+
+    - <<: *ios_env
+      stage: "Test"
       name: "Unit tests (iOS, Xcode)"
       if: type != pull_request
-      install: carthage bootstrap --platform iOS --cache-builds
-      xcode_project: Partial.xcodeproj
-      xcode_scheme: Partial-iOS
-      xcode_destination: platform=iOS Simulator,OS=12.1,name=iPhone XS
-    - stage: "Test"
-      name: "Unit tests (macOS, SPM)"
+
+    - <<: *ios_swift_beta_env
+      stage: "Test"
+      name: "Unit tests (iOS, Swift Beta, Xcode)"
       if: type != pull_request
-      install: skip
-      script: swift test
-    - stage: "Test"
+
+    - <<: *macos_xcode_env
+      stage: "Test"
       name: "Unit tests (macOS, Xcode)"
       if: type != pull_request
-      install: carthage bootstrap --platform macOS --cache-builds
-      xcode_project: Partial.xcodeproj
-      xcode_scheme: Partial-macOS
-      xcode_destination: platform=macOS
-    - stage: "Test"
+
+    - <<: *macos_xcode_swift_beta_env
+      stage: "Test"
+      name: "Unit tests (macOS, Swift Beta, Xcode)"
+      if: type != pull_request
+
+    - <<: *tvos_env
+      stage: "Test"
       name: "Unit tests (tvOS, Xcode)"
       if: type != pull_request
-      install: carthage bootstrap --platform tvOS --cache-builds
-      xcode_project: Partial.xcodeproj
-      xcode_scheme: Partial-tvOS
-      xcode_destination: platform=tvOS Simulator,OS=12.1,name=Apple TV 4K
-    - stage: "Deploy"
+
+    - <<: *tvos_swift_beta_env
+      stage: "Test"
+      name: "Unit tests (tvOS, Swift Beta, Xcode)"
+      if: type != pull_request
+
+    - <<: *linux_env
+      stage: "Test"
+      name: "Unit tests (linux, SwiftPM)"
+      if: type != pull_request
+      script: swift test
+
+    - <<: *linux_env_beta
+      stage: "Test"
+      name: "Unit tests (linux, Swift Beta, SwiftPM)"
+      if: type != pull_request
+      script: swift test
+
+    - <<: *macos_env
+      stage: "Deploy"
       name: "GitHub Release"
       install: skip
       script: skip
@@ -69,7 +146,9 @@ jobs:
         api_key: $GITHUB_TOKEN
         file: Partial.framework.zip
         skip_cleanup: true
-    - stage: "Deploy"
+
+    - <<: *macos_env
+      stage: "Deploy"
       name: "CocoaPods release"
       script: skip
       deploy:
