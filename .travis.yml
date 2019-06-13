@@ -3,6 +3,7 @@ cache:
   yarn: true
   directories:
     - Carthage
+    - ~/.swiftenv
 
 stages:
   - "Test"
