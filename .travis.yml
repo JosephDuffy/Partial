@@ -60,7 +60,7 @@ _base_envs:
 
 jobs:
   include:
-    - <<: *linux_env
+    - <<: *macos_env
       stage: "Test"
       name: "Danger"
       if: type = pull_request
