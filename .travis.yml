@@ -145,7 +145,7 @@ jobs:
       deploy:
         provider: releases
         prerelease: true
-        api_key: $GITHUB_TOKEN
+        api_key: $GITHUB_ACCESS_TOKEN
         file: Partial.framework.zip
         skip_cleanup: true
         on:
@@ -155,8 +155,9 @@ jobs:
     - <<: *linux_env
       stage: "Deploy"
       name: "CocoaPods release"
-      install: bundle install --deployment
+      install: skip
       script: skip
+      before_deploy: bundle install --deployment
       deploy:
         provider: script
         script: bundle exec pod trunk push
