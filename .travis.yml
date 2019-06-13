@@ -79,6 +79,7 @@ jobs:
       stage: "Test"
       name: "pod lib lint"
       if: type = pull_request
+      install: bundle install --deployment
       script: bundle exec pod lib lint
 
     - <<: *macos_env
@@ -151,6 +152,7 @@ jobs:
     - <<: *linux_env
       stage: "Deploy"
       name: "CocoaPods release"
+      install: bundle install --deployment
       script: skip
       deploy:
         provider: script
