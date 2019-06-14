@@ -157,10 +157,11 @@ jobs:
       name: "CocoaPods release"
       install: skip
       script: skip
-      before_deploy: bundle install --deployment
       deploy:
         provider: script
-        script: bundle exec pod trunk push
+        script:
+          - bundle install --deployment
+          - bundle exec pod trunk push
         on:
           tags: true
           branch: master
