@@ -138,7 +138,7 @@ jobs:
 
     - <<: *macos_env
       stage: "Deploy"
-      name: "GitHub Release"
+      name: "Upload Prebuilt Frameworks to GitHub"
       install: skip
       script: skip
       before_deploy: carthage build --archive --platform iOS,macOS,tvOS,watchOS
