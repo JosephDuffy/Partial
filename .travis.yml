@@ -155,13 +155,12 @@ jobs:
     - <<: *linux_env
       stage: "Deploy"
       name: "CocoaPods release"
-      install: skip
+      install: bundle install --deployment
       script: skip
       deploy:
         provider: script
-        script:
-          - bundle install --deployment
-          - bundle exec pod trunk push
+        skip_cleanup: true
+        script: bundle exec pod trunk push
         on:
           tags: true
           branch: master
