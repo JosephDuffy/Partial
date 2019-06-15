@@ -75,7 +75,7 @@ jobs:
         - swift build --skip-update --configuration release --product danger-swift
       script: swift run --skip-update --configuration release danger-swift ci --danger-js-path $(yarn bin danger) --verbose
 
-    - <<: *linux_env
+    - <<: *macos_env
       stage: "Test"
       name: "pod lib lint"
       if: type = pull_request
@@ -152,15 +152,15 @@ jobs:
           tags: true
           branch: master
 
-    - <<: *linux_env
+    - <<: *macos_env
       stage: "Deploy"
       name: "CocoaPods release"
-      install: skip
+      install: bundle install --deployment
       script: skip
       deploy:
         provider: script
         skip_cleanup: true
-        script: scripts/deploy_pod.sh
+        script: bundle exec pod trunk push
         on:
           tags: true
           branch: master
