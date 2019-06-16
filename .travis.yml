@@ -164,3 +164,18 @@ jobs:
         on:
           tags: true
           branch: master
+
+    - <<: *macos_env
+      stage: "Deploy"
+      name: "Upload docs to GitHub Pages"
+      install: bundle install --deployment
+      script: bundle exec jazzy
+      deploy:
+        provider: pages
+        skip_cleanup: true
+        local_dir: docs
+        github_token: $GITHUB_ACCESS_TOKEN
+        keep_history: true
+        on:
+          tags: true
+          branch: master
