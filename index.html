@@ -64,15 +64,139 @@
           <section class="section">
             
             <h1 id='partial' class='heading'>Partial</h1>
-<h3 id='type-safe-wrapper-to-make-a-type-39-s-properties-optional' class='heading'>Type-safe wrapper to make a type&rsquo;s properties optional</h3>
 
-<p>Type-safe wrapper to make a type&rsquo;s properties optional, with extra convenience for creating instances, unwrapping individual properties, and building an instance with multiple pieces of code contributing values</p>
-<h3 id='installation' class='heading'>Installation</h3>
+<p><a href="https://travis-ci.com/JosephDuffy/Partial"><img src="https://api.travis-ci.com/JosephDuffy/Partial.svg" alt="Build Status"></a>
+<a href="https://josephduffy.github.io/Partial/"><img src="https://josephduffy.github.io/Partial/badge.svg" alt="Documentation"></a>
+<img src="https://img.shields.io/badge/platforms-macOS%20%7C%20iOS%20%7C%20watchOS%20%7C%20tvOS%20%7C%20Linux-4BC51D.svg" alt="Compatible with macOS, iOS, watchOS, tvOS, and Linux">
+<a href="https://github.com/apple/swift-package-manager"><img src="https://img.shields.io/badge/SwiftPM-compatible-4BC51D.svg?style=flat" alt="SwiftPM Compatible"></a>
+<a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage Compatible"></a>
+<a href="https://cocoapods.org/pods/Partial"><img src="https://img.shields.io/badge/CocoaPods-compatible-4BC51D.svg?style=flat" alt="CocoaPods Compatible"></a>
+<a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-4BC51D.svg?style=flat" alt="MIT License"></a></p>
+
+<p>Partial is a type-safe wrapper that makes a type&rsquo;s properties optional, allowing for the type to be constructed with multiple pieces of code contributing values.</p>
+
+<p>⚠️️ The current version of Partial is less than 1.0; the API may change and there may be bugs. Where possible types will be deprecated to aid with upgrades, although this cannot be guarenteed ️️⚠️</p>
+<h1 id='installation' class='heading'>Installation</h1>
+<h2 id='swiftpm' class='heading'>SwiftPM</h2>
+
+<p>To install via SwiftPM add the package to the dependencies section and as the dependency of a target:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">package</span> <span class="o">=</span> <span class="kt">Package</span><span class="p">(</span>
+    <span class="o">...</span>
+    <span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
+        <span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/JosephDuffy/Partial.git"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"1.0.0"</span><span class="p">),</span>
+    <span class="p">],</span>
+    <span class="nv">targets</span><span class="p">:</span> <span class="p">[</span>
+        <span class="o">.</span><span class="nf">target</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"MyApp"</span><span class="p">,</span> <span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span><span class="s">"Partial"</span><span class="p">]),</span>
+    <span class="p">],</span>
+    <span class="o">...</span>
+<span class="p">)</span>
+</code></pre>
+<h2 id='carthage' class='heading'>Carthage</h2>
+
+<p>To install via Carthage add to following to your <code>Cartfile</code>:</p>
+<pre class="highlight plaintext"><code>github "JosephDuffy/Partial"
+</code></pre>
+
+<p>Run <code>carthage update Partial</code> to build the framework and then drag the built framework file in to your Xcode project. Partial provides pre-compiled binaries, <a href="https://github.com/Carthage/Carthage#dwarfs-symbol-problem">which can cause some issues with symbols</a>. Use the <code>--no-use-binaries</code> flag if this is an issue.</p>
+
+<p>Remember to <a href="https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos">add Partial to your Carthage build phase</a>:</p>
+<pre class="highlight plaintext"><code>$(SRCROOT)/Carthage/Build/iOS/Partial.framework
+</code></pre>
+
+<p>and</p>
+<pre class="highlight plaintext"><code>$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Partial.framework
+</code></pre>
+<h2 id='cocoapods' class='heading'>CocoaPods</h2>
+
+<p>To install via <a href="https://cocoapods.org">CocoaPods</a> add the following line to your Podfile:</p>
 <pre class="highlight ruby"><code><span class="n">pod</span> <span class="s1">'Partial'</span>
 </code></pre>
-<h3 id='authors' class='heading'>Authors</h3>
 
-<p>Joseph Duffy</p>
+<p>and then run <code>pod install</code>.</p>
+<h1 id='usage' class='heading'>Usage</h1>
+
+<p>Partial has a <code>KeyPath</code>-based API so is fully type-safe. Reading and writing of values is possible via subscripting, although functions are also provided.</p>
+<pre class="highlight swift"><code><span class="k">var</span> <span class="nv">partialSize</span> <span class="o">=</span> <span class="kt">Partial</span><span class="o">&lt;</span><span class="kt">CGSize</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="c1">// Properties can be set via a function or subscript</span>
+<span class="n">partialSize</span><span class="o">.</span><span class="nf">set</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="mi">6016</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="p">\</span><span class="o">.</span><span class="n">width</span><span class="p">)</span>
+<span class="n">partialSize</span><span class="p">[\</span><span class="o">.</span><span class="n">height</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3384</span>
+<span class="c1">// And unwrapped with a convenience function</span>
+<span class="k">let</span> <span class="nv">size</span> <span class="o">=</span> <span class="k">try</span> <span class="n">partialSize</span><span class="o">.</span><span class="nf">unwrappedValue</span><span class="p">()</span> <span class="c1">// A CGSize with width 6016, height 3384</span>
+<span class="c1">// Properties can be retrieved via a function call</span>
+<span class="n">partialSize</span><span class="o">.</span><span class="nf">value</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="p">\</span><span class="o">.</span><span class="n">width</span><span class="p">)</span> <span class="c1">// Optional(6016)</span>
+<span class="k">try</span> <span class="n">partialSize</span><span class="o">.</span><span class="nf">value</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="p">\</span><span class="o">.</span><span class="n">width</span><span class="p">)</span> <span class="c1">// 6016</span>
+<span class="c1">// Properties can be removed via a function for the subscript</span>
+<span class="n">partialSize</span><span class="o">.</span><span class="nf">removeValue</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="p">\</span><span class="o">.</span><span class="n">width</span><span class="p">)</span>
+<span class="n">partialSize</span><span class="p">[\</span><span class="o">.</span><span class="n">width</span><span class="p">]</span> <span class="o">=</span> <span class="kc">nil</span>
+</code></pre>
+<h2 id='swift-5-1-features' class='heading'>Swift 5.1 Features</h2>
+
+<p>⚠️️ Swift 5.1 is currently in beta, so these features may break and Partial may not work with future versions of the beta ⚠️</p>
+
+<p><code>KeyPath</code>-based dynamic member lookup is supported in Partial, allowing for properties to be read and set directly on the <code><a href="Structs/Partial.html">Partial</a></code> or <code><a href="Classes/PartialBuilder.html">PartialBuilder</a></code> instance. For example, the main example in Swift 5.1 would be:</p>
+<pre class="highlight swift"><code><span class="k">var</span> <span class="nv">partialSize</span> <span class="o">=</span> <span class="kt">Partial</span><span class="o">&lt;</span><span class="kt">CGSize</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="n">partialSize</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">6016</span>
+<span class="n">partialSize</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="mi">3384</span>
+<span class="k">let</span> <span class="nv">size</span> <span class="o">=</span> <span class="k">try!</span> <span class="n">partialSize</span><span class="o">.</span><span class="nf">unwrappedValue</span><span class="p">()</span> <span class="c1">// A CGSize with width 6016, height 3384</span>
+</code></pre>
+<h2 id='setting-values' class='heading'>Setting values</h2>
+
+<p>Values can be set via a subscript, or via the <code>set(value:for:)</code> function:</p>
+<pre class="highlight swift"><code>
+</code></pre>
+<h2 id='building-an-instance-with-multiple-pieces-of-code-contributing-values' class='heading'>Building an instance with multiple pieces of code contributing values</h2>
+
+<p>Since <code><a href="Structs/Partial.html">Partial</a></code> is a value type it is not suitable for being passed between multiple pieces of code. To allow for a single instance of a type to be constructed the <code><a href="Classes/PartialBuilder.html">PartialBuilder</a></code> class is provided. <code><a href="Classes/PartialBuilder.html">PartialBuilder</a></code> also provides the ability to be notified when properties are updated.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">sizeBuilder</span> <span class="o">=</span> <span class="kt">PartialBuilder</span><span class="o">&lt;</span><span class="kt">CGSize</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="n">sizeBuilder</span><span class="o">.</span><span class="n">addUpdateListener</span> <span class="p">{</span> <span class="p">(</span><span class="nv">partial</span><span class="p">:</span> <span class="kt">Partial</span><span class="o">&lt;</span><span class="kt">CGSize</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">in</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"A value was set"</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="n">sizeBuilder</span><span class="o">.</span><span class="nf">addUpdateListener</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="o">.</span><span class="n">width</span><span class="p">)</span> <span class="p">{</span> <span class="n">newWidth</span> <span class="k">in</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"width has been updated to </span><span class="se">\(</span><span class="n">newWidth</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">setWidth</span><span class="p">(</span><span class="n">on</span> <span class="nv">partial</span><span class="p">:</span> <span class="kt">PartialBuilder</span><span class="o">&lt;</span><span class="kt">CGSize</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">partial</span><span class="p">[\</span><span class="o">.</span><span class="n">width</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6016</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">setHeight</span><span class="p">(</span><span class="n">on</span> <span class="nv">partial</span><span class="p">:</span> <span class="kt">PartialBuilder</span><span class="o">&lt;</span><span class="kt">CGSize</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">partial</span><span class="p">[\</span><span class="o">.</span><span class="n">height</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3384</span>
+<span class="p">}</span>
+
+<span class="c1">// Notifies both update listeners</span>
+<span class="nf">setWidth</span><span class="p">(</span><span class="nv">on</span><span class="p">:</span> <span class="n">sizeBuilder</span><span class="p">)</span>
+
+<span class="c1">// Notifies first update listener</span>
+<span class="nf">setHeight</span><span class="p">(</span><span class="nv">on</span><span class="p">:</span> <span class="n">sizeBuilder</span><span class="p">)</span>
+
+<span class="k">let</span> <span class="nv">size</span> <span class="o">=</span> <span class="k">try!</span> <span class="n">sizeBuilder</span><span class="o">.</span><span class="nf">unwrappedValue</span><span class="p">()</span> <span class="c1">// A CGSize with width 6016, height 3384</span>
+</code></pre>
+<h2 id='adding-support-to-your-own-types' class='heading'>Adding support to your own types</h2>
+
+<p>Adopting the <code><a href="Protocols/PartialConvertible.html">PartialConvertible</a></code> protocol makes it easy to unwrap a partial value. The protocol has a single requirement:</p>
+<pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">PartialConvertible</span> <span class="p">{</span>
+    <span class="nf">init</span><span class="p">(</span><span class="nv">partial</span><span class="p">:</span> <span class="kt">Partial</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">throws</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>For example, to add <code><a href="Protocols/PartialConvertible.html">PartialConvertible</a></code> conformance to a <code>CGSize</code> requires a single function with only a few lines of code:</p>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">CGSize</span><span class="p">:</span> <span class="kt">PartialConvertible</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">partial</span><span class="p">:</span> <span class="kt">Partial</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">throws</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="nv">width</span> <span class="o">=</span> <span class="k">try</span> <span class="n">partial</span><span class="o">.</span><span class="nf">value</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="p">\</span><span class="o">.</span><span class="n">width</span><span class="p">)</span>
+        <span class="k">let</span> <span class="nv">height</span> <span class="o">=</span> <span class="k">try</span> <span class="n">partial</span><span class="o">.</span><span class="nf">value</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="p">\</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
+        <span class="k">self</span><span class="o">.</span><span class="nf">init</span><span class="p">(</span><span class="nv">width</span><span class="p">:</span> <span class="n">width</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="n">height</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>As a convenience it&rsquo;s then possible to unwrap partial values that wrap a type that conforms to <code><a href="Protocols/PartialConvertible.html">PartialConvertible</a></code>:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">sizeBuilder</span> <span class="o">=</span> <span class="kt">PartialBuilder</span><span class="o">&lt;</span><span class="kt">CGSize</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="c1">// ...</span>
+<span class="k">let</span> <span class="nv">size</span> <span class="o">=</span> <span class="k">try!</span> <span class="n">sizeBuilder</span><span class="o">.</span><span class="nf">unwrappedValue</span><span class="p">()</span>
+</code></pre>
+<h1 id='license' class='heading'>License</h1>
+
+<p>The project is released under the MIT license. View the <a href="./LICENSE">LICENSE</a> file for the full license.</p>
 
           </section>
         </section>
