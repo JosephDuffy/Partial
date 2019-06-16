@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>PartialBuilder Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/PartialBuilder" class="dashAnchor"></a>
+    <a title="PartialBuilder Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">Partial Docs</a> (72% documented)</p>
+        <p class="header-right"><a href="https://github.com/JosephDuffy/Partial"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">Partial Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        PartialBuilder Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/PartialBuilder.html">PartialBuilder</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/PartialConvertible.html">PartialConvertible</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/PartialProtocol.html">PartialProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Partial.html">Partial</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Partial/Error.html">– Error</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>PartialBuilder</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">PartialBuilder</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/PartialProtocol.html">PartialProtocol</a></span></code></pre>
+
+                </div>
+              </div>
+            <p>A class that aids in the building of a partial value.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Partial0A7BuilderC14UpdateListenera"></a>
+                    <a name="//apple_ref/swift/Alias/UpdateListener" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Partial0A7BuilderC14UpdateListenera">UpdateListener</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A closure that will be notified when any property is udpated</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">UpdateListener</span> <span class="o">=</span> <span class="p">(</span><span class="kt"><a href="../Structs/Partial.html">Partial</a></span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Partial0A7BuilderC22PropertyUpdateListenera"></a>
+                    <a name="//apple_ref/swift/Alias/PropertyUpdateListener" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Partial0A7BuilderC22PropertyUpdateListenera">PropertyUpdateListener</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A closure that will be notified when a propertie&rsquo;s value is updated. The closure will
+receive <code>nil</code> when the value has been removed</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">PropertyUpdateListener</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">(</span><span class="kt">Value</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Partial0A7BuilderC7partialA2AVyxGvp"></a>
+                    <a name="//apple_ref/swift/Property/partial" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Partial0A7BuilderC7partialA2AVyxGvp">partial</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The partial value this builder is building</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">partial</span><span class="p">:</span> <span class="kt"><a href="../Structs/Partial.html">Partial</a></span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">get</span>
+  <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Partial0A8ProtocolPxycfc"></a>
+                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Partial0A8ProtocolPxycfc">init()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Partial0A7BuilderC7partialACyxGA2AVyxG_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(partial:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Partial0A7BuilderC7partialACyxGA2AVyxG_tcfc">init(partial:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initialise a new <code>PartialBuilder</code>, starting with the provided partial</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">partial</span><span class="p">:</span> <span class="kt"><a href="../Structs/Partial.html">Partial</a></span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>partial</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The initial partial value</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Partial0A8ProtocolP12backingValuex7WrappedQz_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(backingValue:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Partial0A8ProtocolP12backingValuex7WrappedQz_tcfc">init(backingValue:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">backingValue</span><span class="p">:</span> <span class="kt">Wrapped</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Partial0A7BuilderC17addUpdateListener06updateE0yXlyA2AVyxGc_tF"></a>
+                    <a name="//apple_ref/swift/Method/addUpdateListener(updateListener:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Partial0A7BuilderC17addUpdateListener06updateE0yXlyA2AVyxGc_tF">addUpdateListener(updateListener:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Add a closure that will be called when any key&rsquo;s value has been
+updated. The closure will be called with the new partial.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addUpdateListener</span><span class="p">(</span><span class="nv">updateListener</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Classes/PartialBuilder.html#/s:7Partial0A7BuilderC14UpdateListenera">UpdateListener</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AnyObject</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>updateListener</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A closure that will be called when a property is updated</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An opaque object that represents the listener. It must be passed to <code><a href="../Classes/PartialBuilder.html#/s:7Partial0A7BuilderC20removeUpdateListeneryyyXlF">removeUpdateListener(_:)</a></code> to stop further updates</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Partial0A7BuilderC17addUpdateListener3for06updateE0yXls7KeyPathCyxqd__G_yqd__SgctlF"></a>
+                    <a name="//apple_ref/swift/Method/addUpdateListener(for:updateListener:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Partial0A7BuilderC17addUpdateListener3for06updateE0yXls7KeyPathCyxqd__G_yqd__SgctlF">addUpdateListener(for:updateListener:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Add a closure that will be called when the provided key&rsquo;s value has been
+updated. The closure will be called with the new value.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">addUpdateListener</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="k">for</span> <span class="nv">keyPath</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="nv">updateListener</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Classes/PartialBuilder.html#/s:7Partial0A7BuilderC22PropertyUpdateListenera">PropertyUpdateListener</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AnyObject</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>keyPath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The key path to be notified of changes to</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>updateListener</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A closure that will be called when the value of the key path is updated</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An opaque object that represents the listener. It must be passed to <code><a href="../Classes/PartialBuilder.html#/s:7Partial0A7BuilderC20removeUpdateListeneryyyXlF">removeUpdateListener(_:)</a></code> to stop further updates</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Partial0A7BuilderC20removeUpdateListeneryyyXlF"></a>
+                    <a name="//apple_ref/swift/Method/removeUpdateListener(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Partial0A7BuilderC20removeUpdateListeneryyyXlF">removeUpdateListener(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Remove the update listener associated with the opaque object</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">removeUpdateListener</span><span class="p">(</span><span class="n">_</span> <span class="nv">updateListener</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>updateListener</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The opaque object returned by <code><a href="../Classes/PartialBuilder.html#/s:7Partial0A7BuilderC17addUpdateListener3for06updateE0yXls7KeyPathCyxqd__G_yqd__SgctlF">addUpdateListener(for:updateListener:)</a></code>
+                        or <code>addUpdateListener(for:)</code></p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Partial0A8ProtocolP5value3forqd__s7KeyPathCy7WrappedQzqd__G_tKlF"></a>
+                    <a name="//apple_ref/swift/Method/value(for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Partial0A8ProtocolP5value3forqd__s7KeyPathCy7WrappedQzqd__G_tKlF">value(for:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">value</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="k">for</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Partial0A8ProtocolP5value3forqd__Sgs7KeyPathCy7WrappedQzAFG_tKlF"></a>
+                    <a name="//apple_ref/swift/Method/value(for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Partial0A8ProtocolP5value3forqd__Sgs7KeyPathCy7WrappedQzAFG_tKlF">value(for:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">value</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="k">for</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="p">?</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Partial0A8ProtocolP5value3forqd__s7KeyPathCy7WrappedQzqd__G_tKAA0A11ConvertibleRd__lF"></a>
+                    <a name="//apple_ref/swift/Method/value(for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Partial0A8ProtocolP5value3forqd__s7KeyPathCy7WrappedQzqd__G_tKAA0A11ConvertibleRd__lF">value(for:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">value</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="k">for</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span> <span class="k">where</span> <span class="kt">Value</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/PartialConvertible.html">PartialConvertible</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Partial0A8ProtocolP5value3forqd__Sgs7KeyPathCy7WrappedQzAFG_tKAA0A11ConvertibleRd__lF"></a>
+                    <a name="//apple_ref/swift/Method/value(for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Partial0A8ProtocolP5value3forqd__Sgs7KeyPathCy7WrappedQzAFG_tKAA0A11ConvertibleRd__lF">value(for:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">value</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="k">for</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="p">?</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span><span class="p">?</span> <span class="k">where</span> <span class="kt">Value</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/PartialConvertible.html">PartialConvertible</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Partial0A8ProtocolP12partialValue3forA2AVyqd__Gs7KeyPathCy7WrappedQzqd__G_tKlF"></a>
+                    <a name="//apple_ref/swift/Method/partialValue(for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Partial0A8ProtocolP12partialValue3forA2AVyqd__Gs7KeyPathCy7WrappedQzqd__G_tKlF">partialValue(for:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">partialValue</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="k">for</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/Partial.html">Partial</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Partial0A8ProtocolP12partialValue3forA2AVyqd__Gs7KeyPathCy7WrappedQzqd__SgG_tKlF"></a>
+                    <a name="//apple_ref/swift/Method/partialValue(for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Partial0A8ProtocolP12partialValue3forA2AVyqd__Gs7KeyPathCy7WrappedQzqd__SgG_tKlF">partialValue(for:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">partialValue</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="k">for</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="p">?</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/Partial.html">Partial</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Partial0A8ProtocolP3set5value3foryqd___s7KeyPathCy7WrappedQzqd__GtlF"></a>
+                    <a name="//apple_ref/swift/Method/set(value:for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Partial0A8ProtocolP3set5value3foryqd___s7KeyPathCy7WrappedQzqd__GtlF">set(value:for:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="k">set</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="kt">Value</span><span class="p">,</span> <span class="k">for</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Partial0A8ProtocolP3set5value3foryqd__Sg_s7KeyPathCy7WrappedQzAGGtlF"></a>
+                    <a name="//apple_ref/swift/Method/set(value:for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Partial0A8ProtocolP3set5value3foryqd__Sg_s7KeyPathCy7WrappedQzAGGtlF">set(value:for:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="k">set</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="kt">Value</span><span class="p">?,</span> <span class="k">for</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="p">?</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Partial0A8ProtocolP3set5value3foryA2AVyqd__G_s7KeyPathCy7WrappedQzqd__GtAA0A11ConvertibleRd__lF"></a>
+                    <a name="//apple_ref/swift/Method/set(value:for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Partial0A8ProtocolP3set5value3foryA2AVyqd__G_s7KeyPathCy7WrappedQzqd__GtAA0A11ConvertibleRd__lF">set(value:for:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="k">set</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="kt"><a href="../Structs/Partial.html">Partial</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="k">for</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">where</span> <span class="kt">Value</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/PartialConvertible.html">PartialConvertible</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Partial0A8ProtocolP3set5value3foryA2AVyqd__G_s7KeyPathCy7WrappedQzqd__SgGtAA0A11ConvertibleRd__lF"></a>
+                    <a name="//apple_ref/swift/Method/set(value:for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Partial0A8ProtocolP3set5value3foryA2AVyqd__G_s7KeyPathCy7WrappedQzqd__SgGtAA0A11ConvertibleRd__lF">set(value:for:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="k">set</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="kt"><a href="../Structs/Partial.html">Partial</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="k">for</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="p">?</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">where</span> <span class="kt">Value</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/PartialConvertible.html">PartialConvertible</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Partial0A8ProtocolP11removeValue3forys0A7KeyPathCy7WrappedQzG_tF"></a>
+                    <a name="//apple_ref/swift/Method/removeValue(for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Partial0A8ProtocolP11removeValue3forys0A7KeyPathCy7WrappedQzG_tF">removeValue(for:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">removeValue</span><span class="p">(</span><span class="k">for</span> <span class="nv">keyPath</span><span class="p">:</span> <span class="kt">PartialKeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Partial0A7BuilderCA2A0A11ConvertibleRzlE14unwrappedValuexyKF"></a>
+                    <a name="//apple_ref/swift/Method/unwrappedValue()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Partial0A7BuilderCA2A0A11ConvertibleRzlE14unwrappedValuexyKF">unwrappedValue()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">unwrappedValue</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Wrapped</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2019 <a class="link" href="https://github.com/JosephDuffy/Partial" target="_blank" rel="external">Joseph Duffy</a>. All rights reserved. (Last updated: 2019-06-16)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
