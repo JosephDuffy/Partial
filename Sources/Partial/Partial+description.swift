@@ -1,4 +1,4 @@
-extension Partial {
+extension Partial: CustomStringConvertible {
 
     public var description: String {
         let backingValueDescription: String

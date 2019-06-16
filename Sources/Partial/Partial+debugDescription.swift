@@ -1,4 +1,4 @@
-extension Partial {
+extension Partial: CustomDebugStringConvertible {
 
     public var debugDescription: String {
         if let backingValue = backingValue {

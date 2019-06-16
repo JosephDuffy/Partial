@@ -1,16 +1,28 @@
+/// A class that aids in the building of a partial value. 
 public final class PartialBuilder<Wrapped>: PartialProtocol {
 
+    /// A closure that will be notified when any property is udpated
     public typealias UpdateListener = (Partial<Wrapped>) -> Void
 
+    /// A closure that will be notified when a propertie's value is updated. The closure will
+    /// receive `nil` when the value has been removed
     public typealias PropertyUpdateListener<Value> = (Value?) -> Void
 
+    /// The partial value this builder is building
     public private(set) var partial: Partial<Wrapped>
 
     private var updateListeners: [UpdateListenerWrapper] = []
 
     private var propertyUpdateListeners: [PartialKeyPath<Wrapped>: [PropertyUpdateListenerWrapper]] = [:]
 
-    public init(partial: Partial<Wrapped> = Partial<Wrapped>()) {
+    public init() {
+        partial = Partial<Wrapped>()
+    }
+
+    /// Initialise a new `PartialBuilder`, starting with the provided partial
+    ///
+    /// - Parameter partial: The initial partial value
+    public init(partial: Partial<Wrapped>) {
         self.partial = partial
     }
 
@@ -18,13 +30,11 @@ public final class PartialBuilder<Wrapped>: PartialProtocol {
         partial = Partial(backingValue: backingValue)
     }
 
-    /**
-     Add a closure that will be called when any key's value has been
-     updated. The closure will be called with the new partial.
-     
-     - returns: An opaque object that represents the listener. It must be passed
-     to `removeUpdateListener(_:)` to stop further updates
-     */
+    /// Add a closure that will be called when any key's value has been
+    /// updated. The closure will be called with the new partial.
+    ///
+    /// - Parameter updateListener: A closure that will be called when a property is updated
+    /// - returns: An opaque object that represents the listener. It must be passed to `removeUpdateListener(_:)` to stop further updates
     public func addUpdateListener(updateListener: @escaping UpdateListener) -> AnyObject {
         let wrapper = UpdateListenerWrapper(updateListener: updateListener)
 
@@ -33,37 +43,42 @@ public final class PartialBuilder<Wrapped>: PartialProtocol {
         return wrapper
     }
 
-    /**
-     Add a closure that will be called when the provided key's value has been
-     updated. The closure will be called with the new value.
-     
-     - returns: An opaque object that represents the listener. It must be passed
-                to `removeUpdateListener(_:)` to stop further updates
-     */
+    /// Add a closure that will be called when the provided key's value has been
+    /// updated. The closure will be called with the new value.
+    ///
+    /// - Parameter keyPath: The key path to be notified of changes to
+    /// - Parameter updateListener: A closure that will be called when the value of the key path is updated
+    /// - Returns: An opaque object that represents the listener. It must be passed to `removeUpdateListener(_:)` to stop further updates
     public func addUpdateListener<Value>(
-        for key: KeyPath<Wrapped, Value>,
+        for keyPath: KeyPath<Wrapped, Value>,
         updateListener: @escaping PropertyUpdateListener<Value>
     ) -> AnyObject {
         let wrapper = PropertyUpdateListenerWrapper(updateListener: updateListener)
 
-        if var existingListeners = propertyUpdateListeners[key] {
+        if var existingListeners = propertyUpdateListeners[keyPath] {
             existingListeners += [wrapper]
-            propertyUpdateListeners[key] = existingListeners
+            propertyUpdateListeners[keyPath] = existingListeners
         } else {
-            propertyUpdateListeners[key] = [wrapper]
+            propertyUpdateListeners[keyPath] = [wrapper]
         }
 
         return wrapper
     }
 
+    /// Remove the update listener associated with the opaque object
+    /// 
+    /// - Parameter updateListener: The opaque object returned by `addUpdateListener(for:updateListener:)`
+    ///                             or `addUpdateListener(for:)`
     public func removeUpdateListener(_ updateListener: AnyObject) {
-        guard let updateListener = updateListener as? UpdateListenerWrapper else { return }
-
-        for (key, wrappers) in propertyUpdateListeners {
-            let filteredWrappers = wrappers.filter { $0 !== updateListener }
-            if filteredWrappers.count != filteredWrappers.count {
-                propertyUpdateListeners[key] = filteredWrappers
-                return
+        if let updateListener = updateListener as? UpdateListenerWrapper {
+            updateListeners.removeAll { $0 === updateListener }
+        } else if let updateListener = updateListener as? PropertyUpdateListenerWrapper {
+            for (key, wrappers) in propertyUpdateListeners {
+                let filteredWrappers = wrappers.filter { $0 !== updateListener }
+                if filteredWrappers.count != filteredWrappers.count {
+                    propertyUpdateListeners[key] = filteredWrappers
+                    return
+                }
             }
         }
     }

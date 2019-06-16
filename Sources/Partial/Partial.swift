@@ -1,9 +1,13 @@
 import Foundation
 
-public struct Partial<Wrapped>: PartialProtocol, CustomStringConvertible, CustomDebugStringConvertible {
+/// A Partial version of the `Wrapped` type.
+public struct Partial<Wrapped>: PartialProtocol {
 
+    /// An error that can be thrown by the `value(for:)` function
     public enum Error<Value>: Swift.Error {
+        /// The provided key has not been set
         case missingKey(KeyPath<Wrapped, Value>)
+        /// The provided key is present, but has an invalid value
         case invalidValue(key: KeyPath<Wrapped, Value>, actualValue: Any?)
     }
 
@@ -11,7 +15,11 @@ public struct Partial<Wrapped>: PartialProtocol, CustomStringConvertible, Custom
 
     internal var backingValue: Wrapped?
 
-    public init(backingValue: Wrapped? = nil) {
+    public init() {
+        backingValue = nil
+    }
+
+    public init(backingValue: Wrapped) {
         self.backingValue = backingValue
     }
 

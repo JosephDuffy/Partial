@@ -3,6 +3,16 @@ public protocol PartialProtocol {
 
     associatedtype Wrapped
 
+    /// Initialise an empty partial
+    init()
+
+    /// Initialise a partial that builds on top of the provided value. When a value is set it will take
+    /// precedence over the value from the backing value
+    ///
+    /// - Parameter backingValue: An instance of `Wrapped` that values will be retrieved from, unless
+    ///                           the value has been set on this partial
+    init(backingValue: Wrapped)
+
     /// Return the value of the given key path, or throws an error if the value is not available
     ///
     /// - Parameter key: The key path for the requested value
