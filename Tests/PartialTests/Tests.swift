@@ -22,8 +22,8 @@ final class Tests: QuickSpec {
 
                 context("with no values") {
                     context("the unwrappedValue() function") {
-                        it("should throw a missingKey error") {
-                            let expectedError = Partial<MockPartialConvertible>.Error.missingKey(\.stringProperty)
+                        it("should throw a keyPathNotSet error") {
+                            let expectedError = Partial<MockPartialConvertible>.Error.keyPathNotSet(\.stringProperty)
                             expect { try partial.unwrappedValue() }.to(throwError(expectedError))
                         }
                     }
@@ -59,9 +59,9 @@ final class Tests: QuickSpec {
 
                 context("with the embedded value not set") {
                     context("the value(for:) function") {
-                        it("should throw a missingKey error") {
-                            let missingKeyError = Partial<MockPartialConvertible>.Error.missingKey(\.optionalString)
-                            expect { try partial.value(for: \.optionalString) }.to(throwError(missingKeyError))
+                        it("should throw a keyPathNotSet error") {
+                            let expectedError = Partial<MockPartialConvertible>.Error.keyPathNotSet(\.optionalString)
+                            expect { try partial.value(for: \.optionalString) }.to(throwError(expectedError))
                         }
                     }
                 }
@@ -146,11 +146,11 @@ final class Tests: QuickSpec {
                         }
 
                         context("the unwrappedValue() function") {
-                            it("should throw missingKey error") {
+                            it("should throw keyPathNotSet error") {
                                 let expectedError =
                                     Partial<MockPartialConvertible.PartialConvertibleStringWrapper>
                                         .Error
-                                        .missingKey(\.stringProperty)
+                                        .keyPathNotSet(\.stringProperty)
 
                                 expect { try partial.unwrappedValue() }.to(throwError(expectedError))
                             }
@@ -163,11 +163,11 @@ final class Tests: QuickSpec {
                         }
 
                         context("the unwrappedValue() function") {
-                            it("should throw missingKey error") {
+                            it("should throw keyPathNotSet error") {
                                 let expectedError =
                                     Partial<MockPartialConvertible.PartialConvertibleStringWrapper>
                                         .Error
-                                        .missingKey(\.stringProperty)
+                                        .keyPathNotSet(\.stringProperty)
 
                                 expect { try partial.unwrappedValue() }.to(throwError(expectedError))
                             }
