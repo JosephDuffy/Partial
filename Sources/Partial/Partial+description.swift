@@ -4,12 +4,12 @@ extension Partial: CustomStringConvertible {
         let backingValueDescription: String
 
         if let backingValue = backingValue as? CustomStringConvertible {
-            backingValueDescription = backingValue.description
+            backingValueDescription = String(describing: backingValue)
         } else {
             backingValueDescription = String(describing: backingValue)
         }
 
-        return "<\(type(of: self)) values=\(values.description); backingValue=\(backingValueDescription)>"
+        return "\(type(of: self))(values: \(String(describing: values)), backingValue: \(backingValueDescription))"
     }
 
 }

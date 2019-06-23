@@ -4,7 +4,7 @@ extension Partial: CustomDebugStringConvertible {
         if let backingValue = backingValue {
             return debugDescription(utilising: backingValue)
         } else {
-            return "<\(type(of: self)) values=\(values.debugDescription); backingValue=\(backingValue.debugDescription))>"
+            return String(describing: self)
         }
     }
 
@@ -13,26 +13,19 @@ extension Partial: CustomDebugStringConvertible {
         var unnamedValues: [PartialKeyPath<Wrapped>: Any] = [:]
 
         let mirror = Mirror(reflecting: instance)
-        for (key, value) in self.values {
-            var foundKey = false
-
+        valuesLoop: for (key, value) in self.values {
             for child in mirror.children {
-                if let propertyName = child.label {
-                    foundKey = (value as AnyObject) === (child.value as AnyObject)
+                guard let propertyName = child.label else { continue }
+                guard (value as AnyObject) === (child.value as AnyObject) else { continue }
 
-                    if foundKey {
-                        namedValues[propertyName] = value
-                        break
-                    }
-                }
+                namedValues[propertyName] = value
+                break valuesLoop
             }
 
-            if !foundKey {
-                unnamedValues[key] = value
-            }
+            unnamedValues[key] = value
         }
 
-        return "<\(type(of: self)) values=\(namedValues.debugDescription), \(unnamedValues.debugDescription); backingValue=\(backingValue.debugDescription))>"
+        return "\(type(of: self))(values: \(namedValues) + \(unnamedValues), backingValue: \(instance))"
     }
 
 }
@@ -42,8 +35,10 @@ extension Partial where Wrapped: PartialConvertible {
     public var debugDescription: String {
         if let instance = try? Wrapped(partial: self) {
             return debugDescription(utilising: instance)
+        } else if let backingValue = backingValue {
+            return debugDescription(utilising: backingValue)
         } else {
-            return "<\(type(of: self)) values=\(values.debugDescription); backingValue=\(backingValue.debugDescription))>"
+            return String(describing: self)
         }
     }
 
