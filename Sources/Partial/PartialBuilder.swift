@@ -83,52 +83,52 @@ public final class PartialBuilder<Wrapped>: PartialProtocol {
         }
     }
 
-    public func value<Value>(for key: KeyPath<Wrapped, Value>) throws -> Value {
-        return try partial.value(for: key)
+    public func value<Value>(for keyPath: KeyPath<Wrapped, Value>) throws -> Value {
+        return try partial.value(for: keyPath)
     }
 
-    public func value<Value>(for key: KeyPath<Wrapped, Value?>) throws -> Value? {
-        return try partial.value(for: key)
+    public func value<Value>(for keyPath: KeyPath<Wrapped, Value?>) throws -> Value? {
+        return try partial.value(for: keyPath)
     }
 
-    public func value<Value>(for key: KeyPath<Wrapped, Value>) throws -> Value where Value: PartialConvertible {
-        return try partial.value(for: key)
+    public func value<Value>(for keyPath: KeyPath<Wrapped, Value>) throws -> Value where Value: PartialConvertible {
+        return try partial.value(for: keyPath)
     }
 
-    public func value<Value>(for key: KeyPath<Wrapped, Value?>) throws -> Value? where Value: PartialConvertible {
-        return try partial.value(for: key)
+    public func value<Value>(for keyPath: KeyPath<Wrapped, Value?>) throws -> Value? where Value: PartialConvertible {
+        return try partial.value(for: keyPath)
     }
 
-    public func partialValue<Value>(for key: KeyPath<Wrapped, Value>) throws -> Partial<Value> {
-        return try partial.partialValue(for: key)
+    public func partialValue<Value>(for keyPath: KeyPath<Wrapped, Value>) -> Partial<Value> {
+        return partial.partialValue(for: keyPath)
     }
 
-    public func partialValue<Value>(for key: KeyPath<Wrapped, Value?>) throws -> Partial<Value> {
-        return try partial.partialValue(for: key)
+    public func partialValue<Value>(for keyPath: KeyPath<Wrapped, Value?>) -> Partial<Value> {
+        return partial.partialValue(for: keyPath)
     }
 
-    public func set<Value>(value: Value, for key: KeyPath<Wrapped, Value>) {
-        partial.set(value: value, for: key)
-        notifyUpdateListeners(ofChangeTo: key, newValue: value)
+    public func set<Value>(value: Value, for keyPath: KeyPath<Wrapped, Value>) {
+        partial.set(value: value, for: keyPath)
+        notifyUpdateListeners(ofChangeTo: keyPath, newValue: value)
     }
 
-    public func set<Value>(value: Value?, for key: KeyPath<Wrapped, Value?>) {
-        partial.set(value: value, for: key)
+    public func set<Value>(value: Value?, for keyPath: KeyPath<Wrapped, Value?>) {
+        partial.set(value: value, for: keyPath)
         if let value = value {
-            notifyUpdateListeners(ofChangeTo: key, newValue: value)
+            notifyUpdateListeners(ofChangeTo: keyPath, newValue: value)
         } else {
-            notifyUpdateListeners(ofChangeTo: key, newValue: nil)
+            notifyUpdateListeners(ofChangeTo: keyPath, newValue: nil)
         }
     }
 
-    public func set<Value>(value: Partial<Value>, for key: KeyPath<Wrapped, Value>) where Value: PartialConvertible {
-        partial.set(value: value, for: key)
-        notifyUpdateListeners(ofChangeTo: key, newValue: value)
+    public func set<Value>(value: Partial<Value>, for keyPath: KeyPath<Wrapped, Value>) {
+        partial.set(value: value, for: keyPath)
+        notifyUpdateListeners(ofChangeTo: keyPath, newValue: value)
     }
 
-    public func set<Value>(value: Partial<Value>, for key: KeyPath<Wrapped, Value?>) where Value: PartialConvertible {
-        partial.set(value: value, for: key)
-        notifyUpdateListeners(ofChangeTo: key, newValue: value)
+    public func set<Value>(value: Partial<Value>, for keyPath: KeyPath<Wrapped, Value?>) {
+        partial.set(value: value, for: keyPath)
+        notifyUpdateListeners(ofChangeTo: keyPath, newValue: value)
     }
 
     public func removeValue(for keyPath: PartialKeyPath<Wrapped>) {
@@ -136,8 +136,8 @@ public final class PartialBuilder<Wrapped>: PartialProtocol {
         notifyUpdateListeners(ofChangeTo: keyPath, newValue: nil)
     }
 
-    private func notifyUpdateListeners(ofChangeTo key: PartialKeyPath<Wrapped>, newValue: Any?) {
-        propertyUpdateListeners[key]?.forEach { $0.updateListener(newValue) }
+    private func notifyUpdateListeners(ofChangeTo keyPath: PartialKeyPath<Wrapped>, newValue: Any?) {
+        propertyUpdateListeners[keyPath]?.forEach { $0.updateListener(newValue) }
         updateListeners.forEach { $0.updateListener(partial) }
     }
 
