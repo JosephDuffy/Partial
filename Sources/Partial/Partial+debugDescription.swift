@@ -1,5 +1,8 @@
 extension Partial: CustomDebugStringConvertible {
 
+    /// A textual representation of the Partial's values and backing value. If the
+    /// backing value has been set an attempt to discover the names of the properties
+    /// will be made using reflection
     public var debugDescription: String {
         if let backingValue = backingValue {
             return debugDescription(utilising: backingValue)
@@ -32,6 +35,9 @@ extension Partial: CustomDebugStringConvertible {
 
 extension Partial where Wrapped: PartialConvertible {
 
+    /// A textual representation of the Partial's values and backing value. If the
+    /// backing value has been set an attempt to discover the names of the properties
+    /// will be made using reflection
     public var debugDescription: String {
         if let instance = try? Wrapped(partial: self) {
             return debugDescription(utilising: instance)
