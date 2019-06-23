@@ -17,6 +17,7 @@
 		D92E76D1229D8A66003EBC25 /* PartialProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92E76CF229D8A0D003EBC25 /* PartialProtocol.swift */; };
 		D92E76D2229D8A67003EBC25 /* PartialProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92E76CF229D8A0D003EBC25 /* PartialProtocol.swift */; };
 		D92E76D3229D8A67003EBC25 /* PartialProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92E76CF229D8A0D003EBC25 /* PartialProtocol.swift */; };
+		D992471222BFE54F00A2B079 /* PartialProtocol+deprecations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D992471122BFE54F00A2B079 /* PartialProtocol+deprecations.swift */; };
 		D9A27B6D228CBDC5001530A1 /* PartialConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A27B6C228CBDC5001530A1 /* PartialConvertible.swift */; };
 		D9A27B6E228CBDD2001530A1 /* PartialConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A27B6C228CBDC5001530A1 /* PartialConvertible.swift */; };
 		D9A27B6F228CBDD3001530A1 /* PartialConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A27B6C228CBDC5001530A1 /* PartialConvertible.swift */; };
@@ -84,6 +85,7 @@
 		D91505CB221E050500EB5215 /* Partial+debugDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Partial+debugDescription.swift"; sourceTree = "<group>"; };
 		D91505CD221E052600EB5215 /* PartialBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartialBuilder.swift; sourceTree = "<group>"; };
 		D92E76CF229D8A0D003EBC25 /* PartialProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartialProtocol.swift; sourceTree = "<group>"; };
+		D992471122BFE54F00A2B079 /* PartialProtocol+deprecations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PartialProtocol+deprecations.swift"; sourceTree = "<group>"; };
 		D9A27B6C228CBDC5001530A1 /* PartialConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartialConvertible.swift; sourceTree = "<group>"; };
 		D9A27B71228CBE40001530A1 /* Partial+description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Partial+description.swift"; sourceTree = "<group>"; };
 		D9A27B78228D97D9001530A1 /* APITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITests.swift; sourceTree = "<group>"; };
@@ -204,11 +206,12 @@
 			isa = PBXGroup;
 			children = (
 				D91505C9221E04EB00EB5215 /* Partial.swift */,
+				D91505CD221E052600EB5215 /* PartialBuilder.swift */,
 				D9A27B6C228CBDC5001530A1 /* PartialConvertible.swift */,
 				D9A27B71228CBE40001530A1 /* Partial+description.swift */,
 				D91505CB221E050500EB5215 /* Partial+debugDescription.swift */,
-				D91505CD221E052600EB5215 /* PartialBuilder.swift */,
 				D92E76CF229D8A0D003EBC25 /* PartialProtocol.swift */,
+				D992471122BFE54F00A2B079 /* PartialProtocol+deprecations.swift */,
 			);
 			path = Partial;
 			sourceTree = "<group>";
@@ -520,6 +523,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D992471222BFE54F00A2B079 /* PartialProtocol+deprecations.swift in Sources */,
 				D9A27B72228CBE40001530A1 /* Partial+description.swift in Sources */,
 				D91505CA221E04EB00EB5215 /* Partial.swift in Sources */,
 				D91505CE221E052600EB5215 /* PartialBuilder.swift in Sources */,

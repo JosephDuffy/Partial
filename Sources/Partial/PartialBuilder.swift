@@ -163,8 +163,8 @@ public final class PartialBuilder<Wrapped>: PartialProtocol {
     ///
     /// - Parameter value: The value to store against `keyPath`.
     /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
-    public func set<Value>(value: Value, for keyPath: KeyPath<Wrapped, Value>) {
-        partial.set(value: value, for: keyPath)
+    public func setValue<Value>(_ value: Value, for keyPath: KeyPath<Wrapped, Value>) {
+        partial.setValue(value, for: keyPath)
         notifyUpdateListeners(ofChangeTo: keyPath, newValue: value)
     }
 
@@ -172,8 +172,8 @@ public final class PartialBuilder<Wrapped>: PartialProtocol {
     ///
     /// - Parameter value: The value to store against `keyPath`.
     /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
-    public func set<Value>(value: Value?, for keyPath: KeyPath<Wrapped, Value?>) {
-        partial.set(value: value, for: keyPath)
+    public func setValue<Value>(_ value: Value?, for keyPath: KeyPath<Wrapped, Value?>) {
+        partial.setValue(value, for: keyPath)
         if let value = value {
             notifyUpdateListeners(ofChangeTo: keyPath, newValue: value)
         } else {
@@ -185,8 +185,8 @@ public final class PartialBuilder<Wrapped>: PartialProtocol {
     ///
     /// - Parameter value: The partial value to store against `keyPath`.
     /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
-    public func set<Value>(value: Partial<Value>, for keyPath: KeyPath<Wrapped, Value>) {
-        partial.set(value: value, for: keyPath)
+    public func setValue<Value>(_ value: Partial<Value>, for keyPath: KeyPath<Wrapped, Value>) {
+        partial.setValue(value, for: keyPath)
         notifyUpdateListeners(ofChangeTo: keyPath, newValue: value)
     }
 
@@ -194,8 +194,8 @@ public final class PartialBuilder<Wrapped>: PartialProtocol {
     ///
     /// - Parameter value: The partial value to store against `keyPath`.
     /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
-    public func set<Value>(value: Partial<Value>, for keyPath: KeyPath<Wrapped, Value?>) {
-        partial.set(value: value, for: keyPath)
+    public func setValue<Value>(_ value: Partial<Value>, for keyPath: KeyPath<Wrapped, Value?>) {
+        partial.setValue(value, for: keyPath)
         notifyUpdateListeners(ofChangeTo: keyPath, newValue: value)
     }
 

@@ -68,7 +68,7 @@ final class Tests: QuickSpec {
 
                 context("with the embedded value set to nil") {
                     beforeEach {
-                        partial.set(value: nil, for: \.optionalString)
+                        partial.setValue(nil, for: \.optionalString)
                     }
 
                     context("the value(for:) function") {

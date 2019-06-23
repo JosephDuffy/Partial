@@ -197,7 +197,7 @@ public struct Partial<Wrapped>: PartialProtocol {
     ///
     /// - Parameter value: The value to store against `keyPath`.
     /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
-    public mutating func set<Value>(value: Value, for keyPath: KeyPath<Wrapped, Value>) {
+    public mutating func setValue<Value>(_ value: Value, for keyPath: KeyPath<Wrapped, Value>) {
         values[keyPath] = value
     }
 
@@ -205,7 +205,7 @@ public struct Partial<Wrapped>: PartialProtocol {
     ///
     /// - Parameter value: The value to store against `keyPath`.
     /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
-    public mutating func set<Value>(value: Value?, for keyPath: KeyPath<Wrapped, Value?>) {
+    public mutating func setValue<Value>(_ value: Value?, for keyPath: KeyPath<Wrapped, Value?>) {
         /**
          Uses `updateValue(_:forKey:)` to ensure the value is set to `nil`, rather than
          removed from the dictionary, which would happen if the subscript were used.
@@ -220,7 +220,7 @@ public struct Partial<Wrapped>: PartialProtocol {
     ///
     /// - Parameter value: The partial value to store against `keyPath`.
     /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
-    public mutating func set<Value>(value: Partial<Value>, for keyPath: KeyPath<Wrapped, Value>) {
+    public mutating func setValue<Value>(_ value: Partial<Value>, for keyPath: KeyPath<Wrapped, Value>) {
         values[keyPath] = value
     }
 
@@ -228,7 +228,7 @@ public struct Partial<Wrapped>: PartialProtocol {
     ///
     /// - Parameter value: The partial value to store against `keyPath`.
     /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
-    public mutating func set<Value>(value: Partial<Value>, for keyPath: KeyPath<Wrapped, Value?>) {
+    public mutating func setValue<Value>(_ value: Partial<Value>, for keyPath: KeyPath<Wrapped, Value?>) {
         values[keyPath] = value
     }
 

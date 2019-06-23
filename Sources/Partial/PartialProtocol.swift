@@ -99,25 +99,25 @@ public protocol PartialProtocol {
     ///
     /// - Parameter value: The value to store against `keyPath`.
     /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
-    mutating func set<Value>(value: Value, for keyPath: KeyPath<Wrapped, Value>)
+    mutating func setValue<Value>(_ value: Value, for keyPath: KeyPath<Wrapped, Value>)
 
     /// Updates the stored value for the given key path.
     ///
     /// - Parameter value: The value to store against `keyPath`.
     /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
-    mutating func set<Value>(value: Value?, for keyPath: KeyPath<Wrapped, Value?>)
+    mutating func setValue<Value>(_ value: Value?, for keyPath: KeyPath<Wrapped, Value?>)
 
     /// Updates the stored value for the given key path to be a partial value.
     ///
     /// - Parameter value: The partial value to store against `keyPath`.
     /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
-    mutating func set<Value>(value: Partial<Value>, for keyPath: KeyPath<Wrapped, Value>)
+    mutating func setValue<Value>(_ value: Partial<Value>, for keyPath: KeyPath<Wrapped, Value>)
 
     /// Update the stored value for the given key path to be a partial value.
     ///
     /// - Parameter value: The partial value to store against `keyPath`.
     /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
-    mutating func set<Value>(value: Partial<Value>, for keyPath: KeyPath<Wrapped, Value?>)
+    mutating func setValue<Value>(_ value: Partial<Value>, for keyPath: KeyPath<Wrapped, Value?>)
 
     /// Removes the stored value for the given key path.
     ///
@@ -318,7 +318,7 @@ extension PartialProtocol {
         }
         set {
             if let newValue = newValue {
-                set(value: newValue, for: keyPath)
+                setValue(newValue, for: keyPath)
             } else {
                 removeValue(for: keyPath)
             }
@@ -338,7 +338,7 @@ extension PartialProtocol {
         }
         set {
             if let newValue = newValue {
-                set(value: newValue, for: keyPath)
+                setValue(newValue, for: keyPath)
             } else {
                 removeValue(for: keyPath)
             }
@@ -363,7 +363,7 @@ extension PartialProtocol {
         }
         set {
             if let partialValue = newValue {
-                set(value: partialValue, for: keyPath)
+                setValue(partialValue, for: keyPath)
             } else {
                 removeValue(for: keyPath)
             }
@@ -389,7 +389,7 @@ extension PartialProtocol {
         }
         set {
             if let partialValue = newValue {
-                set(value: partialValue, for: keyPath)
+                setValue(partialValue, for: keyPath)
             } else {
                 removeValue(for: keyPath)
             }
@@ -406,7 +406,7 @@ extension PartialProtocol {
             return partialValue(for: keyPath)
         }
         set {
-            set(value: newValue, for: keyPath)
+            setValue(newValue, for: keyPath)
         }
     }
 
@@ -420,7 +420,7 @@ extension PartialProtocol {
             return partialValue(for: keyPath)
         }
         set {
-            set(value: newValue, for: keyPath)
+            setValue(newValue, for: keyPath)
         }
     }
 
@@ -447,7 +447,7 @@ extension PartialProtocol {
         }
         set {
             if let newValue = newValue {
-                set(value: newValue, for: keyPath)
+                setValue(newValue, for: keyPath)
             } else {
                 removeValue(for: keyPath)
             }
@@ -466,11 +466,10 @@ extension PartialProtocol {
             return value(for: keyPath)
         }
         set {
-            switch newValue {
-            case .none:
+            if let newValue = newValue {
+                setValue(newValue, for: keyPath)
+            } else {
                 removeValue(for: keyPath)
-            case .some(let value):
-                set(value: value, for: keyPath)
             }
         }
     }
@@ -493,7 +492,7 @@ extension PartialProtocol {
         }
         set {
             if let newValue = newValue {
-                set(value: newValue, for: keyPath)
+                setValue(newValue, for: keyPath)
             } else {
                 removeValue(for: keyPath)
             }
@@ -519,7 +518,7 @@ extension PartialProtocol {
         }
         set {
             if let newValue = newValue {
-                set(value: newValue, for: keyPath)
+                setValue(newValue, for: keyPath)
             } else {
                 removeValue(for: keyPath)
             }
@@ -540,7 +539,7 @@ extension PartialProtocol {
             }
         }
         set {
-            set(value: newValue, for: keyPath)
+            setValue(newValue, for: keyPath)
         }
     }
 
@@ -558,7 +557,7 @@ extension PartialProtocol {
             }
         }
         set {
-            set(value: newValue, for: keyPath)
+            setValue(newValue, for: keyPath)
         }
     }
     #endif
