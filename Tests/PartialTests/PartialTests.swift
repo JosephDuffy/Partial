@@ -4,7 +4,7 @@ import Nimble
 @testable
 import Partial
 
-final class Tests: QuickSpec {
+final class PartialTests: QuickSpec {
 
     override func spec() {
         describe("Partial") {
