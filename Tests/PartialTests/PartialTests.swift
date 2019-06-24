@@ -135,7 +135,7 @@ final class PartialTests: QuickSpec {
                             var result: Wrapped.Embedded?
 
                             beforeEach {
-                                result = partial.value(for: \.embedded)
+                                result = partial[\.embedded]
                             }
 
                             it("should return the set value") {
@@ -200,7 +200,7 @@ final class PartialTests: QuickSpec {
                             var result: Wrapped.Embedded?
 
                             beforeEach {
-                                result = partial.value(for: \.embedded)
+                                result = partial[\.embedded]
                             }
 
                             it("should return `nil`") {
@@ -343,7 +343,7 @@ final class PartialTests: QuickSpec {
                             var result: Wrapped.Embedded?
 
                             beforeEach {
-                                result = partial.value(for: \.embedded)
+                                result = partial[\.embedded]
                             }
 
                             it("should return the set value") {
@@ -408,7 +408,7 @@ final class PartialTests: QuickSpec {
                             var result: Wrapped.Embedded?
 
                             beforeEach {
-                                result = partial.value(for: \.embedded)
+                                result = partial[\.embedded]
                             }
 
                             it("should return `nil`") {
@@ -556,7 +556,7 @@ final class PartialTests: QuickSpec {
                             var result: Wrapped.Embedded??
 
                             beforeEach {
-                                result = partial.value(for: \.embedded)
+                                result = partial[\.embedded]
                             }
 
                             it("should return `nil` wrapped in an `Optional`") {
@@ -626,7 +626,7 @@ final class PartialTests: QuickSpec {
                             var result: Wrapped.Embedded??
 
                             beforeEach {
-                                result = partial.value(for: \.embedded)
+                                result = partial[\.embedded]
                             }
 
                             it("should return the set value") {
@@ -691,7 +691,7 @@ final class PartialTests: QuickSpec {
                             var result: Wrapped.Embedded??
 
                             beforeEach {
-                                result = partial.value(for: \.embedded)
+                                result = partial[\.embedded]
                             }
 
                             it("should return `nil`") {
@@ -830,7 +830,7 @@ final class PartialTests: QuickSpec {
                             var result: Wrapped.Embedded??
 
                             beforeEach {
-                                result = partial.value(for: \.embedded)
+                                result = partial[\.embedded]
                             }
 
                             it("should return `nil` wrapped in an `Optional`") {
@@ -900,7 +900,7 @@ final class PartialTests: QuickSpec {
                             var result: Wrapped.Embedded??
 
                             beforeEach {
-                                result = partial.value(for: \.embedded)
+                                result = partial[\.embedded]
                             }
 
                             it("should return the set value") {
@@ -965,7 +965,7 @@ final class PartialTests: QuickSpec {
                             var result: Wrapped.Embedded??
 
                             beforeEach {
-                                result = partial.value(for: \.embedded)
+                                result = partial[\.embedded]
                             }
 
                             it("should return `nil`") {
@@ -1109,7 +1109,7 @@ final class PartialTests: QuickSpec {
                             var result: Wrapped.Embedded??
 
                             beforeEach {
-                                result = partial.value(for: \.embedded)
+                                result = partial[\.embedded]
                             }
 
                             it("should return `nil` wrapped in an `Optional`") {
@@ -1179,7 +1179,7 @@ final class PartialTests: QuickSpec {
                             var result: Wrapped.Embedded??
 
                             beforeEach {
-                                result = partial.value(for: \.embedded)
+                                result = partial[\.embedded]
                             }
 
                             it("should return the set value") {
@@ -1244,7 +1244,7 @@ final class PartialTests: QuickSpec {
                             var result: Wrapped.Embedded??
 
                             beforeEach {
-                                result = partial.value(for: \.embedded)
+                                result = partial[\.embedded]
                             }
 
                             it("should return `nil`") {
@@ -1399,7 +1399,7 @@ final class PartialTests: QuickSpec {
                             var result: Wrapped.Embedded?
 
                             beforeEach {
-                                result = partial.value(for: \.embedded)
+                                result = partial[\.embedded]
                             }
 
                             it("should return the set value") {
@@ -1472,7 +1472,7 @@ final class PartialTests: QuickSpec {
                             var result: Wrapped.Embedded?
 
                             beforeEach {
-                                result = partial.value(for: \.embedded)
+                                result = partial[\.embedded]
                             }
 
                             it("should return an unwrapped value") {
@@ -1615,7 +1615,7 @@ final class PartialTests: QuickSpec {
                             var result: Wrapped.Embedded?
 
                             beforeEach {
-                                result = partial.value(for: \.embedded)
+                                result = partial[\.embedded]
                             }
 
                             it("should return the set value") {
@@ -1688,7 +1688,7 @@ final class PartialTests: QuickSpec {
                             var result: Wrapped.Embedded?
 
                             beforeEach {
-                                result = partial.value(for: \.embedded)
+                                result = partial[\.embedded]
                             }
 
                             it("should return an unwrapped value") {
@@ -1839,7 +1839,7 @@ final class PartialTests: QuickSpec {
                             var result: Wrapped.Embedded??
 
                             beforeEach {
-                                result = partial.value(for: \.embedded)
+                                result = partial[\.embedded]
                             }
 
                             it("should return `nil` wrapped in an `Optional`") {
@@ -1909,7 +1909,7 @@ final class PartialTests: QuickSpec {
                             var result: Wrapped.Embedded??
 
                             beforeEach {
-                                result = partial.value(for: \.embedded)
+                                result = partial[\.embedded]
                             }
 
                             it("should return the set value") {
@@ -1982,7 +1982,7 @@ final class PartialTests: QuickSpec {
                             var result: Wrapped.Embedded??
 
                             beforeEach {
-                                result = partial.value(for: \.embedded)
+                                result = partial[\.embedded]
                             }
 
                             it("should return an unwrapped value") {
@@ -2121,7 +2121,7 @@ final class PartialTests: QuickSpec {
                             var result: Wrapped.Embedded??
 
                             beforeEach {
-                                result = partial.value(for: \.embedded)
+                                result = partial[\.embedded]
                             }
 
                             it("should return `nil` wrapped in an `Optional`") {
@@ -2191,7 +2191,7 @@ final class PartialTests: QuickSpec {
                             var result: Wrapped.Embedded??
 
                             beforeEach {
-                                result = partial.value(for: \.embedded)
+                                result = partial[\.embedded]
                             }
 
                             it("should return the set value") {
@@ -2264,7 +2264,7 @@ final class PartialTests: QuickSpec {
                             var result: Wrapped.Embedded??
 
                             beforeEach {
-                                result = partial.value(for: \.embedded)
+                                result = partial[\.embedded]
                             }
 
                             it("should return an unwrapped value") {
@@ -2408,7 +2408,7 @@ final class PartialTests: QuickSpec {
                             var result: Wrapped.Embedded??
 
                             beforeEach {
-                                result = partial.value(for: \.embedded)
+                                result = partial[\.embedded]
                             }
 
                             it("should return `nil` wrapped in an `Optional`") {
@@ -2478,7 +2478,7 @@ final class PartialTests: QuickSpec {
                             var result: Wrapped.Embedded??
 
                             beforeEach {
-                                result = partial.value(for: \.embedded)
+                                result = partial[\.embedded]
                             }
 
                             it("should return the set value") {
@@ -2551,7 +2551,7 @@ final class PartialTests: QuickSpec {
                             var result: Wrapped.Embedded??
 
                             beforeEach {
-                                result = partial.value(for: \.embedded)
+                                result = partial[\.embedded]
                             }
 
                             it("should return an unwrapped value") {
