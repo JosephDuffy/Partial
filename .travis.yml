@@ -26,6 +26,8 @@ _base_envs:
 - &xcode_env
   <<: *macos_env
   xcode_project: Partial.xcodeproj
+  after_success:
+    - bash <(curl -s https://codecov.io/bash)
 - &macos_xcode_env
   <<: *xcode_env
   install: carthage bootstrap --platform macOS --cache-builds
