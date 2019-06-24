@@ -1694,7 +1694,7 @@ final class PartialTests: QuickSpec {
 
                 }
 
-                fcontext("initialised with a backing value") {
+                context("initialised with a backing value") {
                     var backingValue: Wrapped!
                     var partial: Partial<Wrapped>!
 
