@@ -4,5 +4,5 @@ import Quick
 @testable import PartialTests
 
 QCKMain([
-    Tests.self,
+    PartialTests.self,
 ])
