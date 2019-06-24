@@ -33,25 +33,16 @@ _base_envs:
   install: carthage bootstrap --platform macOS --cache-builds
   xcode_scheme: Partial-macOS
   xcode_destination: platform=macOS
-- &macos_xcode_swift_beta_env
-  <<: *macos_xcode_env
-  <<: *swift_beta_install
-- &ios_env
+- &ios_xcode_env
   <<: *xcode_env
   install: carthage bootstrap --platform iOS --cache-builds
   xcode_scheme: Partial-iOS
   xcode_destination: platform=iOS Simulator,OS=12.1,name=iPhone XS
-- &ios_swift_beta_env
-  <<: *ios_env
-  <<: *swift_beta_install
-- &tvos_env
+- &tvos_xcode_env
   <<: *xcode_env
   install: carthage bootstrap --platform tvOS --cache-builds
   xcode_scheme: Partial-tvOS
   xcode_destination: platform=tvOS Simulator,OS=12.1,name=Apple TV 4K
-- &tvos_swift_beta_env
-  <<: *tvos_env
-  <<: *swift_beta_install
 - &linux_env
   <<: *swiftenv_install
   os: linux
@@ -96,14 +87,9 @@ jobs:
       if: type != pull_request
       script: swift test
 
-    - <<: *ios_env
+    - <<: *ios_xcode_env
       stage: "Test"
       name: "Unit tests (iOS, Xcode)"
-      if: type != pull_request
-
-    - <<: *ios_swift_beta_env
-      stage: "Test"
-      name: "Unit tests (iOS, Swift Beta, Xcode)"
       if: type != pull_request
 
     - <<: *macos_xcode_env
@@ -111,19 +97,9 @@ jobs:
       name: "Unit tests (macOS, Xcode)"
       if: type != pull_request
 
-    - <<: *macos_xcode_swift_beta_env
-      stage: "Test"
-      name: "Unit tests (macOS, Swift Beta, Xcode)"
-      if: type != pull_request
-
-    - <<: *tvos_env
+    - <<: *tvos_xcode_env
       stage: "Test"
       name: "Unit tests (tvOS, Xcode)"
-      if: type != pull_request
-
-    - <<: *tvos_swift_beta_env
-      stage: "Test"
-      name: "Unit tests (tvOS, Swift Beta, Xcode)"
       if: type != pull_request
 
     - <<: *linux_env
