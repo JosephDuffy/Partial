@@ -22,15 +22,14 @@ struct APITests {
         }
 
         var partial = Partial<Value>()
-        partial[\.embeddedValue] = Partial<Value.EmbeddedValue>()
         partial.setValue(Partial<Value.EmbeddedValue>(), for: \Value.embeddedValue)
-
-        partial[\.optionalEmbeddedValue] = Partial<Value.EmbeddedValue>()
         partial.setValue(Partial<Value.EmbeddedValue>(), for: \Value.optionalEmbeddedValue)
 
         // These should cause compiler warnings and not be possible
+//        partial[\.embeddedValue] = Partial<Value.EmbeddedValue>()
+//        partial[\.optionalEmbeddedValue] = Partial<Value.EmbeddedValue>()
 //        partial[\.optionalEmbeddedValue] = Partial<Value.EmbeddedValue?>()
-//        partial.setValue(Partial<Value.EmbeddedValue?>(), for: \Value.optionalEmbeddedValue)
+//        partial.setValue(Partial<Value.EmbeddedValue?>(), for: \.optionalEmbeddedValue)
     }
 
 }

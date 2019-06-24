@@ -177,22 +177,6 @@ public protocol PartialProtocol {
     @available(swift, deprecated: 5.1, message: "Use dynamic member lookup, `value(for:)`, or `set(value:for:)`")
     subscript<Value>(keyPath: KeyPath<Wrapped, Value?>) -> Value?? where Value: PartialConvertible { get set }
 
-    /// Returns a `Partial` for the given key path. If the value exists it will be wrapped in a
-    /// new `Partial`. If the value has not been set an empty `Partial` will be returned.
-    ///
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
-    /// - Returns: The stored value wrapped by a `Partial`, or an empty `Partial`.
-    @available(swift, deprecated: 5.1, message: "Use dynamic member lookup or `value(for:)`")
-    subscript<Value>(keyPath: KeyPath<Wrapped, Value>) -> Partial<Value> { get set }
-
-    /// Returns a `Partial` for the given key path. If the value exists it will be wrapped in a
-    /// new `Partial`. If the value has not been set an empty `Partial` will be returned.
-    ///
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
-    /// - Returns: The stored value wrapped by a `Partial`, or an empty `Partial`.
-    @available(swift, deprecated: 5.1, message: "Use dynamic member lookup or `value(for:)`")
-    subscript<Value>(keyPath: KeyPath<Wrapped, Value?>) -> Partial<Value> { get set }
-
     #if swift(>=5.1)
     /// Retrieve or set a value for the given key path. Returns `nil` if the value has not been set.
     ///
@@ -242,20 +226,6 @@ public protocol PartialProtocol {
     /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
     /// - Returns: The stored value, or `nil` if a value has not been set or could not be unwrapped.
     subscript<Value>(dynamicMember keyPath: KeyPath<Wrapped, Value?>) -> Value?? where Value: PartialConvertible { get set }
-
-    /// Returns a `Partial` for the given key path. If the value exists it will be wrapped in a
-    /// new `Partial`. If the value has not been set an empty `Partial` will be returned.
-    ///
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
-    /// - Returns: The stored value wrapped by a `Partial`, or an empty `Partial`.
-    subscript<Value>(dynamicMember keyPath: KeyPath<Wrapped, Value>) -> Partial<Value> { get set }
-
-    /// Returns a `Partial` for the given key path. If the value exists it will be wrapped in a
-    /// new `Partial`. If the value has not been set an empty `Partial` will be returned.
-    ///
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
-    /// - Returns: The stored value wrapped by a `Partial`, or an empty `Partial`.
-    subscript<Value>(dynamicMember keyPath: KeyPath<Wrapped, Value?>) -> Partial<Value> { get set }
     #endif
 }
 
@@ -279,6 +249,22 @@ extension PartialProtocol {
 
     /// Returns the value for the given key path, or `nil` if the value has not been set.
     ///
+    /// If a backing value was provided on initialisation this will never return an optional; if
+    /// a value has not been set for `keyPath` the value from the backing value will be returned.
+    ///
+    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
+    /// - Returns: The stored value, or `nil` if a value has not been set.
+    public func value<Value>(for keyPath: KeyPath<Wrapped, Value?>) -> Value?? {
+        do {
+            let value: Value? = try self.value(for: keyPath)
+            return value
+        } catch {
+            return nil
+        }
+    }
+
+    /// Returns the value for the given key path, or `nil` if the value has not been set.
+    ///
     /// If the value stored for this key path is a `Partial` an attempt will be made to unwrap
     /// the value. If the initialiser throws an error this function will return `nil`.
     ///
@@ -290,6 +276,25 @@ extension PartialProtocol {
     public func value<Value>(for keyPath: KeyPath<Wrapped, Value>) -> Value? where Value: PartialConvertible {
         do {
             let value: Value = try self.value(for: keyPath)
+            return value
+        } catch {
+            return nil
+        }
+    }
+
+    /// Returns the value for the given key path, or `nil` if the value has not been set.
+    ///
+    /// If the value stored for this key path is a `Partial` an attempt will be made to unwrap
+    /// the value. If the initialiser throws an error this function will return `nil`.
+    ///
+    /// If a backing value was provided on initialisation this will never return an optional; if
+    /// a value has not been set for `keyPath` the value from the backing value will be returned.
+    ///
+    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
+    /// - Returns: The stored value, or `nil` if a value has not been set or could not be unwrapped.
+    public func value<Value>(for keyPath: KeyPath<Wrapped, Value?>) -> Value?? where Value: PartialConvertible {
+        do {
+            let value: Value? = try self.value(for: keyPath)
             return value
         } catch {
             return nil
@@ -326,6 +331,9 @@ extension PartialProtocol {
     }
 
     /// Retrieve or set a value for the given key path. Returns `nil` if the value has not been set.
+    ///
+    /// If a backing value was provided on initialisation this will never return an optional; if
+    /// a value has not been set for `keyPath` the value from the backing value will be returned.
     ///
     /// If the value is set to nil it will remove the value. To explicitly set the
     /// value to `nil` set it to `Optional<Value>.none`.
@@ -396,34 +404,6 @@ extension PartialProtocol {
         }
     }
 
-    /// Returns a `Partial` for the given key path. If the value exists it will be wrapped in a
-    /// new `Partial`. If the value has not been set an empty `Partial` will be returned.
-    ///
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
-    /// - Returns: The stored value wrapped by a `Partial`, or an empty `Partial`.
-    public subscript<Value>(keyPath: KeyPath<Wrapped, Value>) -> Partial<Value> {
-        get {
-            return partialValue(for: keyPath)
-        }
-        set {
-            setValue(newValue, for: keyPath)
-        }
-    }
-
-    /// Returns a `Partial` for the given key path. If the value exists it will be wrapped in a
-    /// new `Partial`. If the value has not been set an empty `Partial` will be returned.
-    ///
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
-    /// - Returns: The stored value wrapped by a `Partial`, or an empty `Partial`.
-    public subscript<Value>(keyPath: KeyPath<Wrapped, Value?>) -> Partial<Value> {
-        get {
-            return partialValue(for: keyPath)
-        }
-        set {
-            setValue(newValue, for: keyPath)
-        }
-    }
-
     /// Do not use this function; dynamic member lookup should only be used with a `KeyPath`, which
     /// requires at least Swift 5.1
     @available(swift, obsoleted: 5.0, message: "Use KeyPath-based dynamic member lookup, `value(for:)`, or `set(value:for:)`")
@@ -442,26 +422,6 @@ extension PartialProtocol {
     /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
     /// - Returns: The stored value, or `nil` if a value has not been set.
     public subscript<Value>(dynamicMember keyPath: KeyPath<Wrapped, Value>) -> Value? {
-        get {
-            return value(for: keyPath)
-        }
-        set {
-            if let newValue = newValue {
-                setValue(newValue, for: keyPath)
-            } else {
-                removeValue(for: keyPath)
-            }
-        }
-    }
-
-    /// Retrieve or set a value for the given key path. Returns `nil` if the value has not been set.
-    ///
-    /// If the value is set to nil it will remove the value. To explicitly set the
-    /// value to `nil` set it to `Optional<Value>.none`.
-    ///
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
-    /// - Returns: The stored value, or `nil` if a value has not been set.
-    public subscript<Value>(dynamicMember keyPath: KeyPath<Wrapped, Value?>) -> Value?? {
         get {
             return value(for: keyPath)
         }
@@ -496,68 +456,6 @@ extension PartialProtocol {
             } else {
                 removeValue(for: keyPath)
             }
-        }
-    }
-
-    /// Retrieve or set a value for the given key path. Returns `nil` if the value has not been set.
-    ///
-    /// If the value stored for this key path is a `Partial` an attempt will be made to unwrap
-    /// the value. If the initialiser throws an error this function will return `nil`.
-    ///
-    /// If a backing value was provided on initialisation this will never return an optional; if
-    /// a value has not been set for `keyPath` the value from the backing value will be returned.
-    ///
-    /// If the value is set to nil it will remove the value. To explicitly set the
-    /// value to `nil` set it to `Optional<Value>.none`.
-    ///
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
-    /// - Returns: The stored value, or `nil` if a value has not been set or could not be unwrapped.
-    public subscript<Value>(dynamicMember keyPath: KeyPath<Wrapped, Value?>) -> Value?? where Value: PartialConvertible {
-        get {
-            return value(for: keyPath)
-        }
-        set {
-            if let newValue = newValue {
-                setValue(newValue, for: keyPath)
-            } else {
-                removeValue(for: keyPath)
-            }
-        }
-    }
-
-    /// Returns a `Partial` for the given key path. If the value exists it will be wrapped in a
-    /// new `Partial`. If the value has not been set an empty `Partial` will be returned.
-    ///
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
-    /// - Returns: The stored value wrapped by a `Partial`, or an empty `Partial`.
-    public subscript<Value>(dynamicMember keyPath: KeyPath<Wrapped, Value>) -> Partial<Value> {
-        get {
-            do {
-                return try partialValue(for: keyPath)
-            } catch {
-                return Partial<Value>()
-            }
-        }
-        set {
-            setValue(newValue, for: keyPath)
-        }
-    }
-
-    /// Returns a `Partial` for the given key path. If the value exists it will be wrapped in a
-    /// new `Partial`. If the value has not been set an empty `Partial` will be returned.
-    ///
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
-    /// - Returns: The stored value wrapped by a `Partial`, or an empty `Partial`.
-    public subscript<Value>(dynamicMember keyPath: KeyPath<Wrapped, Value?>) -> Partial<Value> {
-        get {
-            do {
-                return try partialValue(for: keyPath)
-            } catch {
-                return Partial<Value>()
-            }
-        }
-        set {
-            setValue(newValue, for: keyPath)
         }
     }
     #endif
