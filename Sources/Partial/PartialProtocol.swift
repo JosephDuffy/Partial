@@ -319,7 +319,12 @@ extension PartialProtocol {
     /// - Returns: The stored value, or `nil` if a value has not been set.
     public subscript<Value>(keyPath: KeyPath<Wrapped, Value>) -> Value? {
         get {
-            return value(for: keyPath)
+            do {
+                let value: Value = try self.value(for: keyPath)
+                return value
+            } catch {
+                return nil
+            }
         }
         set {
             if let newValue = newValue {
@@ -342,7 +347,12 @@ extension PartialProtocol {
     /// - Returns: The stored value, or `nil` if a value has not been set.
     public subscript<Value>(keyPath: KeyPath<Wrapped, Value?>) -> Value?? {
         get {
-            return value(for: keyPath)
+            do {
+                let value: Value? = try self.value(for: keyPath)
+                return value
+            } catch {
+                return nil
+            }
         }
         set {
             if let newValue = newValue {
@@ -367,7 +377,12 @@ extension PartialProtocol {
     /// - Returns: The stored value, or `nil` if a value has not been set or could not be unwrapped.
     public subscript<Value>(keyPath: KeyPath<Wrapped, Value>) -> Value? where Value: PartialConvertible {
         get {
-            return value(for: keyPath)
+            do {
+                let value: Value = try self.value(for: keyPath)
+                return value
+            } catch {
+                return nil
+            }
         }
         set {
             if let partialValue = newValue {
@@ -393,7 +408,12 @@ extension PartialProtocol {
     /// - Returns: The stored value, or `nil` if a value has not been set or could not be unwrapped.
     public subscript<Value>(keyPath: KeyPath<Wrapped, Value?>) -> Value?? where Value: PartialConvertible {
         get {
-            return value(for: keyPath)
+            do {
+                let value: Value? = try self.value(for: keyPath)
+                return value
+            } catch {
+                return nil
+            }
         }
         set {
             if let partialValue = newValue {
@@ -423,7 +443,38 @@ extension PartialProtocol {
     /// - Returns: The stored value, or `nil` if a value has not been set.
     public subscript<Value>(dynamicMember keyPath: KeyPath<Wrapped, Value>) -> Value? {
         get {
-            return value(for: keyPath)
+            do {
+                let value: Value = try self.value(for: keyPath)
+                return value
+            } catch {
+                return nil
+            }
+        }
+        set {
+            if let newValue = newValue {
+                setValue(newValue, for: keyPath)
+            } else {
+                removeValue(for: keyPath)
+            }
+        }
+    }
+    /// Retrieve or set a value for the given key path. Returns `nil` if the value has not been set.
+    ///
+    /// If a backing value was provided on initialisation this will never return an optional; if
+    /// a value has not been set for `keyPath` the value from the backing value will be returned.
+    ///
+    /// If the value is set to nil it will remove the value.
+    ///
+    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
+    /// - Returns: The stored value, or `nil` if a value has not been set.
+    public subscript<Value>(dynamicMember keyPath: KeyPath<Wrapped, Value?>) -> Value?? {
+        get {
+            do {
+                let value: Value? = try self.value(for: keyPath)
+                return value
+            } catch {
+                return nil
+            }
         }
         set {
             if let newValue = newValue {
@@ -448,7 +499,42 @@ extension PartialProtocol {
     /// - Returns: The stored value, or `nil` if a value has not been set or could not be unwrapped.
     public subscript<Value>(dynamicMember keyPath: KeyPath<Wrapped, Value>) -> Value? where Value: PartialConvertible {
         get {
-            return value(for: keyPath)
+            do {
+                let value: Value = try self.value(for: keyPath)
+                return value
+            } catch {
+                return nil
+            }
+        }
+        set {
+            if let newValue = newValue {
+                setValue(newValue, for: keyPath)
+            } else {
+                removeValue(for: keyPath)
+            }
+        }
+    }
+
+    /// Retrieve or set a value for the given key path. Returns `nil` if the value has not been set.
+    ///
+    /// If the value stored for this key path is a `Partial` an attempt will be made to unwrap
+    /// the value. If the initialiser throws an error this function will return `nil`.
+    ///
+    /// If a backing value was provided on initialisation this will never return an optional; if
+    /// a value has not been set for `keyPath` the value from the backing value will be returned.
+    ///
+    /// If the value is set to nil it will remove the value.
+    ///
+    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
+    /// - Returns: The stored value, or `nil` if a value has not been set or could not be unwrapped.
+    public subscript<Value>(dynamicMember keyPath: KeyPath<Wrapped, Value?>) -> Value?? where Value: PartialConvertible {
+        get {
+            do {
+                let value: Value? = try self.value(for: keyPath)
+                return value
+            } catch {
+                return nil
+            }
         }
         set {
             if let newValue = newValue {
