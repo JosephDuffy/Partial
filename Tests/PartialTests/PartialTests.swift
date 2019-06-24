@@ -1060,7 +1060,7 @@ final class PartialTests: QuickSpec {
                             }
 
                             it("should return `nil` wrapped in an optional") {
-                                expect(result).to(beNilWrappedInOptional()())
+                                expect(result).to(beNilWrappedInOptional())
                             }
                         }
                         #endif
@@ -2359,7 +2359,7 @@ final class PartialTests: QuickSpec {
                             }
 
                             it("should return `nil` wrapped in an optional") {
-                                expect(result).to(beNilWrappedInOptional()())
+                                expect(result).to(beNilWrappedInOptional())
                             }
                         }
                         #endif
