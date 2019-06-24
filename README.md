@@ -10,7 +10,7 @@
 
 Partial is a type-safe wrapper that makes a type's properties optional, allowing for the type to be constructed with multiple pieces of code contributing values.
 
-⚠️️ The current version of Partial is less than 1.0; the API may change and there may be bugs. Where possible types will be deprecated to aid with upgrades, although this cannot be guarenteed ️️⚠️
+⚠️️ The current version of Partial is less than 1.0; the API may change and there may be bugs. Where possible types will be deprecated to aid with upgrades, although this cannot be guaranteed ️️⚠️
 
 # Installation
 
