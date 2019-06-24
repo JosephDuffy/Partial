@@ -50,9 +50,14 @@ final class PartialTests: QuickSpec {
                         }
 
                         context("the partialValue(for:) function") {
-                            it("should return an empty partial") {
+                            it("should return a partial without a value set") {
                                 let result = partial.partialValue(for: \.embedded)
                                 expect(result.value(for: \.string)).to(beNil())
+                            }
+
+                            it("should return a partial without a backing value") {
+                                let result = partial.partialValue(for: \.embedded)
+                                expect(result.backingValue).to(beNil())
                             }
                         }
 
@@ -470,9 +475,14 @@ final class PartialTests: QuickSpec {
                         }
 
                         context("the partialValue(for:) function") {
-                            it("should return an empty partial") {
+                            it("should return a partial without a value set") {
                                 let result = partial.partialValue(for: \.embedded)
                                 expect(result.value(for: \.string)).to(beNil())
+                            }
+
+                            it("should return a partial without a backing value") {
+                                let result = partial.partialValue(for: \.embedded)
+                                expect(result.backingValue).to(beNil())
                             }
                         }
 
@@ -531,9 +541,14 @@ final class PartialTests: QuickSpec {
                         }
 
                         context("the partialValue(for:) function") {
-                            it("should return an empty partial") {
+                            it("should return a partial without a value set") {
                                 let result = partial.partialValue(for: \.embedded)
                                 expect(result.value(for: \.string)).to(beNil())
+                            }
+
+                            it("should return a partial without a backing value") {
+                                let result = partial.partialValue(for: \.embedded)
+                                expect(result.backingValue).to(beNil())
                             }
                         }
 
@@ -800,9 +815,293 @@ final class PartialTests: QuickSpec {
                         }
 
                         context("the partialValue(for:) function") {
-                            it("should return an empty partial") {
+                            it("should return a partial without a value set") {
                                 let result = partial.partialValue(for: \.embedded)
                                 expect(result.value(for: \.string)).to(beNil())
+                            }
+
+                            it("should return a partial without a backing value") {
+                                let result = partial.partialValue(for: \.embedded)
+                                expect(result.backingValue).to(beNil())
+                            }
+                        }
+
+                        context("the subscript") {
+                            var result: Wrapped.Embedded??
+
+                            beforeEach {
+                                result = partial.value(for: \.embedded)
+                            }
+
+                            it("should return `nil` wrapped in an `Optional`") {
+                                expect(result).to(beNilWrappedInOptional())
+                            }
+                        }
+
+                        #if swift(>=5.1)
+                        context("dynamic member lookup") {
+                            var result: Wrapped.Embedded??
+
+                            beforeEach {
+                                result = partial.embedded
+                            }
+
+                            it("should return `nil` wrapped in an `Optional`") {
+                                expect(result).to(beNilWrappedInOptional())
+                            }
+                        }
+                        #endif
+                    }
+
+                    context("with the property value set to an instance of the propery's type") {
+                        var valueSet: Wrapped.Embedded!
+
+                        beforeEach {
+                            valueSet = Wrapped.Embedded(string: "test")
+                            partial.setValue(valueSet, for: \.embedded)
+                        }
+
+                        context("the throwing value(for:) function") {
+                            it("should not throw an error") {
+                                expect {
+                                    let result: Wrapped.Embedded? = try partial.value(for: \.embedded)
+                                    return result
+                                    }.toNot(throwError())
+                            }
+
+                            it("should return the set value") {
+                                expect {
+                                    let result: Wrapped.Embedded? = try partial.value(for: \.embedded)
+                                    return result
+                                    }.to(equal(valueSet))
+                            }
+                        }
+
+                        context("the non-throwing value(for:) function") {
+                            var result: Wrapped.Embedded??
+
+                            beforeEach {
+                                result = partial.value(for: \.embedded)
+                            }
+
+                            it("should return the set value") {
+                                expect(result) == valueSet
+                            }
+                        }
+
+                        context("the partialValue(for:) function") {
+                            it("should return the a partial wrapping the set value") {
+                                let result = partial.partialValue(for: \.embedded)
+                                expect(result.backingValue) == valueSet
+                            }
+                        }
+
+                        context("the subscript") {
+                            var result: Wrapped.Embedded??
+
+                            beforeEach {
+                                result = partial.value(for: \.embedded)
+                            }
+
+                            it("should return the set value") {
+                                expect(result) == valueSet
+                            }
+                        }
+
+                        #if swift(>=5.1)
+                        context("dynamic member lookup") {
+                            var result: Wrapped.Embedded??
+
+                            beforeEach {
+                                result = partial.embedded
+                            }
+
+                            it("should return the set value") {
+                                expect(result) == valueSet
+                            }
+                        }
+                        #endif
+                    }
+
+                    context("with the property value set to a partial") {
+                        var valueSet: Partial<Wrapped.Embedded>!
+
+                        beforeEach {
+                            valueSet = Partial<Wrapped.Embedded>()
+                            valueSet.setValue("test", for: \.string)
+                            partial.setValue(valueSet, for: \.embedded)
+                        }
+
+                        context("the throwing value(for:) function") {
+                            it("should throw a foundUnwrappablePartial error") {
+                                let expectedError = Partial<Wrapped>.Error.foundUnwrappablePartial(valueSet)
+                                expect {
+                                    let result = try partial.value(for: \.embedded)
+                                    return result
+                                    }.to(throwError(expectedError))
+                            }
+                        }
+
+                        context("the non-throwing value(for:) function") {
+                            var result: Wrapped.Embedded??
+
+                            beforeEach {
+                                result = partial.value(for: \.embedded)
+                            }
+
+                            it("should return `nil`") {
+                                expect(result).to(beNil())
+                            }
+                        }
+
+                        context("the partialValue(for:) function") {
+                            it("should return the set partial") {
+                                let result = partial.partialValue(for: \.embedded)
+                                expect(result.value(for: \.string)).to(equal(valueSet.value(for: \.string)))
+                            }
+                        }
+
+                        context("the subscript") {
+                            var result: Wrapped.Embedded??
+
+                            beforeEach {
+                                result = partial.value(for: \.embedded)
+                            }
+
+                            it("should return `nil`") {
+                                expect(result).to(beNil())
+                            }
+                        }
+
+                        #if swift(>=5.1)
+                        context("dynamic member lookup") {
+                            var result: Wrapped.Embedded??
+
+                            beforeEach {
+                                result = partial.embedded
+                            }
+
+                            it("should return `nil`") {
+                                expect(result).to(beNil())
+                            }
+                        }
+                        #endif
+                    }
+                }
+
+                context("initialised with a backing value with the property set to `nil`") {
+                    var backingValue: Wrapped!
+                    var partial: Partial<Wrapped>!
+
+                    beforeEach {
+                        backingValue = Wrapped(embedded: nil)
+                        partial = Partial(backingValue: backingValue)
+                    }
+
+                    context("with the property value not set") {
+                        context("the throwing value(for:) function") {
+                            it("should not throw an error") {
+                                expect {
+                                    let result: Wrapped.Embedded? = try partial.value(for: \.embedded)
+                                    return result
+                                }.toNot(throwError())
+                            }
+
+                            it("should return `nil`") {
+                                expect { () -> Wrapped.Embedded? in
+                                    let result: Wrapped.Embedded? = try partial.value(for: \.embedded)
+                                    return result
+                                }.to(beNil())
+                            }
+                        }
+
+                        context("the non-throwing value(for:) function") {
+                            var result: Wrapped.Embedded??
+
+                            beforeEach {
+                                result = partial.value(for: \.embedded)
+                            }
+
+                            it("should return the value from the backing value") {
+                                expect(result) == backingValue.embedded
+                            }
+                        }
+
+                        context("the partialValue(for:) function") {
+                            it("should return a partial without a value set") {
+                                let result = partial.partialValue(for: \.embedded)
+                                expect(result.value(for: \.string)).to(beNil())
+                            }
+
+                            it("should return a partial without a backing value") {
+                                let result = partial.partialValue(for: \.embedded)
+                                expect(result.backingValue).to(beNil())
+                            }
+                        }
+
+                        context("the subscript") {
+                            var result: Wrapped.Embedded??
+
+                            beforeEach {
+                                result = partial[\.embedded]
+                            }
+
+                            it("should return `nil` wrapped in an optional") {
+                                expect(result).to(beNilWrappedInOptional())
+                            }
+                        }
+
+                        #if swift(>=5.1)
+                        context("dynamic member lookup") {
+                            var result: Wrapped.Embedded??
+
+                            beforeEach {
+                                result = partial.embedded
+                            }
+
+                            it("should return `nil` wrapped in an optional") {
+                                expect(result).to(beNilWrappedInOptional()())
+                            }
+                        }
+                        #endif
+                    }
+
+                    context("with the property value set to nil") {
+                        beforeEach {
+                            partial.setValue(nil, for: \.embedded)
+                        }
+
+                        context("the throwing value(for:) function") {
+                            it("should not throw an error") {
+                                expect { try partial.value(for: \.embedded) }.toNot(throwError())
+                            }
+
+                            it("should return `nil`") {
+                                expect { try partial.value(for: \.embedded) }.to(beNil())
+                            }
+                        }
+
+                        context("the non-throwing value(for:) function") {
+                            var result: Wrapped.Embedded??
+
+                            beforeEach {
+                                result = partial.value(for: \.embedded)
+                            }
+
+                            it("should return `nil` wrapped in an `Optional`") {
+                                expect(result).to(beNilWrappedInOptional())
+                            }
+                        }
+
+                        context("the partialValue(for:) function") {
+                            it("should return a partial without a value set") {
+                                let result = partial.partialValue(for: \.embedded)
+                                expect(result.value(for: \.string)).to(beNil())
+                            }
+
+                            it("should return a partial without a backing value") {
+                                let result = partial.partialValue(for: \.embedded)
+                                expect(result.backingValue).to(beNil())
                             }
                         }
 
@@ -1015,9 +1314,14 @@ final class PartialTests: QuickSpec {
                         }
 
                         context("the partialValue(for:) function") {
-                            it("should return an empty partial") {
+                            it("should return a partial without a value set") {
                                 let result = partial.partialValue(for: \.embedded)
                                 expect(result.value(for: \.string)).to(beNil())
+                            }
+
+                            it("should return a partial without a backing value") {
+                                let result = partial.partialValue(for: \.embedded)
+                                expect(result.backingValue).to(beNil())
                             }
                         }
 
@@ -1454,9 +1758,14 @@ final class PartialTests: QuickSpec {
                         }
 
                         context("the partialValue(for:) function") {
-                            it("should return an empty partial") {
+                            it("should return a partial without a value set") {
                                 let result = partial.partialValue(for: \.embedded)
                                 expect(result.value(for: \.string)).to(beNil())
+                            }
+
+                            it("should return a partial without a backing value") {
+                                let result = partial.partialValue(for: \.embedded)
+                                expect(result.backingValue).to(beNil())
                             }
                         }
 
@@ -1515,9 +1824,14 @@ final class PartialTests: QuickSpec {
                         }
 
                         context("the partialValue(for:) function") {
-                            it("should return an empty partial") {
+                            it("should return a partial without a value set") {
                                 let result = partial.partialValue(for: \.embedded)
                                 expect(result.value(for: \.string)).to(beNil())
+                            }
+
+                            it("should return a partial without a backing value") {
+                                let result = partial.partialValue(for: \.embedded)
+                                expect(result.backingValue).to(beNil())
                             }
                         }
 
@@ -1690,8 +2004,6 @@ final class PartialTests: QuickSpec {
                         }
                         #endif
                     }
-
-
                 }
 
                 context("initialised with a backing value") {
@@ -1794,9 +2106,14 @@ final class PartialTests: QuickSpec {
                         }
 
                         context("the partialValue(for:) function") {
-                            it("should return an empty partial") {
+                            it("should return a partial without a value set") {
                                 let result = partial.partialValue(for: \.embedded)
                                 expect(result.value(for: \.string)).to(beNil())
+                            }
+
+                            it("should return a partial without a backing value") {
+                                let result = partial.partialValue(for: \.embedded)
+                                expect(result.backingValue).to(beNil())
                             }
                         }
 
@@ -1848,6 +2165,293 @@ final class PartialTests: QuickSpec {
                                     let result: Wrapped.Embedded? = try partial.value(for: \.embedded)
                                     return result
                                     }.to(equal(valueSet))
+                            }
+                        }
+
+                        context("the non-throwing value(for:) function") {
+                            var result: Wrapped.Embedded??
+
+                            beforeEach {
+                                result = partial.value(for: \.embedded)
+                            }
+
+                            it("should return the set value") {
+                                expect(result) == valueSet
+                            }
+                        }
+
+                        context("the partialValue(for:) function") {
+                            it("should return the a partial wrapping the set value") {
+                                let result = partial.partialValue(for: \.embedded)
+                                expect(result.backingValue) == valueSet
+                            }
+                        }
+
+                        context("the subscript") {
+                            var result: Wrapped.Embedded??
+
+                            beforeEach {
+                                result = partial.value(for: \.embedded)
+                            }
+
+                            it("should return the set value") {
+                                expect(result) == valueSet
+                            }
+                        }
+
+                        #if swift(>=5.1)
+                        context("dynamic member lookup") {
+                            var result: Wrapped.Embedded??
+
+                            beforeEach {
+                                result = partial.embedded
+                            }
+
+                            it("should return the set value") {
+                                expect(result) == valueSet
+                            }
+                        }
+                        #endif
+                    }
+
+                    context("with the property value set to a partial") {
+                        var unwrappedValue: Wrapped.Embedded!
+                        var valueSet: Partial<Wrapped.Embedded>!
+
+                        beforeEach {
+                            unwrappedValue = Wrapped.Embedded(string: "test")
+                            valueSet = Partial<Wrapped.Embedded>()
+                            valueSet.setValue(unwrappedValue.string, for: \.string)
+                            partial.setValue(valueSet, for: \.embedded)
+                        }
+
+                        context("the throwing value(for:) function") {
+                            it("should not throw") {
+                                expect {
+                                    let result = try partial.value(for: \.embedded)
+                                    return result
+                                    }.toNot(throwError())
+                            }
+
+                            it("should return an unwrapped value") {
+                                expect {
+                                    let result = try partial.value(for: \.embedded)
+                                    return result
+                                    }.to(equal(unwrappedValue))
+                            }
+                        }
+
+                        context("the non-throwing value(for:) function") {
+                            var result: Wrapped.Embedded??
+
+                            beforeEach {
+                                result = partial.value(for: \.embedded)
+                            }
+
+                            it("should return an unwrapped value") {
+                                expect(result).to(equal(unwrappedValue))
+                            }
+                        }
+
+                        context("the partialValue(for:) function") {
+                            it("should return the set partial") {
+                                let result = partial.partialValue(for: \.embedded)
+                                expect(result.value(for: \.string)).to(equal(valueSet.value(for: \.string)))
+                            }
+                        }
+
+                        context("the subscript") {
+                            var result: Wrapped.Embedded??
+
+                            beforeEach {
+                                result = partial.value(for: \.embedded)
+                            }
+
+                            it("should return an unwrapped value") {
+                                expect(result).to(equal(unwrappedValue))
+                            }
+                        }
+
+                        #if swift(>=5.1)
+                        context("dynamic member lookup") {
+                            var result: Wrapped.Embedded??
+
+                            beforeEach {
+                                result = partial.embedded
+                            }
+
+                            it("should return an unwrapped value") {
+                                expect(result).to(equal(unwrappedValue))
+                            }
+                        }
+                        #endif
+                    }
+                }
+
+                context("initialised with a backing value with the property set to `nil`") {
+                    var backingValue: Wrapped!
+                    var partial: Partial<Wrapped>!
+
+                    beforeEach {
+                        backingValue = Wrapped(embedded: nil)
+                        partial = Partial(backingValue: backingValue)
+                    }
+
+                    context("with the property value not set") {
+                        context("the throwing value(for:) function") {
+                            it("should not throw an error") {
+                                expect {
+                                    let result: Wrapped.Embedded? = try partial.value(for: \.embedded)
+                                    return result
+                                }.toNot(throwError())
+                            }
+
+                            it("should return `nil`") {
+                                expect { () -> Wrapped.Embedded? in
+                                    let result: Wrapped.Embedded? = try partial.value(for: \.embedded)
+                                    return result
+                                }.to(beNil())
+                            }
+                        }
+
+                        context("the non-throwing value(for:) function") {
+                            var result: Wrapped.Embedded??
+
+                            beforeEach {
+                                result = partial.value(for: \.embedded)
+                            }
+
+                            it("should return the value from the backing value") {
+                                expect(result) == backingValue.embedded
+                            }
+                        }
+
+                        context("the partialValue(for:) function") {
+                            it("should return a partial without a value set") {
+                                let result = partial.partialValue(for: \.embedded)
+                                expect(result.value(for: \.string)).to(beNil())
+                            }
+
+                            it("should return a partial without a backing value") {
+                                let result = partial.partialValue(for: \.embedded)
+                                expect(result.backingValue).to(beNil())
+                            }
+                        }
+
+                        context("the subscript") {
+                            var result: Wrapped.Embedded??
+
+                            beforeEach {
+                                result = partial[\.embedded]
+                            }
+
+                            it("should return `nil` wrapped in an optional") {
+                                expect(result).to(beNilWrappedInOptional())
+                            }
+                        }
+
+                        #if swift(>=5.1)
+                        context("dynamic member lookup") {
+                            var result: Wrapped.Embedded??
+
+                            beforeEach {
+                                result = partial.embedded
+                            }
+
+                            it("should return `nil` wrapped in an optional") {
+                                expect(result).to(beNilWrappedInOptional()())
+                            }
+                        }
+                        #endif
+                    }
+
+                    context("with the property value set to nil") {
+                        beforeEach {
+                            partial.setValue(nil, for: \.embedded)
+                        }
+
+                        context("the throwing value(for:) function") {
+                            it("should not throw an error") {
+                                expect { try partial.value(for: \.embedded) }.toNot(throwError())
+                            }
+
+                            it("should return `nil`") {
+                                expect { try partial.value(for: \.embedded) }.to(beNil())
+                            }
+                        }
+
+                        context("the non-throwing value(for:) function") {
+                            var result: Wrapped.Embedded??
+
+                            beforeEach {
+                                result = partial.value(for: \.embedded)
+                            }
+
+                            it("should return `nil` wrapped in an `Optional`") {
+                                expect(result).to(beNilWrappedInOptional())
+                            }
+                        }
+
+                        context("the partialValue(for:) function") {
+                            it("should return a partial without a value set") {
+                                let result = partial.partialValue(for: \.embedded)
+                                expect(result.value(for: \.string)).to(beNil())
+                            }
+
+                            it("should return a partial without a backing value") {
+                                let result = partial.partialValue(for: \.embedded)
+                                expect(result.backingValue).to(beNil())
+                            }
+                        }
+
+                        context("the subscript") {
+                            var result: Wrapped.Embedded??
+
+                            beforeEach {
+                                result = partial.value(for: \.embedded)
+                            }
+
+                            it("should return `nil` wrapped in an `Optional`") {
+                                expect(result).to(beNilWrappedInOptional())
+                            }
+                        }
+
+                        #if swift(>=5.1)
+                        context("dynamic member lookup") {
+                            var result: Wrapped.Embedded??
+
+                            beforeEach {
+                                result = partial.embedded
+                            }
+
+                            it("should return `nil` wrapped in an `Optional`") {
+                                expect(result).to(beNilWrappedInOptional())
+                            }
+                        }
+                        #endif
+                    }
+
+                    context("with the property value set to an instance of the propery's type") {
+                        var valueSet: Wrapped.Embedded!
+
+                        beforeEach {
+                            valueSet = Wrapped.Embedded(string: "test")
+                            partial.setValue(valueSet, for: \.embedded)
+                        }
+
+                        context("the throwing value(for:) function") {
+                            it("should not throw an error") {
+                                expect {
+                                    let result: Wrapped.Embedded? = try partial.value(for: \.embedded)
+                                    return result
+                                }.toNot(throwError())
+                            }
+
+                            it("should return the set value") {
+                                expect {
+                                    let result: Wrapped.Embedded? = try partial.value(for: \.embedded)
+                                    return result
+                                }.to(equal(valueSet))
                             }
                         }
 
