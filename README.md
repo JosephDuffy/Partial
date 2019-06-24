@@ -63,6 +63,10 @@ pod 'Partial'
 
 and then run `pod install`.
 
+# Documentation
+
+Partial is fully documented, with [documentation available online](https://josephduffy.github.io/Partial/). The online documentation is generated from the source code with every release, so it is up-to-date with the latest release, but may be different to the code in `master`.
+
 # Usage
 
 Partial has a `KeyPath`-based API so is fully type-safe. Reading and writing of values is possible via subscripting, although functions are also provided.
