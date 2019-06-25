@@ -183,8 +183,8 @@ extension PartialProtocol {
             return try? self.value(for: keyPath)
         }
         set {
-            if let partialValue = newValue {
-                setValue(partialValue, for: keyPath)
+            if let newValue = newValue {
+                setValue(newValue, for: keyPath)
             } else {
                 removeValue(for: keyPath)
             }
@@ -215,8 +215,8 @@ extension PartialProtocol {
             }
         }
         set {
-            if let partialValue = newValue {
-                setValue(partialValue, for: keyPath)
+            if let newValue = newValue {
+                setValue(newValue, for: keyPath)
             } else {
                 removeValue(for: keyPath)
             }
