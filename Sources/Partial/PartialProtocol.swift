@@ -125,12 +125,7 @@ extension PartialProtocol {
     @available(swift, deprecated: 5.1, message: "Use dynamic member lookup, `value(for:)`, or `set(value:for:)`")
     public subscript<Value>(keyPath: KeyPath<Wrapped, Value>) -> Value? {
         get {
-            do {
-                let value: Value = try self.value(for: keyPath)
-                return value
-            } catch {
-                return nil
-            }
+            return try? self.value(for: keyPath)
         }
         set {
             if let newValue = newValue {
@@ -185,12 +180,7 @@ extension PartialProtocol {
     @available(swift, deprecated: 5.1, message: "Use dynamic member lookup, `value(for:)`, or `set(value:for:)`")
     public subscript<Value>(keyPath: KeyPath<Wrapped, Value>) -> Value? where Value: PartialConvertible {
         get {
-            do {
-                let value: Value = try self.value(for: keyPath)
-                return value
-            } catch {
-                return nil
-            }
+            return try? self.value(for: keyPath)
         }
         set {
             if let partialValue = newValue {
@@ -252,12 +242,7 @@ extension PartialProtocol {
     /// - Returns: The stored value, or `nil` if a value has not been set.
     public subscript<Value>(dynamicMember keyPath: KeyPath<Wrapped, Value>) -> Value? {
         get {
-            do {
-                let value: Value = try self.value(for: keyPath)
-                return value
-            } catch {
-                return nil
-            }
+            return try? self.value(for: keyPath)
         }
         set {
             if let newValue = newValue {
@@ -308,12 +293,7 @@ extension PartialProtocol {
     /// - Returns: The stored value, or `nil` if a value has not been set or could not be unwrapped.
     public subscript<Value>(dynamicMember keyPath: KeyPath<Wrapped, Value>) -> Value? where Value: PartialConvertible {
         get {
-            do {
-                let value: Value = try self.value(for: keyPath)
-                return value
-            } catch {
-                return nil
-            }
+            return try? self.value(for: keyPath)
         }
         set {
             if let newValue = newValue {
