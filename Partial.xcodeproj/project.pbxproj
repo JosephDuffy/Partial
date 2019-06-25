@@ -35,6 +35,9 @@
 		D9C039B1224263610031B393 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9C039AF224263610031B393 /* Nimble.framework */; };
 		D9C039B4224263610031B393 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9C039B0224263610031B393 /* Quick.framework */; };
 		D9CA443A222FF3F0000E424B /* DangerDeps.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CA4439222FF3F0000E424B /* DangerDeps.swift */; };
+		D9E30FEF22C27882003949F5 /* PartialProtocol+deprecations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D992471122BFE54F00A2B079 /* PartialProtocol+deprecations.swift */; };
+		D9E30FF022C27883003949F5 /* PartialProtocol+deprecations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D992471122BFE54F00A2B079 /* PartialProtocol+deprecations.swift */; };
+		D9E30FF122C27883003949F5 /* PartialProtocol+deprecations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D992471122BFE54F00A2B079 /* PartialProtocol+deprecations.swift */; };
 		D9E601CF2233E99D00B36B1E /* Partial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9E601C62233E99D00B36B1E /* Partial.framework */; };
 		D9E601DD2233EBE300B36B1E /* PartialTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91505BD221E024900EB5215 /* PartialTests.swift */; };
 		D9E601DE2233EBED00B36B1E /* Partial.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91505C9221E04EB00EB5215 /* Partial.swift */; };
@@ -567,6 +570,7 @@
 				D9A27B74228CBE4C001530A1 /* Partial+description.swift in Sources */,
 				D9FFA6392235A407005D9A4D /* Partial+debugDescription.swift in Sources */,
 				D92E76D2229D8A67003EBC25 /* PartialProtocol.swift in Sources */,
+				D9E30FF022C27883003949F5 /* PartialProtocol+deprecations.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -580,6 +584,7 @@
 				D9A27B73228CBE4C001530A1 /* Partial+description.swift in Sources */,
 				D9E601DF2233EBED00B36B1E /* Partial+debugDescription.swift in Sources */,
 				D92E76D1229D8A66003EBC25 /* PartialProtocol.swift in Sources */,
+				D9E30FEF22C27882003949F5 /* PartialProtocol+deprecations.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -603,6 +608,7 @@
 				D9A27B75228CBE4D001530A1 /* Partial+description.swift in Sources */,
 				D9FFA63C2235A408005D9A4D /* Partial+debugDescription.swift in Sources */,
 				D92E76D3229D8A67003EBC25 /* PartialProtocol.swift in Sources */,
+				D9E30FF122C27883003949F5 /* PartialProtocol+deprecations.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
