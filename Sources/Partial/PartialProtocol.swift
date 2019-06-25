@@ -36,15 +36,6 @@ public protocol PartialProtocol {
     /// - Returns: The stored value.
     func value<Value>(for keyPath: KeyPath<Wrapped, Value?>) throws -> Value?
 
-    /// Returns the value for the given key path, or `nil` if the value has not been set.
-    ///
-    /// If a backing value was provided on initialisation this will never return an optional; if
-    /// a value has not been set for `keyPath` the value from the backing value will be returned.
-    ///
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
-    /// - Returns: The stored value, or `nil` if a value has not been set.
-    func value<Value>(for keyPath: KeyPath<Wrapped, Value>) -> Value?
-
     /// Returns the value of the given key path, or throws an error if the value has not been set.
     ///
     /// If the value stored for this key path is a `Partial` an attempt will be made to unwrap
@@ -68,18 +59,6 @@ public protocol PartialProtocol {
     /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
     /// - Returns: The stored value.
     func value<Value>(for keyPath: KeyPath<Wrapped, Value?>) throws -> Value? where Value: PartialConvertible
-
-    /// Returns the value for the given key path, or `nil` if the value has not been set.
-    ///
-    /// If the value stored for this key path is a `Partial` an attempt will be made to unwrap
-    /// the value. If the initialiser throws an error this function will return `nil`.
-    ///
-    /// If a backing value was provided on initialisation this will never return an optional; if
-    /// a value has not been set for `keyPath` the value from the backing value will be returned.
-    ///
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
-    /// - Returns: The stored value, or `nil` if a value has not been set or could not be unwrapped.
-    func value<Value>(for keyPath: KeyPath<Wrapped, Value>) -> Value? where Value: PartialConvertible
 
     /// Returns a `Partial` for the given key path. If the value exists it will be wrapped in a
     /// new `Partial`. If the value has not been set an empty `Partial` will be returned.
@@ -126,76 +105,6 @@ public protocol PartialProtocol {
 }
 
 extension PartialProtocol {
-
-    /// Returns the value for the given key path, or `nil` if the value has not been set.
-    ///
-    /// If a backing value was provided on initialisation this will never return an optional; if
-    /// a value has not been set for `keyPath` the value from the backing value will be returned.
-    ///
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
-    /// - Returns: The stored value, or `nil` if a value has not been set.
-    public func value<Value>(for keyPath: KeyPath<Wrapped, Value>) -> Value? {
-        do {
-            let value: Value = try self.value(for: keyPath)
-            return value
-        } catch {
-            return nil
-        }
-    }
-
-    /// Returns the value for the given key path, or `nil` if the value has not been set.
-    ///
-    /// If a backing value was provided on initialisation this will never return an optional; if
-    /// a value has not been set for `keyPath` the value from the backing value will be returned.
-    ///
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
-    /// - Returns: The stored value, or `nil` if a value has not been set.
-    public func value<Value>(for keyPath: KeyPath<Wrapped, Value?>) -> Value?? {
-        do {
-            let value: Value? = try self.value(for: keyPath)
-            return value
-        } catch {
-            return nil
-        }
-    }
-
-    /// Returns the value for the given key path, or `nil` if the value has not been set.
-    ///
-    /// If the value stored for this key path is a `Partial` an attempt will be made to unwrap
-    /// the value. If the initialiser throws an error this function will return `nil`.
-    ///
-    /// If a backing value was provided on initialisation this will never return an optional; if
-    /// a value has not been set for `keyPath` the value from the backing value will be returned.
-    ///
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
-    /// - Returns: The stored value, or `nil` if a value has not been set or could not be unwrapped.
-    public func value<Value>(for keyPath: KeyPath<Wrapped, Value>) -> Value? where Value: PartialConvertible {
-        do {
-            let value: Value = try self.value(for: keyPath)
-            return value
-        } catch {
-            return nil
-        }
-    }
-
-    /// Returns the value for the given key path, or `nil` if the value has not been set.
-    ///
-    /// If the value stored for this key path is a `Partial` an attempt will be made to unwrap
-    /// the value. If the initialiser throws an error this function will return `nil`.
-    ///
-    /// If a backing value was provided on initialisation this will never return an optional; if
-    /// a value has not been set for `keyPath` the value from the backing value will be returned.
-    ///
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
-    /// - Returns: The stored value, or `nil` if a value has not been set or could not be unwrapped.
-    public func value<Value>(for keyPath: KeyPath<Wrapped, Value?>) -> Value?? where Value: PartialConvertible {
-        do {
-            let value: Value? = try self.value(for: keyPath)
-            return value
-        } catch {
-            return nil
-        }
-    }
 
     /// Removes the stored value for the given key path.
     ///
