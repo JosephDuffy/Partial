@@ -144,7 +144,7 @@ final class PartialTests: QuickSpec {
                         context("partialValue(for:)") {
                             it("should return the set partial") {
                                 let result = partial.partialValue(for: \.embedded)
-                                expect { try result.value(for: \.string) } == (try! valueSet.value(for: \.string))
+                                expect { try result.value(for: \.string) } == valueSet[\.string]
                             }
                         }
 
@@ -301,7 +301,7 @@ final class PartialTests: QuickSpec {
                         context("partialValue(for:)") {
                             it("should return the set partial") {
                                 let result = partial.partialValue(for: \.embedded)
-                                expect { try result.value(for: \.string) } == (try! valueSet.value(for: \.string))
+                                expect { try result.value(for: \.string) } == valueSet[\.string]
                             }
                         }
 
@@ -524,7 +524,7 @@ final class PartialTests: QuickSpec {
                         context("partialValue(for:)") {
                             it("should return the set partial") {
                                 let result = partial.partialValue(for: \.embedded)
-                               expect { try result.value(for: \.string) } == (try! valueSet.value(for: \.string))
+                               expect { try result.value(for: \.string) } == valueSet[\.string]
                             }
                         }
 
@@ -734,7 +734,7 @@ final class PartialTests: QuickSpec {
                         context("partialValue(for:)") {
                             it("should return the set partial") {
                                 let result = partial.partialValue(for: \.embedded)
-                                expect { try result.value(for: \.string) } == (try! valueSet.value(for: \.string))
+                                expect { try result.value(for: \.string) } == valueSet[\.string]
                             }
                         }
 
@@ -950,7 +950,7 @@ final class PartialTests: QuickSpec {
                         context("partialValue(for:)") {
                             it("should return the set partial") {
                                 let result = partial.partialValue(for: \.embedded)
-                                expect { try result.value(for: \.string) } == (try! valueSet.value(for: \.string))
+                                expect { try result.value(for: \.string) } == valueSet[\.string]
                             }
                         }
 
@@ -1127,7 +1127,7 @@ final class PartialTests: QuickSpec {
                         context("partialValue(for:)") {
                             it("should return the set partial") {
                                 let result = partial.partialValue(for: \.embedded)
-                                expect { try result.value(for: \.string) } == (try! valueSet.value(for: \.string))
+                                expect { try result.value(for: \.string) } == valueSet[\.string]
                             }
                         }
 
@@ -1289,7 +1289,7 @@ final class PartialTests: QuickSpec {
                         context("partialValue(for:)") {
                             it("should return the set partial") {
                                 let result = partial.partialValue(for: \.embedded)
-                                expect { try result.value(for: \.string) } == (try! valueSet.value(for: \.string))
+                                expect { try result.value(for: \.string) } == valueSet[\.string]
                             }
                         }
 
@@ -1520,7 +1520,7 @@ final class PartialTests: QuickSpec {
                         context("partialValue(for:)") {
                             it("should return the set partial") {
                                 let result = partial.partialValue(for: \.embedded)
-                                expect { try result.value(for: \.string) } == (try! valueSet.value(for: \.string))
+                                expect { try result.value(for: \.string) } == valueSet[\.string]
                             }
                         }
 
@@ -1736,7 +1736,7 @@ final class PartialTests: QuickSpec {
                         context("partialValue(for:)") {
                             it("should return the set partial") {
                                 let result = partial.partialValue(for: \.embedded)
-                                expect { try result.value(for: \.string) } == (try! valueSet.value(for: \.string))
+                                expect { try result.value(for: \.string) } == valueSet[\.string]
                             }
                         }
 
@@ -1957,7 +1957,7 @@ final class PartialTests: QuickSpec {
                         context("partialValue(for:)") {
                             it("should return the set partial") {
                                 let result = partial.partialValue(for: \.embedded)
-                                expect { try result.value(for: \.string) } == (try! valueSet.value(for: \.string))
+                                expect { try result.value(for: \.string) } == valueSet[\.string]
                             }
                         }
 
