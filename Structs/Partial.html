@@ -14,7 +14,7 @@
     <a title="Partial Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">Partial Docs</a> (72% documented)</p>
+        <p><a href="../index.html">Partial Docs</a> (100% documented)</p>
         <p class="header-right"><a href="https://github.com/JosephDuffy/Partial"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -70,7 +70,8 @@
 
                 </div>
               </div>
-            <p>A Partial version of the <code>Wrapped</code> type.</p>
+            <p>A struct that mirrors the properties of <code>Wrapped</code>, making each of the
+types optional.</p>
 
           </section>
           <section class="section task-group-section">
@@ -89,7 +90,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An error that can be thrown by the <code><a href="../Structs/Partial.html#/s:7Partial0A8ProtocolP5value3forqd__s7KeyPathCy7WrappedQzqd__G_tKlF">value(for:)</a></code> function</p>
+                        <p>An error that can be thrown by the <code><a href="../Structs/Partial.html#/s:7PartialAAV5value3forqd__s7KeyPathCyxqd__G_tKlF">value(for:)</a></code> function.</p>
 
                         <a href="../Structs/Partial/Error.html" class="slightly-smaller">See more</a>
                       </div>
@@ -107,9 +108,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7Partial0A8ProtocolPxycfc"></a>
+                    <a name="/s:7PartialAAVAByxGycfc"></a>
                     <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Partial0A8ProtocolPxycfc">init()</a>
+                    <a class="token" href="#/s:7PartialAAVAByxGycfc">init()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -117,7 +118,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Create an empty <code>Partial</code>.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -133,9 +135,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7Partial0A8ProtocolP12backingValuex7WrappedQz_tcfc"></a>
+                    <a name="/s:7PartialAAV12backingValueAByxGx_tcfc"></a>
                     <a name="//apple_ref/swift/Method/init(backingValue:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Partial0A8ProtocolP12backingValuex7WrappedQz_tcfc">init(backingValue:)</a>
+                    <a class="token" href="#/s:7PartialAAV12backingValueAByxGx_tcfc">init(backingValue:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -143,7 +145,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Create a <code>Partial</code> that builds on top of the provided value.</p>
+
+<p>The provided instance will be used to return values that have not been set.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -153,15 +158,34 @@
 
                         </div>
                       </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>backingValue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An instance of <code>Wrapped</code> that will be used to return values that have not been set</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                     </section>
                   </div>
                 </li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7Partial0A8ProtocolP5value3forqd__s7KeyPathCy7WrappedQzqd__G_tKlF"></a>
+                    <a name="/s:7PartialAAV5value3forqd__s7KeyPathCyxqd__G_tKlF"></a>
                     <a name="//apple_ref/swift/Method/value(for:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Partial0A8ProtocolP5value3forqd__s7KeyPathCy7WrappedQzqd__G_tKlF">value(for:)</a>
+                    <a class="token" href="#/s:7PartialAAV5value3forqd__s7KeyPathCyxqd__G_tKlF">value(for:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -169,15 +193,42 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Returns the value of the given key path, or throws an error if the value has not been set.</p>
+
+<p>If a backing value was provided on initialisation this will never throw; if a value has
+not been set for <code>keyPath</code> the value from the backing value will be returned.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">value</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="k">for</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">value</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="k">for</span> <span class="nv">keyPath</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>keyPath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A keyPath path from <code>Wrapped</code> to a property of type <code>Value</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The stored value.</p>
                       </div>
                     </section>
                   </div>
@@ -185,9 +236,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7Partial0A8ProtocolP5value3forqd__Sgs7KeyPathCy7WrappedQzAFG_tKlF"></a>
+                    <a name="/s:7PartialAAV5value3forqd__Sgs7KeyPathCyxAEG_tKlF"></a>
                     <a name="//apple_ref/swift/Method/value(for:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Partial0A8ProtocolP5value3forqd__Sgs7KeyPathCy7WrappedQzAFG_tKlF">value(for:)</a>
+                    <a class="token" href="#/s:7PartialAAV5value3forqd__Sgs7KeyPathCyxAEG_tKlF">value(for:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -195,15 +246,42 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Returns the value of the given key path, or throws an error if the value has not been set.</p>
+
+<p>If a backing value was provided on initialisation this will never throw; if a value has
+not been set for <code>keyPath</code> the value from the backing value will be returned.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">value</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="k">for</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="p">?</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">value</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="k">for</span> <span class="nv">keyPath</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="p">?</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span><span class="p">?</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>keyPath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A key path from <code>Wrapped</code> to a property of type <code>Value?</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The stored value.</p>
                       </div>
                     </section>
                   </div>
@@ -211,9 +289,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7Partial0A8ProtocolP5value3forqd__s7KeyPathCy7WrappedQzqd__G_tKAA0A11ConvertibleRd__lF"></a>
+                    <a name="/s:7PartialAAV5value3forqd__s7KeyPathCyxqd__G_tKAA0A11ConvertibleRd__lF"></a>
                     <a name="//apple_ref/swift/Method/value(for:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Partial0A8ProtocolP5value3forqd__s7KeyPathCy7WrappedQzqd__G_tKAA0A11ConvertibleRd__lF">value(for:)</a>
+                    <a class="token" href="#/s:7PartialAAV5value3forqd__s7KeyPathCyxqd__G_tKAA0A11ConvertibleRd__lF">value(for:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -221,15 +299,45 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Returns the value of the given key path, or throws an error if the value has not been set.</p>
+
+<p>If the value stored for this key path is a <code>Partial</code> an attempt will be made to unwrap
+the value. If the initialiser throws an error it will be rethrown by this function.</p>
+
+<p>If a backing value was provided on initialisation this will never throw; if a value has
+not been set for <code>keyPath</code> the value from the backing value will be returned.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">value</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="k">for</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span> <span class="k">where</span> <span class="kt">Value</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/PartialConvertible.html">PartialConvertible</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">value</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="k">for</span> <span class="nv">keyPath</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span> <span class="k">where</span> <span class="kt">Value</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/PartialConvertible.html">PartialConvertible</a></span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>keyPath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A key path from <code>Wrapped</code> to a property of type <code>Value</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The stored value.</p>
                       </div>
                     </section>
                   </div>
@@ -237,9 +345,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7Partial0A8ProtocolP5value3forqd__Sgs7KeyPathCy7WrappedQzAFG_tKAA0A11ConvertibleRd__lF"></a>
+                    <a name="/s:7PartialAAV5value3forqd__Sgs7KeyPathCyxAEG_tKAA0A11ConvertibleRd__lF"></a>
                     <a name="//apple_ref/swift/Method/value(for:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Partial0A8ProtocolP5value3forqd__Sgs7KeyPathCy7WrappedQzAFG_tKAA0A11ConvertibleRd__lF">value(for:)</a>
+                    <a class="token" href="#/s:7PartialAAV5value3forqd__Sgs7KeyPathCyxAEG_tKAA0A11ConvertibleRd__lF">value(for:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -247,15 +355,45 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Returns the value of the given key path, or throws an error if the value has not been set.</p>
+
+<p>If the value stored for this key path is a <code>Partial</code> an attempt will be made to unwrap
+the value. If the initialiser throws an error it will be rethrown by this function.</p>
+
+<p>If a backing value was provided on initialisation this will never throw; if a value has
+not been set for <code>keyPath</code> the value from the backing value will be returned.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">value</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="k">for</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="p">?</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span><span class="p">?</span> <span class="k">where</span> <span class="kt">Value</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/PartialConvertible.html">PartialConvertible</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">value</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="k">for</span> <span class="nv">keyPath</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="p">?</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span><span class="p">?</span> <span class="k">where</span> <span class="kt">Value</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/PartialConvertible.html">PartialConvertible</a></span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>keyPath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A key path from <code>Wrapped</code> to a property of type <code>Value?</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The stored value.</p>
                       </div>
                     </section>
                   </div>
@@ -263,9 +401,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7Partial0A8ProtocolP12partialValue3forA2AVyqd__Gs7KeyPathCy7WrappedQzqd__G_tKlF"></a>
+                    <a name="/s:7PartialAAV12partialValue3forAByqd__Gs7KeyPathCyxqd__G_tlF"></a>
                     <a name="//apple_ref/swift/Method/partialValue(for:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Partial0A8ProtocolP12partialValue3forA2AVyqd__Gs7KeyPathCy7WrappedQzqd__G_tKlF">partialValue(for:)</a>
+                    <a class="token" href="#/s:7PartialAAV12partialValue3forAByqd__Gs7KeyPathCyxqd__G_tlF">partialValue(for:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -273,15 +411,40 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Returns a <code>Partial</code> for the given key path. If the value exists it will be wrapped in a
+new <code>Partial</code>. If the value has not been set an empty <code>Partial</code> will be returned.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">partialValue</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="k">for</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Partial</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">partialValue</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="k">for</span> <span class="nv">keyPath</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Partial</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>keyPath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A key path from <code>Wrapped</code> to a property of type <code>Value</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The stored value wrapped by a <code>Partial</code>, or an empty <code>Partial</code>.</p>
                       </div>
                     </section>
                   </div>
@@ -289,9 +452,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7Partial0A8ProtocolP12partialValue3forA2AVyqd__Gs7KeyPathCy7WrappedQzqd__SgG_tKlF"></a>
+                    <a name="/s:7PartialAAV12partialValue3forAByqd__Gs7KeyPathCyxqd__SgG_tlF"></a>
                     <a name="//apple_ref/swift/Method/partialValue(for:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Partial0A8ProtocolP12partialValue3forA2AVyqd__Gs7KeyPathCy7WrappedQzqd__SgG_tKlF">partialValue(for:)</a>
+                    <a class="token" href="#/s:7PartialAAV12partialValue3forAByqd__Gs7KeyPathCyxqd__SgG_tlF">partialValue(for:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -299,15 +462,40 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Returns a <code>Partial</code> for the given key path. If the value exists it will be wrapped in a
+new <code>Partial</code>. If the value has not been set an empty <code>Partial</code> will be returned.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">partialValue</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="k">for</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="p">?</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Partial</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">partialValue</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="k">for</span> <span class="nv">keyPath</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="p">?</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Partial</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>keyPath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A key path from <code>Wrapped</code> to a property of type <code>Value?</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The stored value wrapped by a <code>Partial</code>, or an empty <code>Partial</code>.</p>
                       </div>
                     </section>
                   </div>
@@ -315,9 +503,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7Partial0A8ProtocolP3set5value3foryqd___s7KeyPathCy7WrappedQzqd__GtlF"></a>
-                    <a name="//apple_ref/swift/Method/set(value:for:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Partial0A8ProtocolP3set5value3foryqd___s7KeyPathCy7WrappedQzqd__GtlF">set(value:for:)</a>
+                    <a name="/s:7PartialAAV8setValue_3foryqd___s7KeyPathCyxqd__GtlF"></a>
+                    <a name="//apple_ref/swift/Method/setValue(_:for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7PartialAAV8setValue_3foryqd___s7KeyPathCyxqd__GtlF">setValue(_:for:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -325,15 +513,47 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Updates the stored value for the given key path.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="k">set</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="kt">Value</span><span class="p">,</span> <span class="k">for</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="n">setValue</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Value</span><span class="p">,</span> <span class="k">for</span> <span class="nv">keyPath</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The value to store against <code>keyPath</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>keyPath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A key path from <code>Wrapped</code> to a property of type <code>Value</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -341,9 +561,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7Partial0A8ProtocolP3set5value3foryqd__Sg_s7KeyPathCy7WrappedQzAGGtlF"></a>
-                    <a name="//apple_ref/swift/Method/set(value:for:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Partial0A8ProtocolP3set5value3foryqd__Sg_s7KeyPathCy7WrappedQzAGGtlF">set(value:for:)</a>
+                    <a name="/s:7PartialAAV8setValue_3foryqd__Sg_s7KeyPathCyxAEGtlF"></a>
+                    <a name="//apple_ref/swift/Method/setValue(_:for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7PartialAAV8setValue_3foryqd__Sg_s7KeyPathCyxAEGtlF">setValue(_:for:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -351,15 +571,47 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Updates the stored value for the given key path.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="k">set</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="kt">Value</span><span class="p">?,</span> <span class="k">for</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="p">?</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="n">setValue</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Value</span><span class="p">?,</span> <span class="k">for</span> <span class="nv">keyPath</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="p">?</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The value to store against <code>keyPath</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>keyPath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A key path from <code>Wrapped</code> to a property of type <code>Value?</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -367,9 +619,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7Partial0A8ProtocolP3set5value3foryA2AVyqd__G_s7KeyPathCy7WrappedQzqd__GtAA0A11ConvertibleRd__lF"></a>
-                    <a name="//apple_ref/swift/Method/set(value:for:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Partial0A8ProtocolP3set5value3foryA2AVyqd__G_s7KeyPathCy7WrappedQzqd__GtAA0A11ConvertibleRd__lF">set(value:for:)</a>
+                    <a name="/s:7PartialAAV8setValue_3foryAByqd__G_s7KeyPathCyxqd__GtlF"></a>
+                    <a name="//apple_ref/swift/Method/setValue(_:for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7PartialAAV8setValue_3foryAByqd__G_s7KeyPathCyxqd__GtlF">setValue(_:for:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -377,23 +629,47 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Uses <code>updateValue(_:forKey:)</code> to ensure the value is set to <code>nil</code>, rather than
-removed from the dictionary, which would happen if the subscript were used.
-This ensures that the <code>backingValue</code>&lsquo;s value will not be used when
-a <code>backingValue</code> is set and a key is explicitly set to <code>nil</code>, and also allows
-the <code><a href="../Structs/Partial.html#/s:7Partial0A8ProtocolP5value3forqd__s7KeyPathCy7WrappedQzqd__G_tKlF">value(for:)</a></code> function to get a value of <code>nil</code> from the dictionary.</p>
+                        <p>Updates the stored value for the given key path to be a partial value.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="k">set</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span>
-    <span class="nv">value</span><span class="p">:</span> <span class="kt">Partial</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span>
-    <span class="k">for</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span>
-<span class="p">)</span> <span class="k">where</span> <span class="kt">Value</span><span class="p">:</span> <span class="kt"><a href="../Protocols/PartialConvertible.html">PartialConvertible</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="n">setValue</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Partial</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="k">for</span> <span class="nv">keyPath</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The partial value to store against <code>keyPath</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>keyPath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A key path from <code>Wrapped</code> to a property of type <code>Value</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -401,9 +677,9 @@ the <code><a href="../Structs/Partial.html#/s:7Partial0A8ProtocolP5value3forqd__
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7Partial0A8ProtocolP3set5value3foryA2AVyqd__G_s7KeyPathCy7WrappedQzqd__SgGtAA0A11ConvertibleRd__lF"></a>
-                    <a name="//apple_ref/swift/Method/set(value:for:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Partial0A8ProtocolP3set5value3foryA2AVyqd__G_s7KeyPathCy7WrappedQzqd__SgGtAA0A11ConvertibleRd__lF">set(value:for:)</a>
+                    <a name="/s:7PartialAAV8setValue_3foryAByqd__G_s7KeyPathCyxqd__SgGtlF"></a>
+                    <a name="//apple_ref/swift/Method/setValue(_:for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7PartialAAV8setValue_3foryAByqd__G_s7KeyPathCyxqd__SgGtlF">setValue(_:for:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -411,18 +687,47 @@ the <code><a href="../Structs/Partial.html#/s:7Partial0A8ProtocolP5value3forqd__
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Update the stored value for the given key path to be a partial value.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="k">set</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span>
-    <span class="nv">value</span><span class="p">:</span> <span class="kt">Partial</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span>
-    <span class="k">for</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="p">?</span><span class="o">&gt;</span>
-<span class="p">)</span> <span class="k">where</span> <span class="kt">Value</span><span class="p">:</span> <span class="kt"><a href="../Protocols/PartialConvertible.html">PartialConvertible</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="n">setValue</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Partial</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="k">for</span> <span class="nv">keyPath</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="p">?</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The partial value to store against <code>keyPath</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>keyPath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A key path from <code>Wrapped</code> to a property of type <code>Value?</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -430,9 +735,9 @@ the <code><a href="../Structs/Partial.html#/s:7Partial0A8ProtocolP5value3forqd__
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7Partial0A8ProtocolP11removeValue3forys0A7KeyPathCy7WrappedQzG_tF"></a>
+                    <a name="/s:7PartialAAV11removeValue3forys0A7KeyPathCyxG_tF"></a>
                     <a name="//apple_ref/swift/Method/removeValue(for:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Partial0A8ProtocolP11removeValue3forys0A7KeyPathCy7WrappedQzG_tF">removeValue(for:)</a>
+                    <a class="token" href="#/s:7PartialAAV11removeValue3forys0A7KeyPathCyxG_tF">removeValue(for:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -440,7 +745,8 @@ the <code><a href="../Structs/Partial.html#/s:7Partial0A8ProtocolP5value3forqd__
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Removes the stored value for the given key path.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -449,6 +755,25 @@ the <code><a href="../Structs/Partial.html#/s:7Partial0A8ProtocolP5value3forqd__
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">removeValue</span><span class="p">(</span><span class="k">for</span> <span class="nv">keyPath</span><span class="p">:</span> <span class="kt">PartialKeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>keyPath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The key path of the value to remove.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -460,9 +785,9 @@ the <code><a href="../Structs/Partial.html#/s:7Partial0A8ProtocolP5value3forqd__
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:s28CustomDebugStringConvertibleP16debugDescriptionSSvp"></a>
+                    <a name="/s:7PartialAAV16debugDescriptionSSvp"></a>
                     <a name="//apple_ref/swift/Property/debugDescription" class="dashAnchor"></a>
-                    <a class="token" href="#/s:s28CustomDebugStringConvertibleP16debugDescriptionSSvp">debugDescription</a>
+                    <a class="token" href="#/s:7PartialAAV16debugDescriptionSSvp">debugDescription</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -470,7 +795,10 @@ the <code><a href="../Structs/Partial.html#/s:7Partial0A8ProtocolP5value3forqd__
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>A textual representation of the Partial&rsquo;s values and backing value. If the
+backing value has been set an attempt to discover the names of the properties
+will be made using reflection</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -500,7 +828,10 @@ the <code><a href="../Structs/Partial.html#/s:7Partial0A8ProtocolP5value3forqd__
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>A textual representation of the Partial&rsquo;s values and backing value. If the
+backing value has been set an attempt to discover the names of the properties
+will be made using reflection</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -520,9 +851,9 @@ the <code><a href="../Structs/Partial.html#/s:7Partial0A8ProtocolP5value3forqd__
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:s23CustomStringConvertibleP11descriptionSSvp"></a>
+                    <a name="/s:7PartialAAV11descriptionSSvp"></a>
                     <a name="//apple_ref/swift/Property/description" class="dashAnchor"></a>
-                    <a class="token" href="#/s:s23CustomStringConvertibleP11descriptionSSvp">description</a>
+                    <a class="token" href="#/s:7PartialAAV11descriptionSSvp">description</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -530,7 +861,13 @@ the <code><a href="../Structs/Partial.html#/s:7Partial0A8ProtocolP5value3forqd__
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>A textual representation of the Partial&rsquo;s values and backing value. The
+names of the properties will not be included because they are not available
+via KeyPaths without reflection.</p>
+
+<p>If this partial has a backing value the <code><a href="../Structs/Partial.html#/s:7PartialAAV16debugDescriptionSSvp">debugDescription</a></code> property can be
+used to print the names of the properties</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -560,7 +897,10 @@ the <code><a href="../Structs/Partial.html#/s:7Partial0A8ProtocolP5value3forqd__
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Attempts to initialise a new <code>Wrapped</code> with self</p>
+
+<p>Any errors thrown by <code>Wrapped.init(partial:)</code> will be rethrown</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -570,6 +910,10 @@ the <code><a href="../Structs/Partial.html#/s:7Partial0A8ProtocolP5value3forqd__
 
                         </div>
                       </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The new <code>Wrapped</code> instance</p>
+                      </div>
                     </section>
                   </div>
                 </li>
@@ -578,7 +922,7 @@ the <code><a href="../Structs/Partial.html#/s:7Partial0A8ProtocolP5value3forqd__
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://github.com/JosephDuffy/Partial" target="_blank" rel="external">Joseph Duffy</a>. All rights reserved. (Last updated: 2019-06-16)</p>
+          <p>&copy; 2019 <a class="link" href="https://github.com/JosephDuffy/Partial" target="_blank" rel="external">Joseph Duffy</a>. All rights reserved. (Last updated: 2019-06-26)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

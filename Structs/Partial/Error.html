@@ -14,7 +14,7 @@
     <a title="Error Enumeration Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../../index.html">Partial Docs</a> (72% documented)</p>
+        <p><a href="../../index.html">Partial Docs</a> (100% documented)</p>
         <p class="header-right"><a href="https://github.com/JosephDuffy/Partial"><img src="../../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -70,7 +70,7 @@
 
                 </div>
               </div>
-            <p>An error that can be thrown by the <code><a href="../../Structs/Partial.html#/s:7Partial0A8ProtocolP5value3forqd__s7KeyPathCy7WrappedQzqd__G_tKlF">value(for:)</a></code> function</p>
+            <p>An error that can be thrown by the <code><a href="../../Structs/Partial.html#/s:7PartialAAV5value3forqd__s7KeyPathCyxqd__G_tKlF">value(for:)</a></code> function.</p>
 
           </section>
           <section class="section task-group-section">
@@ -79,9 +79,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7PartialAAV5ErrorO10missingKeyyADyx_qd__Gs0D4PathCyxqd__GcAFmr__lF"></a>
-                    <a name="//apple_ref/swift/Element/missingKey(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7PartialAAV5ErrorO10missingKeyyADyx_qd__Gs0D4PathCyxqd__GcAFmr__lF">missingKey(_:)</a>
+                    <a name="/s:7PartialAAV5ErrorO13keyPathNotSetyADyx_qd__Gs03KeyD0Cyxqd__GcAFmr__lF"></a>
+                    <a name="//apple_ref/swift/Element/keyPathNotSet(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7PartialAAV5ErrorO13keyPathNotSetyADyx_qd__Gs03KeyD0Cyxqd__GcAFmr__lF">keyPathNotSet(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -89,14 +89,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The provided key has not been set</p>
+                        <p>The key path has not been set.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">missingKey</span><span class="p">(</span><span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">keyPathNotSet</span><span class="p">(</span><span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -106,9 +106,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7PartialAAV5ErrorO12invalidValueyADyx_qd__Gs7KeyPathCyxqd__G_ypSgtcAFmr__lF"></a>
-                    <a name="//apple_ref/swift/Element/invalidValue(key:actualValue:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7PartialAAV5ErrorO12invalidValueyADyx_qd__Gs7KeyPathCyxqd__G_ypSgtcAFmr__lF">invalidValue(key:actualValue:)</a>
+                    <a name="/s:7PartialAAV5ErrorO016foundUnwrappableA0yADyx_qd__GAByqd__GcAFmr__lF"></a>
+                    <a name="//apple_ref/swift/Element/foundUnwrappablePartial(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7PartialAAV5ErrorO016foundUnwrappableA0yADyx_qd__GAByqd__GcAFmr__lF">foundUnwrappablePartial(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -116,14 +116,15 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The provided key is present, but has an invalid value</p>
+                        <p>The key path has been set to a <code><a href="../../Structs/Partial.html">Partial</a></code> that wraps
+a type not conforming to <code><a href="../../Protocols/PartialConvertible.html">PartialConvertible</a></code></p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">invalidValue</span><span class="p">(</span><span class="nv">key</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">actualValue</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">foundUnwrappablePartial</span><span class="p">(</span><span class="kt"><a href="../../Structs/Partial.html">Partial</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -135,7 +136,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://github.com/JosephDuffy/Partial" target="_blank" rel="external">Joseph Duffy</a>. All rights reserved. (Last updated: 2019-06-16)</p>
+          <p>&copy; 2019 <a class="link" href="https://github.com/JosephDuffy/Partial" target="_blank" rel="external">Joseph Duffy</a>. All rights reserved. (Last updated: 2019-06-26)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
