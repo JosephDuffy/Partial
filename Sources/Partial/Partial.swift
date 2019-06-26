@@ -8,6 +8,9 @@ public struct Partial<Wrapped>: PartialProtocol {
     public enum Error<Value>: Swift.Error {
         /// The key path has not been set.
         case keyPathNotSet(KeyPath<Wrapped, Value>)
+        /// The key path has been set to a `Partial` that wraps
+        /// a type not conforming to `PartialConvertible`
+        case foundUnwrappablePartial(Partial<Value>)
     }
 
     /// The values that have been set.
@@ -41,12 +44,13 @@ public struct Partial<Wrapped>: PartialProtocol {
     /// - Returns: The stored value.
     public func value<Value>(for keyPath: KeyPath<Wrapped, Value>) throws -> Value {
         if let value = values[keyPath] {
-            switch value {
-            case .some(let value as Value):
+            if let value = value as? Value {
                 return value
-            case .some(let value):
+            } else if let partial = value as? Partial<Value> {
+                throw Error<Value>.foundUnwrappablePartial(partial)
+            } else if let value = value {
                 preconditionFailure("Value has been set, but is not of type \(Value.self): \(value)")
-            case .none:
+            } else {
                 preconditionFailure("Non-optional value has been set to nil")
             }
         } else if let backingValue = backingValue {
@@ -65,12 +69,13 @@ public struct Partial<Wrapped>: PartialProtocol {
     /// - Returns: The stored value.
     public func value<Value>(for keyPath: KeyPath<Wrapped, Value?>) throws -> Value? {
         if let value = values[keyPath] {
-            switch value {
-            case .some(let value as Value):
+            if let value = value as? Value {
                 return value
-            case .some(let value):
+            } else if let partial = value as? Partial<Value> {
+                throw Error<Value>.foundUnwrappablePartial(partial)
+            } else if let value = value {
                 preconditionFailure("Value has been set, but is not of type \(Value.self): \(value)")
-            case .none:
+            } else {
                 // Value has been explicitly set to `nil`
                 return nil
             }
@@ -93,14 +98,13 @@ public struct Partial<Wrapped>: PartialProtocol {
     /// - Returns: The stored value.
     public func value<Value>(for keyPath: KeyPath<Wrapped, Value>) throws -> Value where Value: PartialConvertible {
         if let value = values[keyPath] {
-            switch value {
-            case .some(let value as Value):
+            if let value = value as? Value {
                 return value
-            case .some(let partial as Partial<Value>):
+            } else if let partial = value as? Partial<Value> {
                 return try Value(partial: partial)
-            case .some(let value):
+            } else if let value = value {
                 preconditionFailure("Value has been set, but is not of type \(Value.self) or \(Partial<Value>.self): \(value)")
-            case .none:
+            } else {
                 preconditionFailure("Non-optional value has been set to nil")
             }
         } else if let backingValue = backingValue {
@@ -122,14 +126,13 @@ public struct Partial<Wrapped>: PartialProtocol {
     /// - Returns: The stored value.
     public func value<Value>(for keyPath: KeyPath<Wrapped, Value?>) throws -> Value? where Value: PartialConvertible {
         if let value = values[keyPath] {
-            switch value {
-            case .some(let value as Value):
+            if let value = value as? Value {
                 return value
-            case .some(let partial as Partial<Value>):
+            } else if let partial = value as? Partial<Value> {
                 return try Value(partial: partial)
-            case .some(let value):
+            } else if let value = value {
                 preconditionFailure("Value has been set, but is not of type \(Value.self) or \(Partial<Value>.self): \(value)")
-            case .none:
+            } else {
                 // Value has been explicitly set to `nil`
                 return nil
             }
