@@ -4,5 +4,12 @@ import Quick
 @testable import PartialTests
 
 QCKMain([
-    PartialTests.self,
+    PartialNonOptionalPropertyTests.self,
+    PartialOptionalPropertyTests.self,
+    PartialNonOptionalPartialConvertiblePropertyTests.self,
+    PartialOptionalPartialConvertiblePropertyTests.self,
+    PartialBuilderNonOptionalPropertyTests.self,
+    PartialBuilderOptionalPropertyTests.self,
+    PartialBuilderNonOptionalPartialConvertiblePropertyTests.self,
+    PartialBuilderOptionalPartialConvertiblePropertyTests.self,
 ])
