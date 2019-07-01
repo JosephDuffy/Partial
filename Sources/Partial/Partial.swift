@@ -13,29 +13,10 @@ public struct Partial<Wrapped>: PartialProtocol {
     /// The values that have been set.
     internal private(set) var values: [PartialKeyPath<Wrapped>: Any?] = [:]
 
-    /// An instance of `Wrapped` that this partial is backed by. When this
-    /// value is not `nil` it will be used when a value is not present in
-    /// the `values` dictionary.
-    internal let backingValue: Wrapped?
-
     /// Create an empty `Partial`.
-    public init() {
-        backingValue = nil
-    }
-
-    /// Create a `Partial` that builds on top of the provided value.
-    ///
-    /// The provided instance will be used to return values that have not been set.
-    ///
-    /// - Parameter backingValue: An instance of `Wrapped` that will be used to return values that have not been set
-    public init(backingValue: Wrapped) {
-        self.backingValue = backingValue
-    }
+    public init() {}
 
     /// Returns the value of the given key path, or throws an error if the value has not been set.
-    ///
-    /// If a backing value was provided on initialisation this will never throw; if a value has
-    /// not been set for `keyPath` the value from the backing value will be returned.
     ///
     /// - Parameter keyPath: A keyPath path from `Wrapped` to a property of type `Value`.
     /// - Returns: The stored value.
@@ -48,17 +29,12 @@ public struct Partial<Wrapped>: PartialProtocol {
             } else {
                 preconditionFailure("Non-optional value has been set to nil")
             }
-        } else if let backingValue = backingValue {
-            return backingValue[keyPath: keyPath]
         } else {
             throw Error.keyPathNotSet(keyPath)
         }
     }
 
     /// Returns the value of the given key path, or throws an error if the value has not been set.
-    ///
-    /// If a backing value was provided on initialisation this will never throw; if a value has
-    /// not been set for `keyPath` the value from the backing value will be returned.
     ///
     /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
     /// - Returns: The stored value.
@@ -72,8 +48,6 @@ public struct Partial<Wrapped>: PartialProtocol {
                 // Value has been explicitly set to `nil`
                 return nil
             }
-        } else if let backingValue = backingValue {
-            return backingValue[keyPath: keyPath]
         } else {
             throw Error.keyPathNotSet(keyPath)
         }
@@ -95,9 +69,6 @@ public struct Partial<Wrapped>: PartialProtocol {
         /**
          Uses `updateValue(_:forKey:)` to ensure the value is set to `nil`, rather than
          removed from the dictionary, which would happen if the subscript were used.
-         This ensures that the `backingValue`'s value will not be used when
-         a `backingValue` is set and a key is explicitly set to `nil`, and also allows
-         the `value(for:)` function to get a value of `nil` from the dictionary.
          */
         values.updateValue(value, forKey: keyPath)
     }

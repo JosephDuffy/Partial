@@ -10,7 +10,6 @@
 		D91505B9221E024900EB5215 /* Partial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D91505AF221E024900EB5215 /* Partial.framework */; };
 		D91505C0221E024900EB5215 /* Partial.h in Headers */ = {isa = PBXBuildFile; fileRef = D91505B2221E024900EB5215 /* Partial.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D91505CA221E04EB00EB5215 /* Partial.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91505C9221E04EB00EB5215 /* Partial.swift */; };
-		D91505CC221E050500EB5215 /* Partial+debugDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91505CB221E050500EB5215 /* Partial+debugDescription.swift */; };
 		D91505CE221E052600EB5215 /* PartialBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91505CD221E052600EB5215 /* PartialBuilder.swift */; };
 		D92E76D0229D8A0D003EBC25 /* PartialProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92E76CF229D8A0D003EBC25 /* PartialProtocol.swift */; };
 		D92E76D1229D8A66003EBC25 /* PartialProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92E76CF229D8A0D003EBC25 /* PartialProtocol.swift */; };
@@ -63,15 +62,12 @@
 		D9E30FF122C27883003949F5 /* PartialProtocol+deprecations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D992471122BFE54F00A2B079 /* PartialProtocol+deprecations.swift */; };
 		D9E601CF2233E99D00B36B1E /* Partial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9E601C62233E99D00B36B1E /* Partial.framework */; };
 		D9E601DE2233EBED00B36B1E /* Partial.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91505C9221E04EB00EB5215 /* Partial.swift */; };
-		D9E601DF2233EBED00B36B1E /* Partial+debugDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91505CB221E050500EB5215 /* Partial+debugDescription.swift */; };
 		D9E601E02233EBED00B36B1E /* PartialBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91505CD221E052600EB5215 /* PartialBuilder.swift */; };
 		D9E601E12233EBFA00B36B1E /* Partial.h in Headers */ = {isa = PBXBuildFile; fileRef = D91505B2221E024900EB5215 /* Partial.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D9FFA6292235A223005D9A4D /* Partial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9FFA6202235A223005D9A4D /* Partial.framework */; };
 		D9FFA6382235A407005D9A4D /* Partial.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91505C9221E04EB00EB5215 /* Partial.swift */; };
-		D9FFA6392235A407005D9A4D /* Partial+debugDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91505CB221E050500EB5215 /* Partial+debugDescription.swift */; };
 		D9FFA63A2235A407005D9A4D /* PartialBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91505CD221E052600EB5215 /* PartialBuilder.swift */; };
 		D9FFA63B2235A408005D9A4D /* Partial.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91505C9221E04EB00EB5215 /* Partial.swift */; };
-		D9FFA63C2235A408005D9A4D /* Partial+debugDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91505CB221E050500EB5215 /* Partial+debugDescription.swift */; };
 		D9FFA63D2235A408005D9A4D /* PartialBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91505CD221E052600EB5215 /* PartialBuilder.swift */; };
 		D9FFA63E2235A40B005D9A4D /* Partial.h in Headers */ = {isa = PBXBuildFile; fileRef = D91505B2221E024900EB5215 /* Partial.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D9FFA63F2235A40B005D9A4D /* Partial.h in Headers */ = {isa = PBXBuildFile; fileRef = D91505B2221E024900EB5215 /* Partial.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -109,7 +105,6 @@
 		D91505BD221E024900EB5215 /* PartialNonOptionalPropertyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartialNonOptionalPropertyTests.swift; sourceTree = "<group>"; };
 		D91505BF221E024900EB5215 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D91505C9221E04EB00EB5215 /* Partial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Partial.swift; sourceTree = "<group>"; };
-		D91505CB221E050500EB5215 /* Partial+debugDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Partial+debugDescription.swift"; sourceTree = "<group>"; };
 		D91505CD221E052600EB5215 /* PartialBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartialBuilder.swift; sourceTree = "<group>"; };
 		D92E76CF229D8A0D003EBC25 /* PartialProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartialProtocol.swift; sourceTree = "<group>"; };
 		D940F0F322C6DE8A00400A32 /* PartialOptionalPropertyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartialOptionalPropertyTests.swift; sourceTree = "<group>"; };
@@ -244,7 +239,6 @@
 				D91505CD221E052600EB5215 /* PartialBuilder.swift */,
 				D9A27B6C228CBDC5001530A1 /* PartialConvertible.swift */,
 				D9A27B71228CBE40001530A1 /* Partial+description.swift */,
-				D91505CB221E050500EB5215 /* Partial+debugDescription.swift */,
 				D92E76CF229D8A0D003EBC25 /* PartialProtocol.swift */,
 				D992471122BFE54F00A2B079 /* PartialProtocol+deprecations.swift */,
 			);
@@ -578,7 +572,6 @@
 				D9A27B72228CBE40001530A1 /* Partial+description.swift in Sources */,
 				D91505CA221E04EB00EB5215 /* Partial.swift in Sources */,
 				D91505CE221E052600EB5215 /* PartialBuilder.swift in Sources */,
-				D91505CC221E050500EB5215 /* Partial+debugDescription.swift in Sources */,
 				D9CA443A222FF3F0000E424B /* DangerDeps.swift in Sources */,
 				D92E76D0229D8A0D003EBC25 /* PartialProtocol.swift in Sources */,
 				D9A27B6D228CBDC5001530A1 /* PartialConvertible.swift in Sources */,
@@ -610,7 +603,6 @@
 				D9A27B6F228CBDD3001530A1 /* PartialConvertible.swift in Sources */,
 				D9FFA63A2235A407005D9A4D /* PartialBuilder.swift in Sources */,
 				D9A27B74228CBE4C001530A1 /* Partial+description.swift in Sources */,
-				D9FFA6392235A407005D9A4D /* Partial+debugDescription.swift in Sources */,
 				D92E76D2229D8A67003EBC25 /* PartialProtocol.swift in Sources */,
 				D9E30FF022C27883003949F5 /* PartialProtocol+deprecations.swift in Sources */,
 			);
@@ -624,7 +616,6 @@
 				D9A27B6E228CBDD2001530A1 /* PartialConvertible.swift in Sources */,
 				D9E601E02233EBED00B36B1E /* PartialBuilder.swift in Sources */,
 				D9A27B73228CBE4C001530A1 /* Partial+description.swift in Sources */,
-				D9E601DF2233EBED00B36B1E /* Partial+debugDescription.swift in Sources */,
 				D92E76D1229D8A66003EBC25 /* PartialProtocol.swift in Sources */,
 				D9E30FEF22C27882003949F5 /* PartialProtocol+deprecations.swift in Sources */,
 			);
@@ -655,7 +646,6 @@
 				D9A27B70228CBDD4001530A1 /* PartialConvertible.swift in Sources */,
 				D9FFA63D2235A408005D9A4D /* PartialBuilder.swift in Sources */,
 				D9A27B75228CBE4D001530A1 /* Partial+description.swift in Sources */,
-				D9FFA63C2235A408005D9A4D /* Partial+debugDescription.swift in Sources */,
 				D92E76D3229D8A67003EBC25 /* PartialProtocol.swift in Sources */,
 				D9E30FF122C27883003949F5 /* PartialProtocol+deprecations.swift in Sources */,
 			);
