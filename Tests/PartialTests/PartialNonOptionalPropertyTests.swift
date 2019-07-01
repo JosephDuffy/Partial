@@ -33,18 +33,6 @@ final class PartialNonOptionalPropertyTests: QuickSpec {
                         }
                     }
 
-                    context("partialValue(for:)") {
-                        it("should return a partial without a value set") {
-                            let result = partial.partialValue(for: \.embedded)
-                            expect { try? result.value(for: \.string) }.to(beNil())
-                        }
-
-                        it("should return a partial without a backing value") {
-                            let result = partial.partialValue(for: \.embedded)
-                            expect(result.backingValue).to(beNil())
-                        }
-                    }
-
                     context("the subscript") {
                         var result: Wrapped.Embedded?
 
@@ -89,13 +77,6 @@ final class PartialNonOptionalPropertyTests: QuickSpec {
                             }
                         }
 
-                        context("partialValue(for:)") {
-                            it("should return the a partial wrapping the set value") {
-                                let result = partial.partialValue(for: \.embedded)
-                                expect(result.backingValue) == valueSet
-                            }
-                        }
-
                         context("the subscript") {
                             var result: Wrapped.Embedded?
 
@@ -131,18 +112,6 @@ final class PartialNonOptionalPropertyTests: QuickSpec {
                                 it("should throw a keyPathNotSet error") {
                                     let expectedError = Partial<Wrapped>.Error.keyPathNotSet(\.embedded)
                                     expect { try partial.value(for: \.embedded) }.to(throwError(expectedError))
-                                }
-                            }
-
-                            context("partialValue(for:)") {
-                                it("should return a partial without a value set") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect { try? result.value(for: \.string) }.to(beNil())
-                                }
-
-                                it("should return a partial without a backing value") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect(result.backingValue).to(beNil())
                                 }
                             }
 
@@ -185,18 +154,6 @@ final class PartialNonOptionalPropertyTests: QuickSpec {
                                 }
                             }
 
-                            context("partialValue(for:)") {
-                                it("should return a partial without a value set") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect { try? result.value(for: \.string) }.to(beNil())
-                                }
-
-                                it("should return a partial without a backing value") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect(result.backingValue).to(beNil())
-                                }
-                            }
-
                             context("the subscript") {
                                 var result: Wrapped.Embedded?
 
@@ -234,18 +191,6 @@ final class PartialNonOptionalPropertyTests: QuickSpec {
                                 it("should throw a keyPathNotSet error") {
                                     let expectedError = Partial<Wrapped>.Error.keyPathNotSet(\.embedded)
                                     expect { try partial.value(for: \.embedded) }.to(throwError(expectedError))
-                                }
-                            }
-
-                            context("partialValue(for:)") {
-                                it("should return a partial without a value set") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect { try? result.value(for: \.string) }.to(beNil())
-                                }
-
-                                it("should return a partial without a backing value") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect(result.backingValue).to(beNil())
                                 }
                             }
 
@@ -294,13 +239,6 @@ final class PartialNonOptionalPropertyTests: QuickSpec {
                             }
                         }
 
-                        context("partialValue(for:)") {
-                            it("should return the a partial wrapping the set value") {
-                                let result = partial.partialValue(for: \.embedded)
-                                expect(result.backingValue) == valueSet
-                            }
-                        }
-
                         context("the subscript") {
                             var result: Wrapped.Embedded?
 
@@ -336,18 +274,6 @@ final class PartialNonOptionalPropertyTests: QuickSpec {
                                 it("should throw a keyPathNotSet error") {
                                     let expectedError = Partial<Wrapped>.Error.keyPathNotSet(\.embedded)
                                     expect { try partial.value(for: \.embedded) }.to(throwError(expectedError))
-                                }
-                            }
-
-                            context("partialValue(for:)") {
-                                it("should return a partial without a value set") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect { try? result.value(for: \.string) }.to(beNil())
-                                }
-
-                                it("should return a partial without a backing value") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect(result.backingValue).to(beNil())
                                 }
                             }
 
@@ -390,18 +316,6 @@ final class PartialNonOptionalPropertyTests: QuickSpec {
                                 }
                             }
 
-                            context("partialValue(for:)") {
-                                it("should return a partial without a value set") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect { try? result.value(for: \.string) }.to(beNil())
-                                }
-
-                                it("should return a partial without a backing value") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect(result.backingValue).to(beNil())
-                                }
-                            }
-
                             context("the subscript") {
                                 var result: Wrapped.Embedded?
 
@@ -439,18 +353,6 @@ final class PartialNonOptionalPropertyTests: QuickSpec {
                                 it("should throw a keyPathNotSet error") {
                                     let expectedError = Partial<Wrapped>.Error.keyPathNotSet(\.embedded)
                                     expect { try partial.value(for: \.embedded) }.to(throwError(expectedError))
-                                }
-                            }
-
-                            context("partialValue(for:)") {
-                                it("should return a partial without a value set") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect { try? result.value(for: \.string) }.to(beNil())
-                                }
-
-                                it("should return a partial without a backing value") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect(result.backingValue).to(beNil())
                                 }
                             }
 
@@ -500,13 +402,6 @@ final class PartialNonOptionalPropertyTests: QuickSpec {
                             }
                         }
 
-                        context("partialValue(for:)") {
-                            it("should return the a partial wrapping the set value") {
-                                let result = partial.partialValue(for: \.embedded)
-                                expect(result.backingValue) == valueSet
-                            }
-                        }
-
                         context("the subscript") {
                             var result: Wrapped.Embedded?
 
@@ -542,18 +437,6 @@ final class PartialNonOptionalPropertyTests: QuickSpec {
                                 it("should throw a keyPathNotSet error") {
                                     let expectedError = Partial<Wrapped>.Error.keyPathNotSet(\.embedded)
                                     expect { try partial.value(for: \.embedded) }.to(throwError(expectedError))
-                                }
-                            }
-
-                            context("partialValue(for:)") {
-                                it("should return a partial without a value set") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect { try? result.value(for: \.string) }.to(beNil())
-                                }
-
-                                it("should return a partial without a backing value") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect(result.backingValue).to(beNil())
                                 }
                             }
 
@@ -596,18 +479,6 @@ final class PartialNonOptionalPropertyTests: QuickSpec {
                                 }
                             }
 
-                            context("partialValue(for:)") {
-                                it("should return a partial without a value set") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect { try? result.value(for: \.string) }.to(beNil())
-                                }
-
-                                it("should return a partial without a backing value") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect(result.backingValue).to(beNil())
-                                }
-                            }
-
                             context("the subscript") {
                                 var result: Wrapped.Embedded?
 
@@ -645,18 +516,6 @@ final class PartialNonOptionalPropertyTests: QuickSpec {
                                 it("should throw a keyPathNotSet error") {
                                     let expectedError = Partial<Wrapped>.Error.keyPathNotSet(\.embedded)
                                     expect { try partial.value(for: \.embedded) }.to(throwError(expectedError))
-                                }
-                            }
-
-                            context("partialValue(for:)") {
-                                it("should return a partial without a value set") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect { try? result.value(for: \.string) }.to(beNil())
-                                }
-
-                                it("should return a partial without a backing value") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect(result.backingValue).to(beNil())
                                 }
                             }
 
@@ -687,209 +546,6 @@ final class PartialNonOptionalPropertyTests: QuickSpec {
                         #endif
                     }
                     #endif
-
-                    context("with the value set to a partial via `setValue(_:for:)`") {
-                        var valueSet: Partial<Wrapped.Embedded>!
-
-                        beforeEach {
-                            valueSet = Partial<Wrapped.Embedded>()
-                            valueSet.setValue("test", for: \.string)
-                            partial.setValue(valueSet, for: \.embedded)
-                        }
-
-                        context("value(for:)") {
-                            it("should throw a foundUnwrappablePartial error") {
-                                let expectedError = Partial<Wrapped>.Error.foundUnwrappablePartial(valueSet)
-                                expect { try partial.value(for: \.embedded) }.to(throwError(expectedError))
-                            }
-                        }
-
-                        context("partialValue(for:)") {
-                            it("should return the set partial") {
-                                let result = partial.partialValue(for: \.embedded)
-                                expect { try result.value(for: \.string) } == valueSet[\.string]
-                            }
-                        }
-
-                        context("the subscript") {
-                            var result: Wrapped.Embedded?
-
-                            beforeEach {
-                                result = partial[\.embedded]
-                            }
-
-                            it("should return `nil`") {
-                                expect(result).to(beNil())
-                            }
-                        }
-
-                        #if swift(>=5.1)
-                        context("dynamic member lookup") {
-                            var result: Wrapped.Embedded?
-
-                            beforeEach {
-                                result = partial.embedded
-                            }
-
-                            it("should return `nil`") {
-                                expect(result).to(beNil())
-                            }
-                        }
-                        #endif
-
-                        context("then removed with removeValue(for:)") {
-                            beforeEach {
-                                partial.removeValue(for: \.embedded)
-                            }
-
-                            context("value(for:)") {
-                                it("should throw a keyPathNotSet error") {
-                                    let expectedError = Partial<Wrapped>.Error.keyPathNotSet(\.embedded)
-                                    expect { try partial.value(for: \.embedded) }.to(throwError(expectedError))
-                                }
-                            }
-
-                            context("partialValue(for:)") {
-                                it("should return a partial without a value set") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect { try? result.value(for: \.string) }.to(beNil())
-                                }
-
-                                it("should return a partial without a backing value") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect(result.backingValue).to(beNil())
-                                }
-                            }
-
-                            context("the subscript") {
-                                var result: Wrapped.Embedded?
-
-                                beforeEach {
-                                    result = partial[\.embedded]
-                                }
-
-                                it("should return `nil`") {
-                                    expect(result).to(beNil())
-                                }
-                            }
-
-                            #if swift(>=5.1)
-                            context("dynamic member lookup") {
-                                var result: Wrapped.Embedded?
-
-                                beforeEach {
-                                    result = partial.embedded
-                                }
-
-                                it("should return `nil`") {
-                                    expect(result).to(beNil())
-                                }
-                            }
-                            #endif
-                        }
-
-                        context("then removed with via the subscript") {
-                            beforeEach {
-                                partial[\.embedded] = nil
-                            }
-
-                            context("value(for:)") {
-                                it("should throw a keyPathNotSet error") {
-                                    let expectedError = Partial<Wrapped>.Error.keyPathNotSet(\.embedded)
-                                    expect { try partial.value(for: \.embedded) }.to(throwError(expectedError))
-                                }
-                            }
-
-                            context("partialValue(for:)") {
-                                it("should return a partial without a value set") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect { try? result.value(for: \.string) }.to(beNil())
-                                }
-
-                                it("should return a partial without a backing value") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect(result.backingValue).to(beNil())
-                                }
-                            }
-
-                            context("the subscript") {
-                                var result: Wrapped.Embedded?
-
-                                beforeEach {
-                                    result = partial[\.embedded]
-                                }
-
-                                it("should return `nil`") {
-                                    expect(result).to(beNil())
-                                }
-                            }
-
-                            #if swift(>=5.1)
-                            context("dynamic member lookup") {
-                                var result: Wrapped.Embedded?
-
-                                beforeEach {
-                                    result = partial.embedded
-                                }
-
-                                it("should return `nil`") {
-                                    expect(result).to(beNil())
-                                }
-                            }
-                            #endif
-                        }
-
-                        #if swift(>=5.1)
-                        context("then removed with via dynamic member lookup") {
-                            beforeEach {
-                                partial[\.embedded] = nil
-                            }
-
-                            context("value(for:)") {
-                                it("should throw a keyPathNotSet error") {
-                                    let expectedError = Partial<Wrapped>.Error.keyPathNotSet(\.embedded)
-                                    expect { try partial.value(for: \.embedded) }.to(throwError(expectedError))
-                                }
-                            }
-
-                            context("partialValue(for:)") {
-                                it("should return a partial without a value set") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect { try? result.value(for: \.string) }.to(beNil())
-                                }
-
-                                it("should return a partial without a backing value") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect(result.backingValue).to(beNil())
-                                }
-                            }
-
-                            context("the subscript") {
-                                var result: Wrapped.Embedded?
-
-                                beforeEach {
-                                    result = partial[\.embedded]
-                                }
-
-                                it("should return `nil`") {
-                                    expect(result).to(beNil())
-                                }
-                            }
-
-                            context("dynamic member lookup") {
-                                var result: Wrapped.Embedded?
-
-                                beforeEach {
-                                    result = partial.embedded
-                                }
-
-                                it("should return `nil`") {
-                                    expect(result).to(beNil())
-                                }
-                            }
-                        }
-                        #endif
-                    }
                 }
 
                 context("initialised with a backing value") {
@@ -911,13 +567,6 @@ final class PartialNonOptionalPropertyTests: QuickSpec {
                         }
                     }
 
-                    context("partialValue(for:)") {
-                        it("should return a partial backed by the value from the backing value") {
-                            let result = partial.partialValue(for: \.embedded)
-                            expect(result.backingValue) == backingValue.embedded
-                        }
-                    }
-
                     context("the subscript") {
                         var result: Wrapped.Embedded?
 
@@ -962,13 +611,6 @@ final class PartialNonOptionalPropertyTests: QuickSpec {
                             }
                         }
 
-                        context("partialValue(for:)") {
-                            it("should return the a partial wrapping the set value") {
-                                let result = partial.partialValue(for: \.embedded)
-                                expect(result.backingValue) == valueSet
-                            }
-                        }
-
                         context("the subscript") {
                             var result: Wrapped.Embedded?
 
@@ -1007,13 +649,6 @@ final class PartialNonOptionalPropertyTests: QuickSpec {
 
                                 it("should return the value from the backing value") {
                                     expect { try partial.value(for: \.embedded) }.to(equal(backingValue.embedded))
-                                }
-                            }
-
-                            context("partialValue(for:)") {
-                                it("should return a partial backed by the value from the backing value") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect(result.backingValue) == backingValue.embedded
                                 }
                             }
 
@@ -1059,13 +694,6 @@ final class PartialNonOptionalPropertyTests: QuickSpec {
                                 }
                             }
 
-                            context("partialValue(for:)") {
-                                it("should return a partial backed by the value from the backing value") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect(result.backingValue) == backingValue.embedded
-                                }
-                            }
-
                             context("the subscript") {
                                 var result: Wrapped.Embedded?
 
@@ -1106,13 +734,6 @@ final class PartialNonOptionalPropertyTests: QuickSpec {
 
                                 it("should return the value from the backing value") {
                                     expect { try partial.value(for: \.embedded) }.to(equal(backingValue.embedded))
-                                }
-                            }
-
-                            context("partialValue(for:)") {
-                                it("should return a partial backed by the value from the backing value") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect(result.backingValue) == backingValue.embedded
                                 }
                             }
 
@@ -1161,13 +782,6 @@ final class PartialNonOptionalPropertyTests: QuickSpec {
                             }
                         }
 
-                        context("partialValue(for:)") {
-                            it("should return the a partial wrapping the set value") {
-                                let result = partial.partialValue(for: \.embedded)
-                                expect(result.backingValue) == valueSet
-                            }
-                        }
-
                         context("the subscript") {
                             var result: Wrapped.Embedded?
 
@@ -1206,13 +820,6 @@ final class PartialNonOptionalPropertyTests: QuickSpec {
 
                                 it("should return the value from the backing value") {
                                     expect { try partial.value(for: \.embedded) }.to(equal(backingValue.embedded))
-                                }
-                            }
-
-                            context("partialValue(for:)") {
-                                it("should return a partial backed by the value from the backing value") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect(result.backingValue) == backingValue.embedded
                                 }
                             }
 
@@ -1258,13 +865,6 @@ final class PartialNonOptionalPropertyTests: QuickSpec {
                                 }
                             }
 
-                            context("partialValue(for:)") {
-                                it("should return a partial backed by the value from the backing value") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect(result.backingValue) == backingValue.embedded
-                                }
-                            }
-
                             context("the subscript") {
                                 var result: Wrapped.Embedded?
 
@@ -1305,13 +905,6 @@ final class PartialNonOptionalPropertyTests: QuickSpec {
 
                                 it("should return the value from the backing value") {
                                     expect { try partial.value(for: \.embedded) }.to(equal(backingValue.embedded))
-                                }
-                            }
-
-                            context("partialValue(for:)") {
-                                it("should return a partial backed by the value from the backing value") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect(result.backingValue) == backingValue.embedded
                                 }
                             }
 
@@ -1361,13 +954,6 @@ final class PartialNonOptionalPropertyTests: QuickSpec {
                             }
                         }
 
-                        context("partialValue(for:)") {
-                            it("should return the a partial wrapping the set value") {
-                                let result = partial.partialValue(for: \.embedded)
-                                expect(result.backingValue) == valueSet
-                            }
-                        }
-
                         context("the subscript") {
                             var result: Wrapped.Embedded?
 
@@ -1406,13 +992,6 @@ final class PartialNonOptionalPropertyTests: QuickSpec {
 
                                 it("should return the value from the backing value") {
                                     expect { try partial.value(for: \.embedded) }.to(equal(backingValue.embedded))
-                                }
-                            }
-
-                            context("partialValue(for:)") {
-                                it("should return a partial backed by the value from the backing value") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect(result.backingValue) == backingValue.embedded
                                 }
                             }
 
@@ -1455,13 +1034,6 @@ final class PartialNonOptionalPropertyTests: QuickSpec {
 
                                 it("should return the value from the backing value") {
                                     expect { try partial.value(for: \.embedded) }.to(equal(backingValue.embedded))
-                                }
-                            }
-
-                            context("partialValue(for:)") {
-                                it("should return a partial backed by the value from the backing value") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect(result.backingValue) == backingValue.embedded
                                 }
                             }
 
@@ -1508,13 +1080,6 @@ final class PartialNonOptionalPropertyTests: QuickSpec {
                                 }
                             }
 
-                            context("partialValue(for:)") {
-                                it("should return a partial backed by the value from the backing value") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect(result.backingValue) == backingValue.embedded
-                                }
-                            }
-
                             context("the subscript") {
                                 var result: Wrapped.Embedded?
 
@@ -1542,203 +1107,6 @@ final class PartialNonOptionalPropertyTests: QuickSpec {
                         #endif
                     }
                     #endif
-
-                    context("with the value set to a partial via `setValue(_:for:)`") {
-                        var valueSet: Partial<Wrapped.Embedded>!
-
-                        beforeEach {
-                            valueSet = Partial<Wrapped.Embedded>()
-                            valueSet.setValue("test", for: \.string)
-                            partial.setValue(valueSet, for: \.embedded)
-                        }
-
-                        context("value(for:)") {
-                            it("should throw a foundUnwrappablePartial error") {
-                                let expectedError = Partial<Wrapped>.Error.foundUnwrappablePartial(valueSet)
-                                expect { try partial.value(for: \.embedded) }.to(throwError(expectedError))
-                            }
-                        }
-
-                        context("partialValue(for:)") {
-                            it("should return the set partial") {
-                                let result = partial.partialValue(for: \.embedded)
-                                expect { try result.value(for: \.string) } == valueSet[\.string]
-                            }
-                        }
-
-                        context("the subscript") {
-                            var result: Wrapped.Embedded?
-
-                            beforeEach {
-                                result = partial[\.embedded]
-                            }
-
-                            it("should return `nil`") {
-                                expect(result).to(beNil())
-                            }
-                        }
-
-                        #if swift(>=5.1)
-                        context("dynamic member lookup") {
-                            var result: Wrapped.Embedded?
-
-                            beforeEach {
-                                result = partial.embedded
-                            }
-
-                            it("should return `nil`") {
-                                expect(result).to(beNil())
-                            }
-                        }
-                        #endif
-
-                        context("then removed with removeValue(for:)") {
-                            beforeEach {
-                                partial.removeValue(for: \.embedded)
-                            }
-
-                            context("value(for:)") {
-                                it("should not throw an error") {
-                                    expect { try partial.value(for: \.embedded) }.toNot(throwError())
-                                }
-
-                                it("should return the value from the backing value") {
-                                    expect { try partial.value(for: \.embedded) }.to(equal(backingValue.embedded))
-                                }
-                            }
-
-                            context("partialValue(for:)") {
-                                it("should return a partial backed by the value from the backing value") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect(result.backingValue) == backingValue.embedded
-                                }
-                            }
-
-                            context("the subscript") {
-                                var result: Wrapped.Embedded?
-
-                                beforeEach {
-                                    result = partial[\.embedded]
-                                }
-
-                                it("should return the value from the backing value") {
-                                    expect(result) == backingValue.embedded
-                                }
-                            }
-
-                            #if swift(>=5.1)
-                            context("dynamic member lookup") {
-                                var result: Wrapped.Embedded?
-
-                                beforeEach {
-                                    result = partial.embedded
-                                }
-
-                                it("should return the value from the backing value") {
-                                    expect(result) == backingValue.embedded
-                                }
-                            }
-                            #endif
-                        }
-
-                        context("then removed via the subscript") {
-                            beforeEach {
-                                partial[\.embedded] = nil
-                            }
-
-                            context("value(for:)") {
-                                it("should not throw an error") {
-                                    expect { try partial.value(for: \.embedded) }.toNot(throwError())
-                                }
-
-                                it("should return the value from the backing value") {
-                                    expect { try partial.value(for: \.embedded) }.to(equal(backingValue.embedded))
-                                }
-                            }
-
-                            context("partialValue(for:)") {
-                                it("should return a partial backed by the value from the backing value") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect(result.backingValue) == backingValue.embedded
-                                }
-                            }
-
-                            context("the subscript") {
-                                var result: Wrapped.Embedded?
-
-                                beforeEach {
-                                    result = partial[\.embedded]
-                                }
-
-                                it("should return the value from the backing value") {
-                                    expect(result) == backingValue.embedded
-                                }
-                            }
-
-                            #if swift(>=5.1)
-                            context("dynamic member lookup") {
-                                var result: Wrapped.Embedded?
-
-                                beforeEach {
-                                    result = partial.embedded
-                                }
-
-                                it("should return the value from the backing value") {
-                                    expect(result) == backingValue.embedded
-                                }
-                            }
-                            #endif
-                        }
-
-                        #if swift(>=5.1)
-                        context("then removed via dynamic member lookup") {
-                            beforeEach {
-                                partial.embedded = nil
-                            }
-
-                            context("value(for:)") {
-                                it("should not throw an error") {
-                                    expect { try partial.value(for: \.embedded) }.toNot(throwError())
-                                }
-
-                                it("should return the value from the backing value") {
-                                    expect { try partial.value(for: \.embedded) }.to(equal(backingValue.embedded))
-                                }
-                            }
-
-                            context("partialValue(for:)") {
-                                it("should return a partial backed by the value from the backing value") {
-                                    let result = partial.partialValue(for: \.embedded)
-                                    expect(result.backingValue) == backingValue.embedded
-                                }
-                            }
-
-                            context("the subscript") {
-                                var result: Wrapped.Embedded?
-
-                                beforeEach {
-                                    result = partial[\.embedded]
-                                }
-
-                                it("should return the value from the backing value") {
-                                    expect(result) == backingValue.embedded
-                                }
-                            }
-
-                            context("dynamic member lookup") {
-                                var result: Wrapped.Embedded?
-
-                                beforeEach {
-                                    result = partial.embedded
-                                }
-
-                                it("should return the value from the backing value") {
-                                    expect(result) == backingValue.embedded
-                                }
-                            }
-                        }
-                        #endif
-                    }
                 }
             }
         }

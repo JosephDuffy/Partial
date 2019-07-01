@@ -141,24 +141,6 @@ public final class PartialBuilder<Wrapped>: PartialProtocol {
         return try partial.value(for: keyPath)
     }
 
-    /// Returns a `Partial` for the given key path. If the value exists it will be wrapped in a
-    /// new `Partial`. If the value has not been set an empty `Partial` will be returned.
-    ///
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
-    /// - Returns: The stored value wrapped by a `Partial`, or an empty `Partial`.
-    public func partialValue<Value>(for keyPath: KeyPath<Wrapped, Value>) -> Partial<Value> {
-        return partial.partialValue(for: keyPath)
-    }
-
-    /// Returns a `Partial` for the given key path. If the value exists it will be wrapped in a
-    /// new `Partial`. If the value has not been set an empty `Partial` will be returned.
-    ///
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
-    /// - Returns: The stored value wrapped by a `Partial`, or an empty `Partial`.
-    public func partialValue<Value>(for keyPath: KeyPath<Wrapped, Value?>) -> Partial<Value> {
-        return partial.partialValue(for: keyPath)
-    }
-
     /// Updates the stored value for the given key path.
     ///
     /// - Parameter value: The value to store against `keyPath`.
@@ -179,24 +161,6 @@ public final class PartialBuilder<Wrapped>: PartialProtocol {
         } else {
             notifyUpdateListeners(ofChangeTo: keyPath, newValue: nil)
         }
-    }
-
-    /// Updates the stored value for the given key path to be a partial value.
-    ///
-    /// - Parameter value: The partial value to store against `keyPath`.
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
-    public func setValue<Value>(_ value: Partial<Value>, for keyPath: KeyPath<Wrapped, Value>) {
-        partial.setValue(value, for: keyPath)
-        notifyUpdateListeners(ofChangeTo: keyPath, newValue: value)
-    }
-
-    /// Update the stored value for the given key path to be a partial value.
-    ///
-    /// - Parameter value: The partial value to store against `keyPath`.
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
-    public func setValue<Value>(_ value: Partial<Value>, for keyPath: KeyPath<Wrapped, Value?>) {
-        partial.setValue(value, for: keyPath)
-        notifyUpdateListeners(ofChangeTo: keyPath, newValue: value)
     }
 
     /// Removes the stored value for the given key path.

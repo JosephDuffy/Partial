@@ -36,44 +36,6 @@ public protocol PartialProtocol {
     /// - Returns: The stored value.
     func value<Value>(for keyPath: KeyPath<Wrapped, Value?>) throws -> Value?
 
-    /// Returns the value of the given key path, or throws an error if the value has not been set.
-    ///
-    /// If the value stored for this key path is a `Partial` an attempt will be made to unwrap
-    /// the value. If the initialiser throws an error it will be rethrown by this function.
-    ///
-    /// If a backing value was provided on initialisation this will never throw; if a value has
-    /// not been set for `keyPath` the value from the backing value will be returned.
-    ///
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
-    /// - Returns: The stored value.
-    func value<Value>(for keyPath: KeyPath<Wrapped, Value>) throws -> Value where Value: PartialConvertible
-
-    /// Returns the value of the given key path, or throws an error if the value has not been set.
-    ///
-    /// If the value stored for this key path is a `Partial` an attempt will be made to unwrap
-    /// the value. If the initialiser throws an error it will be rethrown by this function.
-    ///
-    /// If a backing value was provided on initialisation this will never throw; if a value has
-    /// not been set for `keyPath` the value from the backing value will be returned.
-    ///
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
-    /// - Returns: The stored value.
-    func value<Value>(for keyPath: KeyPath<Wrapped, Value?>) throws -> Value? where Value: PartialConvertible
-
-    /// Returns a `Partial` for the given key path. If the value exists it will be wrapped in a
-    /// new `Partial`. If the value has not been set an empty `Partial` will be returned.
-    ///
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
-    /// - Returns: The stored value wrapped by a `Partial`, or an empty `Partial`.
-    func partialValue<Value>(for keyPath: KeyPath<Wrapped, Value>) -> Partial<Value>
-
-    /// Returns a `Partial` for the given key path. If the value exists it will be wrapped in a
-    /// new `Partial`. If the value has not been set an empty `Partial` will be returned.
-    ///
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
-    /// - Returns: The stored value wrapped by a `Partial`, or an empty `Partial`.
-    func partialValue<Value>(for keyPath: KeyPath<Wrapped, Value?>) -> Partial<Value>
-
     /// Updates the stored value for the given key path.
     ///
     /// - Parameter value: The value to store against `keyPath`.
@@ -85,18 +47,6 @@ public protocol PartialProtocol {
     /// - Parameter value: The value to store against `keyPath`.
     /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
     mutating func setValue<Value>(_ value: Value?, for keyPath: KeyPath<Wrapped, Value?>)
-
-    /// Updates the stored value for the given key path to be a partial value.
-    ///
-    /// - Parameter value: The partial value to store against `keyPath`.
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
-    mutating func setValue<Value>(_ value: Partial<Value>, for keyPath: KeyPath<Wrapped, Value>)
-
-    /// Update the stored value for the given key path to be a partial value.
-    ///
-    /// - Parameter value: The partial value to store against `keyPath`.
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
-    mutating func setValue<Value>(_ value: Partial<Value>, for keyPath: KeyPath<Wrapped, Value?>)
 
     /// Removes the stored value for the given key path.
     ///
@@ -111,6 +61,26 @@ extension PartialProtocol {
     /// - Parameter keyPath: The key path of the value to remove.
     public mutating func removeValue<Value>(for keyPath: KeyPath<Wrapped, Value>) {
         self.removeValue(for: keyPath as PartialKeyPath<Wrapped>)
+    }
+
+    /// Attempts to update the stored value for the given key path by unwrapping the
+    /// provided partial value. If the unwrapping fails the error will be thrown.
+    ///
+    /// - Parameter value: A partial wrapping a value of type `Value`.
+    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
+    mutating func setValue<Value>(_ partial: Partial<Value>, for keyPath: KeyPath<Wrapped, Value>) throws where Value: PartialConvertible {
+        let value = try partial.unwrappedValue()
+        setValue(value, for: keyPath)
+    }
+
+    /// Attempts to update the stored value for the given key path by unwrapping the
+    /// provided partial value. If the unwrapping fails the error will be thrown.
+    ///
+    /// - Parameter value: A partial wrapping a value of type `Value`.
+    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
+    mutating func setValue<Value>(_ partial: Partial<Value>, for keyPath: KeyPath<Wrapped, Value?>) throws where Value: PartialConvertible {
+        let value = try partial.unwrappedValue()
+        setValue(value, for: keyPath)
     }
 
     /// Retrieve or set a value for the given key path. Returns `nil` if the value has not been set.
