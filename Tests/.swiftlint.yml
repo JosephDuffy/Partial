@@ -3,3 +3,4 @@ disabled_rules:
   - nesting
   - file_length
   - type_body_length
+  - type_name
