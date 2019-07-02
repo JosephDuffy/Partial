@@ -21,9 +21,9 @@ struct APITests {
             let optionalEmbeddedValue: EmbeddedValue?
         }
 
-        var partial = Partial<Value>()
-        partial.setValue(Partial<Value.EmbeddedValue>(), for: \Value.embeddedValue)
-        partial.setValue(Partial<Value.EmbeddedValue>(), for: \Value.optionalEmbeddedValue)
+//        var partial = Partial<Value>()
+//        partial.setValue(Partial<Value.EmbeddedValue>(), for: \Value.embeddedValue)
+//        partial.setValue(Partial<Value.EmbeddedValue>(), for: \Value.optionalEmbeddedValue)
 
         // These should cause compiler warnings and not be possible
 //        partial[\.embeddedValue] = Partial<Value.EmbeddedValue>()
