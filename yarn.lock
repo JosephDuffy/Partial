@@ -300,10 +300,10 @@ cross-spawn@^6.0.0:
     shebang-command "^1.2.0"
     which "^1.2.9"
 
-danger@^9.0.1:
-  version "9.0.1"
-  resolved "https://registry.yarnpkg.com/danger/-/danger-9.0.1.tgz#d0a4a9b54d17b38ce4bf924cec2bf398af76acfc"
-  integrity sha512-jrzPpD20BmN5/3ZlgG2K80WFVS2/2+Eq/hmzbr+SJXNv7HKzp5YzKng2f8eGP2ctsUJxJ2lcTRPGUq8Ai3dM9g==
+danger@^9.0.2:
+  version "9.0.2"
+  resolved "https://registry.yarnpkg.com/danger/-/danger-9.0.2.tgz#8348189e5f6dad759079b31d62e766b3d71f18a1"
+  integrity sha512-H0G8qgU1rUsKUlDb4rtsgFsMMS43WQMOUNE9eP5/NcnGsuZf8W+eMiAPR28Lwb2k3gSHGbrlWebWQPeSg6mS2w==
   dependencies:
     "@babel/polyfill" "^7.2.5"
     "@octokit/rest" "^16.14.1"
@@ -311,7 +311,7 @@ danger@^9.0.1:
     commander "^2.18.0"
     debug "^4.1.1"
     get-stdin "^6.0.0"
-    gitlab "^6.0.0"
+    gitlab "~6.0.0"
     http-proxy-agent "^2.1.0"
     https-proxy-agent "^2.2.1"
     hyperlinker "^1.0.0"
@@ -606,10 +606,10 @@ git-config-path@^1.0.1:
     fs-exists-sync "^0.1.0"
     homedir-polyfill "^1.0.0"
 
-gitlab@^6.0.0:
-  version "6.3.7"
-  resolved "https://registry.yarnpkg.com/gitlab/-/gitlab-6.3.7.tgz#ca35ecc4be069e70cce5c077ed202a1d28aeaf25"
-  integrity sha512-PNXAXdUr2o+Rpg8v7BQVjj5AVc39aJDpoxGxG7uHMr7hl6U6gR5TXlfcJtb9kRzPJI//rX/ccnvXbWhRftROPQ==
+gitlab@~6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/gitlab/-/gitlab-6.0.0.tgz#7bd44bf57dcb6b1231c70a52ea9b83934e6c1539"
+  integrity sha512-/0KE/Un0Hg/CDTtiYfC1Z4lkuHhkSmC3JjkKy4VsCgTb51rTtOfk7NGspyM+wTIgEPd6cE061Pu5m4a5ao01Ow==
   dependencies:
     form-data "^2.3.3"
     humps "^2.0.1"
