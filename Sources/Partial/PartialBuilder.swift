@@ -14,9 +14,6 @@ open class PartialBuilder<Wrapped>: PartialProtocol {
     /// A closure that will be notified when a key path is updated
     public typealias PropertyUpdateListener<Value> = (_ keyPath: KeyPath<Wrapped, Value>, _ update: PropertyUpdate<Value>) -> Void
 
-    /// A closure that will be notified when a key path is updated
-    public typealias OptionalPropertyUpdateListener<Value> = (_ keyPath: KeyPath<Wrapped, Value?>, _ update: PropertyUpdate<Value?>) -> Void
-
     /// The partial value this builder is building
     private var partial: Partial<Wrapped>
 
@@ -174,28 +171,6 @@ extension PartialBuilder {
             }
             self._notifyOfRemovable = {
                 let update = PropertyUpdate<Value>.valueRemoved
-                updateListener(keyPath, update)
-            }
-
-            super.init(cancelAction: { cancellable in
-                guard let cancellable = cancellable as? PropertyUpdateCancellable else {
-                    preconditionFailure()
-                }
-                cancelAction(cancellable)
-            })
-        }
-
-        init<Value>(keyPath: KeyPath<Wrapped, Value?>, updateListener: @escaping OptionalPropertyUpdateListener<Value>, cancelAction: @escaping CancelAction) {
-            self._notifyOfValue = { value in
-                guard let value = value as? Value? else {
-                    assertionFailure("Update listener should only be called with value of type \(Value?.self)")
-                    return
-                }
-                let update = PropertyUpdate<Value?>.valueSet(value)
-                updateListener(keyPath, update)
-            }
-            self._notifyOfRemovable = {
-                let update = PropertyUpdate<Value?>.valueRemoved
                 updateListener(keyPath, update)
             }
 
