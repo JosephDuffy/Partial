@@ -4,6 +4,7 @@ cache:
   directories:
     - Carthage
     - ~/.swiftenv
+    - .build
 
 stages:
   - "Test"
