@@ -4,6 +4,7 @@ cache:
   directories:
     - Carthage
     - ~/.swiftenv
+    - .build
 
 stages:
   - "Test"
@@ -61,12 +62,11 @@ jobs:
         homebrew:
           packages:
             - yarn
-            - danger/tap/danger-swift
       install:
         - yarn install
-        - swift build --skip-update --configuration release --product swiftlint
-        - swift build --skip-update --configuration release --product danger-swift
-      script: swift run --skip-update --configuration release danger-swift ci --danger-js-path $(yarn bin danger) --verbose
+        - swift build --skip-update --target CIDependencies
+        - swift build --skip-update --product danger-swift
+      script: swift run --skip-update danger-swift ci --danger-js-path $(yarn bin danger) --verbose
 
     - <<: *macos_env
       stage: "Test"
@@ -105,12 +105,6 @@ jobs:
     - <<: *linux_env
       stage: "Test"
       name: "Unit tests (linux, SwiftPM)"
-      if: type != pull_request
-      script: swift test
-
-    - <<: *linux_env_beta
-      stage: "Test"
-      name: "Unit tests (linux, Swift Beta, SwiftPM)"
       if: type != pull_request
       script: swift test
 
