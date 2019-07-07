@@ -2,7 +2,7 @@ import Foundation
 
 /// A struct that mirrors the properties of `Wrapped`, making each of the
 /// types optional.
-public struct Partial<Wrapped>: PartialProtocol {
+public struct Partial<Wrapped>: PartialProtocol, CustomStringConvertible {
 
     /// An error that can be thrown by the `value(for:)` function.
     public enum Error<Value>: Swift.Error {
@@ -10,8 +10,13 @@ public struct Partial<Wrapped>: PartialProtocol {
         case keyPathNotSet(KeyPath<Wrapped, Value>)
     }
 
+    /// A textual representation of the Partial's values.
+    public var description: String {
+        return "\(type(of: self))(values: \(String(describing: values)))"
+    }
+
     /// The values that have been set.
-    internal private(set) var values: [PartialKeyPath<Wrapped>: Any] = [:]
+    private var values: [PartialKeyPath<Wrapped>: Any] = [:]
 
     /// Create an empty `Partial`.
     public init() {}
