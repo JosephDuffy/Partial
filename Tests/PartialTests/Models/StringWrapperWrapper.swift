@@ -1,8 +1,18 @@
 import Partial
 
-struct StringWrapperWrapper {
+struct StringWrapperWrapper: PartialConvertible, Hashable {
 
     let stringWrapper: StringWrapper
     let optionalStringWrapper: StringWrapper?
+
+    init(stringWrapper: StringWrapper, optionalStringWrapper: StringWrapper?) {
+        self.stringWrapper = stringWrapper
+        self.optionalStringWrapper = optionalStringWrapper
+    }
+
+    init(partial: Partial<StringWrapperWrapper>) throws {
+        stringWrapper = try partial.value(for: \.stringWrapper)
+        optionalStringWrapper = try partial.value(for: \.optionalStringWrapper)
+    }
 
 }
