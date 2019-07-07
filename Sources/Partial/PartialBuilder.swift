@@ -1,7 +1,7 @@
 import Foundation
 
 /// A class that aids in the building of a partial value.
-open class PartialBuilder<Wrapped>: PartialProtocol {
+open class PartialBuilder<Wrapped>: PartialProtocol, CustomStringConvertible {
 
     /// An update to a key path
     public struct KeyPathUpdate<Value> {
@@ -46,6 +46,11 @@ open class PartialBuilder<Wrapped>: PartialProtocol {
 
     /// A closure that will be notified when a key path is updated
     public typealias KeyPathUpdateListener<Value> = (_ update: KeyPathUpdate<Value>) -> Void
+
+    /// A textual representation of the PartialBuilder's values.
+    public var description: String {
+        return "\(type(of: self))(partial: \(partial))"
+    }
 
     /// The partial value this builder is building
     private var partial: Partial<Wrapped>
