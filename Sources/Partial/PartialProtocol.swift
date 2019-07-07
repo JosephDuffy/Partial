@@ -17,23 +17,11 @@ public protocol PartialProtocol {
     /// - Returns: The stored value.
     func value<Value>(for keyPath: KeyPath<Wrapped, Value>) throws -> Value
 
-    /// Returns the value of the given key path, or throws an error if the value has not been set.
-    ///
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
-    /// - Returns: The stored value.
-    func value<Value>(for keyPath: KeyPath<Wrapped, Value?>) throws -> Value?
-
     /// Updates the stored value for the given key path.
     ///
     /// - Parameter value: The value to store against `keyPath`.
     /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
     mutating func setValue<Value>(_ value: Value, for keyPath: KeyPath<Wrapped, Value>)
-
-    /// Updates the stored value for the given key path.
-    ///
-    /// - Parameter value: The value to store against `keyPath`.
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
-    mutating func setValue<Value>(_ value: Value?, for keyPath: KeyPath<Wrapped, Value?>)
 
     /// Removes the stored value for the given key path.
     ///
@@ -60,16 +48,6 @@ extension PartialProtocol {
         setValue(value, for: keyPath)
     }
 
-    /// Attempts to update the stored value for the given key path by unwrapping the
-    /// provided partial value. If the unwrapping fails the error will be thrown.
-    ///
-    /// - Parameter value: A partial wrapping a value of type `Value`.
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
-    mutating func setValue<Value>(_ partial: Partial<Value>, for keyPath: KeyPath<Wrapped, Value?>) throws where Value: PartialConvertible {
-        let value = try partial.unwrappedValue()
-        setValue(value, for: keyPath)
-    }
-
     /// Retrieve or set a value for the given key path. Returns `nil` if the value has not been set. If the value is set
     /// to nil it will remove the value.
     ///
@@ -79,73 +57,6 @@ extension PartialProtocol {
     public subscript<Value>(keyPath: KeyPath<Wrapped, Value>) -> Value? {
         get {
             return try? self.value(for: keyPath)
-        }
-        set {
-            if let newValue = newValue {
-                setValue(newValue, for: keyPath)
-            } else {
-                removeValue(for: keyPath)
-            }
-        }
-    }
-
-    /// Retrieve or set a value for the given key path. Returns `nil` if the value has not been set. If the value is set
-    /// to nil it will remove the value. To set the value to `nil` set it to `Optional<Value>.none`.
-    ///
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
-    /// - Returns: The stored value, or `nil` if a value has not been set.
-    @available(swift, deprecated: 5.1, message: "Use dynamic member lookup, `value(for:)`, or `set(value:for:)`")
-    public subscript<Value>(keyPath: KeyPath<Wrapped, Value?>) -> Value?? {
-        get {
-            do {
-                let value: Value? = try self.value(for: keyPath)
-                return value
-            } catch {
-                return nil
-            }
-        }
-        set {
-            if let newValue = newValue {
-                setValue(newValue, for: keyPath)
-            } else {
-                removeValue(for: keyPath)
-            }
-        }
-    }
-
-    /// Retrieve or set a value for the given key path. Returns `nil` if the value has not been set. If the value is set
-    /// to nil it will remove the value.
-    ///
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
-    /// - Returns: The stored value, or `nil` if a value has not been set.
-    @available(swift, deprecated: 5.1, message: "Use dynamic member lookup, `value(for:)`, or `set(value:for:)`")
-    public subscript<Value>(keyPath: KeyPath<Wrapped, Value>) -> Value? where Value: PartialConvertible {
-        get {
-            return try? self.value(for: keyPath)
-        }
-        set {
-            if let newValue = newValue {
-                setValue(newValue, for: keyPath)
-            } else {
-                removeValue(for: keyPath)
-            }
-        }
-    }
-
-    /// Retrieve or set a value for the given key path. Returns `nil` if the value has not been set. If the value is set
-    /// to nil it will remove the value. To set the value to `nil` set it to `Optional<Value>.none`.
-    ///
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
-    /// - Returns: The stored value, or `nil` if a value has not been set.
-    @available(swift, deprecated: 5.1, message: "Use dynamic member lookup, `value(for:)`, or `set(value:for:)`")
-    public subscript<Value>(keyPath: KeyPath<Wrapped, Value?>) -> Value?? where Value: PartialConvertible {
-        get {
-            do {
-                let value: Value? = try self.value(for: keyPath)
-                return value
-            } catch {
-                return nil
-            }
         }
         set {
             if let newValue = newValue {
@@ -172,69 +83,6 @@ extension PartialProtocol {
     public subscript<Value>(dynamicMember keyPath: KeyPath<Wrapped, Value>) -> Value? {
         get {
             return try? self.value(for: keyPath)
-        }
-        set {
-            if let newValue = newValue {
-                setValue(newValue, for: keyPath)
-            } else {
-                removeValue(for: keyPath)
-            }
-        }
-    }
-    /// Retrieve or set a value for the given key path. Returns `nil` if the value has not been set. If the value is set
-    /// to nil it will remove the value. To set the value to `nil` set it to `Optional<Value>.none`.
-    ///
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
-    /// - Returns: The stored value, or `nil` if a value has not been set.
-    public subscript<Value>(dynamicMember keyPath: KeyPath<Wrapped, Value?>) -> Value?? {
-        get {
-            do {
-                let value: Value? = try self.value(for: keyPath)
-                return value
-            } catch {
-                return nil
-            }
-        }
-        set {
-            if let newValue = newValue {
-                setValue(newValue, for: keyPath)
-            } else {
-                removeValue(for: keyPath)
-            }
-        }
-    }
-
-    /// Retrieve or set a value for the given key path. Returns `nil` if the value has not been set. If the value is set
-    /// to nil it will remove the value.
-    ///
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
-    /// - Returns: The stored value, or `nil` if a value has not been set.
-    public subscript<Value>(dynamicMember keyPath: KeyPath<Wrapped, Value>) -> Value? where Value: PartialConvertible {
-        get {
-            return try? self.value(for: keyPath)
-        }
-        set {
-            if let newValue = newValue {
-                setValue(newValue, for: keyPath)
-            } else {
-                removeValue(for: keyPath)
-            }
-        }
-    }
-
-    /// Retrieve or set a value for the given key path. Returns `nil` if the value has not been set. If the value is set
-    /// to nil it will remove the value. To set the value to `nil` set it to `Optional<Value>.none`.
-    ///
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
-    /// - Returns: The stored value, or `nil` if a value has not been set.
-    public subscript<Value>(dynamicMember keyPath: KeyPath<Wrapped, Value?>) -> Value?? where Value: PartialConvertible {
-        get {
-            do {
-                let value: Value? = try self.value(for: keyPath)
-                return value
-            } catch {
-                return nil
-            }
         }
         set {
             if let newValue = newValue {
