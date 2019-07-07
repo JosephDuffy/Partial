@@ -14,6 +14,12 @@ final class PartialBuilderTests: QuickSpec {
                 builder = PartialBuilder()
             }
 
+            context("description") {
+                it("should include the name of the wrapping type") {
+                    expect(String(describing: builder)).to(contain(String(describing: StringWrapperWrapper.self)))
+                }
+            }
+
             context("a non-optional key path that has not been set") {
                 let keyPath = \StringWrapperWrapper.stringWrapper
 
@@ -96,6 +102,12 @@ final class PartialBuilderTests: QuickSpec {
                     }
                 }
                 #endif
+
+                context("description") {
+                    it("should include description of the set value") {
+                        expect(String(describing: builder)).to(contain(String(describing: newValue!)))
+                    }
+                }
 
                 context("removeValue(for:)") {
                     beforeEach {
