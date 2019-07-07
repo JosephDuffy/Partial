@@ -6,14 +6,9 @@ public class Subscription: Hashable {
         return lhs.uuid == rhs.uuid
     }
 
-    typealias CancelAction = (Subscription) -> Void
-
     private let uuid = UUID()
-    private let cancelAction: CancelAction
 
-    init(cancelAction: @escaping CancelAction) {
-        self.cancelAction = cancelAction
-    }
+    init() {}
 
     deinit {
         cancel()
@@ -21,7 +16,7 @@ public class Subscription: Hashable {
 
     /// Cancels the subscription, causing the update subscriber to be removed
     public func cancel() {
-        cancelAction(self)
+        preconditionFailure("\(#function) must be overriden")
     }
 
     public func hash(into hasher: inout Hasher) {

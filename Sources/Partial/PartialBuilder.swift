@@ -161,28 +161,33 @@ extension PartialBuilder {
 
     private final class AllChangesSubscription: Subscription {
 
+        typealias CancelAction = (AllChangesSubscription) -> Void
+
         fileprivate let updateListener: AllChangesUpdateListener
-        private let uuid = UUID()
+        private let cancelAction: CancelAction
 
-        init(updateListener: @escaping AllChangesUpdateListener, cancelAction: @escaping (AllChangesSubscription) -> Void) {
+        init(updateListener: @escaping AllChangesUpdateListener, cancelAction: @escaping CancelAction) {
             self.updateListener = updateListener
+            self.cancelAction = cancelAction
 
-            super.init(cancelAction: { subscription in
-                guard let subscription = subscription as? AllChangesSubscription else {
-                    preconditionFailure()
-                }
-                cancelAction(subscription)
-            })
+            super.init()
+        }
+
+        override func cancel() {
+            cancelAction(self)
         }
 
     }
 
     private final class KeyPathChangesSubscription: Subscription {
 
+        typealias CancelAction = (KeyPathChangesSubscription) -> Void
+
         private let _notifyOfValue: (_ oldValue: Any?, _ newValue: Any?) -> Void
         private let _notifyOfRemovable: (_ oldValue: Any?) -> Void
+        private let cancelAction: CancelAction
 
-        init<Value>(keyPath: KeyPath<Wrapped, Value>, updateListener: @escaping KeyPathUpdateListener<Value>, cancelAction: @escaping (KeyPathChangesSubscription) -> Void) {
+        init<Value>(keyPath: KeyPath<Wrapped, Value>, updateListener: @escaping KeyPathUpdateListener<Value>, cancelAction: @escaping CancelAction) {
             self._notifyOfValue = { oldValue, newValue in
                 guard let oldValue = oldValue as? Value? else {
                     assertionFailure("Update listener should only be called with value of type \(Value?.self)")
@@ -203,13 +208,9 @@ extension PartialBuilder {
                 let update = KeyPathUpdate<Value>(kind: .valueRemoved, keyPath: keyPath, oldValue: oldValue)
                 updateListener(update)
             }
+            self.cancelAction = cancelAction
 
-            super.init(cancelAction: { subscription in
-                guard let subscription = subscription as? KeyPathChangesSubscription else {
-                    preconditionFailure()
-                }
-                cancelAction(subscription)
-            })
+            super.init()
         }
 
         func notifyOfUpdate<Value>(from oldValue: Value?, to newValue: Value) {
@@ -218,6 +219,10 @@ extension PartialBuilder {
 
         func notifyOfRemovable(oldValue: Any?) {
             _notifyOfRemovable(oldValue)
+        }
+
+        override func cancel() {
+            cancelAction(self)
         }
 
     }
