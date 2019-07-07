@@ -71,10 +71,10 @@
 		D9F58EE322CA730B00931D29 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F58EE022CA730B00931D29 /* Weak.swift */; };
 		D9F58EE422CA730B00931D29 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F58EE022CA730B00931D29 /* Weak.swift */; };
 		D9F58EE522CA730B00931D29 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F58EE022CA730B00931D29 /* Weak.swift */; };
-		D9F58EE622CA730B00931D29 /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F58EE122CA730B00931D29 /* Cancellable.swift */; };
-		D9F58EE722CA730B00931D29 /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F58EE122CA730B00931D29 /* Cancellable.swift */; };
-		D9F58EE822CA730B00931D29 /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F58EE122CA730B00931D29 /* Cancellable.swift */; };
-		D9F58EE922CA730B00931D29 /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F58EE122CA730B00931D29 /* Cancellable.swift */; };
+		D9F58EE622CA730B00931D29 /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F58EE122CA730B00931D29 /* Subscription.swift */; };
+		D9F58EE722CA730B00931D29 /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F58EE122CA730B00931D29 /* Subscription.swift */; };
+		D9F58EE822CA730B00931D29 /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F58EE122CA730B00931D29 /* Subscription.swift */; };
+		D9F58EE922CA730B00931D29 /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F58EE122CA730B00931D29 /* Subscription.swift */; };
 		D9FFA6292235A223005D9A4D /* Partial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9FFA6202235A223005D9A4D /* Partial.framework */; };
 		D9FFA6382235A407005D9A4D /* Partial.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91505C9221E04EB00EB5215 /* Partial.swift */; };
 		D9FFA63A2235A407005D9A4D /* PartialBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91505CD221E052600EB5215 /* PartialBuilder.swift */; };
@@ -139,7 +139,7 @@
 		D9E601CE2233E99D00B36B1E /* PartialTests-macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PartialTests-macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9F58ED822CA72F400931D29 /* PartialBuilderSubscriptionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartialBuilderSubscriptionTests.swift; sourceTree = "<group>"; };
 		D9F58EE022CA730B00931D29 /* Weak.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
-		D9F58EE122CA730B00931D29 /* Cancellable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cancellable.swift; sourceTree = "<group>"; };
+		D9F58EE122CA730B00931D29 /* Subscription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subscription.swift; sourceTree = "<group>"; };
 		D9FFA6202235A223005D9A4D /* Partial.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Partial.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9FFA6282235A223005D9A4D /* PartialTests-tvOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PartialTests-tvOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -251,7 +251,7 @@
 			children = (
 				D91505C9221E04EB00EB5215 /* Partial.swift */,
 				D91505CD221E052600EB5215 /* PartialBuilder.swift */,
-				D9F58EE122CA730B00931D29 /* Cancellable.swift */,
+				D9F58EE122CA730B00931D29 /* Subscription.swift */,
 				D9F58EE022CA730B00931D29 /* Weak.swift */,
 				D9A27B6C228CBDC5001530A1 /* PartialConvertible.swift */,
 				D9A27B71228CBE40001530A1 /* Partial+description.swift */,
@@ -585,7 +585,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D9F58EE622CA730B00931D29 /* Cancellable.swift in Sources */,
+				D9F58EE622CA730B00931D29 /* Subscription.swift in Sources */,
 				D992471222BFE54F00A2B079 /* PartialProtocol+deprecations.swift in Sources */,
 				D9A27B72228CBE40001530A1 /* Partial+description.swift in Sources */,
 				D91505CA221E04EB00EB5215 /* Partial.swift in Sources */,
@@ -619,7 +619,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D9F58EE822CA730B00931D29 /* Cancellable.swift in Sources */,
+				D9F58EE822CA730B00931D29 /* Subscription.swift in Sources */,
 				D9FFA6382235A407005D9A4D /* Partial.swift in Sources */,
 				D9A27B6F228CBDD3001530A1 /* PartialConvertible.swift in Sources */,
 				D9FFA63A2235A407005D9A4D /* PartialBuilder.swift in Sources */,
@@ -634,7 +634,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D9F58EE722CA730B00931D29 /* Cancellable.swift in Sources */,
+				D9F58EE722CA730B00931D29 /* Subscription.swift in Sources */,
 				D9E601DE2233EBED00B36B1E /* Partial.swift in Sources */,
 				D9A27B6E228CBDD2001530A1 /* PartialConvertible.swift in Sources */,
 				D9E601E02233EBED00B36B1E /* PartialBuilder.swift in Sources */,
@@ -667,7 +667,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D9F58EE922CA730B00931D29 /* Cancellable.swift in Sources */,
+				D9F58EE922CA730B00931D29 /* Subscription.swift in Sources */,
 				D9FFA63B2235A408005D9A4D /* Partial.swift in Sources */,
 				D9A27B70228CBDD4001530A1 /* PartialConvertible.swift in Sources */,
 				D9FFA63D2235A408005D9A4D /* PartialBuilder.swift in Sources */,

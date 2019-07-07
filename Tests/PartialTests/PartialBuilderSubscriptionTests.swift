@@ -17,10 +17,6 @@ final class PartialBuilderSubscriptionTests: QuickSpec {
             struct PartialConvertibleType: Equatable, ExpressibleByStringLiteral, PartialConvertible {
                 let string: String
 
-                init(string: String) {
-                    self.string = string
-                }
-
                 init(stringLiteral string: String) {
                     self.string = string
                 }
@@ -38,17 +34,17 @@ final class PartialBuilderSubscriptionTests: QuickSpec {
 
             context("subscribeToAllChanges(updateListener:)") {
                 var lastUpdate: (keyPath: PartialKeyPath<Wrapped>, builder: PartialBuilder<Wrapped>)?
-                var cancellable: Cancellable?
+                var subscription: Subscription?
 
                 beforeEach {
-                    cancellable = builder.subscribeToAllChanges(updateListener: { keyPath, builder in
+                    subscription = builder.subscribeToAllChanges(updateListener: { keyPath, builder in
                         lastUpdate = (keyPath, builder)
                     })
                 }
 
                 afterEach {
-                    cancellable?.cancel()
-                    cancellable = nil
+                    subscription?.cancel()
+                    subscription = nil
                     lastUpdate = nil
                 }
 
@@ -57,11 +53,13 @@ final class PartialBuilderSubscriptionTests: QuickSpec {
                 }
 
                 context("when a non-optional key path is set") {
+                    var newValue: String!
                     var setKeyPath: KeyPath<Wrapped, String>!
 
                     beforeEach {
                         setKeyPath = \.string
-                        builder.setValue("new value", for: setKeyPath)
+                        newValue = "new value"
+                        builder.setValue(newValue, for: setKeyPath)
                     }
 
                     it("should call the subscriber with the set key path") {
@@ -165,9 +163,9 @@ final class PartialBuilderSubscriptionTests: QuickSpec {
                     }
                 }
 
-                context("after the cancellable has been deallocated") {
+                context("after the subscription has been deallocated") {
                     beforeEach {
-                        cancellable = nil
+                        subscription = nil
                     }
 
                     context("when a key path is set") {
@@ -184,18 +182,18 @@ final class PartialBuilderSubscriptionTests: QuickSpec {
 
             context("subscribeForChanges(to:updateListener:) for a non-optional property") {
                 let subscribedKeyPath = \Wrapped.string
-                var lastUpdate: (keyPath: KeyPath<Wrapped, String>, update: PartialBuilder<Wrapped>.PropertyUpdate<String>)?
-                var cancellable: Cancellable?
+                var lastUpdate: PartialBuilder<Wrapped>.KeyPathUpdate<String>?
+                var subscription: Subscription?
 
                 beforeEach {
-                    cancellable = builder.subscribeForChanges(to: subscribedKeyPath, updateListener: { keyPath, update in
-                        lastUpdate = (keyPath, update)
+                    subscription = builder.subscribeForChanges(to: subscribedKeyPath, updateListener: { update in
+                        lastUpdate = update
                     })
                 }
 
                 afterEach {
-                    cancellable?.cancel()
-                    cancellable = nil
+                    subscription?.cancel()
+                    subscription = nil
                     lastUpdate = nil
                 }
 
@@ -203,34 +201,104 @@ final class PartialBuilderSubscriptionTests: QuickSpec {
                     expect(lastUpdate).to(beNil())
                 }
 
-                context("when subscribed key path is set") {
-                    var valueSet: String!
+                context("when subscribed key path does not have a value") {
+                    context("setting a value for the subscribed key path") {
+                        var newValue: String!
 
-                    beforeEach {
-                        valueSet = "set value"
-                        builder.setValue(valueSet, for: subscribedKeyPath)
+                        beforeEach {
+                            newValue = "new value"
+                            builder.setValue(newValue, for: subscribedKeyPath)
+                        }
+
+                        it("should call the subscriber with a `valueSet` update containing the new value") {
+                            expect(lastUpdate?.kind) == .valueSet(newValue)
+                        }
+
+                        it("should call the subscriber with the subscribed key path") {
+                            expect(lastUpdate?.keyPath) == subscribedKeyPath
+                        }
+
+                        it("should call the subscriber with the new value") {
+                            expect(lastUpdate?.newValue) == newValue
+                        }
+
+                        it("should call the subscriber with an old value of `nil`") {
+                            expect(lastUpdate?.oldValue).to(beNil())
+                        }
                     }
 
-                    it("should call the subscriber with a `valueSet` update containing the new value") {
-                        expect(lastUpdate?.update) == .valueSet(valueSet)
-                    }
+                    context("removing the value for the subscribed key path") {
+                        beforeEach {
+                            builder.removeValue(for: subscribedKeyPath)
+                        }
 
-                    it("should call the subscriber with the subscribed key path") {
-                        expect(lastUpdate?.keyPath) == subscribedKeyPath
+                        it("should call the subscriber with a `valueRemoved` update") {
+                            expect(lastUpdate?.kind) == .valueRemoved
+                        }
+
+                        it("should call the subscriber with the subscribed key path") {
+                            expect(lastUpdate?.keyPath) == subscribedKeyPath
+                        }
+
+                        it("should call the subscriber with a new value of `nil`") {
+                            expect(lastUpdate?.newValue).to(beNil())
+                        }
+
+                        it("should call the subscriber with an old value of `nil`") {
+                            expect(lastUpdate?.oldValue).to(beNil())
+                        }
                     }
                 }
 
-                context("when subscribed key path is removed") {
-                    beforeEach {
-                        builder.removeValue(for: subscribedKeyPath)
+                context("when subscribed key path has a value") {
+                    context("setting a value for the subscribed key path") {
+                        var firstValue: String!
+                        var secondValue: String!
+
+                        beforeEach {
+                            firstValue = "first value"
+                            secondValue = "second value"
+                            builder.setValue(firstValue, for: subscribedKeyPath)
+                            builder.setValue(secondValue, for: subscribedKeyPath)
+                        }
+
+                        it("should call the subscriber with a `valueSet` update containing the new value") {
+                            expect(lastUpdate?.kind) == .valueSet(secondValue)
+                        }
+
+                        it("should call the subscriber with the subscribed key path") {
+                            expect(lastUpdate?.keyPath) == subscribedKeyPath
+                        }
+
+                        it("should call the subscriber with the new value") {
+                            expect(lastUpdate?.newValue) == secondValue
+                        }
+
+                        it("should call the subscriber with the old value") {
+                            expect(lastUpdate?.oldValue) == firstValue
+                        }
                     }
 
-                    it("should call the subscriber with a `valueRemoved` update") {
-                        expect(lastUpdate?.update) == .valueRemoved
-                    }
+                    context("removing the value for the subscribed key path") {
+                        beforeEach {
+                            builder.removeValue(for: subscribedKeyPath)
+                        }
 
-                    it("should call the subscriber with the subscribed key path") {
-                        expect(lastUpdate?.keyPath) == subscribedKeyPath
+                        it("should call the subscriber with a `valueRemoved` update") {
+                            expect(lastUpdate?.kind) == .valueRemoved
+                        }
+
+                        it("should call the subscriber with the subscribed key path") {
+                            expect(lastUpdate?.keyPath) == subscribedKeyPath
+                        }
+
+                        it("should call the subscriber with a new value of `nil`") {
+                            expect(lastUpdate?.newValue).to(beNil())
+                        }
+
+                        it("should call the subscriber with an old value of `nil`") {
+                            expect(lastUpdate?.oldValue).to(beNil())
+                        }
                     }
                 }
 
@@ -246,7 +314,7 @@ final class PartialBuilderSubscriptionTests: QuickSpec {
 
                 context("after being cancelled") {
                     beforeEach {
-                        cancellable?.cancel()
+                        subscription?.cancel()
                     }
 
                     context("when subscribed key path is set") {
@@ -260,9 +328,9 @@ final class PartialBuilderSubscriptionTests: QuickSpec {
                     }
                 }
 
-                context("after the cancellable has been deallocated") {
+                context("after the subscription has been deallocated") {
                     beforeEach {
-                        cancellable = nil
+                        subscription = nil
                     }
 
                     context("when subscribed key path is set") {
@@ -279,18 +347,18 @@ final class PartialBuilderSubscriptionTests: QuickSpec {
 
             context("subscribeForChanges(to:updateListener:) for an optional property") {
                 let subscribedKeyPath = \Wrapped.optionalString
-                var lastUpdate: (keyPath: KeyPath<Wrapped, String?>, update: PartialBuilder<Wrapped>.PropertyUpdate<String?>)?
-                var cancellable: Cancellable?
+                var lastUpdate: PartialBuilder<Wrapped>.KeyPathUpdate<String?>?
+                var subscription: Subscription?
 
                 beforeEach {
-                    cancellable = builder.subscribeForChanges(to: subscribedKeyPath, updateListener: { keyPath, update in
-                        lastUpdate = (keyPath, update)
+                    subscription = builder.subscribeForChanges(to: subscribedKeyPath, updateListener: { update in
+                        lastUpdate = update
                     })
                 }
 
                 afterEach {
-                    cancellable?.cancel()
-                    cancellable = nil
+                    subscription?.cancel()
+                    subscription = nil
                     lastUpdate = nil
                 }
 
@@ -298,48 +366,227 @@ final class PartialBuilderSubscriptionTests: QuickSpec {
                     expect(lastUpdate).to(beNil())
                 }
 
-                context("when subscribed key path is set to a non-optional value") {
-                    var valueSet: String!
+                context("when subscribed key path does not have a value") {
+                    context("setting the subscribed key path to a non-optional value") {
+                        var newValue: String!
 
-                    beforeEach {
-                        valueSet = "set value"
-                        builder.setValue(valueSet, for: subscribedKeyPath)
+                        beforeEach {
+                            newValue = "new value"
+                            builder.setValue(newValue, for: subscribedKeyPath)
+                        }
+
+                        it("should call the subscriber with a `valueSet` update containing the new value") {
+                            expect(lastUpdate?.kind) == .valueSet(newValue)
+                        }
+
+                        it("should call the subscriber with the subscribed key path") {
+                            expect(lastUpdate?.keyPath) == subscribedKeyPath
+                        }
+
+                        it("should call the subscriber with the new value") {
+                            expect(lastUpdate?.newValue).to(equal(newValue))
+                        }
+
+                        it("should call the subscriber with an old value of `nil`") {
+                            expect(lastUpdate?.oldValue).to(beNil())
+                        }
                     }
 
-                    it("should call the subscriber with a `valueSet` update containing the new value") {
-                        expect(lastUpdate?.update) == .valueSet(valueSet)
+                    context("setting the subscribed key path to nil") {
+                        beforeEach {
+                            builder.setValue(nil, for: subscribedKeyPath)
+                        }
+
+                        it("should call the subscriber with a `valueSet` update containing nil") {
+                            expect(lastUpdate?.kind) == .valueSet(nil)
+                        }
+
+                        it("should call the subscriber with the subscribed key path") {
+                            expect(lastUpdate?.keyPath) == subscribedKeyPath
+                        }
+
+                        it("should call the subscriber with a new value of `nil` wrapped in an optional") {
+                            expect(lastUpdate?.newValue).to(beNilWrappedInOptional())
+                        }
+
+                        it("should call the subscriber with an old value of `nil`") {
+                            expect(lastUpdate?.oldValue).to(beNil())
+                        }
                     }
 
-                    it("should call the subscriber with the subscribed key path") {
-                        expect(lastUpdate?.keyPath) == subscribedKeyPath
+                    context("removing the subscribed key path") {
+                        beforeEach {
+                            builder.removeValue(for: subscribedKeyPath)
+                        }
+
+                        it("should call the subscriber with a `valueRemoved` update") {
+                            expect(lastUpdate?.kind) == .valueRemoved
+                        }
+
+                        it("should call the subscriber with the subscribed key path") {
+                            expect(lastUpdate?.keyPath) == subscribedKeyPath
+                        }
+
+                        it("should call the subscriber with a new value of `nil`") {
+                            expect(lastUpdate?.newValue).to(beNil())
+                        }
+
+                        it("should call the subscriber with an old value of `nil`") {
+                            expect(lastUpdate?.oldValue).to(beNil())
+                        }
                     }
                 }
 
-                context("when subscribed key path is set to nil") {
+                context("when subscribed key path has a value of `nil`") {
                     beforeEach {
                         builder.setValue(nil, for: subscribedKeyPath)
                     }
 
-                    it("should call the subscriber with a `valueSet` update containing nil") {
-                        expect(lastUpdate?.update) == .valueSet(nil)
+                    context("setting the subscribed key path to a non-optional value") {
+                        var newValue: String!
+
+                        beforeEach {
+                            newValue = "new value"
+                            builder.setValue(newValue, for: subscribedKeyPath)
+                        }
+
+                        it("should call the subscriber with a `valueSet` update containing the new value") {
+                            expect(lastUpdate?.kind) == .valueSet(newValue)
+                        }
+
+                        it("should call the subscriber with the subscribed key path") {
+                            expect(lastUpdate?.keyPath) == subscribedKeyPath
+                        }
+
+                        it("should call the subscriber with the new value") {
+                            expect(lastUpdate?.newValue).to(equal(newValue))
+                        }
+
+                        it("should call the subscriber with an old value of `nil` wrapped in an Optional") {
+                            expect(lastUpdate?.oldValue).to(beNilWrappedInOptional())
+                        }
                     }
 
-                    it("should call the subscriber with the subscribed key path") {
-                        expect(lastUpdate?.keyPath) == subscribedKeyPath
+                    context("setting the subscribed key path to nil") {
+                        beforeEach {
+                            builder.setValue(nil, for: subscribedKeyPath)
+                        }
+
+                        it("should call the subscriber with a `valueSet` update containing nil") {
+                            expect(lastUpdate?.kind) == .valueSet(nil)
+                        }
+
+                        it("should call the subscriber with the subscribed key path") {
+                            expect(lastUpdate?.keyPath) == subscribedKeyPath
+                        }
+
+                        it("should call the subscriber with a new value of `nil` wrapped in an optional") {
+                            expect(lastUpdate?.newValue).to(beNilWrappedInOptional())
+                        }
+
+                        it("should call the subscriber with an old value of `nil` wrapped in an Optional") {
+                            expect(lastUpdate?.oldValue).to(beNilWrappedInOptional())
+                        }
+                    }
+
+                    context("removing the subscribed key path") {
+                        beforeEach {
+                            builder.removeValue(for: subscribedKeyPath)
+                        }
+
+                        it("should call the subscriber with a `valueRemoved` update") {
+                            expect(lastUpdate?.kind) == .valueRemoved
+                        }
+
+                        it("should call the subscriber with the subscribed key path") {
+                            expect(lastUpdate?.keyPath) == subscribedKeyPath
+                        }
+
+                        it("should call the subscriber with a new value of `nil`") {
+                            expect(lastUpdate?.newValue).to(beNil())
+                        }
+
+                        it("should call the subscriber with an old value of `nil` wrapped in an Optional") {
+                            expect(lastUpdate?.oldValue).to(beNilWrappedInOptional())
+                        }
                     }
                 }
 
-                context("when subscribed key path is removed") {
+                context("when subscribed key path has a non-nil value") {
+                    var previousValue: String!
+
                     beforeEach {
-                        builder.removeValue(for: subscribedKeyPath)
+                        previousValue = "first value"
+                        builder.setValue(previousValue, for: subscribedKeyPath)
                     }
 
-                    it("should call the subscriber with a `valueRemoved` update") {
-                        expect(lastUpdate?.update) == .valueRemoved
+                    context("setting the subscribed key path to a non-optional value") {
+                        var newValue: String!
+
+                        beforeEach {
+                            newValue = "new value"
+                            builder.setValue(newValue, for: subscribedKeyPath)
+                        }
+
+                        it("should call the subscriber with a `valueSet` update containing the new value") {
+                            expect(lastUpdate?.kind) == .valueSet(newValue)
+                        }
+
+                        it("should call the subscriber with the subscribed key path") {
+                            expect(lastUpdate?.keyPath) == subscribedKeyPath
+                        }
+
+                        it("should call the subscriber with the new value") {
+                            expect(lastUpdate?.newValue) == newValue
+                        }
+
+                        it("should call the subscriber with the old value") {
+                            expect(lastUpdate?.oldValue) == previousValue
+                        }
                     }
 
-                    it("should call the subscriber with the subscribed key path") {
-                        expect(lastUpdate?.keyPath) == subscribedKeyPath
+                    context("setting the subscribed key path to nil") {
+                        beforeEach {
+                            builder.setValue(nil, for: subscribedKeyPath)
+                        }
+
+                        it("should call the subscriber with a `valueSet` update containing nil") {
+                            expect(lastUpdate?.kind) == .valueSet(nil)
+                        }
+
+                        it("should call the subscriber with the subscribed key path") {
+                            expect(lastUpdate?.keyPath) == subscribedKeyPath
+                        }
+
+                        it("should call the subscriber with a new value of `nil` wrapped in an optional") {
+                            expect(lastUpdate?.newValue).to(beNilWrappedInOptional())
+                        }
+
+                        it("should call the subscriber with the old value") {
+                            expect(lastUpdate?.oldValue) == previousValue
+                        }
+                    }
+
+                    context("removing the subscribed key path") {
+                        beforeEach {
+                            builder.removeValue(for: subscribedKeyPath)
+                        }
+
+                        it("should call the subscriber with a `valueRemoved` update") {
+                            expect(lastUpdate?.kind) == .valueRemoved
+                        }
+
+                        it("should call the subscriber with the subscribed key path") {
+                            expect(lastUpdate?.keyPath) == subscribedKeyPath
+                        }
+
+                        it("should call the subscriber with a new value of `nil`") {
+                            expect(lastUpdate?.newValue).to(beNil())
+                        }
+
+                        it("should call the subscriber with the old value") {
+                            expect(lastUpdate?.oldValue) == previousValue
+                        }
                     }
                 }
 
@@ -355,7 +602,7 @@ final class PartialBuilderSubscriptionTests: QuickSpec {
 
                 context("after being cancelled") {
                     beforeEach {
-                        cancellable?.cancel()
+                        subscription?.cancel()
                     }
 
                     context("when subscribed key path is set") {
@@ -369,9 +616,9 @@ final class PartialBuilderSubscriptionTests: QuickSpec {
                     }
                 }
 
-                context("after the cancellable has been deallocated") {
+                context("after the subscription has been deallocated") {
                     beforeEach {
-                        cancellable = nil
+                        subscription = nil
                     }
 
                     context("when subscribed key path is set") {
@@ -388,23 +635,203 @@ final class PartialBuilderSubscriptionTests: QuickSpec {
 
             context("subscribeForChanges(to:updateListener:) for a non-optional PartialConvertible property") {
                 let subscribedKeyPath = \Wrapped.partialConvertible
-                var lastUpdate: (keyPath: KeyPath<Wrapped, PartialConvertibleType>, update: PartialBuilder<Wrapped>.PropertyUpdate<PartialConvertibleType>)?
-                var cancellable: Cancellable?
+                var lastUpdate: PartialBuilder<Wrapped>.KeyPathUpdate<PartialConvertibleType>?
+                var subscription: Subscription?
 
                 beforeEach {
-                    cancellable = builder.subscribeForChanges(to: subscribedKeyPath, updateListener: { keyPath, update in
-                        lastUpdate = (keyPath, update)
+                    subscription = builder.subscribeForChanges(to: subscribedKeyPath, updateListener: { update in
+                        lastUpdate = update
                     })
                 }
 
                 afterEach {
-                    cancellable?.cancel()
-                    cancellable = nil
+                    subscription?.cancel()
+                    subscription = nil
                     lastUpdate = nil
                 }
 
                 it("should not call the subscriber") {
                     expect(lastUpdate).to(beNil())
+                }
+
+                context("when subscribed key path does not have a value") {
+                    context("setting a value for the subscribed key path") {
+                        var newValue: PartialConvertibleType!
+
+                        beforeEach {
+                            newValue = "new value"
+                            builder.setValue(newValue, for: subscribedKeyPath)
+                        }
+
+                        it("should call the subscriber with a `valueSet` update containing the new value") {
+                            expect(lastUpdate?.kind) == .valueSet(newValue)
+                        }
+
+                        it("should call the subscriber with the subscribed key path") {
+                            expect(lastUpdate?.keyPath) == subscribedKeyPath
+                        }
+
+                        it("should call the subscriber with the new value") {
+                            expect(lastUpdate?.newValue) == newValue
+                        }
+
+                        it("should call the subscriber with an old value of `nil`") {
+                            expect(lastUpdate?.oldValue).to(beNil())
+                        }
+                    }
+
+                    context("setting subscribed key path to an incomplete partial") {
+                        beforeEach {
+                            try? builder.setValue(Partial<PartialConvertibleType>(), for: subscribedKeyPath)
+                        }
+
+                        it("should not call update listener") {
+                            expect(lastUpdate).to(beNil())
+                        }
+                    }
+
+                    context("setting subscribed key path to a complete partial") {
+                        var unwrappedValueSet: PartialConvertibleType!
+
+                        beforeEach {
+                            var partial = Partial<PartialConvertibleType>()
+                            partial[\.string] = "new value"
+                            unwrappedValueSet = "new value"
+                            try? builder.setValue(partial, for: subscribedKeyPath)
+                        }
+
+                        it("should call the subscriber with a `valueSet` update containing the unwrapped value") {
+                            expect(lastUpdate?.kind) == .valueSet(unwrappedValueSet)
+                        }
+
+                        it("should call the subscriber with the subscribed key path") {
+                            expect(lastUpdate?.keyPath) == subscribedKeyPath
+                        }
+
+                        it("should call the subscriber with the new value") {
+                            expect(lastUpdate?.newValue) == unwrappedValueSet
+                        }
+
+                        it("should call the subscriber with an old value of `nil`") {
+                            expect(lastUpdate?.oldValue).to(beNil())
+                        }
+                    }
+
+                    context("removing the value for the subscribed key path") {
+                        beforeEach {
+                            builder.removeValue(for: subscribedKeyPath)
+                        }
+
+                        it("should call the subscriber with a `valueRemoved` update") {
+                            expect(lastUpdate?.kind) == .valueRemoved
+                        }
+
+                        it("should call the subscriber with the subscribed key path") {
+                            expect(lastUpdate?.keyPath) == subscribedKeyPath
+                        }
+
+                        it("should call the subscriber with a new value of `nil`") {
+                            expect(lastUpdate?.newValue).to(beNil())
+                        }
+
+                        it("should call the subscriber with an old value of `nil`") {
+                            expect(lastUpdate?.oldValue).to(beNil())
+                        }
+                    }
+                }
+
+                context("when subscribed key path has a value") {
+                    var firstValue: PartialConvertibleType!
+
+                    beforeEach {
+                        firstValue = "first value"
+                        builder.setValue(firstValue, for: subscribedKeyPath)
+                        lastUpdate = nil
+                    }
+
+                    context("setting a value for the subscribed key path") {
+                        var secondValue: PartialConvertibleType!
+
+                        beforeEach {
+                            secondValue = "second value"
+                            builder.setValue(secondValue, for: subscribedKeyPath)
+                        }
+
+                        it("should call the subscriber with a `valueSet` update containing the new value") {
+                            expect(lastUpdate?.kind) == .valueSet(secondValue)
+                        }
+
+                        it("should call the subscriber with the subscribed key path") {
+                            expect(lastUpdate?.keyPath) == subscribedKeyPath
+                        }
+
+                        it("should call the subscriber with the new value") {
+                            expect(lastUpdate?.newValue) == secondValue
+                        }
+
+                        it("should call the subscriber with the old value") {
+                            expect(lastUpdate?.oldValue) == firstValue
+                        }
+                    }
+
+                    context("setting subscribed key path to an incomplete partial") {
+                        beforeEach {
+                            try? builder.setValue(Partial<PartialConvertibleType>(), for: subscribedKeyPath)
+                        }
+
+                        it("should not call update listener") {
+                            expect(lastUpdate).to(beNil())
+                        }
+                    }
+
+                    context("setting subscribed key path to a complete partial") {
+                        var unwrappedValueSet: PartialConvertibleType!
+
+                        beforeEach {
+                            var partial = Partial<PartialConvertibleType>()
+                            partial[\.string] = "new value"
+                            unwrappedValueSet = "new value"
+                            try? builder.setValue(partial, for: subscribedKeyPath)
+                        }
+
+                        it("should call the subscriber with a `valueSet` update containing the unwrapped value") {
+                            expect(lastUpdate?.kind) == .valueSet(unwrappedValueSet)
+                        }
+
+                        it("should call the subscriber with the subscribed key path") {
+                            expect(lastUpdate?.keyPath) == subscribedKeyPath
+                        }
+
+                        it("should call the subscriber with the new value") {
+                            expect(lastUpdate?.newValue) == unwrappedValueSet
+                        }
+
+                        it("should call the subscriber with the old value") {
+                            expect(lastUpdate?.oldValue) == firstValue
+                        }
+                    }
+
+                    context("removing the value for the subscribed key path") {
+                        beforeEach {
+                            builder.removeValue(for: subscribedKeyPath)
+                        }
+
+                        it("should call the subscriber with a `valueRemoved` update") {
+                            expect(lastUpdate?.kind) == .valueRemoved
+                        }
+
+                        it("should call the subscriber with the subscribed key path") {
+                            expect(lastUpdate?.keyPath) == subscribedKeyPath
+                        }
+
+                        it("should call the subscriber with a new value of `nil`") {
+                            expect(lastUpdate?.newValue).to(beNil())
+                        }
+
+                        it("should call the subscriber with the old value") {
+                            expect(lastUpdate?.oldValue) == firstValue
+                        }
+                    }
                 }
 
                 context("when subscribed key path is set") {
@@ -416,7 +843,7 @@ final class PartialBuilderSubscriptionTests: QuickSpec {
                     }
 
                     it("should call the subscriber with a `valueSet` update containing the new value") {
-                        expect(lastUpdate?.update) == .valueSet(valueSet)
+                        expect(lastUpdate?.kind) == .valueSet(valueSet)
                     }
 
                     it("should call the subscriber with the subscribed key path") {
@@ -430,7 +857,7 @@ final class PartialBuilderSubscriptionTests: QuickSpec {
                     }
 
                     it("should call the subscriber with a `valueRemoved` update") {
-                        expect(lastUpdate?.update) == .valueRemoved
+                        expect(lastUpdate?.kind) == .valueRemoved
                     }
 
                     it("should call the subscriber with the subscribed key path") {
@@ -459,7 +886,7 @@ final class PartialBuilderSubscriptionTests: QuickSpec {
                     }
 
                     it("should call the subscriber with a `valueSet` update containing the unwrapped value") {
-                        expect(lastUpdate?.update) == .valueSet(unwrappedValueSet)
+                        expect(lastUpdate?.kind) == .valueSet(unwrappedValueSet)
                     }
 
                     it("should call the subscriber with the subscribed key path") {
@@ -479,7 +906,7 @@ final class PartialBuilderSubscriptionTests: QuickSpec {
 
                 context("after being cancelled") {
                     beforeEach {
-                        cancellable?.cancel()
+                        subscription?.cancel()
                     }
 
                     context("when subscribed key path is set") {
@@ -493,9 +920,9 @@ final class PartialBuilderSubscriptionTests: QuickSpec {
                     }
                 }
 
-                context("after the cancellable has been deallocated") {
+                context("after the subscription has been deallocated") {
                     beforeEach {
-                        cancellable = nil
+                        subscription = nil
                     }
 
                     context("when subscribed key path is set") {
@@ -512,18 +939,18 @@ final class PartialBuilderSubscriptionTests: QuickSpec {
 
             context("subscribeForChanges(to:updateListener:) for an optional PartialConvertible property") {
                 let subscribedKeyPath = \Wrapped.optionalPartialConvertible
-                var lastUpdate: (keyPath: KeyPath<Wrapped, PartialConvertibleType?>, update: PartialBuilder<Wrapped>.PropertyUpdate<PartialConvertibleType?>)?
-                var cancellable: Cancellable?
+                var lastUpdate: PartialBuilder<Wrapped>.KeyPathUpdate<PartialConvertibleType?>?
+                var subscription: Subscription?
 
                 beforeEach {
-                    cancellable = builder.subscribeForChanges(to: subscribedKeyPath, updateListener: { keyPath, update in
-                        lastUpdate = (keyPath, update)
+                    subscription = builder.subscribeForChanges(to: subscribedKeyPath, updateListener: { update in
+                        lastUpdate = update
                     })
                 }
 
                 afterEach {
-                    cancellable?.cancel()
-                    cancellable = nil
+                    subscription?.cancel()
+                    subscription = nil
                     lastUpdate = nil
                 }
 
@@ -540,7 +967,7 @@ final class PartialBuilderSubscriptionTests: QuickSpec {
                     }
 
                     it("should call the subscriber with a `valueSet` update containing the new value") {
-                        expect(lastUpdate?.update) == .valueSet(valueSet)
+                        expect(lastUpdate?.kind) == .valueSet(valueSet)
                     }
 
                     it("should call the subscriber with the subscribed key path") {
@@ -554,7 +981,7 @@ final class PartialBuilderSubscriptionTests: QuickSpec {
                     }
 
                     it("should call the subscriber with a `valueSet` update containing nil") {
-                        expect(lastUpdate?.update) == .valueSet(nil)
+                        expect(lastUpdate?.kind) == .valueSet(nil)
                     }
 
                     it("should call the subscriber with the subscribed key path") {
@@ -568,7 +995,7 @@ final class PartialBuilderSubscriptionTests: QuickSpec {
                     }
 
                     it("should call the subscriber with a `valueRemoved` update") {
-                        expect(lastUpdate?.update) == .valueRemoved
+                        expect(lastUpdate?.kind) == .valueRemoved
                     }
 
                     it("should call the subscriber with the subscribed key path") {
@@ -597,7 +1024,7 @@ final class PartialBuilderSubscriptionTests: QuickSpec {
                     }
 
                     it("should call the subscriber with a `valueSet` update containing the unwrapped value") {
-                        expect(lastUpdate?.update) == .valueSet(unwrappedValueSet)
+                        expect(lastUpdate?.kind) == .valueSet(unwrappedValueSet)
                     }
 
                     it("should call the subscriber with the subscribed key path") {
@@ -617,7 +1044,7 @@ final class PartialBuilderSubscriptionTests: QuickSpec {
 
                 context("after being cancelled") {
                     beforeEach {
-                        cancellable?.cancel()
+                        subscription?.cancel()
                     }
 
                     context("when subscribed key path is set") {
@@ -631,9 +1058,9 @@ final class PartialBuilderSubscriptionTests: QuickSpec {
                     }
                 }
 
-                context("after the cancellable has been deallocated") {
+                context("after the subscription has been deallocated") {
                     beforeEach {
-                        cancellable = nil
+                        subscription = nil
                     }
 
                     context("when subscribed key path is set") {
