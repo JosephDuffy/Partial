@@ -12,4 +12,5 @@ QCKMain([
     PartialBuilderOptionalPropertyTests.self,
     PartialBuilderNonOptionalPartialConvertiblePropertyTests.self,
     PartialBuilderOptionalPartialConvertiblePropertyTests.self,
+    PartialOptionalPropertyTests.self,
 ])

@@ -25,18 +25,11 @@ public protocol PartialProtocol {
 
     /// Removes the stored value for the given key path.
     ///
-    /// - Parameter keyPath: The key path of the value to remove.
-    mutating func removeValue(for keyPath: PartialKeyPath<Wrapped>)
+    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
+    mutating func removeValue<Value>(for keyPath: KeyPath<Wrapped, Value>)
 }
 
 extension PartialProtocol {
-
-    /// Removes the stored value for the given key path.
-    ///
-    /// - Parameter keyPath: The key path of the value to remove.
-    public mutating func removeValue<Value>(for keyPath: KeyPath<Wrapped, Value>) {
-        self.removeValue(for: keyPath as PartialKeyPath<Wrapped>)
-    }
 
     /// Attempts to update the stored value for the given key path by unwrapping the
     /// provided partial value. If the unwrapping fails the error will be thrown.
@@ -44,6 +37,16 @@ extension PartialProtocol {
     /// - Parameter value: A partial wrapping a value of type `Value`.
     /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
     mutating func setValue<Value>(_ partial: Partial<Value>, for keyPath: KeyPath<Wrapped, Value>) throws where Value: PartialConvertible {
+        let value = try partial.unwrappedValue()
+        setValue(value, for: keyPath)
+    }
+
+    /// Attempts to update the stored value for the given key path by unwrapping the
+    /// provided partial value. If the unwrapping fails the error will be thrown.
+    ///
+    /// - Parameter value: A partial wrapping a value of type `Value?`.
+    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
+    mutating func setValue<Value>(_ partial: Partial<Value>, for keyPath: KeyPath<Wrapped, Value?>) throws where Value: PartialConvertible {
         let value = try partial.unwrappedValue()
         setValue(value, for: keyPath)
     }

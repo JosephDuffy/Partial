@@ -1,24 +1,63 @@
-/// A class that aids in the building of a partial value. 
-public final class PartialBuilder<Wrapped>: PartialProtocol {
+import Foundation
+
+/// A class that aids in the building of a partial value.
+open class PartialBuilder<Wrapped>: PartialProtocol {
+
+    /// An update to a key path
+    public struct KeyPathUpdate<Value> {
+
+        /// The kind of update that occured
+        public enum Kind {
+            /// The value was set to `value`
+            case valueSet(_ value: Value)
+
+            /// The value was removed
+            case valueRemoved
+        }
+
+        /// The kind of update that occured to `keyPath`
+        public let kind: Kind
+
+        /// The key path that the update occured on
+        public let keyPath: KeyPath<Wrapped, Value>
+
+        /// The value before this update
+        public let oldValue: Value?
+
+        /// The value after this update
+        public var newValue: Value? {
+            switch kind {
+            case .valueSet(let value):
+                return value
+            case .valueRemoved:
+                return nil
+            }
+        }
+
+        init(kind: Kind, keyPath: KeyPath<Wrapped, Value>, oldValue: Value?) {
+            self.kind = kind
+            self.keyPath = keyPath
+            self.oldValue = oldValue
+        }
+    }
 
     /// A closure that will be notified when any property is udpated
-    public typealias UpdateListener = (Partial<Wrapped>) -> Void
+    public typealias AllChangesUpdateListener = (_ keyPath: PartialKeyPath<Wrapped>, PartialBuilder<Wrapped>) -> Void
 
-    /// A closure that will be notified when a propertie's value is updated. The closure will
-    /// receive `nil` when the value has been removed
-    public typealias PropertyUpdateListener<Value> = (Value?) -> Void
+    /// A closure that will be notified when a key path is updated
+    public typealias KeyPathUpdateListener<Value> = (_ update: KeyPathUpdate<Value>) -> Void
 
     /// The partial value this builder is building
-    public private(set) var partial: Partial<Wrapped>
+    private var partial: Partial<Wrapped>
 
     /// A collection of objects wrapping closures that will be notified when any change occurs
-    private var updateListeners: [UpdateListenerWrapper] = []
+    private var allChangesSubscriptions: Set<Weak<AllChangesSubscription>> = []
 
     /// A collection of objects wrapping closures that will be notified when a change to a key path occurs
-    private var propertyUpdateListeners: [PartialKeyPath<Wrapped>: [PropertyUpdateListenerWrapper]] = [:]
+    private var keyPathSubscriptions: [PartialKeyPath<Wrapped>: Set<Weak<KeyPathChangesSubscription>>] = [:]
 
     /// Create an empty `PartialBuilder`.
-    public init() {
+    required public init() {
         partial = Partial<Wrapped>()
     }
 
@@ -29,57 +68,41 @@ public final class PartialBuilder<Wrapped>: PartialProtocol {
         self.partial = partial
     }
 
-    /// Add a closure that will be called when any key's value has been
-    /// updated. The closure will be called with the new partial.
+    /// Adds a closure that will be called when any key path has been updated. The closure will be called with the key
+    /// path that was updated and this `PartialBuilder`.
     ///
-    /// - Parameter updateListener: A closure that will be called when a property is updated.
-    /// - returns: An opaque object that represents the listener. It must be passed to `removeUpdateListener(_:)` to stop further updates.
-    public func addUpdateListener(updateListener: @escaping UpdateListener) -> AnyObject {
-        let wrapper = UpdateListenerWrapper(updateListener: updateListener)
-
-        updateListeners.append(wrapper)
-
-        return wrapper
+    /// - Parameter updateListener: A closure that will be called when any key path is updated.
+    /// - Returns: An object that represents the subscription.
+    public func subscribeToAllChanges(updateListener: @escaping AllChangesUpdateListener) -> Subscription {
+        let subscription = AllChangesSubscription(updateListener: updateListener) { [weak self] subscription in
+            self?.allChangesSubscriptions.remove(Weak(subscription))
+        }
+        allChangesSubscriptions.insert(Weak(subscription))
+        return subscription
     }
 
-    /// Add a closure that will be called when the provided key's value has been
-    /// updated. The closure will be called with the new value.
+    /// Adds a closure that will be called when the provided key path has been updated. The closure will be called with
+    /// the key value and an update that provides the change that occured.
     ///
     /// - Parameter keyPath: The key path to be notified of changes to
-    /// - Parameter updateListener: A closure that will be called when the value of the key path is updated
-    /// - Returns: An opaque object that represents the listener. It must be passed to `removeUpdateListener(_:)` to stop further updates
-    public func addUpdateListener<Value>(
-        for keyPath: KeyPath<Wrapped, Value>,
-        updateListener: @escaping PropertyUpdateListener<Value>
-    ) -> AnyObject {
-        let wrapper = PropertyUpdateListenerWrapper(updateListener: updateListener)
-
-        if var existingListeners = propertyUpdateListeners[keyPath] {
-            existingListeners += [wrapper]
-            propertyUpdateListeners[keyPath] = existingListeners
-        } else {
-            propertyUpdateListeners[keyPath] = [wrapper]
-        }
-
-        return wrapper
-    }
-
-    /// Remove the update listener associated with the opaque object
-    /// 
-    /// - Parameter updateListener: The opaque object returned by `addUpdateListener(for:updateListener:)`
-    ///                             or `addUpdateListener(for:)`
-    public func removeUpdateListener(_ updateListener: AnyObject) {
-        if let updateListener = updateListener as? UpdateListenerWrapper {
-            updateListeners.removeAll { $0 === updateListener }
-        } else if let updateListener = updateListener as? PropertyUpdateListenerWrapper {
-            for (key, wrappers) in propertyUpdateListeners {
-                let filteredWrappers = wrappers.filter { $0 !== updateListener }
-                if filteredWrappers.count != filteredWrappers.count {
-                    propertyUpdateListeners[key] = filteredWrappers
-                    return
-                }
+    /// - Parameter updateListener: A closure that will be called when the key path is updated
+    /// - Returns: An object that represents the subscription.
+    public func subscribeForChanges<Value>(
+        to keyPath: KeyPath<Wrapped, Value>,
+        updateListener: @escaping KeyPathUpdateListener<Value>
+    ) -> Subscription {
+        let subscription = KeyPathChangesSubscription(
+            keyPath: keyPath,
+            updateListener: updateListener,
+            cancelAction: { [weak self] subscription in
+                guard let self = self else { return }
+                self.keyPathSubscriptions[keyPath]?.remove(Weak(subscription))
             }
-        }
+        )
+
+        keyPathSubscriptions[keyPath, default: []].insert(Weak(subscription))
+
+        return subscription
     }
 
     /// Returns the value of the given key path, or throws an error if the value has not been set.
@@ -95,21 +118,28 @@ public final class PartialBuilder<Wrapped>: PartialProtocol {
     /// - Parameter value: The value to store against `keyPath`.
     /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
     public func setValue<Value>(_ value: Value, for keyPath: KeyPath<Wrapped, Value>) {
+        let oldValue = partial[keyPath]
         partial.setValue(value, for: keyPath)
-        notifyUpdateListeners(ofChangeTo: keyPath, newValue: value)
+        notifyUpdateListeners(ofChangeTo: keyPath, from: oldValue, to: value)
     }
 
     /// Removes the stored value for the given key path.
     ///
-    /// - Parameter keyPath: The key path of the value to remove.
-    public func removeValue(for keyPath: PartialKeyPath<Wrapped>) {
+    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
+    public func removeValue<Value>(for keyPath: KeyPath<Wrapped, Value>) {
+        let oldValue = partial[keyPath]
         partial.removeValue(for: keyPath)
-        notifyUpdateListeners(ofChangeTo: keyPath, newValue: nil)
+        notifyUpdateListenersOfRemoval(of: keyPath, oldValue: oldValue)
     }
 
-    private func notifyUpdateListeners(ofChangeTo keyPath: PartialKeyPath<Wrapped>, newValue: Any?) {
-        propertyUpdateListeners[keyPath]?.forEach { $0.updateListener(newValue) }
-        updateListeners.forEach { $0.updateListener(partial) }
+    private func notifyUpdateListeners<Value>(ofChangeTo keyPath: PartialKeyPath<Wrapped>, from oldValue: Value?, to newValue: Value) {
+        keyPathSubscriptions[keyPath]?.forEach { $0.wrapped?.notifyOfUpdate(from: oldValue, to: newValue) }
+        allChangesSubscriptions.forEach { $0.wrapped?.updateListener(keyPath, self) }
+    }
+
+    private func notifyUpdateListenersOfRemoval<Value>(of keyPath: KeyPath<Wrapped, Value>, oldValue: Value?) {
+        keyPathSubscriptions[keyPath]?.forEach { $0.wrapped?.notifyOfRemovable(oldValue: oldValue) }
+        allChangesSubscriptions.forEach { $0.wrapped?.updateListener(keyPath, self) }
     }
 
 }
@@ -129,27 +159,75 @@ extension PartialBuilder where Wrapped: PartialConvertible {
 
 extension PartialBuilder {
 
-    private final class UpdateListenerWrapper {
+    private final class AllChangesSubscription: Subscription {
 
-        fileprivate let updateListener: UpdateListener
+        typealias CancelAction = (AllChangesSubscription) -> Void
 
-        fileprivate init(updateListener: @escaping UpdateListener) {
+        fileprivate let updateListener: AllChangesUpdateListener
+        private let cancelAction: CancelAction
+
+        init(updateListener: @escaping AllChangesUpdateListener, cancelAction: @escaping CancelAction) {
             self.updateListener = updateListener
+            self.cancelAction = cancelAction
+
+            super.init()
+        }
+
+        override func cancel() {
+            cancelAction(self)
         }
 
     }
 
-    private final class PropertyUpdateListenerWrapper {
+    private final class KeyPathChangesSubscription: Subscription {
 
-        fileprivate let updateListener: PropertyUpdateListener<Any>
+        typealias CancelAction = (KeyPathChangesSubscription) -> Void
 
-        fileprivate init<Value>(updateListener: @escaping PropertyUpdateListener<Value>) {
-            self.updateListener = { newValue in
-                guard let newValue = newValue as? Value? else { return }
-                updateListener(newValue)
+        private let _notifyOfValue: (_ oldValue: Any?, _ newValue: Any?) -> Void
+        private let _notifyOfRemovable: (_ oldValue: Any?) -> Void
+        private let cancelAction: CancelAction
+
+        init<Value>(keyPath: KeyPath<Wrapped, Value>, updateListener: @escaping KeyPathUpdateListener<Value>, cancelAction: @escaping CancelAction) {
+            self._notifyOfValue = { oldValue, newValue in
+                guard let oldValue = oldValue as? Value? else {
+                    assertionFailure("Update listener should only be called with value of type \(Value?.self)")
+                    return
+                }
+                guard let newValue = newValue as? Value else {
+                    assertionFailure("Update listener should only be called with value of type \(Value.self)")
+                    return
+                }
+                let update = KeyPathUpdate<Value>(kind: .valueSet(newValue), keyPath: keyPath, oldValue: oldValue)
+                updateListener(update)
             }
+            self._notifyOfRemovable = { oldValue in
+                guard let oldValue = oldValue as? Value? else {
+                    assertionFailure("Update listener should only be called with value of type \(Value?.self)")
+                    return
+                }
+                let update = KeyPathUpdate<Value>(kind: .valueRemoved, keyPath: keyPath, oldValue: oldValue)
+                updateListener(update)
+            }
+            self.cancelAction = cancelAction
+
+            super.init()
+        }
+
+        func notifyOfUpdate<Value>(from oldValue: Value?, to newValue: Value) {
+            _notifyOfValue(oldValue, newValue)
+        }
+
+        func notifyOfRemovable(oldValue: Any?) {
+            _notifyOfRemovable(oldValue)
+        }
+
+        override func cancel() {
+            cancelAction(self)
         }
 
     }
 
 }
+
+extension PartialBuilder.KeyPathUpdate.Kind: Equatable where Value: Equatable {}
+extension PartialBuilder.KeyPathUpdate: Equatable where Value: Equatable {}

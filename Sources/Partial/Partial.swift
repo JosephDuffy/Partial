@@ -42,8 +42,8 @@ public struct Partial<Wrapped>: PartialProtocol {
 
     /// Removes the stored value for the given key path.
     ///
-    /// - Parameter keyPath: The key path of the value to remove.
-    public mutating func removeValue(for keyPath: PartialKeyPath<Wrapped>) {
+    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
+    public mutating func removeValue<Value>(for keyPath: KeyPath<Wrapped, Value>) {
         values.removeValue(forKey: keyPath)
     }
 
