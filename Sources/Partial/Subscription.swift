@@ -1,3 +1,5 @@
+import Foundation
+
 /// An object that represents a subscription to a `PartialBuilder`. When the object is deallocated the `cancel` function
 /// will be called automatically.
 public class Subscription: Hashable {
