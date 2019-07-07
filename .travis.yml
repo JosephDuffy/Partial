@@ -54,14 +54,10 @@ _base_envs:
 
 jobs:
   include:
-    - <<: *macos_env
+    - <<: *linux_env
       stage: "Test"
       name: "Danger"
       if: type = pull_request
-      addons:
-        homebrew:
-          packages:
-            - yarn
       install:
         - yarn install
         - swift build --skip-update --target CIDependencies
