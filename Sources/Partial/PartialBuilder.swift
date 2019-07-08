@@ -53,7 +53,7 @@ open class PartialBuilder<Wrapped>: PartialProtocol, CustomStringConvertible {
     }
 
     /// The partial value this builder is building
-    private var partial: Partial<Wrapped>
+    public private(set) var partial: Partial<Wrapped>
 
     /// A collection of objects wrapping closures that will be notified when any change occurs
     private var allChangesSubscriptions: Set<Weak<AllChangesSubscription>> = []
