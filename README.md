@@ -73,15 +73,15 @@ Partial has a `KeyPath`-based API so is fully type-safe. Reading and writing of 
 
 ```swift
 var partialSize = Partial<CGSize>()
-// Properties can be set via a function or subscript
-partialSize.set(value: 6016, for: \.width)
+// Key paths can be set via a function or subscript
+partialSize.setValue(6016, for: \.width)
 partialSize[\.height] = 3384
 // And unwrapped with a convenience function
-let size = try partialSize.unwrappedValue() // A CGSize with width 6016, height 3384
-// Properties can be retrieved via a function call
-partialSize.value(for: \.width) // Optional(6016)
-try partialSize.value(for: \.width) // 6016
-// Properties can be removed via a function for the subscript
+let size = try partialSize.unwrappedValue() // A `CGSize(width: 6016, height: 3384)`
+// Key paths can be retrieved via a throwing function or a subscript
+try partialSize.value(for: \.width) // `6016`
+partialSize[\.width] // `Optional<CGFloat>(6016)`
+// Key paths can be removed via a function or the subscript
 partialSize.removeValue(for: \.width)
 partialSize[\.width] = nil
 ```
@@ -96,45 +96,99 @@ partialSize[\.width] = nil
 var partialSize = Partial<CGSize>()
 partialSize.width = 6016
 partialSize.height = 3384
-let size = try! partialSize.unwrappedValue() // A CGSize with width 6016, height 3384
+let size = try! partialSize.unwrappedValue() // A `CGSize(width: 6016, height: 3384)`
+partialSize.width // `Optional<CGFloat>(6016)`
+partialSize.height = nil // Removes value for `height`
 ```
 
 ## Setting values
 
-Values can be set via a subscript, or via the `set(value:for:)` function:
+Values can be set via a subscript, or via the `setValue(_:for:)` function:
 
 ```swift
+var partialSize = Partial<CGSize>()
+partialSize.setValue(6016, for: \.width)
+partialSize[\.height] = 3384
+```
 
+Optional values can be set to `nil` using the the `setValue(_:for:)` function or the subscript:
+
+```swift
+struct Foo {
+    let bar: String?
+}
+var partial = Partial<Foo>()
+partial.setValue(nil, for: \.bar)
+// Setting the value to `nil` would remove the value
+// This is equivalent to setting the value to `String??.some(nil)`
+partial[\.bar] = String?.none
+```
+
+## Retrieving values
+
+Values can be retrieved via the `value(for:)` function or the subscript:
+
+```swift
+var partialSize = Partial<CGSize>()
+try partialSize.value(for: \.width) // Throws `Partial.Error.keyPathNotSet(\.width)`
+partialSize[\.width] // `Optional<CGFloat>.none`
+partialSize[\.width] = 6016
+try partialSize.value(for: \.width) // `6016`
+partialSize[\.width] // `Optional<CGFloat>(6016)`
+```
+
+`Optional` values returned via the subscript will be doubly wrapped:
+
+```swift
+struct Foo {
+    let bar: String?
+}
+var partial = Partial<Foo>()
+
+switch partial[\.bar] {
+case .some(let value):
+    switch value {
+    case .some(let unwrapped):
+        // Value has been set to `unwrapped`
+        break
+    case .none:
+        // Value has been set to `nil`
+        break
+    }
+case .none:
+    // Value has not been set
+    break
+}
 ```
 
 ## Building an instance with multiple pieces of code contributing values
 
-Since `Partial` is a value type it is not suitable for being passed between multiple pieces of code. To allow for a single instance of a type to be constructed the `PartialBuilder` class is provided. `PartialBuilder` also provides the ability to be notified when properties are updated.
+Since `Partial` is a value type it is not suitable for being passed between multiple pieces of code. To allow for a single instance of a type to be constructed the `PartialBuilder` class is provided. `PartialBuilder` also provides the ability to subscribed to updates.
 
 ```swift
 let sizeBuilder = PartialBuilder<CGSize>()
-sizeBuilder.addUpdateListener { (partial: Partial<CGSize>) in
-    print("A value was set")
+let allChangesSubscription = sizeBuilder.subscribeToAllChanges { (keyPath: PartialKeyPath<CGSize>, builder: PartialBuilder<CGSize>) in
+    print("\(keyPath) was updated")
 }
-sizeBuilder.addUpdateListener(for: .width) { newWidth in
-    print("width has been updated to \(newWidth)")
-}
-
-func setWidth(on partial: PartialBuilder<CGSize>) {
-    partial[\.width] = 6016
+var widthSubscription = sizeBuilder.subscribeForChanges(to: .width) { update in
+    print("width has been updated from \(update.oldValue) to \(update.newValue)")
 }
 
-func setHeight(on partial: PartialBuilder<CGSize>) {
-    partial[\.height] = 3384
-}
+// Notifies both subscribers
+partial[\.width] = 6016
 
-// Notifies both update listeners
-setWidth(on: sizeBuilder)
+// Notifies the all changes subscriber
+partial[\.height] = 3384
 
-// Notifies first update listener
-setHeight(on: sizeBuilder)
+// Subscriptions can be manually cancelled
+allChangesSubscription.cancel()
+// Notifies the width subscriber
+partial[\.width] = 6016
 
-let size = try! sizeBuilder.unwrappedValue() // A CGSize with width 6016, height 3384
+// Subscriptions will be cancelled when deallocated
+widthSubscription = nil
+// Does not notify any subscribers
+partial[\.width] = 6016
 ```
 
 ## Adding support to your own types
@@ -165,6 +219,20 @@ As a convenience it's then possible to unwrap partial values that wrap a type th
 let sizeBuilder = PartialBuilder<CGSize>()
 // ...
 let size = try! sizeBuilder.unwrappedValue()
+```
+
+It is also possible to set a key path to a partial value. If the unwrapping fails the key path will not be updated and the error will be thrown:
+
+```swift
+struct Foo {
+    let size: CGSize
+}
+var partialFoo = Partial<Foo>()
+var partialSize = Partial<CGSize>()
+partialSize[\.width] = 6016
+try partialFoo.setValue(partialSize, for: \.size) // Throws `Partial<CGSize>.Error.keyPathNotSet(\.height)`
+partialSize[\.height] = 3384
+try partialFoo.setValue(partialSize, for: \.size) // Sets `size` to `CGSize(width: 6016, height: 3384)`
 ```
 
 # License
