@@ -72,6 +72,48 @@ final class PartialBuilder_PartialConvertibleTests: QuickSpec {
                         expect(builder[keyPath]) == unwrappedValue
                     }
                 }
+
+                context("set with a custom unwrapper") {
+                    context("that throws an error") {
+                        enum TestError: Error {
+                            case testError
+                        }
+
+                        var thrownError: Error!
+
+                        beforeEach {
+                            do {
+                                try builder.setValue(Partial<StringWrapper>(), for: keyPath) { _ in
+                                    throw TestError.testError
+                                }
+                            } catch {
+                                thrownError = error
+                            }
+                        }
+
+                        afterEach {
+                            thrownError = nil
+                        }
+
+                        it("should throw errors thrown by the unwrapper") {
+                            expect(thrownError).to(matchError(TestError.testError))
+                        }
+                    }
+
+                    context("that returns a value") {
+                        var returnedValue: StringWrapper!
+
+                        beforeEach {
+                            returnedValue = "returned value"
+                            builder.setValue(Partial<StringWrapper>(), for: keyPath) { _ in
+                                return returnedValue
+                            }
+                        }
+                        it("should set the key path to the value returned by the unwrapper") {
+                            expect(builder[keyPath]) == returnedValue
+                        }
+                    }
+                }
             }
 
             context("an optional key path") {
@@ -130,6 +172,48 @@ final class PartialBuilder_PartialConvertibleTests: QuickSpec {
 
                     it("should set the key path to the unwrapped value") {
                         expect(builder[keyPath]) == unwrappedValue
+                    }
+                }
+
+                context("set with a custom unwrapper") {
+                    context("that throws an error") {
+                        enum TestError: Error {
+                            case testError
+                        }
+
+                        var thrownError: Error!
+
+                        beforeEach {
+                            do {
+                                try builder.setValue(Partial<StringWrapper>(), for: keyPath) { _ in
+                                    throw TestError.testError
+                                }
+                            } catch {
+                                thrownError = error
+                            }
+                        }
+
+                        afterEach {
+                            thrownError = nil
+                        }
+
+                        it("should throw errors thrown by the unwrapper") {
+                            expect(thrownError).to(matchError(TestError.testError))
+                        }
+                    }
+
+                    context("that returns a value") {
+                        var returnedValue: StringWrapper!
+
+                        beforeEach {
+                            returnedValue = "returned value"
+                            builder.setValue(Partial<StringWrapper>(), for: keyPath) { _ in
+                                return returnedValue
+                            }
+                        }
+                        it("should set the key path to the value returned by the unwrapper") {
+                            expect(builder[keyPath]) == returnedValue
+                        }
                     }
                 }
             }

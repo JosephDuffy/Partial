@@ -31,24 +31,64 @@ public protocol PartialProtocol {
 
 extension PartialProtocol {
 
-    /// Attempts to update the stored value for the given key path by unwrapping the
-    /// provided partial value. If the unwrapping fails the error will be thrown.
+    /// Attempts to update the stored value for the given key path by unwrapping the provided partial value. If the
+    /// unwrapping fails the error will be thrown.
     ///
-    /// - Parameter value: A partial wrapping a value of type `Value`.
+    /// - Parameter partial: A partial wrapping a value of type `Value`.
     /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
-    mutating func setValue<Value>(_ partial: Partial<Value>, for keyPath: KeyPath<Wrapped, Value>) throws where Value: PartialConvertible {
-        let value = try partial.unwrappedValue()
+    /// - Parameter unwrapper: A closure that will be called to unwrap the passed partial.
+    mutating func setValue<Value, PartialType>(
+        _ partial: PartialType,
+        for keyPath: KeyPath<Wrapped, Value>,
+        unwrapper: (_ partial: PartialType) throws -> Value
+    ) rethrows where PartialType: PartialProtocol, PartialType.Wrapped == Value {
+        let value = try unwrapper(partial)
         setValue(value, for: keyPath)
     }
 
-    /// Attempts to update the stored value for the given key path by unwrapping the
-    /// provided partial value. If the unwrapping fails the error will be thrown.
+    /// Attempts to update the stored value for the given key path by unwrapping the provided partial value. If the
+    /// unwrapping fails the error will be thrown.
     ///
-    /// - Parameter value: A partial wrapping a value of type `Value?`.
-    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
-    mutating func setValue<Value>(_ partial: Partial<Value>, for keyPath: KeyPath<Wrapped, Value?>) throws where Value: PartialConvertible {
-        let value = try partial.unwrappedValue()
+    /// - Parameter partial: A partial wrapping a value of type `Value`.
+    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
+    /// - Parameter unwrapper: A closure that will be called to unwrap the passed partial.
+    mutating func setValue<Value, PartialType>(
+        _ partial: PartialType,
+        for keyPath: KeyPath<Wrapped, Value?>,
+        unwrapper: (_ partial: PartialType) throws -> Value
+    ) rethrows where PartialType: PartialProtocol, PartialType.Wrapped == Value {
+        let value = try unwrapper(partial)
         setValue(value, for: keyPath)
+    }
+
+    /// Attempts to update the stored value for the given key path by unwrapping the provided partial value. If the
+    /// unwrapping fails the error will be thrown.
+    ///
+    /// - Parameter partial: A partial wrapping a value of type `Value`.
+    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
+    /// - Parameter unwrapper: A closure that will be called to unwrap the passed partial. Defaults to the
+    ///                        `init(partial:)` function of `Value`
+    mutating func setValue<Value, PartialType>(
+        _ partial: PartialType,
+        for keyPath: KeyPath<Wrapped, Value>,
+        customUnwrapper unwrapper: (_ partial: PartialType) throws -> Value = Value.init(partial:)
+    ) rethrows where PartialType: PartialProtocol, PartialType.Wrapped == Value, PartialType.Wrapped: PartialConvertible {
+        try setValue(partial, for: keyPath, unwrapper: unwrapper)
+    }
+
+    /// Attempts to update the stored value for the given key path by unwrapping the provided partial value. If the
+    /// unwrapping fails the error will be thrown.
+    ///
+    /// - Parameter partial: A partial wrapping a value of type `Value`.
+    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value?`.
+    /// - Parameter unwrapper: A closure that will be called to unwrap the passed partial. Defaults to the
+    ///                        `init(partial:)` function of `Value`
+    mutating func setValue<Value, PartialType>(
+        _ partial: PartialType,
+        for keyPath: KeyPath<Wrapped, Value?>,
+        customUnwrapper unwrapper: (_ partial: PartialType) throws -> Value = Value.init(partial:)
+    ) rethrows where PartialType: PartialProtocol, PartialType.Wrapped == Value, PartialType.Wrapped: PartialConvertible {
+        try setValue(partial, for: keyPath, unwrapper: unwrapper)
     }
 
     /// Retrieve or set a value for the given key path. Returns `nil` if the value has not been set. If the value is set
