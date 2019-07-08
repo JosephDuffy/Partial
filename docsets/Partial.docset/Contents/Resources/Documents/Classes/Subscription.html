@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>PartialConvertible Protocol Reference</title>
+    <title>Subscription Class Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Protocol/PartialConvertible" class="dashAnchor"></a>
-    <a title="PartialConvertible Protocol Reference"></a>
+    <a name="//apple_ref/swift/Class/Subscription" class="dashAnchor"></a>
+    <a title="Subscription Class Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">Partial Docs</a> (100% documented)</p>
@@ -22,7 +22,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">Partial Reference</a>
         <img id="carat" src="../img/carat.png" />
-        PartialConvertible Protocol Reference
+        Subscription Class Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -69,14 +69,15 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>PartialConvertible</h1>
+            <h1>Subscription</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">PartialConvertible</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Subscription</span> <span class="p">:</span> <span class="kt">Hashable</span></code></pre>
 
                 </div>
               </div>
-            <p>A type that can be initialised with a <code><a href="../Structs/Partial.html">Partial</a></code> value that wraps itself</p>
+            <p>An object that represents a subscription to a <code><a href="../Classes/PartialBuilder.html">PartialBuilder</a></code>. When the object is deallocated the <code>cancel</code> function
+will be called automatically.</p>
 
           </section>
           <section class="section task-group-section">
@@ -85,9 +86,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7Partial0A11ConvertibleP7partialxA2AVyxG_tKcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(partial:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Partial0A11ConvertibleP7partialxA2AVyxG_tKcfc">init(partial:)</a>
+                    <a name="/s:SQ2eeoiySbx_xtFZ"></a>
+                    <a name="//apple_ref/swift/Method/==(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:SQ2eeoiySbx_xtFZ">==(_:_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -95,39 +96,68 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Create a new instance of this type, retrieving values from the partial.</p>
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">==</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">Subscription</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">Subscription</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
-<p><code><a href="../Structs/Partial.html">Partial</a></code> provides convenience functions that throw relevant errors:</p>
-<pre class="highlight swift"><code><span class="n">foo</span> <span class="o">=</span> <span class="k">try</span> <span class="n">partial</span><span class="o">.</span><span class="nf">value</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="p">\</span><span class="o">.</span><span class="n">foo</span><span class="p">)</span>
-</code></pre>
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Partial12SubscriptionC6cancelyyF"></a>
+                    <a name="//apple_ref/swift/Method/cancel()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Partial12SubscriptionC6cancelyyF">cancel()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Cancels the subscription, causing the update subscriber to be removed</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span><span class="nv">partial</span><span class="p">:</span> <span class="kt"><a href="../Structs/Partial.html">Partial</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">cancel</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>partial</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The partial to retrieve values from</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:SH4hash4intoys6HasherVz_tF"></a>
+                    <a name="//apple_ref/swift/Method/hash(into:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:SH4hash4intoys6HasherVz_tF">hash(into:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">hash</span><span class="p">(</span><span class="n">into</span> <span class="nv">hasher</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">Hasher</span><span class="p">)</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
