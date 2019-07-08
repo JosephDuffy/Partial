@@ -300,10 +300,10 @@ cross-spawn@^6.0.0:
     shebang-command "^1.2.0"
     which "^1.2.9"
 
-danger@^9.0.2:
-  version "9.0.2"
-  resolved "https://registry.yarnpkg.com/danger/-/danger-9.0.2.tgz#8348189e5f6dad759079b31d62e766b3d71f18a1"
-  integrity sha512-H0G8qgU1rUsKUlDb4rtsgFsMMS43WQMOUNE9eP5/NcnGsuZf8W+eMiAPR28Lwb2k3gSHGbrlWebWQPeSg6mS2w==
+danger@^9.0.3:
+  version "9.0.3"
+  resolved "https://registry.yarnpkg.com/danger/-/danger-9.0.3.tgz#9e784c9f725a09db438dbc5450ffdba10263a052"
+  integrity sha512-OwJLxMj5Lmt9gevhLs5P9npj4sAvE4lkaYpOOW6xTCfDFXj/2GMNDnzAUeI0eBcLzD6nKAgpyVY1bVah/0aFig==
   dependencies:
     "@babel/polyfill" "^7.2.5"
     "@octokit/rest" "^16.14.1"
