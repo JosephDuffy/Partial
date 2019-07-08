@@ -10,7 +10,7 @@ struct StringWrapperWrapper: PartialConvertible, Hashable {
         self.optionalStringWrapper = optionalStringWrapper
     }
 
-    init(partial: Partial<StringWrapperWrapper>) throws {
+    init<PartialType: PartialProtocol>(partial: PartialType) throws where PartialType.Wrapped == StringWrapperWrapper {
         stringWrapper = try partial.value(for: \.stringWrapper)
         optionalStringWrapper = try partial.value(for: \.optionalStringWrapper)
     }

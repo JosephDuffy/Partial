@@ -72,6 +72,48 @@ final class Partial_PartialConvertibleTests: QuickSpec {
                         expect(partial[keyPath]) == unwrappedValue
                     }
                 }
+
+                context("set with a custom unwrapper") {
+                    context("that throws an error") {
+                        enum TestError: Error {
+                            case testError
+                        }
+
+                        var thrownError: Error!
+
+                        beforeEach {
+                            do {
+                                try partial.setValue(Partial<StringWrapper>(), for: keyPath) { _ in
+                                    throw TestError.testError
+                                }
+                            } catch {
+                                thrownError = error
+                            }
+                        }
+
+                        afterEach {
+                            thrownError = nil
+                        }
+
+                        it("should throw errors thrown by the unwrapper") {
+                            expect(thrownError).to(matchError(TestError.testError))
+                        }
+                    }
+
+                    context("that returns a value") {
+                        var returnedValue: StringWrapper!
+
+                        beforeEach {
+                            returnedValue = "returned value"
+                            partial.setValue(Partial<StringWrapper>(), for: keyPath) { _ in
+                                return returnedValue
+                            }
+                        }
+                        it("should set the key path to the value returned by the unwrapper") {
+                            expect(partial[keyPath]) == returnedValue
+                        }
+                    }
+                }
             }
 
             context("an optional key path") {
@@ -83,7 +125,7 @@ final class Partial_PartialConvertibleTests: QuickSpec {
                     partial.setValue(initialValue, for: keyPath)
                 }
 
-                context("set no an incomplete Partial") {
+                context("set to an incomplete Partial") {
                     var thrownError: Error?
 
                     beforeEach {
@@ -130,6 +172,48 @@ final class Partial_PartialConvertibleTests: QuickSpec {
 
                     it("should set the key path to the unwrapped value") {
                         expect(partial[keyPath]) == unwrappedValue
+                    }
+                }
+
+                context("set with a custom unwrapper") {
+                    context("that throws an error") {
+                        enum TestError: Error {
+                            case testError
+                        }
+
+                        var thrownError: Error!
+
+                        beforeEach {
+                            do {
+                                try partial.setValue(Partial<StringWrapper>(), for: keyPath) { _ in
+                                    throw TestError.testError
+                                }
+                            } catch {
+                                thrownError = error
+                            }
+                        }
+
+                        afterEach {
+                            thrownError = nil
+                        }
+
+                        it("should throw errors thrown by the unwrapper") {
+                            expect(thrownError).to(matchError(TestError.testError))
+                        }
+                    }
+
+                    context("that returns a value") {
+                        var returnedValue: StringWrapper!
+
+                        beforeEach {
+                            returnedValue = "returned value"
+                            partial.setValue(Partial<StringWrapper>(), for: keyPath) { _ in
+                                return returnedValue
+                            }
+                        }
+                        it("should set the key path to the value returned by the unwrapper") {
+                            expect(partial[keyPath]) == returnedValue
+                        }
                     }
                 }
             }
