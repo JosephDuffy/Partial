@@ -1,0 +1,4 @@
+---
+before:
+  - script:
+      content: ./scripts/update-version.sh "$VERSION"
