@@ -170,7 +170,7 @@ let sizeBuilder = PartialBuilder<CGSize>()
 let allChangesSubscription = sizeBuilder.subscribeToAllChanges { (keyPath: PartialKeyPath<CGSize>, builder: PartialBuilder<CGSize>) in
     print("\(keyPath) was updated")
 }
-var widthSubscription = sizeBuilder.subscribeForChanges(to: .width) { update in
+var widthSubscription = sizeBuilder.subscribeForChanges(to: \.width) { update in
     print("width has been updated from \(update.oldValue) to \(update.newValue)")
 }
 
