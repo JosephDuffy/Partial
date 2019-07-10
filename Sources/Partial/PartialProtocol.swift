@@ -146,7 +146,7 @@ extension PartialProtocol where Wrapped: PartialConvertible {
     /// Any errors thrown by `Wrapped.init(partial:)` will be rethrown
     ///
     /// - Returns: The new `Wrapped` instance
-    public func unwrappedValue() throws -> Wrapped {
+    public func unwrapped() throws -> Wrapped {
         return try Wrapped(partial: self)
     }
 

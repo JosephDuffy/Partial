@@ -49,15 +49,15 @@ final class PartialBuilder_PartialConvertibleTests: QuickSpec {
                 }
 
                 context("set to a complete partial") {
-                    var unwrappedValue: StringWrapper!
+                    var unwrapped: StringWrapper!
                     var thrownError: Error?
 
                     beforeEach {
-                        unwrappedValue = "unwrapped value"
+                        unwrapped = "unwrapped value"
 
                         do {
                             var partialStringWrapper = Partial<StringWrapper>()
-                            partialStringWrapper[\.string] = unwrappedValue.string
+                            partialStringWrapper[\.string] = unwrapped.string
                             try builder.setValue(partialStringWrapper, for: keyPath)
                         } catch {
                             thrownError = error
@@ -69,7 +69,7 @@ final class PartialBuilder_PartialConvertibleTests: QuickSpec {
                     }
 
                     it("should set the key path to the unwrapped value") {
-                        expect(builder[keyPath]) == unwrappedValue
+                        expect(builder[keyPath]) == unwrapped
                     }
                 }
 
@@ -151,15 +151,15 @@ final class PartialBuilder_PartialConvertibleTests: QuickSpec {
                 }
 
                 context("set to a complete partial") {
-                    var unwrappedValue: StringWrapper!
+                    var unwrapped: StringWrapper!
                     var thrownError: Error?
 
                     beforeEach {
-                        unwrappedValue = "unwrapped value"
+                        unwrapped = "unwrapped value"
 
                         do {
                             var partialStringWrapper = Partial<StringWrapper>()
-                            partialStringWrapper[\.string] = unwrappedValue.string
+                            partialStringWrapper[\.string] = unwrapped.string
                             try builder.setValue(partialStringWrapper, for: keyPath)
                         } catch {
                             thrownError = error
@@ -171,7 +171,7 @@ final class PartialBuilder_PartialConvertibleTests: QuickSpec {
                     }
 
                     it("should set the key path to the unwrapped value") {
-                        expect(builder[keyPath]) == unwrappedValue
+                        expect(builder[keyPath]) == unwrapped
                     }
                 }
 
@@ -218,29 +218,29 @@ final class PartialBuilder_PartialConvertibleTests: QuickSpec {
                 }
             }
 
-            context("unwrappedValue()") {
+            context("unwrapped()") {
                 it("should throw the error thrown by Wrapped.init(partial:)") {
                     let expectedError = Partial<StringWrapperWrapper>.Error.keyPathNotSet(\.stringWrapper)
-                    expect { try builder.unwrappedValue() }.to(throwError(expectedError))
+                    expect { try builder.unwrapped() }.to(throwError(expectedError))
                 }
 
                 context("when the partial is complete") {
-                    var unwrappedValue: StringWrapperWrapper?
+                    var unwrapped: StringWrapperWrapper?
 
                     beforeEach {
                         let stringWrapper = StringWrapper(stringLiteral: "string wrapper")
                         let optionaStringWrapper = StringWrapper(stringLiteral: "optional string wrapper")
-                        unwrappedValue = StringWrapperWrapper(stringWrapper: stringWrapper, optionalStringWrapper: optionaStringWrapper)
+                        unwrapped = StringWrapperWrapper(stringWrapper: stringWrapper, optionalStringWrapper: optionaStringWrapper)
                         builder[\.stringWrapper] = stringWrapper
                         builder[\.optionalStringWrapper] = optionaStringWrapper
                     }
 
                     it("should not throw an error") {
-                        expect { try builder.unwrappedValue() }.toNot(throwError())
+                        expect { try builder.unwrapped() }.toNot(throwError())
                     }
 
                     it("should return an unwrapped value") {
-                        expect { try? builder.unwrappedValue() } == unwrappedValue
+                        expect { try? builder.unwrapped() } == unwrapped
                     }
                 }
             }
