@@ -117,7 +117,6 @@ jobs:
       before_deploy: carthage build --archive --platform iOS,macOS,tvOS,watchOS
       deploy:
         provider: releases
-        prerelease: true
         api_key: $GITHUB_ACCESS_TOKEN
         file: Partial.framework.zip
         skip_cleanup: true
