@@ -77,7 +77,7 @@ var partialSize = Partial<CGSize>()
 partialSize.setValue(6016, for: \.width)
 partialSize[\.height] = 3384
 // And unwrapped with a convenience function
-let size = try partialSize.unwrappedValue() // A `CGSize(width: 6016, height: 3384)`
+let size = try partialSize.unwrapped() // A `CGSize(width: 6016, height: 3384)`
 // Key paths can be retrieved via a throwing function or a subscript
 try partialSize.value(for: \.width) // `6016`
 partialSize[\.width] // `Optional<CGFloat>(6016)`
@@ -96,7 +96,7 @@ partialSize[\.width] = nil
 var partialSize = Partial<CGSize>()
 partialSize.width = 6016
 partialSize.height = 3384
-let size = try! partialSize.unwrappedValue() // A `CGSize(width: 6016, height: 3384)`
+let size = try! partialSize.unwrapped() // A `CGSize(width: 6016, height: 3384)`
 partialSize.width // `Optional<CGFloat>(6016)`
 partialSize.height = nil // Removes value for `height`
 ```
@@ -218,7 +218,7 @@ As a convenience it's then possible to unwrap partial values that wrap a type th
 ```swift
 let sizeBuilder = PartialBuilder<CGSize>()
 // ...
-let size = try! sizeBuilder.unwrappedValue()
+let size = try! sizeBuilder.unwrapped()
 ```
 
 It is also possible to set a key path to a partial value. If the unwrapping fails the key path will not be updated and the error will be thrown:

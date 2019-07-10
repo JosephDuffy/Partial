@@ -149,19 +149,6 @@ open class PartialBuilder<Wrapped>: PartialProtocol, CustomStringConvertible {
 
 }
 
-extension PartialBuilder where Wrapped: PartialConvertible {
-
-    /// Attempts to initialise a new `Wrapped` with the partial
-    ///
-    /// Any errors thrown by `Wrapped.init(partial:)` will be rethrown
-    ///
-    /// - Returns: The new `Wrapped` instance
-    public func unwrappedValue() throws -> Wrapped {
-        return try Wrapped(partial: partial)
-    }
-
-}
-
 extension PartialBuilder {
 
     private final class AllChangesSubscription: Subscription {

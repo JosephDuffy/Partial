@@ -53,16 +53,3 @@ public struct Partial<Wrapped>: PartialProtocol, CustomStringConvertible {
     }
 
 }
-
-extension Partial where Wrapped: PartialConvertible {
-
-    /// Attempts to initialise a new `Wrapped` with self
-    ///
-    /// Any errors thrown by `Wrapped.init(partial:)` will be rethrown
-    ///
-    /// - Returns: The new `Wrapped` instance
-    public func unwrappedValue() throws -> Wrapped {
-        return try Wrapped(partial: self)
-    }
-
-}
