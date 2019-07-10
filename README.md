@@ -37,7 +37,7 @@ Partial is fully documented, with [code-level documentation available online](ht
 
 ## Usage overview
 
-Partial has a `KeyPath`-based API so is fully type-safe. Setting, retrieving, and removing key paths is possible via dynamic member lookup or functions.
+Partial has a `KeyPath`-based API, allowing it to be fully type-safe. Setting, retrieving, and removing key paths is possible via dynamic member lookup or functions.
 
 ```swift
 var partialSize = Partial<CGSize>()
@@ -134,7 +134,7 @@ let size2Subscription = size2Builder.subscribeToAllChanges { _, size2Builder in
 
 ## Dealing with `Optional`s
 
-Partials mirrors the properties of the wrapping type exactly, meaning that optional properties will still be optional. This isn't much of a problem with the `value(for:)` and `setValue(_:for:)` functions, but can be a bit more cumbersome when using the subscripts (including the dynamic member lookup).
+Partials mirror the properties of the wrapping type exactly, meaning that optional properties will still be optional. This isn't much of a problem with the `value(for:)` and `setValue(_:for:)` functions, but can be a bit more cumbersome when using dynamic member lookup because the optional will be wrapped in another optional.
 
 These examples will use a type that has an optional property:
 
@@ -142,6 +142,7 @@ These examples will use a type that has an optional property:
 struct Foo {
     let bar: String?
 }
+var fooPartial = Partial<Foo>()
 ```
 
 Setting and retrieving optional values with the `setValue(_:for:)` and `value(for:)` functions does not require anything special:
@@ -152,11 +153,11 @@ fooPartial.setValue(nil, for: \.bar)
 try fooPartial.value(for: \.bar) // Returns `String?.none`
 ```
 
-However, the subscripts (including the dynamic member lookup) wrap the returned type in another `Optional`, and support removing values by setting them to `nil`.
+However using dynamic member lookup requires a little more consideration:
 
 ```swift
 fooPartial.bar = String?.none // Sets the value to `nil`
-fooPartial.bar = nil // Removes the value
+fooPartial.bar = nil // Removes the value. Equivalent to setting to `String??.none`
 ```
 
 When retrieving values it can be necessary to unwrap the value twice:
