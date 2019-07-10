@@ -27,6 +27,7 @@ public protocol PartialProtocol {
     ///
     /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
     mutating func removeValue<Value>(for keyPath: KeyPath<Wrapped, Value>)
+
 }
 
 extension PartialProtocol {
@@ -136,4 +137,17 @@ extension PartialProtocol {
         }
     }
     #endif
+}
+
+extension PartialProtocol where Wrapped: PartialConvertible {
+
+    /// Attempts to initialise a new `Wrapped` with self
+    ///
+    /// Any errors thrown by `Wrapped.init(partial:)` will be rethrown
+    ///
+    /// - Returns: The new `Wrapped` instance
+    public func unwrappedValue() throws -> Wrapped {
+        return try Wrapped(partial: self)
+    }
+
 }
