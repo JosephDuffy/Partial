@@ -249,6 +249,10 @@ func checkSwiftVersions() {
                 path: ".swift-version",
                 interpreter: .closure({ $0.trimmingCharacters(in: .whitespacesAndNewlines) })
             ),
+            VersionFile(
+                path: "./\(projectName).podspec",
+                interpreter: .regex("\\.swift_version\\s*= \"(.*)\"")
+            ),
         ],
         versionKind: "Swift"
     )
