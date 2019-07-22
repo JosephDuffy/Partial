@@ -11,6 +11,9 @@ Pod::Spec.new do |spec|
     :tag => "v#{spec.version}"
   }
   spec.source_files = "Sources/Partial/*.swift"
+  spec.osx.deployment_target = "10.10"
   spec.ios.deployment_target = "8.0"
-  spec.swift_versions = "5.0"
+  spec.tvos.deployment_target = "9.0"
+  spec.watchos.deployment_target = "2.0"
+  spec.swift_version = "5.0"
 end
