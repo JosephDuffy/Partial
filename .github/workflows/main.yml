@@ -3,7 +3,7 @@ name: CI
 on: [push]
 
 jobs:
-  build:
+  swiftpm_tests:
     runs-on: macos-latest
     strategy:
       matrix:
@@ -14,3 +14,19 @@ jobs:
     - name: Select Xcode ${{ matrix.xcode }}
       run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
     - run: swift test
+
+  xcode_tests:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        xcode: [10.3, 11]
+        platform: ["iOS", "tvOS", "macOS"]
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Select Xcode ${{ matrix.xcode }}
+      run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
+    - name: carthage bootstrap
+      run: carthage bootstrap --cache-builds --platform ${{ matrix.platform }}
+    - name: Test ${{ matrix.platform }}
+      run: fastlane scan --clean --scheme "Partial-${{ matrix.platform }}"
