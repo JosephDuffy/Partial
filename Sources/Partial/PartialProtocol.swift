@@ -97,7 +97,6 @@ extension PartialProtocol {
     ///
     /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
     /// - Returns: The stored value, or `nil` if a value has not been set.
-    @available(swift, deprecated: 5.1, message: "Use dynamic member lookup, `value(for:)`, or `set(value:for:)`")
     public subscript<Value>(keyPath: KeyPath<Wrapped, Value>) -> Value? {
         get {
             return try? self.value(for: keyPath)
@@ -113,7 +112,6 @@ extension PartialProtocol {
 
     /// Do not use this function; dynamic member lookup should only be used with a `KeyPath`, which
     /// requires at least Swift 5.1
-    @available(swift, obsoleted: 5.0, message: "Use KeyPath-based dynamic member lookup, `value(for:)`, or `set(value:for:)`")
     public subscript(dynamicMember member: String) -> Never {
         fatalError("Dynamic member lookup requires Swift 5.1")
     }
