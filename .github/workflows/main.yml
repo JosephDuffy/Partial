@@ -4,9 +4,13 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: macos-latest
-    
+    strategy:
+      matrix:
+        xcode: [10.3, 11]
+
     steps:
     - uses: actions/checkout@v1
+    - name: Select Xcode ${{ matrix.xcode }}
+      run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
     - run: swift test
