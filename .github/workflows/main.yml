@@ -4,6 +4,7 @@ on: [push]
 
 jobs:
   swiftpm_tests:
+    name: SwiftPM tests on Xcode ${{ matrix.xcode }}
     runs-on: macos-latest
     fail-fast: false
     strategy:
@@ -17,6 +18,7 @@ jobs:
     - run: swift test
 
   xcode_tests:
+    name: ${{ matrix.platform }} tests on Xcode ${{ matrix.xcode }}
     runs-on: macos-latest
     fail-fast: false
     strategy:
