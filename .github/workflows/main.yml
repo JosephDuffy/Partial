@@ -31,7 +31,7 @@ jobs:
     - name: Select Xcode ${{ matrix.xcode }}
       run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
     - name: carthage bootstrap
-      run: carthage bootstrap --cache-builds --platform ${{ matrix.platform }}
+      run: carthage bootstrap --cache-builds --platform ${{ matrix.platform }} || (cat /var/folders/*/*/*/carthage-xcodebuild.*.log; false)
     - name: Test ${{ matrix.platform }}
       run: fastlane scan --clean --scheme "Partial-${{ matrix.platform }}"
 
