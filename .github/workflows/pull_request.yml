@@ -5,22 +5,12 @@ on: [pull_request]
 jobs:
   danger:
     name: Danger
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v1
-    - name: Setup node
-      uses: actions/setup-node@v1
-      with:
-        node-version: '10.16.3'
-    - name: yarn install
-      run: yarn install
-    - name: Build CI Dependencies
-      run: swift build --skip-update --target CIDependencies
-    - name: Build danger-swift
-      run: swift build --skip-update --product danger-swift
-    - name: Run Danger
-      run: swift run --skip-update danger-swift ci --danger-js-path $(yarn bin danger) --verbose
+    - name: Danger Swift
+      uses: danger/swift@2.0.2
 
   pod_lib_lint:
     name: pod lib lint
