@@ -1,0 +1,28 @@
+name: CI
+
+on: [pull_request]
+
+jobs:
+  danger:
+    name: Danger
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Run Danger
+      run: |
+      yarn install
+      swift build --skip-update --target CIDependencies
+      swift build --skip-update --product danger-swift
+      swift run --skip-update danger-swift ci --danger-js-path $(yarn bin danger) --verbose
+
+  pod_lib_lint:
+    name: pod lib lint
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: pod lib lint
+      run: |
+        bundle install --deployment
+        bundle exec pod lib lint
