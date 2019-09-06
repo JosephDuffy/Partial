@@ -5,6 +5,7 @@ on: [push]
 jobs:
   swiftpm_tests:
     runs-on: macos-latest
+    fail-fast: false
     strategy:
       matrix:
         xcode: [10.3, 11]
@@ -17,6 +18,7 @@ jobs:
 
   xcode_tests:
     runs-on: macos-latest
+    fail-fast: false
     strategy:
       matrix:
         xcode: [10.3, 11]
@@ -34,6 +36,7 @@ jobs:
   linux_tests:
     name: SwiftPM tests on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+    fail-fast: false
     strategy:
       matrix:
         os: [ubuntu-16.04, ubuntu-latest]
