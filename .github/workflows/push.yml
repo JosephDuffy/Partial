@@ -1,10 +1,10 @@
-name: CI
+name: Tests
 
 on: [push]
 
 jobs:
   swiftpm_tests:
-    name: SwiftPM tests on Xcode ${{ matrix.xcode }}
+    name: SwiftPM on Xcode ${{ matrix.xcode }}
     runs-on: macos-latest
     strategy:
       fail-fast: false
@@ -18,7 +18,7 @@ jobs:
     - run: swift test
 
   xcode_tests:
-    name: ${{ matrix.platform }} tests on Xcode ${{ matrix.xcode }}
+    name: ${{ matrix.platform }} on Xcode ${{ matrix.xcode }}
     runs-on: macos-latest
     strategy:
       fail-fast: false
@@ -36,7 +36,7 @@ jobs:
       run: fastlane scan --clean --scheme "Partial-${{ matrix.platform }}"
 
   linux_tests:
-    name: SwiftPM tests on ${{ matrix.os }}
+    name: SwiftPM on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
