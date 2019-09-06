@@ -27,7 +27,7 @@ jobs:
     - name: Select Xcode ${{ matrix.xcode }}
       run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
     - name: carthage bootstrap
-      run: carthage bootstrap --cache-builds --platform ${{ matrix.platform }}
+      run: fastlane run carthage command:bootstrap cache_builds:true platform:${{ matrix.platform }}
     - name: Test ${{ matrix.platform }}
       run: fastlane scan --clean --scheme "Partial-${{ matrix.platform }}"
 
