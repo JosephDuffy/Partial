@@ -9,10 +9,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Danger Swift
-      uses: danger/swift@2.0.2
+    - name: yarn install
+      run: yarn install
+    - name: Build CI Dependencies
+      run: swift build --skip-update --target CIDependencies
+    - name: Build danger-swift
+      run: swift build --skip-update --product danger-swift
+    - name: Run Danger
+      run: swift run --skip-update danger-swift ci --danger-js-path $(yarn bin danger) --verbose
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        DANGER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   pod_lib_lint:
     name: pod lib lint
