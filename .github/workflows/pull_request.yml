@@ -26,9 +26,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+    - run: bundler --version
     - uses: actions/setup-ruby@v1
       with:
         ruby-version: '2.6.3'
+    - run: bundler --version
     - name: bundle install
       run: bundle install --deployment
     - name: pod lib lint
