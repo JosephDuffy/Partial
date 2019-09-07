@@ -34,6 +34,22 @@ jobs:
       run: carthage bootstrap --cache-builds --platform ${{ matrix.platform }} || (cat /var/folders/*/*/*/carthage-xcodebuild.*.log; false)
     - name: Test ${{ matrix.platform }}
       run: fastlane scan --clean --scheme "Partial-${{ matrix.platform }}"
+    - name: Coveralls
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.github_token }}
+        parallel: true
+
+  xcode_tests:
+    name: Coveralls finish
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Coveralls Finished
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.github_token }}
+        parallel-finished: true
 
   linux_tests:
     name: SwiftPM on ${{ matrix.os }}
