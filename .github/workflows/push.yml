@@ -40,9 +40,9 @@ jobs:
         github-token: ${{ secrets.github_token }}
         parallel: true
 
-  xcode_tests:
+  coveralls_finish:
     name: Coveralls finish
-    needs: test
+    needs: xcode_tests
     runs-on: ubuntu-latest
     steps:
     - name: Coveralls Finished
