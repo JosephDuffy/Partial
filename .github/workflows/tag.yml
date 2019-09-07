@@ -27,9 +27,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - uses: actions/setup-ruby@v1
+    - name: Use Ruby 2.6.3
+      uses: actions/setup-ruby@v1
       with:
         ruby-version: '2.6.3'
+    - name: Install bundler 2.0.2
+      run: gem install bundler:2.0.2
     - name: bundle install
       run: bundle install --deployment
     - name: Deploy
@@ -41,9 +44,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - uses: actions/setup-ruby@v1
+    - name: Use Ruby 2.6.3
+      uses: actions/setup-ruby@v1
       with:
         ruby-version: '2.6.3'
+    - name: Install bundler 2.0.2
+      run: gem install bundler:2.0.2
     - name: bundle install
       run: bundle install --deployment
     - name: Build docs
