@@ -28,12 +28,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+    - name: bundle install
+      run: bundle install --deployment
     - name: Select Xcode ${{ matrix.xcode }}
       run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
     - name: carthage bootstrap
       run: carthage bootstrap --cache-builds --platform ${{ matrix.platform }} || (cat /var/folders/*/*/*/carthage-xcodebuild.*.log; false)
     - name: Test ${{ matrix.platform }}
-      run: fastlane scan --clean --scheme "Partial-${{ matrix.platform }}"
+      run: bundle exec fastlane scan --clean --scheme "Partial-${{ matrix.platform }}"
     - name: Coveralls
       run: bash <(curl -s https://codecov.io/bash)
 
