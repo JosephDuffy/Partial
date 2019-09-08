@@ -35,21 +35,7 @@ jobs:
     - name: Test ${{ matrix.platform }}
       run: fastlane scan --clean --scheme "Partial-${{ matrix.platform }}"
     - name: Coveralls
-      uses: coverallsapp/github-action@master
-      with:
-        github-token: ${{ secrets.github_token }}
-        parallel: true
-
-  coveralls_finish:
-    name: Coveralls finish
-    needs: xcode_tests
-    runs-on: ubuntu-latest
-    steps:
-    - name: Coveralls Finished
-      uses: coverallsapp/github-action@master
-      with:
-        github-token: ${{ secrets.github_token }}
-        parallel-finished: true
+      run: bash <(curl -s https://codecov.io/bash)
 
   linux_tests:
     name: SwiftPM on ${{ matrix.os }}
