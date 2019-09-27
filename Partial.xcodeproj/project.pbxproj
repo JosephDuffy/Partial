@@ -756,7 +756,7 @@
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
-				VERSION_NUMBER = 1.0.0;
+				VERSION_NUMBER = 1.0.2;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
@@ -822,7 +822,7 @@
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
-				VERSION_NUMBER = 1.0.0;
+				VERSION_NUMBER = 1.0.2;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
