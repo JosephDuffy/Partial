@@ -14,6 +14,6 @@ if [ "$NORMALISED_VERSION" = "$VERSION" ]; then
 fi
 
 echo "Setting version in Xcode project to $NORMALISED_VERSION"
-sed -E -i "" "s/(VERSION_NUMBER[[:blank:]]*=[[:blank:]]*).*;/\1$NORMALISED_VERSION;/" ./Partial.xcodeproj/project.pbxproj
+/usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString '$NORMALISED_VERSION'" ./Partial.xcodeproj/Partial_Info.plist
 echo "Setting version in Podspec to $NORMALISED_VERSION"
 sed -E -i "" "s/(spec\\.version[[:blank:]]*=[[:blank:]]*)\".*\"/\1\"$NORMALISED_VERSION\"/" ./Partial.podspec
