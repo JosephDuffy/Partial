@@ -41,3 +41,6 @@ node_modules
 
 # Documentation
 docs/
+
+# Exclude Xcode projects; `swift package generate-xcodeproj` will be used on deploy
+Partial.xcodeproj
