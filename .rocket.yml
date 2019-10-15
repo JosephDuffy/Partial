@@ -1,4 +1,35 @@
 ---
-before:
+steps:
+  - hide_dev_dependencies
+  - git_add:
+      paths:
+        - Package.swift
+  - commit:
+      message: "Hide dev dependencies"
+  - script:
+      # Ensure an Xcode project exists so Carthage can build the project
+      content: swift package generate-xcodeproj
   - script:
       content: ./scripts/update-version.sh "$VERSION"
+  - script:
+      content: git add --force Partial.xcodeproj
+  - commit:
+      message: "Add Xcode project"
+  - git_add:
+      paths:
+        - Partial.podspec
+  - commit:
+      message: "Update Pod version"
+  - tag
+  - unhide_dev_dependencies
+  - git_add
+  - commit:
+      message: "Unhide dev dependencies"
+  - script:
+      content: rm -r Partial.xcodeproj
+  - git_add:
+      paths:
+        - Partial.xcodeproj
+  - commit:
+      message: "Remove Xcode project"
+  - push
