@@ -1,0 +1,61 @@
+name: Tests
+
+on: [push]
+
+jobs:
+  swiftpm_tests:
+    name: SwiftPM on Xcode ${{ matrix.xcode }}
+    runs-on: macOS-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        xcode: ["10.3", "11.1", "11.2"]
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Select Xcode ${{ matrix.xcode }}
+      run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
+    - run: swift test
+
+  xcode_tests:
+    name: ${{ matrix.platform }} on Xcode ${{ matrix.xcode }}
+    runs-on: macOS-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        xcode: ["10.3", "11.1", "11.2"]
+        platform: ["iOS", "tvOS", "macOS"]
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: bundle install
+      run: bundle install --deployment
+    - name: Select Xcode ${{ matrix.xcode }}
+      run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
+    - name: carthage bootstrap
+      run: carthage bootstrap --cache-builds --platform ${{ matrix.platform }} --configuration Debug || (cat /var/folders/*/*/*/carthage-xcodebuild.*.log; false)
+      env:
+        GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Test ${{ matrix.platform }}
+      run: bundle exec fastlane scan --clean --scheme "Partial-${{ matrix.platform }}"
+    - name: Coveralls
+      run: bash <(curl -s https://codecov.io/bash)
+
+  linux_tests:
+    name: SwiftPM on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-16.04, ubuntu-latest]
+        swift: ["5.0.3"]
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install Swift ${{ matrix.swift }} and test
+      env:
+        SWIFT_VERSION: ${{ matrix.swift }}
+      run: |
+        # These must be done together so that `swift` is in `PATH`
+        eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
+        swift test

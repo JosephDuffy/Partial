@@ -1,0 +1,49 @@
+name: Release
+
+on:
+  push:
+    branch: master
+    tags: '*'
+
+jobs:
+  github_release:
+    name: GitHub
+    runs-on: macOS-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build carthage archive
+      run: carthage build --archive --platform iOS,macOS,tvOS,watchOS
+    - name: Deploy
+      uses: docker://softprops/action-gh-release
+      with:
+        files: Partial.framework.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  cocoa_pods_release:
+    name: CocoaPods
+    runs-on: macOS-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: bundle install
+      run: bundle install --deployment
+    - name: Deploy
+      run: bundle exec pod trunk push
+
+  docs_upload:
+    name: Documentation
+    runs-on: macOS-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: bundle install
+      run: bundle install --deployment
+    - name: Build docs
+      run: bundle exec jazzy
+    - uses: JamesIves/github-pages-deploy-action@master
+      env:
+        ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: docs

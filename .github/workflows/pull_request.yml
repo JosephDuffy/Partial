@@ -1,0 +1,36 @@
+name: PR Checks
+
+on: [pull_request]
+
+jobs:
+  danger:
+    name: Danger
+    runs-on: macOS-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup Node.js 10.16.3
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10.16.3
+    - name: yarn install
+      run: yarn install
+    - name: Build CI Dependencies
+      run: swift build --skip-update --target CIDependencies
+    - name: Build danger-swift
+      run: swift build --skip-update --product danger-swift
+    - name: Run Danger
+      run: swift run --skip-update danger-swift ci --danger-js-path $(yarn bin danger) --verbose
+      env:
+        DANGER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  pod_lib_lint:
+    name: pod lib lint
+    runs-on: macOS-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: bundle install
+      run: bundle install --deployment
+    - name: pod lib lint
+      run: bundle exec pod lib lint
