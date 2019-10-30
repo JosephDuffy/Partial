@@ -8,7 +8,7 @@ on:
 jobs:
   github_release:
     name: GitHub
-    runs-on: macos-latest
+    runs-on: macOS-latest
 
     steps:
     - uses: actions/checkout@v1
@@ -23,7 +23,7 @@ jobs:
 
   cocoa_pods_release:
     name: CocoaPods
-    runs-on: macos-latest
+    runs-on: macOS-latest
 
     steps:
     - uses: actions/checkout@v1
@@ -34,7 +34,7 @@ jobs:
 
   docs_upload:
     name: Documentation
-    runs-on: macos-latest
+    runs-on: macOS-latest
 
     steps:
     - uses: actions/checkout@v1
