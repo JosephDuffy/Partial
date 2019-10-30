@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        xcode: [10.3, 11]
+        xcode: [10.3, 11.1, 11.2]
 
     steps:
     - uses: actions/checkout@v1
@@ -23,7 +23,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        xcode: [10.3, 11]
+        xcode: [10.3, 11.1, 11.2]
         platform: ["iOS", "tvOS", "macOS"]
 
     steps:
