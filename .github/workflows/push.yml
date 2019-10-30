@@ -33,7 +33,7 @@ jobs:
     - name: Select Xcode ${{ matrix.xcode }}
       run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
     - name: carthage bootstrap
-      run: carthage bootstrap --cache-builds --platform ${{ matrix.platform }} || (cat /var/folders/*/*/*/carthage-xcodebuild.*.log; false)
+      run: carthage bootstrap --cache-builds --platform ${{ matrix.platform }} --configuration Debug || (cat /var/folders/*/*/*/carthage-xcodebuild.*.log; false)
       env:
         GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Test ${{ matrix.platform }}
