@@ -55,5 +55,6 @@ jobs:
     - name: Install Swift ${{ matrix.swift }} and test
       env:
         SWIFT_VERSION: ${{ matrix.swift }}
-      run: eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
-    - run: swift test
+      run: |
+        eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
+        swift test
