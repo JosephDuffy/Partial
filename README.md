@@ -21,7 +21,7 @@ partialSize.height = nil
 try CGSize(partial: partialSize) // Throws `Partial<CGSize>.Error<CGFloat>.keyPathNotSet(\.height)`
 ```
 
-⚠️️ Dynamic member lookup requires Swift 5.1, which is currently in beta. If you are using Swift 5.0 please substitute dynamic member lookup for the subscript ⚠️
+⚠️️ Dynamic member lookup requires Swift 5.1. If you are using Swift 5.0 please substitute dynamic member lookup for the subscript ⚠️
 
 ```swift
 // Requires Swift 5.1
