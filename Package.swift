@@ -19,7 +19,7 @@ let package = Package(
     targets: [
         .target(name: "Partial"),
         .testTarget(name: "PartialTests", dependencies: ["Partial", "Quick", "Nimble"]), // dev
-        .target(name: "CIDependencies", dependencies: ["Danger", "swiftlint"], path: "Resources"), // dev
+        .target(name: "CIDependencies", dependencies: ["swiftlint", "danger-swift"], path: "Resources"), // dev
     ],
     swiftLanguageVersions: [.v5]
 )
