@@ -24,7 +24,8 @@ jobs:
         key: ${{ runner.os }}-xcode_${{ matrix.xcode }}-swiftpm-${{ hashFiles(format('{0}{1}', github.workspace, '/Package.resolved')) }}
         restore-keys: |
           ${{ runner.os }}-xcode_${{ matrix.xcode }}-swiftpm-
-    - run: swift test
+    - name: SwiftPM tests
+      run: swift test --skip-update
 
   xcode_tests:
     name: ${{ matrix.platform }} on Xcode ${{ matrix.xcode }}
@@ -95,4 +96,4 @@ jobs:
         SWIFT_VERSION: ${{ matrix.swift }}
       run: |
         eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
-        swift test
+        swift test --skip-update
