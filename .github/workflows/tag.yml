@@ -15,8 +15,8 @@ jobs:
 
     - name: Build carthage archive
       run: carthage build --archive --platform iOS,macOS,tvOS,watchOS
-    - name: Deploy
-      uses: docker://softprops/action-gh-release
+    - name: Deploy to GitHub
+      uses: softprops/action-gh-release@v1
       with:
         files: Partial.framework.zip
       env:
