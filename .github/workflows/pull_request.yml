@@ -18,10 +18,13 @@ jobs:
       with:
         node-version: ${{ steps.node_version.outputs.version }}
 
+    - name: Calculate Yarn cache directory
+      id: yarn_cache_directory
+      run: echo ::set-output name=directory::$(yarn cache dir)
     - name: Cache Yarn
       uses: actions/cache@preview
       with:
-        path: ~/.cache/yarn
+        path: ${{ steps.yarn_cache_directory.outputs.directory }}
         key: ${{ runner.os }}-yarn-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
         restore-keys: |
           ${{ runner.os }}-yarn-
