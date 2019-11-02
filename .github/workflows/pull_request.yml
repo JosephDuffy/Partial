@@ -9,20 +9,41 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Setup Node.js 10.16.3
+
+    - name: Read .node-version
+      id: node_version
+      run: echo ::set-output name=version::$(cat .node-version)
+    - name: Setup Node.js ${{ steps.node_version.outputs.version }}
       uses: actions/setup-node@v1
       with:
-        node-version: 10.16.3
+        node-version: ${{ steps.node_version.outputs.version }}
+
+    - name: Calculate Yarn cache directory
+      id: yarn_cache_directory
+      run: echo ::set-output name=directory::$(yarn cache dir)
+    - name: Cache Yarn
+      uses: actions/cache@preview
+      with:
+        path: ${{ steps.yarn_cache_directory.outputs.directory }}
+        key: ${{ runner.os }}-yarn-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-
     - name: yarn install
       run: yarn install
+
+    - name: Cache SwiftPM
+      uses: actions/cache@preview
+      with:
+        path: .build
+        key: ${{ runner.os }}-swiftpm-${{ hashFiles(format('{0}{1}', github.workspace, '/Package.resolved')) }}
+        restore-keys: |
+          ${{ runner.os }}-swiftpm-
     - name: Build CI Dependencies
       run: swift build --skip-update --target CIDependencies
-    - name: Build danger-swift
-      run: swift build --skip-update --product danger-swift
     - name: Run Danger
       run: swift run --skip-update danger-swift ci --danger-js-path $(yarn bin danger) --verbose
       env:
-        DANGER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   pod_lib_lint:
     name: pod lib lint
@@ -30,7 +51,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+
+    - name: Cache Bundler
+      uses: actions/cache@preview
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-bundler-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-bundler-
     - name: bundle install
       run: bundle install --deployment
+
     - name: pod lib lint
       run: bundle exec pod lib lint
