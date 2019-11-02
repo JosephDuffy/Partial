@@ -45,7 +45,7 @@ jobs:
     - name: Run Danger
       run: swift run --skip-update --configuration release danger-swift ci --danger-js-path $(yarn bin danger) --verbose
       env:
-        DANGER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   pod_lib_lint:
     name: pod lib lint
