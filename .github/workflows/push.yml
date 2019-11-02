@@ -28,16 +28,35 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: bundle install
-      run: bundle install --deployment
+
     - name: Select Xcode ${{ matrix.xcode }}
       run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
+
+    - name: Cache Bundler
+      uses: actions/cache@preview
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-bundler-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-bundler-
+    - name: bundle install
+      run: bundle install --deployment
+
+    - name: Cache Carthage
+      uses: actions/cache@preview
+      with:
+        path: Carthage
+        key: ${{ runner.os }}-xcode_${{ matrix.xcode }}-${{ matrix.platform }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
+        restore-keys: |
+          ${{ runner.os }}-carthage-
     - name: carthage bootstrap
       run: carthage bootstrap --cache-builds --platform ${{ matrix.platform }} --configuration Debug || (cat /var/folders/*/*/*/carthage-xcodebuild.*.log; false)
       env:
         GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Test ${{ matrix.platform }}
       run: bundle exec fastlane scan --clean --scheme "Partial-${{ matrix.platform }}"
+
     - name: Coveralls
       run: bash <(curl -s https://codecov.io/bash)
 
@@ -52,10 +71,23 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Install Swift ${{ matrix.swift }} and test
+
+    - name: Cache swiftenv
+      id: swiftenv-cache
+      uses: actions/cache@preview
+      with:
+        path: ~/.swiftenv
+        key: ${{ runner.os }}-swift_${{ matrix.swift }}
+
+    - name: Install Swift ${{ matrix.swift }}
+      if: steps.swiftenv-cache.outputs.cache-hit != 'true'
       env:
         SWIFT_VERSION: ${{ matrix.swift }}
+      run: eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
+
+    - name: Test
       run: |
-        # These must be done together so that `swift` is in `PATH`
-        eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
+        export SWIFTENV_ROOT="$HOME/.swiftenv"
+        export PATH="$SWIFTENV_ROOT/bin:$SWIFTENV_ROOT/shims:$PATH"
+        swiftenv rehash
         swift test
