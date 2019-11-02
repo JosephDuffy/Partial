@@ -81,12 +81,6 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: Cache swiftenv
-      id: swiftenv-cache
-      uses: actions/cache@preview
-      with:
-        path: ~/.swiftenv
-        key: ${{ runner.os }}-swift_${{ matrix.swift }}
     - name: Cache SwiftPM
       uses: actions/cache@preview
       with:
