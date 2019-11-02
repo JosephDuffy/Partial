@@ -13,8 +13,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+
     - name: Select Xcode ${{ matrix.xcode }}
       run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
+
+    - name: Cache SwiftPM
+      uses: actions/cache@preview
+      with:
+        path: .build
+        key: ${{ runner.os }}-xcode_${{ matrix.xcode }}-swiftpm-${{ hashFiles(format('{0}{1}', github.workspace, '/Package.resolved')) }}
+        restore-keys: |
+          ${{ runner.os }}-xcode_${{ matrix.xcode }}-swiftpm-
     - run: swift test
 
   xcode_tests:
@@ -78,6 +87,13 @@ jobs:
       with:
         path: ~/.swiftenv
         key: ${{ runner.os }}-swift_${{ matrix.swift }}
+    - name: Cache SwiftPM
+      uses: actions/cache@preview
+      with:
+        path: .build
+        key: ${{ runner.os }}-swift_${{ matrix.swift }}-swiftpm-${{ hashFiles(format('{0}{1}', github.workspace, '/Package.resolved')) }}
+        restore-keys: |
+          ${{ runner.os }}-swift_${{ matrix.swift }}-swiftpm-
 
     - name: Install Swift ${{ matrix.swift }} and test
       if: steps.swiftenv-cache.outputs.cache-hit != 'true'
