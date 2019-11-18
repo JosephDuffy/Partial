@@ -2,29 +2,12 @@
 
 ## Build generated
 build/
-DerivedData/
 
-## Various settings
-*.pbxuser
-!default.pbxuser
-*.mode1v3
-!default.mode1v3
-*.mode2v3
-!default.mode2v3
-*.perspectivev3
-!default.perspectivev3
+## User settings
 xcuserdata/
-
-## Other
-*.moved-aside
-*.xccheckout
-*.xcscmblueprint
 
 ## Obj-C/Swift specific
 *.hmap
-*.ipa
-*.dSYM.zip
-*.dSYM
 
 # Swift Package Manager
 .build
@@ -33,11 +16,11 @@ xcuserdata/
 # Carthage
 Carthage
 
-# Node
-node_modules
-
 # macOS
 .DS_Store
+
+# Node
+node_modules
 
 # Documentation
 docs/
