@@ -5,11 +5,11 @@ on: [push]
 jobs:
   swiftpm_tests:
     name: SwiftPM on Xcode ${{ matrix.xcode }}
-    runs-on: macOS-latest
+    runs-on: macos-latest
     strategy:
       fail-fast: false
       matrix:
-        xcode: ["10.3", "11.1", "11.2"]
+        xcode: ["11.1", "11.2"]
 
     steps:
     - uses: actions/checkout@v1
@@ -29,11 +29,11 @@ jobs:
 
   xcode_tests:
     name: ${{ matrix.platform }} on Xcode ${{ matrix.xcode }}
-    runs-on: macOS-latest
+    runs-on: macos-latest
     strategy:
       fail-fast: false
       matrix:
-        xcode: ["10.3", "11.1", "11.2"]
+        xcode: ["11.1", "11.2"]
         platform: ["iOS", "tvOS", "macOS"]
 
     steps:
