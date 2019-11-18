@@ -2,8 +2,9 @@ name: Release
 
 on:
   push:
-    branch: master
     tags: '*'
+    branches:
+     - master
 
 jobs:
   github_release:
