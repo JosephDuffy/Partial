@@ -70,6 +70,22 @@ jobs:
     - name: Coveralls
       run: bash <(curl -s https://codecov.io/bash)
 
+  carthage_archive:
+    name: Carthage Archive on Xcode ${{ matrix.xcode }}
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        xcode: ["11.2"]
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Select Xcode ${{ matrix.xcode }}
+      run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
+
+    - name: Build Carthage Archive
+      run: carthage build --archive --platform iOS,macOS,tvOS,watchOS
+
   linux_tests:
     name: SwiftPM on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
