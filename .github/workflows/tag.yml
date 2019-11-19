@@ -3,9 +3,9 @@ name: Release
 on:
   push:
     branches:
-     - master
+    - master
     tags:
-     - '*'
+    - '*'
 
 jobs:
   github_release:
