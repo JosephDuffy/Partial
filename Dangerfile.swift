@@ -264,7 +264,7 @@ func checkProjectVersions() {
             ),
         ],
         files: [
-            VersionFile(path: "./\(projectName).podspec", interpreter: .regex("\\.version\\s*= \"(.*)\"")),
+            VersionFile(path: "./\(projectName).podspec", interpreter: .regex("\\.version= \"(.*)\"")),
         ],
         versionKind: "framework"
     )
