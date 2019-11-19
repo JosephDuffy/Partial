@@ -246,10 +246,6 @@ func checkSwiftVersions() {
                 interpreter: .regex("SWIFT_VERSION = (.*);")
             ),
             VersionFile(
-                path: ".swift-version",
-                interpreter: .closure({ $0.trimmingCharacters(in: .whitespacesAndNewlines) })
-            ),
-            VersionFile(
                 path: "./\(projectName).podspec",
                 interpreter: .regex("\\.swift_version\\s*= \"(.*)\"")
             ),
@@ -268,7 +264,7 @@ func checkProjectVersions() {
             ),
         ],
         files: [
-            VersionFile(path: "./\(projectName).podspec", interpreter: .regex("\\.version\\s*= \"(.*)\"")),
+            VersionFile(path: "./\(projectName).podspec", interpreter: .regex("\\.version= \"(.*)\"")),
         ],
         versionKind: "framework"
     )
