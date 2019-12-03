@@ -155,6 +155,15 @@
         }
       },
       {
+        "package": "SwiftChecksDangerPlugin",
+        "repositoryURL": "https://github.com/JosephDuffy/SwiftChecksDangerPlugin.git",
+        "state": {
+          "branch": null,
+          "revision": "5a389396e97fb7d9eb9682ed275194a1490890af",
+          "version": "0.1.0"
+        }
+      },
+      {
         "package": "SwiftLint",
         "repositoryURL": "https://github.com/Realm/SwiftLint",
         "state": {

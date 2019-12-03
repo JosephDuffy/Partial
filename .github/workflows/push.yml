@@ -18,10 +18,10 @@ jobs:
       run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
 
     - name: Cache SwiftPM
-      uses: actions/cache@preview
+      uses: actions/cache@v1
       with:
         path: .build
-        key: ${{ runner.os }}-xcode_${{ matrix.xcode }}-swiftpm-${{ hashFiles(format('{0}{1}', github.workspace, '/Package.resolved')) }}
+        key: ${{ runner.os }}-xcode_${{ matrix.xcode }}-swiftpm-${{ hashFiles('**/Package.resolved') }}
         restore-keys: |
           ${{ runner.os }}-xcode_${{ matrix.xcode }}-swiftpm-
     - name: SwiftPM tests
@@ -43,7 +43,7 @@ jobs:
       run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
 
     - name: Cache Bundler
-      uses: actions/cache@preview
+      uses: actions/cache@v1
       with:
         path: vendor/bundle
         key: ${{ runner.os }}-bundler-${{ hashFiles('**/Gemfile.lock') }}
@@ -53,7 +53,7 @@ jobs:
       run: bundle install --deployment
 
     - name: Cache Carthage
-      uses: actions/cache@preview
+      uses: actions/cache@v1
       with:
         path: Carthage
         key: ${{ runner.os }}-xcode_${{ matrix.xcode }}-${{ matrix.platform }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
@@ -101,10 +101,10 @@ jobs:
     - uses: actions/checkout@v1
 
     - name: Cache SwiftPM
-      uses: actions/cache@preview
+      uses: actions/cache@v1
       with:
         path: .build
-        key: ${{ runner.os }}-swift_${{ matrix.swift }}-swiftpm-${{ hashFiles(format('{0}{1}', github.workspace, '/Package.resolved')) }}
+        key: ${{ runner.os }}-swift_${{ matrix.swift }}-swiftpm-${{ hashFiles('**/Package.resolved') }}
         restore-keys: |
           ${{ runner.os }}-swift_${{ matrix.swift }}-swiftpm-
 

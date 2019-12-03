@@ -2,14 +2,12 @@ name: Release
 
 on:
   push:
-    branches:
-    - master
     tags:
-    - 'v*'
+      - 'v*'
 
 jobs:
   github_release:
-    name: GitHub
+    name: Create GitHub Release with Prebuilt Carthage Frameworks (Xcode ${{ matrix.xcode }})
     runs-on: macos-latest
     strategy:
       matrix:
@@ -39,7 +37,7 @@ jobs:
     - uses: actions/checkout@v1
 
     - name: Cache Bundler
-      uses: actions/cache@preview
+      uses: actions/cache@v1
       with:
         path: vendor/bundle
         key: ${{ runner.os }}-bundler-${{ hashFiles('**/Gemfile.lock') }}
@@ -50,16 +48,18 @@ jobs:
 
     - name: Deploy pod
       run: bundle exec pod trunk push
+      env:
+        COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
 
-  docs_upload:
-    name: Documentation
+  build_docs:
+    name: Build Docs
     runs-on: macos-latest
 
     steps:
     - uses: actions/checkout@v1
 
     - name: Cache Bundler
-      uses: actions/cache@preview
+      uses: actions/cache@v1
       with:
         path: vendor/bundle
         key: ${{ runner.os }}-bundler-${{ hashFiles('**/Gemfile.lock') }}
@@ -71,9 +71,28 @@ jobs:
     - name: Build docs
       run: bundle exec jazzy
 
+    - name: Upload Docs
+      uses: actions/upload-artifact@v1
+      with:
+        name: docs
+        path: docs
+
+  docs_upload:
+    needs: [build_docs]
+    name: Upload Documentation
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Download Docs
+      uses: actions/download-artifact@v1
+      with:
+        name: docs
+
     - name: Deploy docs
-      uses: JamesIves/github-pages-deploy-action@master
-      env:
-        ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: JamesIves/github-pages-deploy-action@releases/v3
+      with:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         BRANCH: gh-pages
         FOLDER: docs
