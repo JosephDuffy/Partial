@@ -53,8 +53,8 @@ jobs:
       env:
         COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
 
-  docs_upload:
-    name: Documentation
+  build_docs:
+    name: Build Docs
     runs-on: macos-latest
 
     steps:
@@ -73,9 +73,28 @@ jobs:
     - name: Build docs
       run: bundle exec jazzy
 
+    - name: Upload Docs
+      uses: actions/upload-artifact@v1
+      with:
+        name: docs
+        path: docs
+
+  docs_upload:
+    needs: [build_docs]
+    name: Upload Documentation
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Download Docs
+      uses: actions/download-artifact@v1
+      with:
+        name: docs
+
     - name: Deploy docs
-      uses: JamesIves/github-pages-deploy-action@master
-      env:
-        ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: JamesIves/github-pages-deploy-action@releases/v3
+      with:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         BRANCH: gh-pages
         FOLDER: docs
