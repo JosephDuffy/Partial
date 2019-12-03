@@ -8,9 +8,11 @@ let package = Package(
     ],
     products: [
         .library(name: "Partial", targets: ["Partial"]),
+        .library(name: "DangerDeps", type: .dynamic, targets: ["DangerDependencies"]), // dev
     ],
     dependencies: [
         .package(url: "https://github.com/danger/swift.git", from: "2.0.0"), // dev
+        .package(url: "https://github.com/JosephDuffy/SwiftChecksDangerPlugin.git", from: "0.1.0"), // dev
         .package(url: "https://github.com/Quick/Quick.git", from: "2.0.0"), // dev
         .package(url: "https://github.com/Quick/Nimble.git", from: "8.0.0"), // dev
         .package(url: "https://github.com/Realm/SwiftLint", from: "0.32.0"), // dev
@@ -19,7 +21,7 @@ let package = Package(
     targets: [
         .target(name: "Partial"),
         .testTarget(name: "PartialTests", dependencies: ["Partial", "Quick", "Nimble"]), // dev
-        .target(name: "CIDependencies", dependencies: ["Danger", "swiftlint", "danger-swift"], path: "Resources"), // dev
+        .target(name: "DangerDependencies", dependencies: ["Danger", "swiftlint", "danger-swift", "SwiftChecksDangerPlugin"], path: "DangerDependencies"), // dev
     ],
     swiftLanguageVersions: [.v5]
 )

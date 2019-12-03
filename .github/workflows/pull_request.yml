@@ -28,8 +28,8 @@ jobs:
         key: ${{ runner.os }}-swiftpm-${{ hashFiles('**/Package.resolved') }}
         restore-keys: |
           ${{ runner.os }}-swiftpm-
-    - name: Build CI Dependencies
-      run: swift build --skip-update --target CIDependencies
+    - name: Build Danger and Danger Dependencies
+      run: swift build --skip-update --target DangerDependencies
     - name: Run Danger
       run: swift run --skip-update danger-swift ci --danger-js-path $(yarn bin danger) --verbose
       env:
