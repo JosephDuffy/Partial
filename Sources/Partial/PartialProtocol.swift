@@ -116,7 +116,6 @@ extension PartialProtocol {
         fatalError("Dynamic member lookup requires Swift 5.1")
     }
 
-    #if swift(>=5.1)
     /// Retrieve or set a value for the given key path. Returns `nil` if the value has not been set. If the value is set
     /// to nil it will remove the value.
     ///
@@ -134,7 +133,7 @@ extension PartialProtocol {
             }
         }
     }
-    #endif
+
 }
 
 extension PartialProtocol where Wrapped: PartialConvertible {
