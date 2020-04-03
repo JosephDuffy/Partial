@@ -6,9 +6,15 @@ jobs:
   danger:
     name: Danger
     runs-on: macos-latest
+    strategy:
+      matrix:
+        xcode: ["11.4"]
 
     steps:
     - uses: actions/checkout@v1
+
+    - name: Select Xcode ${{ matrix.xcode }}
+      run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
 
     - name: Read .node-version
       id: node-version
@@ -38,9 +44,15 @@ jobs:
   pod_lib_lint:
     name: pod lib lint
     runs-on: macos-latest
+    strategy:
+      matrix:
+        xcode: ["11.4"]
 
     steps:
     - uses: actions/checkout@v1
+
+    - name: Select Xcode ${{ matrix.xcode }}
+      run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
 
     - name: Cache Bundler
       uses: actions/cache@v1
