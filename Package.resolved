@@ -38,15 +38,6 @@
         }
       },
       {
-        "package": "PackageConfig",
-        "repositoryURL": "https://github.com/shibapm/PackageConfig.git",
-        "state": {
-          "branch": null,
-          "revision": "fd0829aac9851434b3d2db0890e27bc489fc973a",
-          "version": "0.12.2"
-        }
-      },
-      {
         "package": "Quick",
         "repositoryURL": "https://github.com/Quick/Quick.git",
         "state": {
@@ -62,15 +53,6 @@
           "branch": null,
           "revision": "fd5e9e99aada7432170366c9e95967011ce13bad",
           "version": "2.4.0"
-        }
-      },
-      {
-        "package": "Rocket",
-        "repositoryURL": "https://github.com/f-meloni/Rocket",
-        "state": {
-          "branch": null,
-          "revision": "61166b38e229e09b53becef2e495eb99f437438a",
-          "version": "1.0.1"
         }
       },
       {
@@ -110,15 +92,6 @@
         }
       },
       {
-        "package": "SwiftShell",
-        "repositoryURL": "https://github.com/kareman/SwiftShell",
-        "state": {
-          "branch": null,
-          "revision": "fb7fc2c9ad8811caf324431a508fb79e3fb74f99",
-          "version": "5.0.1"
-        }
-      },
-      {
         "package": "SwiftyTextTable",
         "repositoryURL": "https://github.com/scottrhoyt/SwiftyTextTable.git",
         "state": {
@@ -143,6 +116,15 @@
           "branch": null,
           "revision": "200046c93f6d5d78a6d72bfd9c0b27a95e9c0a2b",
           "version": "1.2.0"
+        }
+      },
+      {
+        "package": "Yams",
+        "repositoryURL": "https://github.com/jpsim/Yams.git",
+        "state": {
+          "branch": null,
+          "revision": "c947a306d2e80ecb2c0859047b35c73b8e1ca27f",
+          "version": "2.0.0"
         }
       }
     ]
