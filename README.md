@@ -21,16 +21,6 @@ partialSize.height = nil
 try CGSize(partial: partialSize) // Throws `Partial<CGSize>.Error<CGFloat>.keyPathNotSet(\.height)`
 ```
 
-⚠️️ Dynamic member lookup requires Swift 5.1. If you are using Swift 5.0 please substitute dynamic member lookup for the subscript ⚠️
-
-```swift
-// Requires Swift 5.1
-partialSize.width = 6016
-
-// Compatible with Swift 5.0
-partialSize[\.width] = 6016
-```
-
 # Documentation
 
 Partial is fully documented, with [code-level documentation available online](https://josephduffy.github.io/Partial/). The online documentation is generated from the source code with every release, so it is up-to-date with the latest release, but may be different to the code in `master`.
