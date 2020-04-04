@@ -10,7 +10,7 @@ public struct PartiallyBuilt<Value: PartialConvertible> {
         return try? projectedValue.unwrapped()
     }
 
-    public let projectedValue: PartialBuilder<Value>
+    public var projectedValue: PartialBuilder<Value>
 
     public init(builder: PartialBuilder<Value> = PartialBuilder<Value>()) {
         projectedValue = builder
