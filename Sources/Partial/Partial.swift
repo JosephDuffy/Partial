@@ -26,15 +26,15 @@ public struct Partial<Wrapped>: PartialProtocol, CustomStringConvertible {
     /// - Parameter keyPath: A keyPath path from `Wrapped` to a property of type `Value`.
     /// - Returns: The stored value.
     public func value<Value>(for keyPath: KeyPath<Wrapped, Value>) throws -> Value {
-        if let value = values[keyPath] {
-            if let value = value as? Value {
-                return value
-            } else {
-                preconditionFailure("Value has been set, but is not of type \(Value.self): \(value)")
-            }
-        } else {
+        guard let value = values[keyPath] else {
             throw Error.keyPathNotSet(keyPath)
         }
+
+        if let value = value as? Value {
+            return value
+        }
+
+        preconditionFailure("Value has been set, but is not of type \(Value.self): \(value)")
     }
 
     /// Updates the stored value for the given key path.
