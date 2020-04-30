@@ -95,7 +95,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-16.04, ubuntu-latest]
-        swift: ["5.2"]
+        swift: ["5.2.2"]
 
     steps:
     - uses: actions/checkout@v1
