@@ -108,12 +108,6 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-swift_${{ matrix.swift }}-swiftpm-
 
-    - name: Cache swiftenv
-      uses: actions/cache@v1
-      with:
-        path: ~/.swiftenv
-        key: ${{ runner.os }}-swiftenv
-
     - name: Install swiftenv
       run: |
         eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
