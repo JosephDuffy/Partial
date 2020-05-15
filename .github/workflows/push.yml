@@ -118,6 +118,6 @@ jobs:
       if: steps.swiftenv-cache.outputs.cache-hit != 'true'
       run: swiftenv install ${{ matrix.swift }}
 
-    - name: test
+    - name: swift test
       if: steps.swiftenv-cache.outputs.cache-hit != 'true'
       run: swift test --skip-update
