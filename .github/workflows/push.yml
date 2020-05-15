@@ -100,14 +100,6 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: Cache SwiftPM
-      uses: actions/cache@v1
-      with:
-        path: .build
-        key: ${{ runner.os }}-swift_${{ matrix.swift }}-swiftpm-${{ hashFiles('**/Package.resolved') }}
-        restore-keys: |
-          ${{ runner.os }}-swift_${{ matrix.swift }}-swiftpm-
-
     - name: Install swiftenv
       run: |
         eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
