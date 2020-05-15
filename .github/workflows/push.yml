@@ -29,7 +29,7 @@ jobs:
       run: swift test --enable-code-coverage
 
     - name: Convert coverage to lcov
-      run: xcrun llvm-cov export -format="lcov" .build/debug/Partial.xctest/Contents/MacOS/Partial -instr-profile .build/debug/codecov/default.profdata > coverage.lcov
+      run: xcrun llvm-cov export -format="lcov" .build/debug/PartialPackageTests.xctest/Contents/MacOS/PartialPackageTests -instr-profile .build/debug/codecov/default.profdata > coverage.lcov
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
