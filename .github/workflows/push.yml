@@ -25,7 +25,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-xcode_${{ matrix.xcode }}-swiftpm-${{ github.workspace }}-
     - name: SwiftPM tests
-      run: swift test --skip-update
+      run: swift test
 
   xcode_tests:
     name: ${{ matrix.platform }} on Xcode ${{ matrix.xcode }}
@@ -112,4 +112,4 @@ jobs:
 
     - name: swift test
       if: steps.swiftenv-cache.outputs.cache-hit != 'true'
-      run: swift test --skip-update
+      run: swift test
