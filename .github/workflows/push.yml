@@ -108,9 +108,16 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-swift_${{ matrix.swift }}-swiftpm-
 
-    - name: Install Swift ${{ matrix.swift }} and test
-      if: steps.swiftenv-cache.outputs.cache-hit != 'true'
+    - name: Install swiftenv
       run: |
         eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
-        swiftenv install ${{ matrix.swift }}
-        swift test --skip-update
+        echo "::set-env name=SWIFTENV_ROOT::$HOME/.swiftenv"
+        echo "::add-path::$SWIFTENV_ROOT/bin:$PATH"
+        
+    - name: Install Swift ${{ matrix.swift }}
+      if: steps.swiftenv-cache.outputs.cache-hit != 'true'
+      run: swiftenv install ${{ matrix.swift }}
+
+    - name: test
+      if: steps.swiftenv-cache.outputs.cache-hit != 'true'
+      run: swift test --skip-update
