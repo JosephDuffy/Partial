@@ -211,6 +211,23 @@ partialSize[\.height] = 3384
 try partialFoo.setValue(partialSize, for: \.size) // Sets `size` to `CGSize(width: 6016, height: 3384)`
 ```
 
+## Using the Property Wrapper
+
+`PartiallyBuilt` is a property wrapper that can be applied to any `PartialConvertible` property. The property wrapper's `projectedValue` is a `PartialBuilder`, allowing for the following usage:
+
+```swift
+struct Foo {
+    @PartiallyBuilt<CGSize>
+    var size: CGSize?
+}
+
+var foo = Foo()
+foo.size // nil
+foo.$size.width = 1024
+foo.$size.height = 720
+foo.size // CGSize(width: 1024, height: 720)
+```
+
 # Tests and CI
 
 Partial has a full test suite, which is run on [Travis CI](https://travis-ci.com/JosephDuffy/Partial) as part of pull requests. All tests must pass for a pull request to be merged.
