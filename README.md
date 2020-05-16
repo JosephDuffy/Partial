@@ -1,6 +1,6 @@
 # Partial
 
-[![Build Status](https://github.com/JosephDuffy/Partial/workflows/Tests/badge.svg)](https://launch-editor.github.com/actions?workflowID=Tests&event=push&nwo=JosephDuffy%2FPartial)
+[![Build Status](https://github.com/JosephDuffy/Partial/workflows/Tests/badge.svg)](https://github.com/JosephDuffy/Partial/actions?query=workflow%3ATests)
 [![Documentation](https://josephduffy.github.io/Partial/badge.svg)](https://josephduffy.github.io/Partial/)
 ![Compatible with macOS, iOS, watchOS, tvOS, and Linux](https://img.shields.io/badge/platforms-macOS%20%7C%20iOS%20%7C%20watchOS%20%7C%20tvOS%20%7C%20Linux-4BC51D.svg)
 [![SwiftPM Compatible](https://img.shields.io/badge/SwiftPM-compatible-4BC51D.svg?style=flat)](https://github.com/apple/swift-package-manager)
