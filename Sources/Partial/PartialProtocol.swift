@@ -112,6 +112,7 @@ extension PartialProtocol {
 
     /// Do not use this function; dynamic member lookup should only be used with a `KeyPath`, which
     /// requires at least Swift 5.1
+    @available(*, unavailable, message: "Dynamic member lookup requires Swift 5.1")
     public subscript(dynamicMember member: String) -> Never {
         fatalError("Dynamic member lookup requires Swift 5.1")
     }
