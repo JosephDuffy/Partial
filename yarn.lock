@@ -316,10 +316,10 @@ cross-spawn@^6.0.0:
     shebang-command "^1.2.0"
     which "^1.2.9"
 
-danger@^10.4.0:
-  version "10.4.0"
-  resolved "https://registry.yarnpkg.com/danger/-/danger-10.4.0.tgz#d4824115c9320e4032b2160a804602442252f5ad"
-  integrity sha512-HoJLLwJPQKhgelMRfu+tfyVO946QIxbEZ7kFlS1ZYYkGVwfvC9Zured/PbmGbUmplfFsrVPTF/S/kM1XdieB/w==
+danger@^10.4.1:
+  version "10.4.1"
+  resolved "https://registry.yarnpkg.com/danger/-/danger-10.4.1.tgz#7614539f234d642c8f95e625fb7f09f540a5fb97"
+  integrity sha512-C0Iz1FY1oZ1Rc98jNpdIirKasiBpSeEVj378UvCupdfJ6/ZvL/CIH1ae5NBnV6eT/GXkah44o8h/nAuXtGW6fQ==
   dependencies:
     "@babel/polyfill" "^7.2.5"
     "@octokit/rest" "^16.43.1"
@@ -345,7 +345,7 @@ danger@^10.4.0:
     memfs-or-file-map-to-github-branch "^1.1.0"
     micromatch "^3.1.10"
     node-cleanup "^2.1.2"
-    node-fetch "^2.3.0"
+    node-fetch "2.6.1"
     override-require "^1.1.1"
     p-limit "^2.1.0"
     parse-diff "^0.7.0"
@@ -1082,7 +1082,7 @@ node-cleanup@^2.1.2:
   resolved "https://registry.yarnpkg.com/node-cleanup/-/node-cleanup-2.1.2.tgz#7ac19abd297e09a7f72a71545d951b517e4dde2c"
   integrity sha1-esGavSl+Caf3KnFUXZUbUX5N3iw=
 
-node-fetch@^2.3.0:
+node-fetch@2.6.1, node-fetch@^2.3.0:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
   integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
