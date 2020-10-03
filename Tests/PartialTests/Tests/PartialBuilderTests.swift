@@ -330,6 +330,36 @@ final class PartialBuilderTests: QuickSpec {
                     expect { try? builder.value(for: keyPath) }.to(beNil())
                 }
             }
+            
+            context("creating a builder for a property") {
+                struct Root {
+                    let name: StringWrapper
+                }
+                
+                var rootBuilder: PartialBuilder<Root>!
+                var nameBuilder: AttachedPartialBuilder<StringWrapper>!
+                
+                beforeEach {
+                    rootBuilder = PartialBuilder<Root>()
+                    nameBuilder = rootBuilder.builder(for: \.name)
+                    nameBuilder.setValue("foo", for: \.string)
+                }
+
+                it("updates the original builder") {
+                    expect(rootBuilder.name?.string).to(equal("foo"))
+                }
+                
+                it("stops updating the original builder after detaching") {
+                    nameBuilder.detach()
+                    nameBuilder.setValue("bar", for: \.string)
+                    expect(rootBuilder.name).to(equal("foo"))
+                }
+                
+                it("resets original builder value to nil after becoming invalid") {
+                    nameBuilder.removeValue(for: \.string)
+                    expect(rootBuilder.name).to(beNil())
+                }
+            }
         }
     }
 
