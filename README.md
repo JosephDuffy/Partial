@@ -111,15 +111,28 @@ struct Root {
 }
 
 let rootBuilder = PartialBuilder<Root>()
-let size1Builder = PartialBuilder<CGSize>()
-let size2Builder = PartialBuilder<CGSize>()
+let size1Builder = rootBuilder.builder(for: \.size1)
+let size2Builder = rootBuilder.builder(for: \.size2)
 
-let size1Subscription = size1Builder.subscribeToAllChanges { _, size1Builder in
-    try? rootBuilder.setValue(size1Builder, for: \.size1)
-}
-let size2Subscription = size2Builder.subscribeToAllChanges { _, size2Builder in
-    try? rootBuilder.setValue(size2Builder, for: \.size2)
-}
+size1Builder.setValue(1, for: \.width)
+size1Builder.setValue(2, for: \.height)
+
+// These will evaluate to `true`
+try? size1Builder.unwrapped() == CGSize(width: 1, height: 2)
+try? rootBuilder.value(for: \.size1) == CGSize(width: 1, height: 2)
+try? rootBuilder.value(for: \.size2) == nil
+```
+
+The per-property builders are synchronized using a `Subscription`. You can cancel the subscription by using `PropertyBuilder.detach()`, like so:
+
+```swift
+size2Builder.detach()
+size2Builder.setValue(3, for: \.width)
+size2Builder.setValue(4, for: \.height)
+
+// These will evaluate to `true`
+try? size2Builder.unwrapped() == CGSize(width: 3, height: 4)
+try? rootBuilder.value(for: \.size2) == nil
 ```
 
 ## Dealing with `Optional`s

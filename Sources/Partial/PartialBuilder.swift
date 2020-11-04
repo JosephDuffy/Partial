@@ -60,6 +60,8 @@ open class PartialBuilder<Wrapped>: PartialProtocol, CustomStringConvertible {
 
     /// A collection of objects wrapping closures that will be notified when a change to a key path occurs
     private var keyPathSubscriptions: [PartialKeyPath<Wrapped>: Set<Weak<KeyPathChangesSubscription>>] = [:]
+    
+    private var attachedSubscription: Subscription?
 
     /// Create an empty `PartialBuilder`.
     required public init() {
@@ -146,7 +148,31 @@ open class PartialBuilder<Wrapped>: PartialProtocol, CustomStringConvertible {
         keyPathSubscriptions[keyPath]?.forEach { $0.wrapped?.notifyOfRemovable(oldValue: oldValue) }
         allChangesSubscriptions.forEach { $0.wrapped?.updateListener(keyPath, self) }
     }
+    
+    /// Creates a `PartialBuilder` for any `PartialConvertable` field in the type. It will automatically subscribe the original `PartialBuilder` to get updates made to the field's builder.
+    ///
+    /// - Parameter for: The `KeyPath` to create a `PartialBuilder` for.
+    ///
+    /// - Returns: The attached `PartialBuilder` for the path.
+    ///
+    /// - SeeAlso: `detach()`
+    public func builder<Value: PartialConvertible>(for keyPath: KeyPath<Wrapped, Value>) -> PartialBuilder<Value> {
+        let result = PartialBuilder<Value>()
+        result.attachedSubscription = result.subscribeToAllChanges { _, builder in
+            do {
+                try self.setValue(Value(partial: builder), for: keyPath)
+            } catch {
+                self.removeValue(for: keyPath)
+            }
+        }
+        return result
+    }
 
+    /// If this `PartialBuilder` was created via `builder(for:)`, it will detach it, cancelling any further updates to the originating `PartialBuilder`.
+    /// It will have no effect for root-level `PartialBuilder`s.
+    public func detach() {
+        attachedSubscription = nil
+    }
 }
 
 extension PartialBuilder {
