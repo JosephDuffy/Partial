@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
 
 jobs:
   github_release:
@@ -11,68 +11,68 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        xcode: ["11.4"]
+        xcode: ["12.1"]
 
     steps:
-    - uses: actions/checkout@v1
+      - uses: actions/checkout@v1
 
-    - name: Select Xcode ${{ matrix.xcode }}
-      run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
+      - name: Select Xcode ${{ matrix.xcode }}
+        run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
 
-    - name: Build carthage archive
-      run: carthage build --archive --platform iOS,macOS,tvOS,watchOS
+      - name: Build carthage archive
+        run: ./scripts/carthage.sh build --archive --platform iOS,macOS,tvOS,watchOS
 
-    - name: Deploy to GitHub
-      uses: softprops/action-gh-release@v1
-      with:
-        files: Partial.framework.zip
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Deploy to GitHub
+        uses: softprops/action-gh-release@v1
+        with:
+          files: Partial.framework.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   cocoa_pods_release:
     name: CocoaPods
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v1
+      - uses: actions/checkout@v1
 
-    - name: Cache Bundler
-      uses: actions/cache@v1
-      with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-bundler-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-bundler-
-    - name: bundle install
-      run: bundle install --deployment
+      - name: Cache Bundler
+        uses: actions/cache@v1
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-bundler-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bundler-
+      - name: bundle install
+        run: bundle install --deployment
 
-    - name: Deploy pod
-      run: bundle exec pod trunk push
-      env:
-        COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
+      - name: Deploy pod
+        run: bundle exec pod trunk push
+        env:
+          COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
 
   build_docs:
     name: Build Docs
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v1
+      - uses: actions/checkout@v1
 
-    - name: Cache Bundler
-      uses: actions/cache@v1
-      with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-bundler-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-bundler-
-    - name: bundle install
-      run: bundle install --deployment
+      - name: Cache Bundler
+        uses: actions/cache@v1
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-bundler-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bundler-
+      - name: bundle install
+        run: bundle install --deployment
 
-    - name: Build docs
-      run: bundle exec jazzy
+      - name: Build docs
+        run: bundle exec jazzy
 
-    - name: Upload Docs
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs
+      - name: Upload Docs
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
