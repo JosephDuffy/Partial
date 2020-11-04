@@ -1,0 +1,126 @@
+name: Tests
+
+on: [pull_request]
+
+jobs:
+  swiftpm_tests:
+    name: SwiftPM on Xcode ${{ matrix.xcode }}
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        xcode: ["12.1"]
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Select Xcode ${{ matrix.xcode }}
+        run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
+
+      - name: Cache SwiftPM
+        uses: actions/cache@v1
+        with:
+          path: .build
+          key: ${{ runner.os }}-xcode_${{ matrix.xcode }}-swiftpm-${{ github.workspace }}-${{ hashFiles('**/Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-xcode_${{ matrix.xcode }}-swiftpm-${{ github.workspace }}-
+
+      - name: SwiftPM tests
+        run: swift test --enable-code-coverage
+
+      - name: Convert coverage to lcov
+        run: xcrun llvm-cov export -format="lcov" .build/debug/PartialPackageTests.xctest/Contents/MacOS/PartialPackageTests -instr-profile .build/debug/codecov/default.profdata > coverage.lcov
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          fail_ci_if_error: true
+
+  xcode_tests:
+    name: ${{ matrix.platform }} on Xcode ${{ matrix.xcode }}
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        xcode: ["12.1"]
+        platform: ["iOS", "tvOS", "macOS"]
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Select Xcode ${{ matrix.xcode }}
+        run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
+
+      - name: Cache Bundler
+        uses: actions/cache@v1
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-bundler-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bundler-
+
+      - name: bundle install
+        run: bundle install --deployment
+
+      - name: Cache Carthage
+        uses: actions/cache@v1
+        with:
+          path: Carthage
+          key: ${{ runner.os }}-xcode_${{ matrix.xcode }}-${{ matrix.platform }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-carthage-
+
+      - name: carthage bootstrap
+        run: carthage bootstrap --cache-builds --platform ${{ matrix.platform }} --configuration Debug || (cat /var/folders/*/*/*/carthage-xcodebuild.*.log; false)
+        env:
+          GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Test ${{ matrix.platform }}
+        run: bundle exec fastlane scan --clean --scheme "Partial-${{ matrix.platform }}"
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          fail_ci_if_error: true
+
+  carthage_archive:
+    name: Carthage Archive on Xcode ${{ matrix.xcode }}
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        xcode: ["12.1"]
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Select Xcode ${{ matrix.xcode }}
+        run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
+
+      - name: Build Carthage Archive
+        run: carthage build --archive --platform iOS,macOS,tvOS,watchOS
+
+  linux_tests:
+    name: SwiftPM on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-16.04, ubuntu-latest]
+        swift: ["5.2.3"]
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Install swiftenv
+        run: |
+          eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
+          echo "::set-env name=SWIFTENV_ROOT::$HOME/.swiftenv"
+          echo "::add-path::$SWIFTENV_ROOT/bin:$PATH"
+
+      - name: Install Swift ${{ matrix.swift }}
+        if: steps.swiftenv-cache.outputs.cache-hit != 'true'
+        run: swiftenv install ${{ matrix.swift }}
+
+      - name: swift test
+        if: steps.swiftenv-cache.outputs.cache-hit != 'true'
+        run: swift test
