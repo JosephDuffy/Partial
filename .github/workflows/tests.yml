@@ -71,7 +71,7 @@ jobs:
             ${{ runner.os }}-carthage-
 
       - name: carthage bootstrap
-        run: carthage bootstrap --cache-builds --platform ${{ matrix.platform }} --configuration Debug || (cat /var/folders/*/*/*/carthage-xcodebuild.*.log; false)
+        run: ./scripts/carthage.sh bootstrap --cache-builds --platform ${{ matrix.platform }} --configuration Debug || (cat /var/folders/*/*/*/carthage-xcodebuild.*.log; false)
         env:
           GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -97,7 +97,7 @@ jobs:
         run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
 
       - name: Build Carthage Archive
-        run: carthage build --archive --platform iOS,macOS,tvOS,watchOS
+        run: ./scripts/carthage.sh build --archive --platform iOS,macOS,tvOS,watchOS
 
   linux_tests:
     name: SwiftPM on ${{ matrix.os }}

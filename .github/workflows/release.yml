@@ -20,7 +20,7 @@ jobs:
         run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
 
       - name: Build carthage archive
-        run: carthage build --archive --platform iOS,macOS,tvOS,watchOS
+        run: ./scripts/carthage.sh build --archive --platform iOS,macOS,tvOS,watchOS
 
       - name: Deploy to GitHub
         uses: softprops/action-gh-release@v1
