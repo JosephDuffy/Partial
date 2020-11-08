@@ -6,15 +6,44 @@ on:
       - "v*"
 
 jobs:
-  github_release:
-    name: Create GitHub Release with Prebuilt Carthage Frameworks (Xcode ${{ matrix.xcode }})
+  validate_release:
+    name: Validate Release
     runs-on: macos-latest
     strategy:
       matrix:
         xcode: ["12.1"]
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+
+      - name: Select Xcode ${{ matrix.xcode }}
+        run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
+
+      - name: Fetch tag
+        run: git fetch --depth=1 origin +${{ github.ref }}:${{ github.ref }}
+
+      - name: Get the release version
+        id: release_version
+        run: echo "::set-output name=version::${GITHUB_REF/refs\/tags\//}"
+
+      - run: pod spec lint --verbose
+
+      - name: Run update-version script
+        run: ./scripts/update-version.sh "${{ steps.release_version.outputs.version }})"
+
+      - name: Check update-version script was run before release
+        run: git diff --exit-code
+
+  github_release:
+    name: Create GitHub Release with Prebuilt Carthage Frameworks (Xcode ${{ matrix.xcode }})
+    needs: validate_release
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        xcode: ["12.1"]
+
+    steps:
+      - uses: actions/checkout@v2
 
       - name: Select Xcode ${{ matrix.xcode }}
         run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
@@ -22,15 +51,48 @@ jobs:
       - name: Build carthage archive
         run: ./scripts/carthage.sh build --archive --platform iOS,macOS,tvOS,watchOS
 
-      - name: Deploy to GitHub
-        uses: softprops/action-gh-release@v1
-        with:
-          files: Partial.framework.zip
+      - name: Fetch tag
+        run: git fetch --depth=1 origin +${{ github.ref }}:${{ github.ref }}
+
+      - name: Get the release version
+        id: release_version
+        run: echo "::set-output name=version::${GITHUB_REF/refs\/tags\//}"
+
+      - name: Get release description
+        run: |
+          description="$(git tag -ln --format=$'%(contents:subject)\n\n%(contents:body)' ${{ steps.release_version.outputs.version }})"
+          # Fix set-output for multiline strings: https://github.community/t/set-output-truncates-multiline-strings/16852
+          description="${description//'%'/'%25'}"
+          description="${description//$'\n'/'%0A'}"
+          description="${description//$'\r'/'%0D'}"
+          echo "$description"
+          echo "::set-output name=description::$description"
+        id: release_description
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.release_version.outputs.version }}
+          release_name: ${{ steps.release_version.outputs.version }}
+          body: ${{ steps.release_description.outputs.description }}
+          prerelease: ${{ startsWith(steps.release_version.outputs.version, 'v0.') || contains(steps.release_version.outputs.version, '-') }}
+
+      - name: Upload Carthage Archive
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./Partial.framework.zip
+          asset_name: Partial.framework.zip
+          asset_content_type: application/zip
 
   cocoa_pods_release:
     name: CocoaPods
+    needs: validate_release
     runs-on: macos-latest
 
     steps:
@@ -53,6 +115,7 @@ jobs:
 
   build_docs:
     name: Build Docs
+    needs: validate_release
     runs-on: macos-latest
 
     steps:
