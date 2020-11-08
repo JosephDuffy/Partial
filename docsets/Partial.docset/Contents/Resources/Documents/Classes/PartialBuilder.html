@@ -8,14 +8,22 @@
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Class/PartialBuilder" class="dashAnchor"></a>
     <a title="PartialBuilder Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">Partial Docs</a> (100% documented)</p>
+        <p><a href="../index.html">Partial 1.1.0 Docs</a> (100% documented)</p>
         <p class="header-right"><a href="https://github.com/JosephDuffy/Partial"><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -72,6 +80,7 @@
             <h1>PartialBuilder</h1>
               <div class="declaration">
                 <div class="language">
+                  
                   <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">class</span> <span class="kt">PartialBuilder</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/PartialProtocol.html">PartialProtocol</a></span><span class="p">,</span> <span class="kt">CustomStringConvertible</span></code></pre>
 
                 </div>
@@ -104,6 +113,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">KeyPathUpdate</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt"><a href="../Classes/PartialBuilder.html">PartialBuilder</a></span><span class="o">.</span><span class="kt">KeyPathUpdate</span><span class="p">:</span> <span class="kt">Equatable</span> <span class="k">where</span> <span class="kt">Value</span><span class="p">:</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -211,7 +221,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">partial</span><span class="p">:</span> <span class="kt"><a href="../Structs/Partial.html">Partial</a></span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">partial</span><span class="p">:</span> <span class="kt"><a href="../Structs/Partial.html">Partial</a></span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="o">&gt;</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -250,7 +260,7 @@
                     <code>
                     <a name="/s:7Partial0A7BuilderC7partialACyxGA2AVyxG_tcfc"></a>
                     <a name="//apple_ref/swift/Method/init(partial:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Partial0A7BuilderC7partialACyxGA2AVyxG_tcfc">init(partial:)</a>
+                    <a class="token" href="#/s:7Partial0A7BuilderC7partialACyxGA2AVyxG_tcfc">init(partial:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -296,7 +306,7 @@
                     <code>
                     <a name="/s:7Partial0A7BuilderC21subscribeToAllChanges14updateListenerAA12SubscriptionCys0A7KeyPathCyxG_ACyxGtc_tF"></a>
                     <a name="//apple_ref/swift/Method/subscribeToAllChanges(updateListener:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Partial0A7BuilderC21subscribeToAllChanges14updateListenerAA12SubscriptionCys0A7KeyPathCyxG_ACyxGtc_tF">subscribeToAllChanges(updateListener:)</a>
+                    <a class="token" href="#/s:7Partial0A7BuilderC21subscribeToAllChanges14updateListenerAA12SubscriptionCys0A7KeyPathCyxG_ACyxGtc_tF">subscribeToAllChanges(updateListener:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -347,7 +357,7 @@ path that was updated and this <code>PartialBuilder</code>.</p>
                     <code>
                     <a name="/s:7Partial0A7BuilderC19subscribeForChanges2to14updateListenerAA12SubscriptionCs7KeyPathCyxqd__G_yAC0jK6UpdateVyx_qd__GctlF"></a>
                     <a name="//apple_ref/swift/Method/subscribeForChanges(to:updateListener:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Partial0A7BuilderC19subscribeForChanges2to14updateListenerAA12SubscriptionCs7KeyPathCyxqd__G_yAC0jK6UpdateVyx_qd__GctlF">subscribeForChanges(to:updateListener:)</a>
+                    <a class="token" href="#/s:7Partial0A7BuilderC19subscribeForChanges2to14updateListenerAA12SubscriptionCs7KeyPathCyxqd__G_yAC0jK6UpdateVyx_qd__GctlF">subscribeForChanges(to:<wbr>updateListener:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -413,7 +423,7 @@ the key value and an update that provides the change that occured.</p>
                     <code>
                     <a name="/s:7Partial0A7BuilderC5value3forqd__s7KeyPathCyxqd__G_tKlF"></a>
                     <a name="//apple_ref/swift/Method/value(for:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Partial0A7BuilderC5value3forqd__s7KeyPathCyxqd__G_tKlF">value(for:)</a>
+                    <a class="token" href="#/s:7Partial0A7BuilderC5value3forqd__s7KeyPathCyxqd__G_tKlF">value(for:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -463,7 +473,7 @@ the key value and an update that provides the change that occured.</p>
                     <code>
                     <a name="/s:7Partial0A7BuilderC8setValue_3foryqd___s7KeyPathCyxqd__GtlF"></a>
                     <a name="//apple_ref/swift/Method/setValue(_:for:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Partial0A7BuilderC8setValue_3foryqd___s7KeyPathCyxqd__GtlF">setValue(_:for:)</a>
+                    <a class="token" href="#/s:7Partial0A7BuilderC8setValue_3foryqd___s7KeyPathCyxqd__GtlF">setValue(_:<wbr>for:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -521,7 +531,7 @@ the key value and an update that provides the change that occured.</p>
                     <code>
                     <a name="/s:7Partial0A7BuilderC11removeValue3forys7KeyPathCyxqd__G_tlF"></a>
                     <a name="//apple_ref/swift/Method/removeValue(for:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Partial0A7BuilderC11removeValue3forys7KeyPathCyxqd__G_tlF">removeValue(for:)</a>
+                    <a class="token" href="#/s:7Partial0A7BuilderC11removeValue3forys7KeyPathCyxqd__G_tlF">removeValue(for:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -562,13 +572,96 @@ the key value and an update that provides the change that occured.</p>
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Partial0A7BuilderC7builder3forACyqd__Gs7KeyPathCyxqd__G_tAA0A11ConvertibleRd__lF"></a>
+                    <a name="//apple_ref/swift/Method/builder(for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Partial0A7BuilderC7builder3forACyqd__Gs7KeyPathCyxqd__G_tAA0A11ConvertibleRd__lF">builder(for:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a <code>PartialBuilder</code> for any <code>PartialConvertable</code> field in the type. It will automatically subscribe the original <code>PartialBuilder</code> to get updates made to the field&rsquo;s builder.</p>
+<div class="aside aside-see-also">
+    <p class="aside-title">See also</p>
+    <p><code><a href="../Classes/PartialBuilder.html#/s:7Partial0A7BuilderC6detachyyF">detach()</a></code></p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">builder</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="k">for</span> <span class="nv">keyPath</span><span class="p">:</span> <span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">Wrapped</span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">PartialBuilder</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">Value</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/PartialConvertible.html">PartialConvertible</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>for</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code>KeyPath</code> to create a <code>PartialBuilder</code> for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The attached <code>PartialBuilder</code> for the path.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Partial0A7BuilderC6detachyyF"></a>
+                    <a name="//apple_ref/swift/Method/detach()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Partial0A7BuilderC6detachyyF">detach()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>If this <code>PartialBuilder</code> was created via <code><a href="../Classes/PartialBuilder.html#/s:7Partial0A7BuilderC7builder3forACyqd__Gs7KeyPathCyxqd__G_tAA0A11ConvertibleRd__lF">builder(for:)</a></code>, it will detach it, cancelling any further updates to the originating <code>PartialBuilder</code>.
+It will have no effect for root-level <code>PartialBuilder</code>s.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">detach</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://github.com/JosephDuffy/Partial" target="_blank" rel="external">Joseph Duffy</a>. All rights reserved. (Last updated: 2019-10-15)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.10.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2020 <a class="link" href="https://github.com/JosephDuffy/Partial" target="_blank" rel="external">Joseph Duffy</a>. All rights reserved. (Last updated: 2020-11-08)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

@@ -8,13 +8,21 @@
     <script src="js/jquery.min.js" defer></script>
     <script src="js/jazzy.js" defer></script>
     
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a title="Partial  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">Partial Docs</a> (100% documented)</p>
+        <p><a href="index.html">Partial 1.1.0 Docs</a> (100% documented)</p>
         <p class="header-right"><a href="https://github.com/JosephDuffy/Partial"><img src="img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -71,7 +79,7 @@
             
             <h1 id='partial' class='heading'>Partial</h1>
 
-<p><a href="https://travis-ci.com/JosephDuffy/Partial"><img src="https://api.travis-ci.com/JosephDuffy/Partial.svg" alt="Build Status"></a>
+<p><a href="https://github.com/JosephDuffy/Partial/actions?query=workflow%3ATests"><img src="https://github.com/JosephDuffy/Partial/workflows/Tests/badge.svg" alt="Build Status"></a>
 <a href="https://josephduffy.github.io/Partial/"><img src="https://josephduffy.github.io/Partial/badge.svg" alt="Documentation"></a>
 <img src="https://img.shields.io/badge/platforms-macOS%20%7C%20iOS%20%7C%20watchOS%20%7C%20tvOS%20%7C%20Linux-4BC51D.svg" alt="Compatible with macOS, iOS, watchOS, tvOS, and Linux">
 <a href="https://github.com/apple/swift-package-manager"><img src="https://img.shields.io/badge/SwiftPM-compatible-4BC51D.svg?style=flat" alt="SwiftPM Compatible"></a>
@@ -89,14 +97,6 @@
 <span class="n">partialSize</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="kc">nil</span>
 <span class="k">try</span> <span class="kt">CGSize</span><span class="p">(</span><span class="nv">partial</span><span class="p">:</span> <span class="n">partialSize</span><span class="p">)</span> <span class="c1">// Throws `Partial&lt;CGSize&gt;.Error&lt;CGFloat&gt;.keyPathNotSet(\.height)`</span>
 </code></pre>
-
-<p>⚠️️ Dynamic member lookup requires Swift 5.1, which is currently in beta. If you are using Swift 5.0 please substitute dynamic member lookup for the subscript ⚠️</p>
-<pre class="highlight swift"><code><span class="c1">// Requires Swift 5.1</span>
-<span class="n">partialSize</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">6016</span>
-
-<span class="c1">// Compatible with Swift 5.0</span>
-<span class="n">partialSize</span><span class="p">[\</span><span class="o">.</span><span class="n">width</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6016</span>
-</code></pre>
 <h1 id='documentation' class='heading'>Documentation</h1>
 
 <p>Partial is fully documented, with <a href="https://josephduffy.github.io/Partial/">code-level documentation available online</a>. The online documentation is generated from the source code with every release, so it is up-to-date with the latest release, but may be different to the code in <code>master</code>.</p>
@@ -107,15 +107,15 @@
 
 <span class="c1">// Set key paths</span>
 <span class="n">partialSize</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">6016</span>
-<span class="n">partialSize</span><span class="o">.</span><span class="nf">setValue</span><span class="p">(</span><span class="mi">3384</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="p">\</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
+<span class="n">partialSize</span><span class="o">.</span><span class="nf">setValue</span><span class="p">(</span><span class="mi">3384</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="err">\</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
 
 <span class="c1">// Retrieve key paths</span>
 <span class="n">partialSize</span><span class="o">.</span><span class="n">width</span> <span class="c1">// `Optional&lt;CGFloat&gt;(6016)`</span>
-<span class="k">try</span> <span class="n">partialSize</span><span class="o">.</span><span class="nf">value</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="p">\</span><span class="o">.</span><span class="n">height</span><span class="p">)</span> <span class="c1">// `3384`</span>
+<span class="k">try</span> <span class="n">partialSize</span><span class="o">.</span><span class="nf">value</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="err">\</span><span class="o">.</span><span class="n">height</span><span class="p">)</span> <span class="c1">// `3384`</span>
 
 <span class="c1">// Remove key paths</span>
 <span class="n">partialSize</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="kc">nil</span>
-<span class="n">partialSize</span><span class="o">.</span><span class="nf">removeValue</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="p">\</span><span class="o">.</span><span class="n">width</span><span class="p">)</span>
+<span class="n">partialSize</span><span class="o">.</span><span class="nf">removeValue</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="err">\</span><span class="o">.</span><span class="n">width</span><span class="p">)</span>
 </code></pre>
 <h2 id='key-path-considerations' class='heading'>Key path considerations</h2>
 
@@ -132,10 +132,10 @@
 
     <span class="kd">init</span><span class="o">&lt;</span><span class="kt">PartialType</span><span class="p">:</span> <span class="kt">PartialProtocol</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">partial</span><span class="p">:</span> <span class="kt">PartialType</span><span class="p">)</span> <span class="k">throws</span> <span class="k">where</span> <span class="kt">PartialType</span><span class="o">.</span><span class="kt">Wrapped</span> <span class="o">==</span> <span class="kt">SizeWrapper</span> <span class="p">{</span>
         <span class="c1">// Should unwrap `size` directly...</span>
-        <span class="n">size</span> <span class="o">=</span> <span class="k">try</span> <span class="n">partial</span><span class="o">.</span><span class="nf">value</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="p">\</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="k">try</span> <span class="n">partial</span><span class="o">.</span><span class="nf">value</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="err">\</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
         <span class="c1">// ... or unwrap each property of `size`?</span>
-        <span class="k">let</span> <span class="nv">width</span> <span class="o">=</span> <span class="k">try</span> <span class="n">partial</span><span class="o">.</span><span class="nf">value</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="p">\</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">width</span><span class="p">)</span>
-        <span class="k">let</span> <span class="nv">height</span> <span class="o">=</span> <span class="k">try</span> <span class="n">partial</span><span class="o">.</span><span class="nf">value</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="p">\</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
+        <span class="k">let</span> <span class="nv">width</span> <span class="o">=</span> <span class="k">try</span> <span class="n">partial</span><span class="o">.</span><span class="nf">value</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="err">\</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">width</span><span class="p">)</span>
+        <span class="k">let</span> <span class="nv">height</span> <span class="o">=</span> <span class="k">try</span> <span class="n">partial</span><span class="o">.</span><span class="nf">value</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="err">\</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
         <span class="n">size</span> <span class="o">=</span> <span class="kt">CGSize</span><span class="p">(</span><span class="nv">width</span><span class="p">:</span> <span class="n">width</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="n">height</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
@@ -150,25 +150,25 @@
 <span class="k">let</span> <span class="nv">allChangesSubscription</span> <span class="o">=</span> <span class="n">sizeBuilder</span><span class="o">.</span><span class="n">subscribeToAllChanges</span> <span class="p">{</span> <span class="p">(</span><span class="nv">keyPath</span><span class="p">:</span> <span class="kt">PartialKeyPath</span><span class="o">&lt;</span><span class="kt">CGSize</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">builder</span><span class="p">:</span> <span class="kt">PartialBuilder</span><span class="o">&lt;</span><span class="kt">CGSize</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">in</span>
     <span class="nf">print</span><span class="p">(</span><span class="s">"</span><span class="se">\(</span><span class="n">keyPath</span><span class="se">)</span><span class="s"> was updated"</span><span class="p">)</span>
 <span class="p">}</span>
-<span class="k">var</span> <span class="nv">widthSubscription</span> <span class="o">=</span> <span class="n">sizeBuilder</span><span class="o">.</span><span class="nf">subscribeForChanges</span><span class="p">(</span><span class="nv">to</span><span class="p">:</span> <span class="p">\</span><span class="o">.</span><span class="n">width</span><span class="p">)</span> <span class="p">{</span> <span class="n">update</span> <span class="k">in</span>
+<span class="k">var</span> <span class="nv">widthSubscription</span> <span class="o">=</span> <span class="n">sizeBuilder</span><span class="o">.</span><span class="nf">subscribeForChanges</span><span class="p">(</span><span class="nv">to</span><span class="p">:</span> <span class="err">\</span><span class="o">.</span><span class="n">width</span><span class="p">)</span> <span class="p">{</span> <span class="n">update</span> <span class="k">in</span>
     <span class="nf">print</span><span class="p">(</span><span class="s">"width has been updated from </span><span class="se">\(</span><span class="n">update</span><span class="o">.</span><span class="n">oldValue</span><span class="se">)</span><span class="s"> to </span><span class="se">\(</span><span class="n">update</span><span class="o">.</span><span class="n">newValue</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="c1">// Notifies both subscribers</span>
-<span class="n">partial</span><span class="p">[\</span><span class="o">.</span><span class="n">width</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6016</span>
+<span class="n">partial</span><span class="p">[</span><span class="err">\</span><span class="o">.</span><span class="n">width</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6016</span>
 
 <span class="c1">// Notifies the all changes subscriber</span>
-<span class="n">partial</span><span class="p">[\</span><span class="o">.</span><span class="n">height</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3384</span>
+<span class="n">partial</span><span class="p">[</span><span class="err">\</span><span class="o">.</span><span class="n">height</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3384</span>
 
 <span class="c1">// Subscriptions can be manually cancelled</span>
 <span class="n">allChangesSubscription</span><span class="o">.</span><span class="nf">cancel</span><span class="p">()</span>
 <span class="c1">// Notifies the width subscriber</span>
-<span class="n">partial</span><span class="p">[\</span><span class="o">.</span><span class="n">width</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6016</span>
+<span class="n">partial</span><span class="p">[</span><span class="err">\</span><span class="o">.</span><span class="n">width</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6016</span>
 
 <span class="c1">// Subscriptions will be cancelled when deallocated</span>
 <span class="n">widthSubscription</span> <span class="o">=</span> <span class="kc">nil</span>
 <span class="c1">// Does not notify any subscribers</span>
-<span class="n">partial</span><span class="p">[\</span><span class="o">.</span><span class="n">width</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6016</span>
+<span class="n">partial</span><span class="p">[</span><span class="err">\</span><span class="o">.</span><span class="n">width</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6016</span>
 </code></pre>
 
 <p>When building a more complex type I recommend using a builder per-property and using the builders to set the key paths on the root builder:</p>
@@ -178,15 +178,26 @@
 <span class="p">}</span>
 
 <span class="k">let</span> <span class="nv">rootBuilder</span> <span class="o">=</span> <span class="kt">PartialBuilder</span><span class="o">&lt;</span><span class="kt">Root</span><span class="o">&gt;</span><span class="p">()</span>
-<span class="k">let</span> <span class="nv">size1Builder</span> <span class="o">=</span> <span class="kt">PartialBuilder</span><span class="o">&lt;</span><span class="kt">CGSize</span><span class="o">&gt;</span><span class="p">()</span>
-<span class="k">let</span> <span class="nv">size2Builder</span> <span class="o">=</span> <span class="kt">PartialBuilder</span><span class="o">&lt;</span><span class="kt">CGSize</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="k">let</span> <span class="nv">size1Builder</span> <span class="o">=</span> <span class="n">rootBuilder</span><span class="o">.</span><span class="nf">builder</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="err">\</span><span class="o">.</span><span class="n">size1</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">size2Builder</span> <span class="o">=</span> <span class="n">rootBuilder</span><span class="o">.</span><span class="nf">builder</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="err">\</span><span class="o">.</span><span class="n">size2</span><span class="p">)</span>
 
-<span class="k">let</span> <span class="nv">size1Subscription</span> <span class="o">=</span> <span class="n">size1Builder</span><span class="o">.</span><span class="n">subscribeToAllChanges</span> <span class="p">{</span> <span class="n">_</span><span class="p">,</span> <span class="n">size1Builder</span> <span class="k">in</span>
-    <span class="k">try</span><span class="p">?</span> <span class="n">rootBuilder</span><span class="o">.</span><span class="nf">setValue</span><span class="p">(</span><span class="n">size1Builder</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="p">\</span><span class="o">.</span><span class="n">size1</span><span class="p">)</span>
-<span class="p">}</span>
-<span class="k">let</span> <span class="nv">size2Subscription</span> <span class="o">=</span> <span class="n">size2Builder</span><span class="o">.</span><span class="n">subscribeToAllChanges</span> <span class="p">{</span> <span class="n">_</span><span class="p">,</span> <span class="n">size2Builder</span> <span class="k">in</span>
-    <span class="k">try</span><span class="p">?</span> <span class="n">rootBuilder</span><span class="o">.</span><span class="nf">setValue</span><span class="p">(</span><span class="n">size2Builder</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="p">\</span><span class="o">.</span><span class="n">size2</span><span class="p">)</span>
-<span class="p">}</span>
+<span class="n">size1Builder</span><span class="o">.</span><span class="nf">setValue</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="err">\</span><span class="o">.</span><span class="n">width</span><span class="p">)</span>
+<span class="n">size1Builder</span><span class="o">.</span><span class="nf">setValue</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="err">\</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
+
+<span class="c1">// These will evaluate to `true`</span>
+<span class="k">try</span><span class="p">?</span> <span class="n">size1Builder</span><span class="o">.</span><span class="nf">unwrapped</span><span class="p">()</span> <span class="o">==</span> <span class="kt">CGSize</span><span class="p">(</span><span class="nv">width</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="mi">2</span><span class="p">)</span>
+<span class="k">try</span><span class="p">?</span> <span class="n">rootBuilder</span><span class="o">.</span><span class="nf">value</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="err">\</span><span class="o">.</span><span class="n">size1</span><span class="p">)</span> <span class="o">==</span> <span class="kt">CGSize</span><span class="p">(</span><span class="nv">width</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="mi">2</span><span class="p">)</span>
+<span class="k">try</span><span class="p">?</span> <span class="n">rootBuilder</span><span class="o">.</span><span class="nf">value</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="err">\</span><span class="o">.</span><span class="n">size2</span><span class="p">)</span> <span class="o">==</span> <span class="kc">nil</span>
+</code></pre>
+
+<p>The per-property builders are synchronized using a <code><a href="Classes/Subscription.html">Subscription</a></code>. You can cancel the subscription by using <code>PropertyBuilder.detach()</code>, like so:</p>
+<pre class="highlight swift"><code><span class="n">size2Builder</span><span class="o">.</span><span class="nf">detach</span><span class="p">()</span>
+<span class="n">size2Builder</span><span class="o">.</span><span class="nf">setValue</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="err">\</span><span class="o">.</span><span class="n">width</span><span class="p">)</span>
+<span class="n">size2Builder</span><span class="o">.</span><span class="nf">setValue</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="err">\</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
+
+<span class="c1">// These will evaluate to `true`</span>
+<span class="k">try</span><span class="p">?</span> <span class="n">size2Builder</span><span class="o">.</span><span class="nf">unwrapped</span><span class="p">()</span> <span class="o">==</span> <span class="kt">CGSize</span><span class="p">(</span><span class="nv">width</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="mi">4</span><span class="p">)</span>
+<span class="k">try</span><span class="p">?</span> <span class="n">rootBuilder</span><span class="o">.</span><span class="nf">value</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="err">\</span><span class="o">.</span><span class="n">size2</span><span class="p">)</span> <span class="o">==</span> <span class="kc">nil</span>
 </code></pre>
 <h2 id='dealing-with-code-optional-code-s' class='heading'>Dealing with <code>Optional</code>s</h2>
 
@@ -200,9 +211,9 @@
 </code></pre>
 
 <p>Setting and retrieving optional values with the <code>setValue(_:for:)</code> and <code>value(for:)</code> functions does not require anything special:</p>
-<pre class="highlight swift"><code><span class="k">try</span> <span class="n">fooPartial</span><span class="o">.</span><span class="nf">value</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="p">\</span><span class="o">.</span><span class="n">bar</span><span class="p">)</span> <span class="c1">// Throws `Partial&lt;Foo&gt;.Error&lt;String?&gt;.keyPathNotSet(\.bar)`</span>
-<span class="n">fooPartial</span><span class="o">.</span><span class="nf">setValue</span><span class="p">(</span><span class="kc">nil</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="p">\</span><span class="o">.</span><span class="n">bar</span><span class="p">)</span>
-<span class="k">try</span> <span class="n">fooPartial</span><span class="o">.</span><span class="nf">value</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="p">\</span><span class="o">.</span><span class="n">bar</span><span class="p">)</span> <span class="c1">// Returns `String?.none`</span>
+<pre class="highlight swift"><code><span class="k">try</span> <span class="n">fooPartial</span><span class="o">.</span><span class="nf">value</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="err">\</span><span class="o">.</span><span class="n">bar</span><span class="p">)</span> <span class="c1">// Throws `Partial&lt;Foo&gt;.Error&lt;String?&gt;.keyPathNotSet(\.bar)`</span>
+<span class="n">fooPartial</span><span class="o">.</span><span class="nf">setValue</span><span class="p">(</span><span class="kc">nil</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="err">\</span><span class="o">.</span><span class="n">bar</span><span class="p">)</span>
+<span class="k">try</span> <span class="n">fooPartial</span><span class="o">.</span><span class="nf">value</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="err">\</span><span class="o">.</span><span class="n">bar</span><span class="p">)</span> <span class="c1">// Returns `String?.none`</span>
 </code></pre>
 
 <p>However using dynamic member lookup requires a little more consideration:</p>
@@ -232,8 +243,8 @@
 <p>The <code>value(for:)</code> function will throw an error if the key path has not been set, which can be useful when adding conformance. For example, to add <code><a href="Protocols/PartialConvertible.html">PartialConvertible</a></code> conformance to <code>CGSize</code> you could use <code>value(for:)</code> to retrieve the <code>width</code> and <code>height</code> values:</p>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">CGSize</span><span class="p">:</span> <span class="kt">PartialConvertible</span> <span class="p">{</span>
     <span class="kd">public</span> <span class="kd">init</span><span class="o">&lt;</span><span class="kt">PartialType</span><span class="p">:</span> <span class="kt">PartialProtocol</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">partial</span><span class="p">:</span> <span class="kt">PartialType</span><span class="p">)</span> <span class="k">throws</span> <span class="k">where</span> <span class="kt">PartialType</span><span class="o">.</span><span class="kt">Wrapped</span> <span class="o">==</span> <span class="kt">CGSize</span> <span class="p">{</span>
-        <span class="k">let</span> <span class="nv">width</span> <span class="o">=</span> <span class="k">try</span> <span class="n">partial</span><span class="o">.</span><span class="nf">value</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="p">\</span><span class="o">.</span><span class="n">width</span><span class="p">)</span>
-        <span class="k">let</span> <span class="nv">height</span> <span class="o">=</span> <span class="k">try</span> <span class="n">partial</span><span class="o">.</span><span class="nf">value</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="p">\</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
+        <span class="k">let</span> <span class="nv">width</span> <span class="o">=</span> <span class="k">try</span> <span class="n">partial</span><span class="o">.</span><span class="nf">value</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="err">\</span><span class="o">.</span><span class="n">width</span><span class="p">)</span>
+        <span class="k">let</span> <span class="nv">height</span> <span class="o">=</span> <span class="k">try</span> <span class="n">partial</span><span class="o">.</span><span class="nf">value</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="err">\</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
         <span class="k">self</span><span class="o">.</span><span class="nf">init</span><span class="p">(</span><span class="nv">width</span><span class="p">:</span> <span class="n">width</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="n">height</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
@@ -253,11 +264,25 @@
 <span class="k">var</span> <span class="nv">partialFoo</span> <span class="o">=</span> <span class="kt">Partial</span><span class="o">&lt;</span><span class="kt">Foo</span><span class="o">&gt;</span><span class="p">()</span>
 <span class="k">var</span> <span class="nv">partialSize</span> <span class="o">=</span> <span class="kt">Partial</span><span class="o">&lt;</span><span class="kt">CGSize</span><span class="o">&gt;</span><span class="p">()</span>
 
-<span class="n">partialSize</span><span class="p">[\</span><span class="o">.</span><span class="n">width</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6016</span>
-<span class="k">try</span> <span class="n">partialFoo</span><span class="o">.</span><span class="nf">setValue</span><span class="p">(</span><span class="n">partialSize</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="p">\</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="c1">// Throws `Partial&lt;CGSize&gt;.Error.keyPathNotSet(\.height)`</span>
+<span class="n">partialSize</span><span class="p">[</span><span class="err">\</span><span class="o">.</span><span class="n">width</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6016</span>
+<span class="k">try</span> <span class="n">partialFoo</span><span class="o">.</span><span class="nf">setValue</span><span class="p">(</span><span class="n">partialSize</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="err">\</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="c1">// Throws `Partial&lt;CGSize&gt;.Error.keyPathNotSet(\.height)`</span>
 
-<span class="n">partialSize</span><span class="p">[\</span><span class="o">.</span><span class="n">height</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3384</span>
-<span class="k">try</span> <span class="n">partialFoo</span><span class="o">.</span><span class="nf">setValue</span><span class="p">(</span><span class="n">partialSize</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="p">\</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="c1">// Sets `size` to `CGSize(width: 6016, height: 3384)`</span>
+<span class="n">partialSize</span><span class="p">[</span><span class="err">\</span><span class="o">.</span><span class="n">height</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3384</span>
+<span class="k">try</span> <span class="n">partialFoo</span><span class="o">.</span><span class="nf">setValue</span><span class="p">(</span><span class="n">partialSize</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="err">\</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="c1">// Sets `size` to `CGSize(width: 6016, height: 3384)`</span>
+</code></pre>
+<h2 id='using-the-property-wrapper' class='heading'>Using the Property Wrapper</h2>
+
+<p><code>PartiallyBuilt</code> is a property wrapper that can be applied to any <code><a href="Protocols/PartialConvertible.html">PartialConvertible</a></code> property. The property wrapper&rsquo;s <code>projectedValue</code> is a <code><a href="Classes/PartialBuilder.html">PartialBuilder</a></code>, allowing for the following usage:</p>
+<pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">Foo</span> <span class="p">{</span>
+    <span class="kd">@PartiallyBuilt</span><span class="o">&lt;</span><span class="kt">CGSize</span><span class="o">&gt;</span>
+    <span class="k">var</span> <span class="nv">size</span><span class="p">:</span> <span class="kt">CGSize</span><span class="p">?</span>
+<span class="p">}</span>
+
+<span class="k">var</span> <span class="nv">foo</span> <span class="o">=</span> <span class="kt">Foo</span><span class="p">()</span>
+<span class="n">foo</span><span class="o">.</span><span class="n">size</span> <span class="c1">// nil</span>
+<span class="n">foo</span><span class="o">.</span><span class="err">$</span><span class="n">size</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">1024</span>
+<span class="n">foo</span><span class="o">.</span><span class="err">$</span><span class="n">size</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="mi">720</span>
+<span class="n">foo</span><span class="o">.</span><span class="n">size</span> <span class="c1">// CGSize(width: 1024, height: 720)</span>
 </code></pre>
 <h1 id='tests-and-ci' class='heading'>Tests and CI</h1>
 
@@ -308,8 +333,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://github.com/JosephDuffy/Partial" target="_blank" rel="external">Joseph Duffy</a>. All rights reserved. (Last updated: 2019-10-15)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.10.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2020 <a class="link" href="https://github.com/JosephDuffy/Partial" target="_blank" rel="external">Joseph Duffy</a>. All rights reserved. (Last updated: 2020-11-08)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
