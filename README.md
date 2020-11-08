@@ -243,7 +243,7 @@ foo.size // CGSize(width: 1024, height: 720)
 
 # Tests and CI
 
-Partial has a full test suite, which is run on [Travis CI](https://travis-ci.com/JosephDuffy/Partial) as part of pull requests. All tests must pass for a pull request to be merged.
+Partial has a full test suite, which is run on [GitHub Actions](https://github.com/JosephDuffy/Partial/actions?query=workflow%3ATests) as part of pull requests. All tests must pass for a pull request to be merged.
 
 Code coverage is collected and reported to to [Codecov](https://codecov.io/gh/JosephDuffy/Partial). 100% coverage is not possible; some lines of code should never be hit but are required for type-safety, and Swift does not track `deinit` functions as part of coverage. These limitations will be considered when reviewing a pull request that lowers the overall code coverage.
 
