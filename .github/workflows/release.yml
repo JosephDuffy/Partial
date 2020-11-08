@@ -6,8 +6,37 @@ on:
       - "v*"
 
 jobs:
+  validate_release:
+    name: Validate Release
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        xcode: ["12.1"]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Select Xcode ${{ matrix.xcode }}
+        run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
+
+      - name: Fetch tag
+        run: git fetch --depth=1 origin +${{ github.ref }}:${{ github.ref }}
+
+      - name: Get the release version
+        id: release_version
+        run: echo "::set-output name=version::${GITHUB_REF/refs\/tags\//}"
+
+      - run: pod spec lint --verbose
+
+      - name: Run update-version script
+        run: ./scripts/update-version.sh "${{ steps.release_version.outputs.version }})"
+
+      - name: Check update-version script was run before release
+        run: git diff --exit-code
+
   github_release:
     name: Create GitHub Release with Prebuilt Carthage Frameworks (Xcode ${{ matrix.xcode }})
+    needs: validate_release
     runs-on: macos-latest
     strategy:
       matrix:
@@ -63,6 +92,7 @@ jobs:
 
   cocoa_pods_release:
     name: CocoaPods
+    needs: validate_release
     runs-on: macos-latest
 
     steps:
@@ -85,6 +115,7 @@ jobs:
 
   build_docs:
     name: Build Docs
+    needs: validate_release
     runs-on: macos-latest
 
     steps:
