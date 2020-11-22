@@ -118,9 +118,7 @@ jobs:
           echo "$SWIFTENV_ROOT/bin" >> $GITHUB_PATH
 
       - name: Install Swift ${{ matrix.swift }}
-        if: steps.swiftenv-cache.outputs.cache-hit != 'true'
         run: swiftenv install ${{ matrix.swift }}
 
       - name: swift test
-        if: steps.swiftenv-cache.outputs.cache-hit != 'true'
         run: swift test
