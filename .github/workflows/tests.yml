@@ -114,8 +114,8 @@ jobs:
       - name: Install swiftenv
         run: |
           eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
-          echo "::set-env name=SWIFTENV_ROOT::$HOME/.swiftenv"
-          echo "::add-path::$SWIFTENV_ROOT/bin:$PATH"
+          echo "SWIFTENV_ROOT=$HOME/.swiftenv" >> $GITHUB_ENV
+          echo "$SWIFTENV_ROOT/bin" >> $GITHUB_PATH
 
       - name: Install Swift ${{ matrix.swift }}
         if: steps.swiftenv-cache.outputs.cache-hit != 'true'
