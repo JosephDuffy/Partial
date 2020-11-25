@@ -117,9 +117,15 @@ jobs:
     name: Build Docs
     needs: validate_release
     runs-on: macos-latest
+    strategy:
+      matrix:
+        xcode: ["12.1"]
 
     steps:
       - uses: actions/checkout@v1
+
+      - name: Select Xcode ${{ matrix.xcode }}
+        run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
 
       - name: Cache Bundler
         uses: actions/cache@v1
