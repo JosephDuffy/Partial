@@ -1,5 +1,5 @@
 workflows:
-  workflows/pre_checks.yml:
+  workflows/pr_checks.yml:
     jobs:
       danger:
         strategy:
