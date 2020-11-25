@@ -20,7 +20,7 @@ workflows:
         strategy:
           matrix:
             xcode: latest
-      validate_release:
+      build_docs:
         strategy:
           matrix:
             xcode: latest
