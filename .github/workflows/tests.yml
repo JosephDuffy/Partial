@@ -2,8 +2,9 @@ name: Tests
 
 on:
   push:
-    branches: [$default-branch]
   pull_request:
+    branches:
+      - "**:**" # PRs from forks have a prefix with `owner:`
 
 jobs:
   swiftpm_tests:
