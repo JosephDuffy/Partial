@@ -1,0 +1,22 @@
+name: Update Xcode Version
+
+on:
+  # Allow to be run manually
+  workflow_dispatch:
+  # Run at 8am UTC daily
+  schedule:
+    - cron: "0 8 * * *"
+
+jobs:
+  update-xcode-version:
+    name: Update Xcode Version
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.UPDATE_XCODE_VERSIONS_GITHUB_TOKEN }}
+
+      - uses: josephduffy/update-xcode-version-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}

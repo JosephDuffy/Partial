@@ -1,0 +1,43 @@
+workflows:
+  workflows/pre_checks.yml:
+    jobs:
+      danger:
+        strategy:
+          matrix:
+            xcode: latest
+      pod_lib_lint:
+        strategy:
+          matrix:
+            xcode: latest
+
+  workflows/release.yml:
+    jobs:
+      validate_release:
+        strategy:
+          matrix:
+            xcode: latest
+      github_release:
+        strategy:
+          matrix:
+            xcode: latest
+      validate_release:
+        strategy:
+          matrix:
+            xcode: latest
+
+  workflows/test.yml:
+    jobs:
+      swiftpm_tests:
+        strategy:
+          matrix:
+            xcode:
+              - last-major
+              - latest
+              - latest-beta
+      xcode_tests:
+        strategy:
+          matrix:
+            xcode:
+              - last-major
+              - latest
+              - latest-beta
