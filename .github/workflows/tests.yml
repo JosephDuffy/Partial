@@ -15,9 +15,7 @@ jobs:
       matrix:
         xcode:
           - '11.7'
-          - '12.2'
           - '12.3'
-
     steps:
       - uses: actions/checkout@v1
 
@@ -51,7 +49,6 @@ jobs:
       matrix:
         xcode:
           - '11.7'
-          - '12.2'
           - '12.3'
         platform: ["iOS", "tvOS", "macOS"]
 
