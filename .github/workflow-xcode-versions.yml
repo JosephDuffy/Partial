@@ -41,3 +41,7 @@ workflows:
               - last-major
               - latest
               - latest-beta
+      carthage_archive:
+        strategy:
+          matrix:
+            xcode: latest
