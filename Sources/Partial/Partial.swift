@@ -3,7 +3,6 @@ import Foundation
 /// A struct that mirrors the properties of `Wrapped`, making each of the
 /// types optional.
 public struct Partial<Wrapped>: PartialProtocol, CustomStringConvertible {
-
     /// An error that can be thrown by the `value(for:)` function.
     public enum Error<Value>: Swift.Error {
         /// The key path has not been set.
@@ -16,7 +15,7 @@ public struct Partial<Wrapped>: PartialProtocol, CustomStringConvertible {
     }
 
     /// The values that have been set.
-    private var values: [PartialKeyPath<Wrapped>: Any] = [:]
+    fileprivate var values: [PartialKeyPath<Wrapped>: Any] = [:]
 
     /// Create an empty `Partial`.
     public init() {}
@@ -51,5 +50,16 @@ public struct Partial<Wrapped>: PartialProtocol, CustomStringConvertible {
     public mutating func removeValue<Value>(for keyPath: KeyPath<Wrapped, Value>) {
         values.removeValue(forKey: keyPath)
     }
+}
 
+extension Partial: Encodable where Wrapped: PartialCodable {
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: Wrapped.CodingKey.self)
+
+        try values.forEach { pair in
+            let (keyPath, value) = pair
+
+            try Wrapped.encodeValue(value, for: keyPath, to: &container)
+        }
+    }
 }
