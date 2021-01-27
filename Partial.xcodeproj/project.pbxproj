@@ -42,6 +42,13 @@
 		D9A27B70228CBDD4001530A1 /* PartialConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A27B6C228CBDC5001530A1 /* PartialConvertible.swift */; };
 		D9C039B1224263610031B393 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9C039AF224263610031B393 /* Nimble.framework */; };
 		D9C039B4224263610031B393 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9C039B0224263610031B393 /* Quick.framework */; };
+		D9C0662325C1A95A00BD0509 /* PartialCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C0662225C1A95A00BD0509 /* PartialCodable.swift */; };
+		D9C0662425C1A95A00BD0509 /* PartialCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C0662225C1A95A00BD0509 /* PartialCodable.swift */; };
+		D9C0662525C1A95A00BD0509 /* PartialCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C0662225C1A95A00BD0509 /* PartialCodable.swift */; };
+		D9C0662625C1A95A00BD0509 /* PartialCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C0662225C1A95A00BD0509 /* PartialCodable.swift */; };
+		D9C0663625C1A97400BD0509 /* PartiallyBuiltTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C0663525C1A97400BD0509 /* PartiallyBuiltTests.swift */; };
+		D9C0663725C1A97400BD0509 /* PartiallyBuiltTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C0663525C1A97400BD0509 /* PartiallyBuiltTests.swift */; };
+		D9C0663825C1A97400BD0509 /* PartiallyBuiltTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C0663525C1A97400BD0509 /* PartiallyBuiltTests.swift */; };
 		D9E601CF2233E99D00B36B1E /* Partial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9E601C62233E99D00B36B1E /* Partial.framework */; };
 		D9E601DE2233EBED00B36B1E /* Partial.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91505C9221E04EB00EB5215 /* Partial.swift */; };
 		D9E601E02233EBED00B36B1E /* PartialBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91505CD221E052600EB5215 /* PartialBuilder.swift */; };
@@ -109,6 +116,8 @@
 		D9A27B6C228CBDC5001530A1 /* PartialConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartialConvertible.swift; sourceTree = "<group>"; };
 		D9C039AF224263610031B393 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = SOURCE_ROOT; };
 		D9C039B0224263610031B393 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = SOURCE_ROOT; };
+		D9C0662225C1A95A00BD0509 /* PartialCodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartialCodable.swift; sourceTree = "<group>"; };
+		D9C0663525C1A97400BD0509 /* PartiallyBuiltTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartiallyBuiltTests.swift; sourceTree = "<group>"; };
 		D9CA4437222FF3CD000E424B /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = SOURCE_ROOT; };
 		D9D933B4223492FD00E94AAE /* Partial.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Partial.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9E601C62233E99D00B36B1E /* Partial.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Partial.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -226,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				D91505C9221E04EB00EB5215 /* Partial.swift */,
+				D9C0662225C1A95A00BD0509 /* PartialCodable.swift */,
 				D91505CD221E052600EB5215 /* PartialBuilder.swift */,
 				D9F58EE122CA730B00931D29 /* Subscription.swift */,
 				D9F58EE022CA730B00931D29 /* Weak.swift */,
@@ -258,6 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				D9651AC622D26A53008DBB0E /* PartialTests.swift */,
+				D9C0663525C1A97400BD0509 /* PartiallyBuiltTests.swift */,
 				D9651AD022D27BE7008DBB0E /* Partial+PartialConvertibleTests.swift */,
 				D9651ACA22D26EFB008DBB0E /* PartialBuilderTests.swift */,
 				D9651AD422D28374008DBB0E /* PartialBuilder+PartialConvertibleTests.swift */,
@@ -571,6 +582,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9C0662325C1A95A00BD0509 /* PartialCodable.swift in Sources */,
 				D9F58EE622CA730B00931D29 /* Subscription.swift in Sources */,
 				D91505CA221E04EB00EB5215 /* Partial.swift in Sources */,
 				D9A27B6D228CBDC5001530A1 /* PartialConvertible.swift in Sources */,
@@ -586,6 +598,7 @@
 			files = (
 				D9651AC022D24673008DBB0E /* StringWrapperWrapper.swift in Sources */,
 				D9651ACB22D2788C008DBB0E /* PartialBuilderTests.swift in Sources */,
+				D9C0663625C1A97400BD0509 /* PartiallyBuiltTests.swift in Sources */,
 				D9651AC322D24678008DBB0E /* StringWrapper.swift in Sources */,
 				D992471922C15D6300A2B079 /* beNilWrappedInOptional.swift in Sources */,
 				D9651AD122D27BE7008DBB0E /* Partial+PartialConvertibleTests.swift in Sources */,
@@ -599,6 +612,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9C0662525C1A95A00BD0509 /* PartialCodable.swift in Sources */,
 				D9F58EE822CA730B00931D29 /* Subscription.swift in Sources */,
 				D9FFA6382235A407005D9A4D /* Partial.swift in Sources */,
 				D9A27B6F228CBDD3001530A1 /* PartialConvertible.swift in Sources */,
@@ -612,6 +626,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9C0662425C1A95A00BD0509 /* PartialCodable.swift in Sources */,
 				D9F58EE722CA730B00931D29 /* Subscription.swift in Sources */,
 				D9E601DE2233EBED00B36B1E /* Partial.swift in Sources */,
 				D9A27B6E228CBDD2001530A1 /* PartialConvertible.swift in Sources */,
@@ -627,6 +642,7 @@
 			files = (
 				D9651AC122D24673008DBB0E /* StringWrapperWrapper.swift in Sources */,
 				D9651ACC22D2788D008DBB0E /* PartialBuilderTests.swift in Sources */,
+				D9C0663725C1A97400BD0509 /* PartiallyBuiltTests.swift in Sources */,
 				D9651AC422D24678008DBB0E /* StringWrapper.swift in Sources */,
 				D992471A22C15D6500A2B079 /* beNilWrappedInOptional.swift in Sources */,
 				D9651AD222D27BE7008DBB0E /* Partial+PartialConvertibleTests.swift in Sources */,
@@ -640,6 +656,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9C0662625C1A95A00BD0509 /* PartialCodable.swift in Sources */,
 				D9F58EE922CA730B00931D29 /* Subscription.swift in Sources */,
 				D9FFA63B2235A408005D9A4D /* Partial.swift in Sources */,
 				D9A27B70228CBDD4001530A1 /* PartialConvertible.swift in Sources */,
@@ -655,6 +672,7 @@
 			files = (
 				D9651AC222D24673008DBB0E /* StringWrapperWrapper.swift in Sources */,
 				D9651ACD22D2788E008DBB0E /* PartialBuilderTests.swift in Sources */,
+				D9C0663825C1A97400BD0509 /* PartiallyBuiltTests.swift in Sources */,
 				D9651AC522D24679008DBB0E /* StringWrapper.swift in Sources */,
 				D992471B22C15D6900A2B079 /* beNilWrappedInOptional.swift in Sources */,
 				D9651AD322D27BE7008DBB0E /* Partial+PartialConvertibleTests.swift in Sources */,
