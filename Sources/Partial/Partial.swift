@@ -52,7 +52,12 @@ public struct Partial<Wrapped>: PartialProtocol, CustomStringConvertible {
     }
 }
 
-extension Partial: Encodable where Wrapped: PartialCodable {
+extension Partial: Codable where Wrapped: PartialCodable {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: Wrapped.CodingKey.self)
+        values = try Wrapped.decodeValuesInContainer(container)
+    }
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: Wrapped.CodingKey.self)
 

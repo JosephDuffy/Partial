@@ -9,6 +9,15 @@ final class PartialCodableTests: QuickSpec {
     override func spec() {
         describe("PartialCodable") {
             struct CodableType: Codable, PartialCodable, Hashable {
+                static func decodeValuesInContainer(_ container: KeyedDecodingContainer<CodingKeys>) throws -> [PartialKeyPath<CodableType>: Any] {
+                    var values: [PartialKeyPath<CodableType>: Any] = [:]
+
+                    values[\Self.foo] = try container.decodeIfPresent(String.self, forKey: .foo)
+                    values[\Self.bar] = try container.decodeIfPresent(Int.self, forKey: .bar)
+
+                    return values
+                }
+
                 static func encodeValue(
                     _ value: Any,
                     for keyPath: PartialKeyPath<CodableType>,
@@ -56,6 +65,18 @@ final class PartialCodableTests: QuickSpec {
                         do {
                             let decoder = JSONDecoder()
                             let decodedValue = try decoder.decode(CodableType.self, from: encodedData)
+
+                            expect(decodedValue.foo) == "foo"
+                            expect(decodedValue.bar) == 123
+                        } catch {
+                            fail("Should not throw: \(error)")
+                        }
+                    }
+
+                    it("should be usable to decode Partial<Wrapped>") {
+                        do {
+                            let decoder = JSONDecoder()
+                            let decodedValue = try decoder.decode(Partial<CodableType>.self, from: encodedData)
 
                             expect(decodedValue.foo) == "foo"
                             expect(decodedValue.bar) == 123
