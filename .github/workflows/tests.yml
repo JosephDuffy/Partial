@@ -107,25 +107,18 @@ jobs:
         run: ./scripts/carthage.sh build --archive --platform iOS,macOS,tvOS,watchOS
 
   linux_tests:
-    name: SwiftPM on ${{ matrix.os }}
+    name: Swift ${{ matrix.swift }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+    container:
+      image: swift:${{ matrix.swift }}
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-16.04, ubuntu-latest]
-        swift: ["5.2.3"]
+        os: [ubuntu-latest]
+        swift: ['5.2', '5.3']
 
     steps:
       - uses: actions/checkout@v1
-
-      - name: Install swiftenv
-        run: |
-          eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
-          echo "SWIFTENV_ROOT=$HOME/.swiftenv" >> $GITHUB_ENV
-          echo "$SWIFTENV_ROOT/bin" >> $GITHUB_PATH
-
-      - name: Install Swift ${{ matrix.swift }}
-        run: swiftenv install ${{ matrix.swift }}
 
       - name: swift test
         run: swift test
