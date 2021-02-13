@@ -1,4 +1,7 @@
 #!/bin/sh
 
-GYB_FILE="Sources/Partial/Codable/KeyPathCodingKeyCollectionBuilder.swift"
-gyb --line-directive '' -o "$GYB_FILE" "$GYB_FILE.gyb"
+KeyPathCodingKeyCollectionBuilder_FILE="Sources/Partial/Codable/KeyPathCodingKeyCollectionBuilder.swift"
+PartialCodableTests_FILE="Tests/PartialTests/Tests/PartialCodableTests.swift"
+
+gyb --line-directive '' -o "$KeyPathCodingKeyCollectionBuilder_FILE" "$KeyPathCodingKeyCollectionBuilder_FILE.gyb"
+gyb --line-directive '' -o "$PartialCodableTests_FILE" "$PartialCodableTests_FILE.gyb"
