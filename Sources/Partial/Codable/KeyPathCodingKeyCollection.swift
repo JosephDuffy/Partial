@@ -1,4 +1,8 @@
 public struct KeyPathCodingKeyCollection<Root, CodingKey: Swift.CodingKey & Hashable> {
+    public enum EncodeError: Error {
+        case invalidType(value: Any, expectedType: Any.Type)
+    }
+
     private typealias Encoder = (_ value: Any, _ container: inout KeyedEncodingContainer<CodingKey>) throws -> Void
     private typealias Decoder = (_ codingKey: CodingKey, _ container: KeyedDecodingContainer<CodingKey>) throws -> (Any, PartialKeyPath<Root>)?
 
@@ -16,8 +20,7 @@ public struct KeyPathCodingKeyCollection<Root, CodingKey: Swift.CodingKey & Hash
     public mutating func addPair<Value: Swift.Codable>(keyPath: KeyPath<Root, Value>, codingKey: CodingKey) {
         encoders[keyPath] = { value, container in
             guard let value = value as? Value else {
-                // TODO: Throw
-                return
+                throw EncodeError.invalidType(value: value, expectedType: Value.self)
             }
 
             try container.encode(value, forKey: codingKey)
