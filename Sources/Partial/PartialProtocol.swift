@@ -1,10 +1,10 @@
+#if swift(>=5.1)
 /// The protocol that `Partial` and `PartialBuilder` implement.
 /// It is not provided for consumers of Partial to implement this protocol; it is
 /// provided to ensure the API of `Partial` and `PartialBuilder` are identical, and
 /// to provide default implementations.
 @dynamicMemberLookup
 public protocol PartialProtocol {
-
     /// The type the partial will mirror the properties of.
     associatedtype Wrapped
 
@@ -27,8 +27,37 @@ public protocol PartialProtocol {
     ///
     /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
     mutating func removeValue<Value>(for keyPath: KeyPath<Wrapped, Value>)
-
 }
+#else
+/// The protocol that `Partial` and `PartialBuilder` implement.
+/// It is not provided for consumers of Partial to implement this protocol; it is
+/// provided to ensure the API of `Partial` and `PartialBuilder` are identical, and
+/// to provide default implementations.
+public protocol PartialProtocol {
+    /// The type the partial will mirror the properties of.
+    associatedtype Wrapped
+
+    /// Create an empty partial.
+    init()
+
+    /// Returns the value of the given key path, or throws an error if the value has not been set.
+    ///
+    /// - Parameter keyPath: A keyPath path from `Wrapped` to a property of type `Value`.
+    /// - Returns: The stored value.
+    func value<Value>(for keyPath: KeyPath<Wrapped, Value>) throws -> Value
+
+    /// Updates the stored value for the given key path.
+    ///
+    /// - Parameter value: The value to store against `keyPath`.
+    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
+    mutating func setValue<Value>(_ value: Value, for keyPath: KeyPath<Wrapped, Value>)
+
+    /// Removes the stored value for the given key path.
+    ///
+    /// - Parameter keyPath: A key path from `Wrapped` to a property of type `Value`.
+    mutating func removeValue<Value>(for keyPath: KeyPath<Wrapped, Value>)
+}
+#endif
 
 extension PartialProtocol {
 
@@ -110,13 +139,7 @@ extension PartialProtocol {
         }
     }
 
-    /// Do not use this function; dynamic member lookup should only be used with a `KeyPath`, which
-    /// requires at least Swift 5.1
-    @available(*, unavailable, message: "Dynamic member lookup requires Swift 5.1")
-    public subscript(dynamicMember member: String) -> Never {
-        fatalError("Dynamic member lookup requires Swift 5.1")
-    }
-
+    #if swift(>=5.1)
     /// Retrieve or set a value for the given key path. Returns `nil` if the value has not been set. If the value is set
     /// to nil it will remove the value.
     ///
@@ -134,7 +157,7 @@ extension PartialProtocol {
             }
         }
     }
-
+    #endif
 }
 
 extension PartialProtocol where Wrapped: PartialConvertible {
