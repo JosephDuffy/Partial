@@ -7,7 +7,7 @@ public protocol PartialCodable {
 }
 
 public struct KeyPathCodingKeyCollection<Root, CodingKey: Swift.CodingKey & Equatable> {
-    private typealias ValueEncoder = (_ value: Any, _ keyPath: PartialKeyPath<Root> ,_ container: inout KeyedEncodingContainer<CodingKey>) throws -> Void
+    private typealias ValueEncoder = (_ value: Any, _ keyPath: PartialKeyPath<Root>, _ container: inout KeyedEncodingContainer<CodingKey>) throws -> Void
     private typealias ValueDecoder = (_ codingKey: CodingKey,_ container: KeyedDecodingContainer<CodingKey>) throws -> (Any, PartialKeyPath<Root>)?
 
     private var valueEncoder: ValueEncoder = { _, _, _ in }
