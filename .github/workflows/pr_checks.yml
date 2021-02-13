@@ -27,6 +27,14 @@ jobs:
 
       - run: npm install
 
+      - name: Cache SwiftPM
+        uses: actions/cache@v1
+        with:
+          path: .build
+          key: ${{ runner.os }}-swiftpm-${{ hashFiles('**/Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-swiftpm-
+
       - name: Build Danger and Danger Dependencies
         run: swift build --target DangerDependencies
 
