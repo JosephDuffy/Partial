@@ -52,8 +52,8 @@ Key paths in Swift are very powerful, but by being so powerful they create a cou
 
 In general **I highly recommend you do not use key paths to a property of a property**. The reason for this is 2 fold:
 
- - It creates ambiguity when unwrapping a partial
- - Dynamic member lookup does not support key paths to a property of a property
+- It creates ambiguity when unwrapping a partial
+- Dynamic member lookup does not support key paths to a property of a property
 
 ```swift
 struct SizeWrapper: PartialConvertible {
