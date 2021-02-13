@@ -28,6 +28,9 @@ jobs:
       - name: yarn install
         run: yarn install
 
+      - name: Build Danger and Danger Dependencies
+        run: swift build --target DangerDependencies
+
       - name: Run Danger
         run: swift run danger-swift ci --danger-js-path $(yarn bin danger) --verbose
         env:
