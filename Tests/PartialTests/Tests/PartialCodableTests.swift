@@ -11,7 +11,7 @@ final class PartialCodableTests: QuickSpec {
             struct CodableType: Codable, PartialCodable, Hashable {
                 @KeyPathCodingKeyCollectionBuilder<Self, CodingKeys>
                 static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
-                    (\Self.stringValue, CodingKeys.foo)
+                    (\Self.stringValue, CodingKeys.stringValue)
                     (\Self.intValue, CodingKeys.intValue)
                 }
 
