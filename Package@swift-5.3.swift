@@ -18,8 +18,8 @@ let package = Package(
         .package(url: "https://github.com/Realm/SwiftLint", from: "0.32.0"),
     ],
     targets: [
-        .target(name: "Partial"),
-        .testTarget(name: "PartialTests", dependencies: ["Partial", "Quick", "Nimble"]),
+        .target(name: "Partial", exclude: ["Codable/KeyPathCodingKeyCollectionBuilder.swift.gyb"]),
+        .testTarget(name: "PartialTests", dependencies: ["Partial", "Quick", "Nimble"], exclude: ["Tests/PartialCodableTests.swift.gyb"]),
         .target(
             name: "DangerDependencies",
             dependencies: [

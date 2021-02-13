@@ -14,8 +14,8 @@ let package = Package(
         .package(url: "https://github.com/Quick/Nimble.git", from: "8.0.0"),
     ],
     targets: [
-        .target(name: "Partial"),
-        .testTarget(name: "PartialTests", dependencies: ["Partial", "Quick", "Nimble"]),
+        .target(name: "Partial", exclude: ["Codable/KeyPathCodingKeyCollectionBuilder.swift.gyb"]),
+        .testTarget(name: "PartialTests", dependencies: ["Partial", "Quick", "Nimble"], exclude: ["Tests/PartialCodableTests.swift.gyb"]),
     ],
     swiftLanguageVersions: [.v5]
 )
