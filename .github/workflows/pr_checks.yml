@@ -4,12 +4,11 @@ on: [pull_request]
 
 jobs:
   danger:
-    name: Danger
+    name: Danger (Xcode ${{ matrix.xcode }})
     runs-on: macos-latest
     strategy:
       matrix:
         xcode:
-
           - '12.4'
     steps:
       - uses: actions/checkout@v1
@@ -20,6 +19,7 @@ jobs:
       - name: Read .node-version
         id: node-version
         run: echo ::set-output name=version::$(cat .node-version)
+
       - name: Setup Node.js ${{ steps.node-version.outputs.version }}
         uses: actions/setup-node@v1
         with:
@@ -28,15 +28,6 @@ jobs:
       - name: yarn install
         run: yarn install
 
-      - name: Cache SwiftPM
-        uses: actions/cache@v1
-        with:
-          path: .build
-          key: ${{ runner.os }}-swiftpm-${{ hashFiles('**/Package.resolved') }}
-          restore-keys: |
-            ${{ runner.os }}-swiftpm-
-      - name: Build Danger and Danger Dependencies
-        run: swift build --target DangerDependencies
       - name: Run Danger
         run: swift run danger-swift ci --danger-js-path $(yarn bin danger) --verbose
         env:
