@@ -76,15 +76,3 @@ extension Partial: Codable where Wrapped: PartialCodable {
         }
     }
 }
-
-private extension KeyPath where Value: Encodable {
-    func encode<CodingKey: Swift.CodingKey>(_ value: Any, forKey codingKey: CodingKey, to container: inout KeyedEncodingContainer< CodingKey>) throws {
-        try container.encode(value as! Value, forKey: codingKey)
-    }
-}
-
-extension KeyPath {
-    var value: Value.Type {
-        Value.self
-    }
-}
