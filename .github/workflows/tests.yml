@@ -82,13 +82,61 @@ jobs:
         with:
           fail_ci_if_error: true
 
+  watchos_xcode_tests:
+    name: ${{ matrix.platform }} on Xcode ${{ matrix.xcode }}
+    runs-on: macos-11.0
+    strategy:
+      fail-fast: false
+      matrix:
+        xcode:
+          - "12.5"
+        platform: ["watchOS"]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Select Xcode ${{ matrix.xcode }}
+        run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
+
+      - name: Cache Bundler
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-bundler-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bundler-
+
+      - name: bundle install
+        run: bundle install --deployment
+
+      - name: Cache Carthage
+        uses: actions/cache@v2
+        with:
+          path: Carthage
+          key: ${{ runner.os }}-xcode_${{ matrix.xcode }}-${{ matrix.platform }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-carthage-
+
+      - name: carthage bootstrap
+        run: ./scripts/carthage.sh bootstrap --cache-builds --platform ${{ matrix.platform }} --configuration Debug || (cat /var/folders/*/*/*/carthage-xcodebuild.*.log; false)
+        env:
+          GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Test ${{ matrix.platform }}
+        run: bundle exec fastlane scan --clean --scheme "Partial-${{ matrix.platform }}"
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          fail_ci_if_error: true
+
   carthage_archive:
     name: Carthage Archive on Xcode ${{ matrix.xcode }}
     runs-on: macos-latest
     strategy:
       matrix:
         xcode:
-          - '12.4'
+          - "12.4"
     steps:
       - uses: actions/checkout@v2
 
