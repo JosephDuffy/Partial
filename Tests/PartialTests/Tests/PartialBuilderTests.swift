@@ -275,7 +275,7 @@ final class PartialBuilderTests: QuickSpec {
                 }
             }
 
-                #if swift(>=5.1)
+            #if swift(>=5.1)
             context("a non-optional key path set with dynamic member lookup") {
                 let keyPath = \StringWrapperWrapper.stringWrapper
                 var newValue: StringWrapper!
