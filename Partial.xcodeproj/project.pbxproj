@@ -44,12 +44,23 @@
 		D9A27B6E228CBDD2001530A1 /* PartialConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A27B6C228CBDC5001530A1 /* PartialConvertible.swift */; };
 		D9A27B6F228CBDD3001530A1 /* PartialConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A27B6C228CBDC5001530A1 /* PartialConvertible.swift */; };
 		D9A27B70228CBDD4001530A1 /* PartialConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A27B6C228CBDC5001530A1 /* PartialConvertible.swift */; };
+		D9A4E47425D85C8E00F3E6D9 /* KeyPathCodingKeyCollectionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A4E47025D85C8E00F3E6D9 /* KeyPathCodingKeyCollectionBuilder.swift */; };
+		D9A4E47525D85C8E00F3E6D9 /* KeyPathCodingKeyCollectionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A4E47025D85C8E00F3E6D9 /* KeyPathCodingKeyCollectionBuilder.swift */; };
+		D9A4E47625D85C8E00F3E6D9 /* KeyPathCodingKeyCollectionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A4E47025D85C8E00F3E6D9 /* KeyPathCodingKeyCollectionBuilder.swift */; };
+		D9A4E47725D85C8E00F3E6D9 /* KeyPathCodingKeyCollectionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A4E47025D85C8E00F3E6D9 /* KeyPathCodingKeyCollectionBuilder.swift */; };
+		D9A4E47C25D85C8E00F3E6D9 /* PartialCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A4E47225D85C8E00F3E6D9 /* PartialCodable.swift */; };
+		D9A4E47D25D85C8E00F3E6D9 /* PartialCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A4E47225D85C8E00F3E6D9 /* PartialCodable.swift */; };
+		D9A4E47E25D85C8E00F3E6D9 /* PartialCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A4E47225D85C8E00F3E6D9 /* PartialCodable.swift */; };
+		D9A4E47F25D85C8E00F3E6D9 /* PartialCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A4E47225D85C8E00F3E6D9 /* PartialCodable.swift */; };
+		D9A4E48025D85C8E00F3E6D9 /* KeyPathCodingKeyCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A4E47325D85C8E00F3E6D9 /* KeyPathCodingKeyCollection.swift */; };
+		D9A4E48125D85C8E00F3E6D9 /* KeyPathCodingKeyCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A4E47325D85C8E00F3E6D9 /* KeyPathCodingKeyCollection.swift */; };
+		D9A4E48225D85C8E00F3E6D9 /* KeyPathCodingKeyCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A4E47325D85C8E00F3E6D9 /* KeyPathCodingKeyCollection.swift */; };
+		D9A4E48325D85C8E00F3E6D9 /* KeyPathCodingKeyCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A4E47325D85C8E00F3E6D9 /* KeyPathCodingKeyCollection.swift */; };
+		D9A4E48925D85CC700F3E6D9 /* PartialCodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A4E48525D85CC700F3E6D9 /* PartialCodableTests.swift */; };
+		D9A4E48A25D85CC700F3E6D9 /* PartialCodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A4E48525D85CC700F3E6D9 /* PartialCodableTests.swift */; };
+		D9A4E48B25D85CC700F3E6D9 /* PartialCodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A4E48525D85CC700F3E6D9 /* PartialCodableTests.swift */; };
 		D9C039B1224263610031B393 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9C039AF224263610031B393 /* Nimble.framework */; };
 		D9C039B4224263610031B393 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9C039B0224263610031B393 /* Quick.framework */; };
-		D9C0662325C1A95A00BD0509 /* PartialCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C0662225C1A95A00BD0509 /* PartialCodable.swift */; };
-		D9C0662425C1A95A00BD0509 /* PartialCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C0662225C1A95A00BD0509 /* PartialCodable.swift */; };
-		D9C0662525C1A95A00BD0509 /* PartialCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C0662225C1A95A00BD0509 /* PartialCodable.swift */; };
-		D9C0662625C1A95A00BD0509 /* PartialCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C0662225C1A95A00BD0509 /* PartialCodable.swift */; };
 		D9C0663625C1A97400BD0509 /* PartiallyBuiltTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C0663525C1A97400BD0509 /* PartiallyBuiltTests.swift */; };
 		D9C0663725C1A97400BD0509 /* PartiallyBuiltTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C0663525C1A97400BD0509 /* PartiallyBuiltTests.swift */; };
 		D9C0663825C1A97400BD0509 /* PartiallyBuiltTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C0663525C1A97400BD0509 /* PartiallyBuiltTests.swift */; };
@@ -119,9 +130,14 @@
 		D9651AD422D28374008DBB0E /* PartialBuilder+PartialConvertibleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PartialBuilder+PartialConvertibleTests.swift"; sourceTree = "<group>"; };
 		D992471422C15D1800A2B079 /* beNilWrappedInOptional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = beNilWrappedInOptional.swift; sourceTree = "<group>"; };
 		D9A27B6C228CBDC5001530A1 /* PartialConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartialConvertible.swift; sourceTree = "<group>"; };
+		D9A4E47025D85C8E00F3E6D9 /* KeyPathCodingKeyCollectionBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyPathCodingKeyCollectionBuilder.swift; sourceTree = "<group>"; };
+		D9A4E47125D85C8E00F3E6D9 /* KeyPathCodingKeyCollectionBuilder.swift.gyb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = KeyPathCodingKeyCollectionBuilder.swift.gyb; sourceTree = "<group>"; };
+		D9A4E47225D85C8E00F3E6D9 /* PartialCodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartialCodable.swift; sourceTree = "<group>"; };
+		D9A4E47325D85C8E00F3E6D9 /* KeyPathCodingKeyCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyPathCodingKeyCollection.swift; sourceTree = "<group>"; };
+		D9A4E48425D85CC700F3E6D9 /* PartialCodableTests.swift.gyb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PartialCodableTests.swift.gyb; sourceTree = "<group>"; };
+		D9A4E48525D85CC700F3E6D9 /* PartialCodableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartialCodableTests.swift; sourceTree = "<group>"; };
 		D9C039AF224263610031B393 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = SOURCE_ROOT; };
 		D9C039B0224263610031B393 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = SOURCE_ROOT; };
-		D9C0662225C1A95A00BD0509 /* PartialCodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartialCodable.swift; sourceTree = "<group>"; };
 		D9C0663525C1A97400BD0509 /* PartiallyBuiltTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartiallyBuiltTests.swift; sourceTree = "<group>"; };
 		D9CA4437222FF3CD000E424B /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = SOURCE_ROOT; };
 		D9D933B4223492FD00E94AAE /* Partial.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Partial.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -239,8 +255,8 @@
 		D930CF9322B0058A00121F2B /* Partial */ = {
 			isa = PBXGroup;
 			children = (
+				D9A4E46F25D85C8E00F3E6D9 /* Codable */,
 				D91505C9221E04EB00EB5215 /* Partial.swift */,
-				D9C0662225C1A95A00BD0509 /* PartialCodable.swift */,
 				D91505CD221E052600EB5215 /* PartialBuilder.swift */,
 				D9F58EE122CA730B00931D29 /* Subscription.swift */,
 				D909A5FA25C200850020D21B /* PartiallyBuilt.swift */,
@@ -278,6 +294,8 @@
 				D9651AD022D27BE7008DBB0E /* Partial+PartialConvertibleTests.swift */,
 				D9651ACA22D26EFB008DBB0E /* PartialBuilderTests.swift */,
 				D9651AD422D28374008DBB0E /* PartialBuilder+PartialConvertibleTests.swift */,
+				D9A4E48525D85CC700F3E6D9 /* PartialCodableTests.swift */,
+				D9A4E48425D85CC700F3E6D9 /* PartialCodableTests.swift.gyb */,
 				D9F58ED822CA72F400931D29 /* PartialBuilderSubscriptionTests.swift */,
 			);
 			path = Tests;
@@ -289,6 +307,17 @@
 				D992471422C15D1800A2B079 /* beNilWrappedInOptional.swift */,
 			);
 			path = Matchers;
+			sourceTree = "<group>";
+		};
+		D9A4E46F25D85C8E00F3E6D9 /* Codable */ = {
+			isa = PBXGroup;
+			children = (
+				D9A4E47025D85C8E00F3E6D9 /* KeyPathCodingKeyCollectionBuilder.swift */,
+				D9A4E47125D85C8E00F3E6D9 /* KeyPathCodingKeyCollectionBuilder.swift.gyb */,
+				D9A4E47225D85C8E00F3E6D9 /* PartialCodable.swift */,
+				D9A4E47325D85C8E00F3E6D9 /* KeyPathCodingKeyCollection.swift */,
+			);
+			path = Codable;
 			sourceTree = "<group>";
 		};
 		D9C039AE224263140031B393 /* Frameworks */ = {
@@ -588,12 +617,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D9C0662325C1A95A00BD0509 /* PartialCodable.swift in Sources */,
+				D9A4E48025D85C8E00F3E6D9 /* KeyPathCodingKeyCollection.swift in Sources */,
+				D9A4E47425D85C8E00F3E6D9 /* KeyPathCodingKeyCollectionBuilder.swift in Sources */,
 				D909A5FB25C200850020D21B /* PartiallyBuilt.swift in Sources */,
 				D9F58EE622CA730B00931D29 /* Subscription.swift in Sources */,
 				D91505CA221E04EB00EB5215 /* Partial.swift in Sources */,
 				D9A27B6D228CBDC5001530A1 /* PartialConvertible.swift in Sources */,
 				D91505CE221E052600EB5215 /* PartialBuilder.swift in Sources */,
+				D9A4E47C25D85C8E00F3E6D9 /* PartialCodable.swift in Sources */,
 				D9F58EE222CA730B00931D29 /* Weak.swift in Sources */,
 				D92E76D0229D8A0D003EBC25 /* PartialProtocol.swift in Sources */,
 			);
@@ -611,6 +642,7 @@
 				D9651AD122D27BE7008DBB0E /* Partial+PartialConvertibleTests.swift in Sources */,
 				D9651AD522D28374008DBB0E /* PartialBuilder+PartialConvertibleTests.swift in Sources */,
 				D9F58EDA22CA72F400931D29 /* PartialBuilderSubscriptionTests.swift in Sources */,
+				D9A4E48925D85CC700F3E6D9 /* PartialCodableTests.swift in Sources */,
 				D9651AC722D26A53008DBB0E /* PartialTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -619,12 +651,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D9C0662525C1A95A00BD0509 /* PartialCodable.swift in Sources */,
+				D9A4E48225D85C8E00F3E6D9 /* KeyPathCodingKeyCollection.swift in Sources */,
+				D9A4E47625D85C8E00F3E6D9 /* KeyPathCodingKeyCollectionBuilder.swift in Sources */,
 				D909A5FD25C200850020D21B /* PartiallyBuilt.swift in Sources */,
 				D9F58EE822CA730B00931D29 /* Subscription.swift in Sources */,
 				D9FFA6382235A407005D9A4D /* Partial.swift in Sources */,
 				D9A27B6F228CBDD3001530A1 /* PartialConvertible.swift in Sources */,
 				D9FFA63A2235A407005D9A4D /* PartialBuilder.swift in Sources */,
+				D9A4E47E25D85C8E00F3E6D9 /* PartialCodable.swift in Sources */,
 				D9F58EE422CA730B00931D29 /* Weak.swift in Sources */,
 				D92E76D2229D8A67003EBC25 /* PartialProtocol.swift in Sources */,
 			);
@@ -634,12 +668,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D9C0662425C1A95A00BD0509 /* PartialCodable.swift in Sources */,
+				D9A4E48125D85C8E00F3E6D9 /* KeyPathCodingKeyCollection.swift in Sources */,
+				D9A4E47525D85C8E00F3E6D9 /* KeyPathCodingKeyCollectionBuilder.swift in Sources */,
 				D909A5FC25C200850020D21B /* PartiallyBuilt.swift in Sources */,
 				D9F58EE722CA730B00931D29 /* Subscription.swift in Sources */,
 				D9E601DE2233EBED00B36B1E /* Partial.swift in Sources */,
 				D9A27B6E228CBDD2001530A1 /* PartialConvertible.swift in Sources */,
 				D9E601E02233EBED00B36B1E /* PartialBuilder.swift in Sources */,
+				D9A4E47D25D85C8E00F3E6D9 /* PartialCodable.swift in Sources */,
 				D9F58EE322CA730B00931D29 /* Weak.swift in Sources */,
 				D92E76D1229D8A66003EBC25 /* PartialProtocol.swift in Sources */,
 			);
@@ -657,6 +693,7 @@
 				D9651AD222D27BE7008DBB0E /* Partial+PartialConvertibleTests.swift in Sources */,
 				D9651AD622D28374008DBB0E /* PartialBuilder+PartialConvertibleTests.swift in Sources */,
 				D9F58EDB22CA72F400931D29 /* PartialBuilderSubscriptionTests.swift in Sources */,
+				D9A4E48A25D85CC700F3E6D9 /* PartialCodableTests.swift in Sources */,
 				D9651AC822D26A53008DBB0E /* PartialTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -665,12 +702,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D9C0662625C1A95A00BD0509 /* PartialCodable.swift in Sources */,
+				D9A4E48325D85C8E00F3E6D9 /* KeyPathCodingKeyCollection.swift in Sources */,
+				D9A4E47725D85C8E00F3E6D9 /* KeyPathCodingKeyCollectionBuilder.swift in Sources */,
 				D909A5FE25C200850020D21B /* PartiallyBuilt.swift in Sources */,
 				D9F58EE922CA730B00931D29 /* Subscription.swift in Sources */,
 				D9FFA63B2235A408005D9A4D /* Partial.swift in Sources */,
 				D9A27B70228CBDD4001530A1 /* PartialConvertible.swift in Sources */,
 				D9FFA63D2235A408005D9A4D /* PartialBuilder.swift in Sources */,
+				D9A4E47F25D85C8E00F3E6D9 /* PartialCodable.swift in Sources */,
 				D9F58EE522CA730B00931D29 /* Weak.swift in Sources */,
 				D92E76D3229D8A67003EBC25 /* PartialProtocol.swift in Sources */,
 			);
@@ -688,6 +727,7 @@
 				D9651AD322D27BE7008DBB0E /* Partial+PartialConvertibleTests.swift in Sources */,
 				D9651AD722D28374008DBB0E /* PartialBuilder+PartialConvertibleTests.swift in Sources */,
 				D9F58EDC22CA72F400931D29 /* PartialBuilderSubscriptionTests.swift in Sources */,
+				D9A4E48B25D85CC700F3E6D9 /* PartialCodableTests.swift in Sources */,
 				D9651AC922D26A53008DBB0E /* PartialTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
