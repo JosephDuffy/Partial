@@ -22,7 +22,7 @@ public protocol PartialCodable {
     ///
     ///    let stringValue: String
     ///    let intValue: Int
-    ///}
+    /// }
     /// ```
     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKey> { get }
 }
