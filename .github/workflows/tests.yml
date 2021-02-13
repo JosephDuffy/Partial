@@ -17,18 +17,10 @@ jobs:
           - '11.7'
           - '12.4'
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
 
       - name: Select Xcode ${{ matrix.xcode }}
         run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
-
-      - name: Cache SwiftPM
-        uses: actions/cache@v1
-        with:
-          path: .build
-          key: ${{ runner.os }}-xcode_${{ matrix.xcode }}-swiftpm-${{ github.workspace }}-${{ hashFiles('**/Package.resolved') }}
-          restore-keys: |
-            ${{ runner.os }}-xcode_${{ matrix.xcode }}-swiftpm-${{ github.workspace }}-
 
       - name: SwiftPM tests
         run: swift test --enable-code-coverage
@@ -53,13 +45,13 @@ jobs:
         platform: ["iOS", "tvOS", "macOS"]
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
 
       - name: Select Xcode ${{ matrix.xcode }}
         run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
 
       - name: Cache Bundler
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: vendor/bundle
           key: ${{ runner.os }}-bundler-${{ hashFiles('**/Gemfile.lock') }}
@@ -70,7 +62,7 @@ jobs:
         run: bundle install --deployment
 
       - name: Cache Carthage
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: Carthage
           key: ${{ runner.os }}-xcode_${{ matrix.xcode }}-${{ matrix.platform }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
@@ -98,7 +90,7 @@ jobs:
         xcode:
           - '12.4'
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
 
       - name: Select Xcode ${{ matrix.xcode }}
         run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
@@ -115,10 +107,10 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        swift: ['5.2', '5.3']
+        swift: ['5.0', '5.1', '5.2', '5.3']
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
 
       - name: swift test
         run: swift test

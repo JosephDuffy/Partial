@@ -3,6 +3,7 @@
 [![Build Status](https://github.com/JosephDuffy/Partial/workflows/Tests/badge.svg)](https://github.com/JosephDuffy/Partial/actions?query=workflow%3ATests)
 [![Documentation](https://josephduffy.github.io/Partial/badge.svg)](https://josephduffy.github.io/Partial/)
 ![Compatible with macOS, iOS, watchOS, tvOS, and Linux](https://img.shields.io/badge/platforms-macOS%20%7C%20iOS%20%7C%20watchOS%20%7C%20tvOS%20%7C%20Linux-4BC51D.svg)
+![Compatible with Swift 5.0+](https://img.shields.io/badge/swift-5.0%2B-4BC51D.svg)
 [![SwiftPM Compatible](https://img.shields.io/badge/SwiftPM-compatible-4BC51D.svg?style=flat)](https://github.com/apple/swift-package-manager)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![CocoaPods Compatible](https://img.shields.io/badge/CocoaPods-compatible-4BC51D.svg?style=flat)](https://cocoapods.org/pods/Partial)
@@ -51,8 +52,8 @@ Key paths in Swift are very powerful, but by being so powerful they create a cou
 
 In general **I highly recommend you do not use key paths to a property of a property**. The reason for this is 2 fold:
 
- - It creates ambiguity when unwrapping a partial
- - Dynamic member lookup does not support key paths to a property of a property
+- It creates ambiguity when unwrapping a partial
+- Dynamic member lookup does not support key paths to a property of a property
 
 ```swift
 struct SizeWrapper: PartialConvertible {
