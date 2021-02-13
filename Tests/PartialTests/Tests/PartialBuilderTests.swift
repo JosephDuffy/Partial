@@ -342,15 +342,15 @@ final class PartialBuilderTests: QuickSpec {
                 }
             }
             #endif
-            
+
             context("creating a builder for a property") {
                 struct Root {
                     let name: StringWrapper
                 }
-                
+
                 var rootBuilder: PartialBuilder<Root>!
                 var nameBuilder: PartialBuilder<StringWrapper>!
-                
+
                 beforeEach {
                     rootBuilder = PartialBuilder<Root>()
                     nameBuilder = rootBuilder.builder(for: \.name)
@@ -360,13 +360,13 @@ final class PartialBuilderTests: QuickSpec {
                 it("updates the original builder") {
                     expect(rootBuilder[\.name]?.string).to(equal("foo"))
                 }
-                
+
                 it("stops updating the original builder after detaching") {
                     nameBuilder.detach()
                     nameBuilder.setValue("bar", for: \.string)
                     expect(rootBuilder[\.name]).to(equal("foo"))
                 }
-                
+
                 it("resets original builder value to nil after becoming invalid") {
                     nameBuilder.removeValue(for: \.string)
                     expect(rootBuilder[\.name]).to(beNil())
