@@ -1,11 +1,3 @@
-import Foundation
-
-public protocol PartialCodable {
-    associatedtype CodingKey: Swift.CodingKey & Hashable
-
-    static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKey> { get }
-}
-
 public struct KeyPathCodingKeyCollection<Root, CodingKey: Swift.CodingKey & Hashable> {
     private typealias Encoder = (_ value: Any, _ container: inout KeyedEncodingContainer<CodingKey>) throws -> Void
     private typealias Decoder = (_ codingKey: CodingKey, _ container: KeyedDecodingContainer<CodingKey>) throws -> (Any, PartialKeyPath<Root>)?
@@ -38,26 +30,5 @@ public struct KeyPathCodingKeyCollection<Root, CodingKey: Swift.CodingKey & Hash
                 return nil
             }
         }
-    }
-}
-
-@_functionBuilder
-public final class KeyPathCodingKeyCollectionBuilder<Root, CodingKey: Swift.CodingKey & Hashable> {
-    static func buildBlock<ValueA: Codable>(
-        _ pairA: (keyPath: KeyPath<Root, ValueA>, codingKey: CodingKey)
-    ) -> KeyPathCodingKeyCollection<Root, CodingKey> {
-        var collection = KeyPathCodingKeyCollection<Root, CodingKey>()
-        collection.addPair(keyPath: pairA.keyPath, codingKey: pairA.codingKey)
-        return collection
-    }
-
-    static func buildBlock<ValueA: Codable, ValueB: Codable>(
-        _ pairA: (keyPath: KeyPath<Root, ValueA>, codingKey: CodingKey),
-        _ pairB: (keyPath: KeyPath<Root, ValueB>, codingKey: CodingKey)
-    ) -> KeyPathCodingKeyCollection<Root, CodingKey> {
-        var collection = KeyPathCodingKeyCollection<Root, CodingKey>()
-        collection.addPair(keyPath: pairA.keyPath, codingKey: pairA.codingKey)
-        collection.addPair(keyPath: pairB.keyPath, codingKey: pairB.codingKey)
-        return collection
     }
 }
