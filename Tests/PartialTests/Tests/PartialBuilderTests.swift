@@ -1,4 +1,3 @@
-#if swift(>=5.1)
 import Quick
 import Nimble
 
@@ -365,4 +364,3 @@ final class PartialBuilderTests: QuickSpec {
     }
 
 }
-#endif
