@@ -1,3 +1,5 @@
+// This file is generated. Do not edit it.
+// swiftlint:disable function_parameter_count file_length type_body_length
 #if swift(>=5.4)
 @resultBuilder
 public final class KeyPathCodingKeyCollectionBuilder<Root, CodingKey: Swift.CodingKey & Hashable> {

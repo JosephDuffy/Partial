@@ -1,3 +1,5 @@
+// This file is generated. Do not edit it.
+// swiftlint:disable cyclomatic_complexity
 import Quick
 import Nimble
 import Foundation
