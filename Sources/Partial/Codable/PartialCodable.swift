@@ -16,12 +16,12 @@ public protocol PartialCodable {
     /// struct CodableType: Codable, PartialCodable, Hashable {
     ///    @KeyPathCodingKeyCollectionBuilder<Self, CodingKeys>
     ///    static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
-    ///        (\Self.foo, CodingKeys.foo)
-    ///        (\Self.bar, CodingKeys.bar)
+    ///        (\Self.stringValue, CodingKeys.stringValue)
+    ///        (\Self.intValue, CodingKeys.intValue)
     ///    }
     ///
-    ///    let foo: String
-    ///    let bar: Int
+    ///    let stringValue: String
+    ///    let intValue: Int
     ///}
     /// ```
     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKey> { get }

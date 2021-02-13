@@ -11,12 +11,12 @@ final class PartialCodableTests: QuickSpec {
             struct CodableType: Codable, PartialCodable, Hashable {
                 @KeyPathCodingKeyCollectionBuilder<Self, CodingKeys>
                 static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
-                    (\Self.foo, CodingKeys.foo)
-                    (\Self.bar, CodingKeys.bar)
+                    (\Self.stringValue, CodingKeys.foo)
+                    (\Self.intValue, CodingKeys.intValue)
                 }
 
-                let foo: String
-                let bar: Int
+                let stringValue: String
+                let intValue: Int
             }
 
             var partial: Partial<CodableType>!
@@ -27,8 +27,8 @@ final class PartialCodableTests: QuickSpec {
 
             context("with complete value") {
                 beforeEach {
-                    partial.foo = "foo"
-                    partial.bar = 123
+                    partial.stringValue = "foo"
+                    partial.intValue = 123
                 }
 
                 context("the encoded data") {
@@ -48,8 +48,8 @@ final class PartialCodableTests: QuickSpec {
                             let decoder = JSONDecoder()
                             let decodedValue = try decoder.decode(CodableType.self, from: encodedData)
 
-                            expect(decodedValue.foo) == "foo"
-                            expect(decodedValue.bar) == 123
+                            expect(decodedValue.stringValue) == "foo"
+                            expect(decodedValue.intValue) == 123
                         } catch {
                             fail("Should not throw: \(error)")
                         }
@@ -60,8 +60,8 @@ final class PartialCodableTests: QuickSpec {
                             let decoder = JSONDecoder()
                             let decodedValue = try decoder.decode(Partial<CodableType>.self, from: encodedData)
 
-                            expect(decodedValue.foo) == "foo"
-                            expect(decodedValue.bar) == 123
+                            expect(decodedValue.stringValue) == "foo"
+                            expect(decodedValue.intValue) == 123
                         } catch {
                             fail("Should not throw: \(error)")
                         }
