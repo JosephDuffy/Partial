@@ -36,11 +36,13 @@ final class PartialBuilderTests: QuickSpec {
                     }
                 }
 
+                #if swift(>=5.1)
                 context("dynamic member lookup") {
                     it("should return `nil`") {
                         expect(builder[dynamicMember: keyPath]).to(beNil())
                     }
                 }
+                #endif
             }
 
             context("an optional key path that has not been set") {
@@ -59,11 +61,13 @@ final class PartialBuilderTests: QuickSpec {
                     }
                 }
 
+                #if swift(>=5.1)
                 context("dynamic member lookup") {
                     it("should return `nil`") {
                         expect(builder[dynamicMember: keyPath]).to(beNil())
                     }
                 }
+                #endif
             }
 
             context("a non-optional key path that has been set") {
@@ -91,11 +95,13 @@ final class PartialBuilderTests: QuickSpec {
                     }
                 }
 
+                #if swift(>=5.1)
                 context("dynamic member lookup") {
                     it("should return the set value") {
                         expect(builder[dynamicMember: keyPath]) == newValue
                     }
                 }
+                #endif
 
                 context("description") {
                     it("should include description of the set value") {
@@ -140,11 +146,13 @@ final class PartialBuilderTests: QuickSpec {
                     }
                 }
 
+                #if swift(>=5.1)
                 context("dynamic member lookup") {
                     it("should return the set value") {
                         expect(builder[dynamicMember: keyPath]) == newValue
                     }
                 }
+                #endif
 
                 context("removeValue(for:)") {
                     beforeEach {
@@ -181,11 +189,13 @@ final class PartialBuilderTests: QuickSpec {
                     }
                 }
 
+                #if swift(>=5.1)
                 context("dynamic member lookup") {
                     it("should return `nil` wrapped in an Optional") {
                         expect(builder[dynamicMember: keyPath]).to(beNilWrappedInOptional())
                     }
                 }
+                #endif
 
                 context("removeValue(for:)") {
                     beforeEach {
@@ -265,6 +275,7 @@ final class PartialBuilderTests: QuickSpec {
                 }
             }
 
+                #if swift(>=5.1)
             context("a non-optional key path set with dynamic member lookup") {
                 let keyPath = \StringWrapperWrapper.stringWrapper
                 var newValue: StringWrapper!
@@ -330,6 +341,7 @@ final class PartialBuilderTests: QuickSpec {
                     expect(expression: { try? builder.value(for: keyPath) }).to(beNil())
                 }
             }
+            #endif
             
             context("creating a builder for a property") {
                 struct Root {
