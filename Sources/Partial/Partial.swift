@@ -55,16 +55,36 @@ public struct Partial<Wrapped>: PartialProtocol, CustomStringConvertible {
 extension Partial: Codable where Wrapped: PartialCodable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: Wrapped.CodingKey.self)
-        values = try Wrapped.decodeValuesInContainer(container)
+        let collection = Wrapped.keyPathCodingKeyCollection
+        values = try container
+            .allKeys
+            .reduce(into: [PartialKeyPath<Wrapped>: Any](), { values, codingKey in
+                guard let (value, keyPath) = try collection.decode(codingKey, in: container) else { return }
+                values[keyPath] = value
+            })
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: Wrapped.CodingKey.self)
 
+        let collection = Wrapped.keyPathCodingKeyCollection
+
         try values.forEach { pair in
             let (keyPath, value) = pair
 
-            try Wrapped.encodeValue(value, for: keyPath, to: &container)
+            try collection.encode(value, forKey: keyPath, to: &container)
         }
+    }
+}
+
+private extension KeyPath where Value: Encodable {
+    func encode<CodingKey: Swift.CodingKey>(_ value: Any, forKey codingKey: CodingKey, to container: inout KeyedEncodingContainer< CodingKey>) throws {
+        try container.encode(value as! Value, forKey: codingKey)
+    }
+}
+
+extension KeyPath {
+    var value: Value.Type {
+        Value.self
     }
 }

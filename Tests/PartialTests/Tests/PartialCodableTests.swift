@@ -9,28 +9,10 @@ final class PartialCodableTests: QuickSpec {
     override func spec() {
         describe("PartialCodable") {
             struct CodableType: Codable, PartialCodable, Hashable {
-                static func decodeValuesInContainer(_ container: KeyedDecodingContainer<CodingKeys>) throws -> [PartialKeyPath<CodableType>: Any] {
-                    var values: [PartialKeyPath<CodableType>: Any] = [:]
-
-                    values[\Self.foo] = try container.decodeIfPresent(String.self, forKey: .foo)
-                    values[\Self.bar] = try container.decodeIfPresent(Int.self, forKey: .bar)
-
-                    return values
-                }
-
-                static func encodeValue(
-                    _ value: Any,
-                    for keyPath: PartialKeyPath<CodableType>,
-                    to container: inout KeyedEncodingContainer<CodingKeys>
-                ) throws {
-                    switch keyPath {
-                    case \Self.foo:
-                        try container.encode(value as! String, forKey: .foo)
-                    case \Self.bar:
-                        try container.encode(value as! Int, forKey: .bar)
-                    default:
-                        break
-                    }
+                @KeyPathCodingKeyCollectionBuilder<Self, CodingKeys>
+                static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
+                    (\Self.foo, CodingKeys.foo)
+                    (\Self.bar, CodingKeys.bar)
                 }
 
                 let foo: String
