@@ -358,18 +358,18 @@ final class PartialBuilderTests: QuickSpec {
                 }
 
                 it("updates the original builder") {
-                    expect(rootBuilder.name?.string).to(equal("foo"))
+                    expect(rootBuilder[\.name]?.string).to(equal("foo"))
                 }
                 
                 it("stops updating the original builder after detaching") {
                     nameBuilder.detach()
                     nameBuilder.setValue("bar", for: \.string)
-                    expect(rootBuilder.name).to(equal("foo"))
+                    expect(rootBuilder[\.name]).to(equal("foo"))
                 }
                 
                 it("resets original builder value to nil after becoming invalid") {
                     nameBuilder.removeValue(for: \.string)
-                    expect(rootBuilder.name).to(beNil())
+                    expect(rootBuilder[\.name]).to(beNil())
                 }
             }
         }
