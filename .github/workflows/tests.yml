@@ -22,14 +22,6 @@ jobs:
       - name: Select Xcode ${{ matrix.xcode }}
         run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
 
-      - name: Cache SwiftPM
-        uses: actions/cache@v1
-        with:
-          path: .build
-          key: ${{ runner.os }}-xcode_${{ matrix.xcode }}-swiftpm-${{ github.workspace }}-${{ hashFiles('**/Package.resolved') }}
-          restore-keys: |
-            ${{ runner.os }}-xcode_${{ matrix.xcode }}-swiftpm-${{ github.workspace }}-
-
       - name: SwiftPM tests
         run: swift test --enable-code-coverage
 
