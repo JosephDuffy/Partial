@@ -25,14 +25,13 @@ jobs:
         with:
           node-version: ${{ steps.node-version.outputs.version }}
 
-      - name: yarn install
-        run: yarn install
+      - run: npm install
 
       - name: Build Danger and Danger Dependencies
         run: swift build --target DangerDependencies
 
       - name: Run Danger
-        run: swift run danger-swift ci --danger-js-path $(yarn bin danger) --verbose
+        run: swift run danger-swift ci --danger-js-path $(npm bin)/danger --verbose
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
