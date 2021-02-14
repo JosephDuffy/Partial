@@ -36,7 +36,7 @@ final class PartialBuilder_CodableTests: QuickSpec {
 
                 context("with complete value") {
                     beforeEach {
-                        partial[keyPath: \.stringA] = "Value A"
+                        partial.setValue("Value A", for: \.stringA)
                     }
 
                     context("the encoded data") {
@@ -56,7 +56,7 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(CodableType.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
+                                expect(decodedValue.stringA) == "Value A"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -67,7 +67,7 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(Partial<CodableType>.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
+                                expect(decodedValue.stringA) == "Value A"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -79,7 +79,7 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
+                                expect(decodedValue.stringA) == "Value A"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -117,8 +117,8 @@ final class PartialBuilder_CodableTests: QuickSpec {
 
                 context("with complete value") {
                     beforeEach {
-                        partial[keyPath: \.stringA] = "Value A"
-                        partial[keyPath: \.stringB] = "Value B"
+                        partial.setValue("Value A", for: \.stringA)
+                        partial.setValue("Value B", for: \.stringB)
                     }
 
                     context("the encoded data") {
@@ -138,8 +138,8 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(CodableType.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -150,8 +150,8 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(Partial<CodableType>.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -163,8 +163,8 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -205,9 +205,9 @@ final class PartialBuilder_CodableTests: QuickSpec {
 
                 context("with complete value") {
                     beforeEach {
-                        partial[keyPath: \.stringA] = "Value A"
-                        partial[keyPath: \.stringB] = "Value B"
-                        partial[keyPath: \.stringC] = "Value C"
+                        partial.setValue("Value A", for: \.stringA)
+                        partial.setValue("Value B", for: \.stringB)
+                        partial.setValue("Value C", for: \.stringC)
                     }
 
                     context("the encoded data") {
@@ -227,9 +227,9 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(CodableType.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -240,9 +240,9 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(Partial<CodableType>.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -254,9 +254,9 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -300,10 +300,10 @@ final class PartialBuilder_CodableTests: QuickSpec {
 
                 context("with complete value") {
                     beforeEach {
-                        partial[keyPath: \.stringA] = "Value A"
-                        partial[keyPath: \.stringB] = "Value B"
-                        partial[keyPath: \.stringC] = "Value C"
-                        partial[keyPath: \.stringD] = "Value D"
+                        partial.setValue("Value A", for: \.stringA)
+                        partial.setValue("Value B", for: \.stringB)
+                        partial.setValue("Value C", for: \.stringC)
+                        partial.setValue("Value D", for: \.stringD)
                     }
 
                     context("the encoded data") {
@@ -323,10 +323,10 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(CodableType.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -337,10 +337,10 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(Partial<CodableType>.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -352,10 +352,10 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -402,11 +402,11 @@ final class PartialBuilder_CodableTests: QuickSpec {
 
                 context("with complete value") {
                     beforeEach {
-                        partial[keyPath: \.stringA] = "Value A"
-                        partial[keyPath: \.stringB] = "Value B"
-                        partial[keyPath: \.stringC] = "Value C"
-                        partial[keyPath: \.stringD] = "Value D"
-                        partial[keyPath: \.stringE] = "Value E"
+                        partial.setValue("Value A", for: \.stringA)
+                        partial.setValue("Value B", for: \.stringB)
+                        partial.setValue("Value C", for: \.stringC)
+                        partial.setValue("Value D", for: \.stringD)
+                        partial.setValue("Value E", for: \.stringE)
                     }
 
                     context("the encoded data") {
@@ -426,11 +426,11 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(CodableType.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -441,11 +441,11 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(Partial<CodableType>.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -457,11 +457,11 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -511,12 +511,12 @@ final class PartialBuilder_CodableTests: QuickSpec {
 
                 context("with complete value") {
                     beforeEach {
-                        partial[keyPath: \.stringA] = "Value A"
-                        partial[keyPath: \.stringB] = "Value B"
-                        partial[keyPath: \.stringC] = "Value C"
-                        partial[keyPath: \.stringD] = "Value D"
-                        partial[keyPath: \.stringE] = "Value E"
-                        partial[keyPath: \.stringF] = "Value F"
+                        partial.setValue("Value A", for: \.stringA)
+                        partial.setValue("Value B", for: \.stringB)
+                        partial.setValue("Value C", for: \.stringC)
+                        partial.setValue("Value D", for: \.stringD)
+                        partial.setValue("Value E", for: \.stringE)
+                        partial.setValue("Value F", for: \.stringF)
                     }
 
                     context("the encoded data") {
@@ -536,12 +536,12 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(CodableType.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -552,12 +552,12 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(Partial<CodableType>.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -569,12 +569,12 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -627,13 +627,13 @@ final class PartialBuilder_CodableTests: QuickSpec {
 
                 context("with complete value") {
                     beforeEach {
-                        partial[keyPath: \.stringA] = "Value A"
-                        partial[keyPath: \.stringB] = "Value B"
-                        partial[keyPath: \.stringC] = "Value C"
-                        partial[keyPath: \.stringD] = "Value D"
-                        partial[keyPath: \.stringE] = "Value E"
-                        partial[keyPath: \.stringF] = "Value F"
-                        partial[keyPath: \.stringG] = "Value G"
+                        partial.setValue("Value A", for: \.stringA)
+                        partial.setValue("Value B", for: \.stringB)
+                        partial.setValue("Value C", for: \.stringC)
+                        partial.setValue("Value D", for: \.stringD)
+                        partial.setValue("Value E", for: \.stringE)
+                        partial.setValue("Value F", for: \.stringF)
+                        partial.setValue("Value G", for: \.stringG)
                     }
 
                     context("the encoded data") {
@@ -653,13 +653,13 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(CodableType.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
-                                expect(decodedValue[keyPath: \.stringG]) == "Value G"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -670,13 +670,13 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(Partial<CodableType>.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
-                                expect(decodedValue[keyPath: \.stringG]) == "Value G"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -688,13 +688,13 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
-                                expect(decodedValue[keyPath: \.stringG]) == "Value G"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -750,14 +750,14 @@ final class PartialBuilder_CodableTests: QuickSpec {
 
                 context("with complete value") {
                     beforeEach {
-                        partial[keyPath: \.stringA] = "Value A"
-                        partial[keyPath: \.stringB] = "Value B"
-                        partial[keyPath: \.stringC] = "Value C"
-                        partial[keyPath: \.stringD] = "Value D"
-                        partial[keyPath: \.stringE] = "Value E"
-                        partial[keyPath: \.stringF] = "Value F"
-                        partial[keyPath: \.stringG] = "Value G"
-                        partial[keyPath: \.stringH] = "Value H"
+                        partial.setValue("Value A", for: \.stringA)
+                        partial.setValue("Value B", for: \.stringB)
+                        partial.setValue("Value C", for: \.stringC)
+                        partial.setValue("Value D", for: \.stringD)
+                        partial.setValue("Value E", for: \.stringE)
+                        partial.setValue("Value F", for: \.stringF)
+                        partial.setValue("Value G", for: \.stringG)
+                        partial.setValue("Value H", for: \.stringH)
                     }
 
                     context("the encoded data") {
@@ -777,14 +777,14 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(CodableType.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
-                                expect(decodedValue[keyPath: \.stringG]) == "Value G"
-                                expect(decodedValue[keyPath: \.stringH]) == "Value H"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -795,14 +795,14 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(Partial<CodableType>.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
-                                expect(decodedValue[keyPath: \.stringG]) == "Value G"
-                                expect(decodedValue[keyPath: \.stringH]) == "Value H"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -814,14 +814,14 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
-                                expect(decodedValue[keyPath: \.stringG]) == "Value G"
-                                expect(decodedValue[keyPath: \.stringH]) == "Value H"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -880,15 +880,15 @@ final class PartialBuilder_CodableTests: QuickSpec {
 
                 context("with complete value") {
                     beforeEach {
-                        partial[keyPath: \.stringA] = "Value A"
-                        partial[keyPath: \.stringB] = "Value B"
-                        partial[keyPath: \.stringC] = "Value C"
-                        partial[keyPath: \.stringD] = "Value D"
-                        partial[keyPath: \.stringE] = "Value E"
-                        partial[keyPath: \.stringF] = "Value F"
-                        partial[keyPath: \.stringG] = "Value G"
-                        partial[keyPath: \.stringH] = "Value H"
-                        partial[keyPath: \.stringI] = "Value I"
+                        partial.setValue("Value A", for: \.stringA)
+                        partial.setValue("Value B", for: \.stringB)
+                        partial.setValue("Value C", for: \.stringC)
+                        partial.setValue("Value D", for: \.stringD)
+                        partial.setValue("Value E", for: \.stringE)
+                        partial.setValue("Value F", for: \.stringF)
+                        partial.setValue("Value G", for: \.stringG)
+                        partial.setValue("Value H", for: \.stringH)
+                        partial.setValue("Value I", for: \.stringI)
                     }
 
                     context("the encoded data") {
@@ -908,15 +908,15 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(CodableType.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
-                                expect(decodedValue[keyPath: \.stringG]) == "Value G"
-                                expect(decodedValue[keyPath: \.stringH]) == "Value H"
-                                expect(decodedValue[keyPath: \.stringI]) == "Value I"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                                expect(decodedValue.stringI) == "Value I"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -927,15 +927,15 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(Partial<CodableType>.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
-                                expect(decodedValue[keyPath: \.stringG]) == "Value G"
-                                expect(decodedValue[keyPath: \.stringH]) == "Value H"
-                                expect(decodedValue[keyPath: \.stringI]) == "Value I"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                                expect(decodedValue.stringI) == "Value I"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -947,15 +947,15 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
-                                expect(decodedValue[keyPath: \.stringG]) == "Value G"
-                                expect(decodedValue[keyPath: \.stringH]) == "Value H"
-                                expect(decodedValue[keyPath: \.stringI]) == "Value I"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                                expect(decodedValue.stringI) == "Value I"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -1017,16 +1017,16 @@ final class PartialBuilder_CodableTests: QuickSpec {
 
                 context("with complete value") {
                     beforeEach {
-                        partial[keyPath: \.stringA] = "Value A"
-                        partial[keyPath: \.stringB] = "Value B"
-                        partial[keyPath: \.stringC] = "Value C"
-                        partial[keyPath: \.stringD] = "Value D"
-                        partial[keyPath: \.stringE] = "Value E"
-                        partial[keyPath: \.stringF] = "Value F"
-                        partial[keyPath: \.stringG] = "Value G"
-                        partial[keyPath: \.stringH] = "Value H"
-                        partial[keyPath: \.stringI] = "Value I"
-                        partial[keyPath: \.stringJ] = "Value J"
+                        partial.setValue("Value A", for: \.stringA)
+                        partial.setValue("Value B", for: \.stringB)
+                        partial.setValue("Value C", for: \.stringC)
+                        partial.setValue("Value D", for: \.stringD)
+                        partial.setValue("Value E", for: \.stringE)
+                        partial.setValue("Value F", for: \.stringF)
+                        partial.setValue("Value G", for: \.stringG)
+                        partial.setValue("Value H", for: \.stringH)
+                        partial.setValue("Value I", for: \.stringI)
+                        partial.setValue("Value J", for: \.stringJ)
                     }
 
                     context("the encoded data") {
@@ -1046,16 +1046,16 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(CodableType.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
-                                expect(decodedValue[keyPath: \.stringG]) == "Value G"
-                                expect(decodedValue[keyPath: \.stringH]) == "Value H"
-                                expect(decodedValue[keyPath: \.stringI]) == "Value I"
-                                expect(decodedValue[keyPath: \.stringJ]) == "Value J"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                                expect(decodedValue.stringI) == "Value I"
+                                expect(decodedValue.stringJ) == "Value J"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -1066,16 +1066,16 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(Partial<CodableType>.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
-                                expect(decodedValue[keyPath: \.stringG]) == "Value G"
-                                expect(decodedValue[keyPath: \.stringH]) == "Value H"
-                                expect(decodedValue[keyPath: \.stringI]) == "Value I"
-                                expect(decodedValue[keyPath: \.stringJ]) == "Value J"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                                expect(decodedValue.stringI) == "Value I"
+                                expect(decodedValue.stringJ) == "Value J"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -1087,16 +1087,16 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
-                                expect(decodedValue[keyPath: \.stringG]) == "Value G"
-                                expect(decodedValue[keyPath: \.stringH]) == "Value H"
-                                expect(decodedValue[keyPath: \.stringI]) == "Value I"
-                                expect(decodedValue[keyPath: \.stringJ]) == "Value J"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                                expect(decodedValue.stringI) == "Value I"
+                                expect(decodedValue.stringJ) == "Value J"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -1161,17 +1161,17 @@ final class PartialBuilder_CodableTests: QuickSpec {
 
                 context("with complete value") {
                     beforeEach {
-                        partial[keyPath: \.stringA] = "Value A"
-                        partial[keyPath: \.stringB] = "Value B"
-                        partial[keyPath: \.stringC] = "Value C"
-                        partial[keyPath: \.stringD] = "Value D"
-                        partial[keyPath: \.stringE] = "Value E"
-                        partial[keyPath: \.stringF] = "Value F"
-                        partial[keyPath: \.stringG] = "Value G"
-                        partial[keyPath: \.stringH] = "Value H"
-                        partial[keyPath: \.stringI] = "Value I"
-                        partial[keyPath: \.stringJ] = "Value J"
-                        partial[keyPath: \.stringK] = "Value K"
+                        partial.setValue("Value A", for: \.stringA)
+                        partial.setValue("Value B", for: \.stringB)
+                        partial.setValue("Value C", for: \.stringC)
+                        partial.setValue("Value D", for: \.stringD)
+                        partial.setValue("Value E", for: \.stringE)
+                        partial.setValue("Value F", for: \.stringF)
+                        partial.setValue("Value G", for: \.stringG)
+                        partial.setValue("Value H", for: \.stringH)
+                        partial.setValue("Value I", for: \.stringI)
+                        partial.setValue("Value J", for: \.stringJ)
+                        partial.setValue("Value K", for: \.stringK)
                     }
 
                     context("the encoded data") {
@@ -1191,17 +1191,17 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(CodableType.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
-                                expect(decodedValue[keyPath: \.stringG]) == "Value G"
-                                expect(decodedValue[keyPath: \.stringH]) == "Value H"
-                                expect(decodedValue[keyPath: \.stringI]) == "Value I"
-                                expect(decodedValue[keyPath: \.stringJ]) == "Value J"
-                                expect(decodedValue[keyPath: \.stringK]) == "Value K"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                                expect(decodedValue.stringI) == "Value I"
+                                expect(decodedValue.stringJ) == "Value J"
+                                expect(decodedValue.stringK) == "Value K"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -1212,17 +1212,17 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(Partial<CodableType>.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
-                                expect(decodedValue[keyPath: \.stringG]) == "Value G"
-                                expect(decodedValue[keyPath: \.stringH]) == "Value H"
-                                expect(decodedValue[keyPath: \.stringI]) == "Value I"
-                                expect(decodedValue[keyPath: \.stringJ]) == "Value J"
-                                expect(decodedValue[keyPath: \.stringK]) == "Value K"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                                expect(decodedValue.stringI) == "Value I"
+                                expect(decodedValue.stringJ) == "Value J"
+                                expect(decodedValue.stringK) == "Value K"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -1234,17 +1234,17 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
-                                expect(decodedValue[keyPath: \.stringG]) == "Value G"
-                                expect(decodedValue[keyPath: \.stringH]) == "Value H"
-                                expect(decodedValue[keyPath: \.stringI]) == "Value I"
-                                expect(decodedValue[keyPath: \.stringJ]) == "Value J"
-                                expect(decodedValue[keyPath: \.stringK]) == "Value K"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                                expect(decodedValue.stringI) == "Value I"
+                                expect(decodedValue.stringJ) == "Value J"
+                                expect(decodedValue.stringK) == "Value K"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -1312,18 +1312,18 @@ final class PartialBuilder_CodableTests: QuickSpec {
 
                 context("with complete value") {
                     beforeEach {
-                        partial[keyPath: \.stringA] = "Value A"
-                        partial[keyPath: \.stringB] = "Value B"
-                        partial[keyPath: \.stringC] = "Value C"
-                        partial[keyPath: \.stringD] = "Value D"
-                        partial[keyPath: \.stringE] = "Value E"
-                        partial[keyPath: \.stringF] = "Value F"
-                        partial[keyPath: \.stringG] = "Value G"
-                        partial[keyPath: \.stringH] = "Value H"
-                        partial[keyPath: \.stringI] = "Value I"
-                        partial[keyPath: \.stringJ] = "Value J"
-                        partial[keyPath: \.stringK] = "Value K"
-                        partial[keyPath: \.stringL] = "Value L"
+                        partial.setValue("Value A", for: \.stringA)
+                        partial.setValue("Value B", for: \.stringB)
+                        partial.setValue("Value C", for: \.stringC)
+                        partial.setValue("Value D", for: \.stringD)
+                        partial.setValue("Value E", for: \.stringE)
+                        partial.setValue("Value F", for: \.stringF)
+                        partial.setValue("Value G", for: \.stringG)
+                        partial.setValue("Value H", for: \.stringH)
+                        partial.setValue("Value I", for: \.stringI)
+                        partial.setValue("Value J", for: \.stringJ)
+                        partial.setValue("Value K", for: \.stringK)
+                        partial.setValue("Value L", for: \.stringL)
                     }
 
                     context("the encoded data") {
@@ -1343,18 +1343,18 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(CodableType.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
-                                expect(decodedValue[keyPath: \.stringG]) == "Value G"
-                                expect(decodedValue[keyPath: \.stringH]) == "Value H"
-                                expect(decodedValue[keyPath: \.stringI]) == "Value I"
-                                expect(decodedValue[keyPath: \.stringJ]) == "Value J"
-                                expect(decodedValue[keyPath: \.stringK]) == "Value K"
-                                expect(decodedValue[keyPath: \.stringL]) == "Value L"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                                expect(decodedValue.stringI) == "Value I"
+                                expect(decodedValue.stringJ) == "Value J"
+                                expect(decodedValue.stringK) == "Value K"
+                                expect(decodedValue.stringL) == "Value L"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -1365,18 +1365,18 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(Partial<CodableType>.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
-                                expect(decodedValue[keyPath: \.stringG]) == "Value G"
-                                expect(decodedValue[keyPath: \.stringH]) == "Value H"
-                                expect(decodedValue[keyPath: \.stringI]) == "Value I"
-                                expect(decodedValue[keyPath: \.stringJ]) == "Value J"
-                                expect(decodedValue[keyPath: \.stringK]) == "Value K"
-                                expect(decodedValue[keyPath: \.stringL]) == "Value L"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                                expect(decodedValue.stringI) == "Value I"
+                                expect(decodedValue.stringJ) == "Value J"
+                                expect(decodedValue.stringK) == "Value K"
+                                expect(decodedValue.stringL) == "Value L"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -1388,18 +1388,18 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
-                                expect(decodedValue[keyPath: \.stringG]) == "Value G"
-                                expect(decodedValue[keyPath: \.stringH]) == "Value H"
-                                expect(decodedValue[keyPath: \.stringI]) == "Value I"
-                                expect(decodedValue[keyPath: \.stringJ]) == "Value J"
-                                expect(decodedValue[keyPath: \.stringK]) == "Value K"
-                                expect(decodedValue[keyPath: \.stringL]) == "Value L"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                                expect(decodedValue.stringI) == "Value I"
+                                expect(decodedValue.stringJ) == "Value J"
+                                expect(decodedValue.stringK) == "Value K"
+                                expect(decodedValue.stringL) == "Value L"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -1470,19 +1470,19 @@ final class PartialBuilder_CodableTests: QuickSpec {
 
                 context("with complete value") {
                     beforeEach {
-                        partial[keyPath: \.stringA] = "Value A"
-                        partial[keyPath: \.stringB] = "Value B"
-                        partial[keyPath: \.stringC] = "Value C"
-                        partial[keyPath: \.stringD] = "Value D"
-                        partial[keyPath: \.stringE] = "Value E"
-                        partial[keyPath: \.stringF] = "Value F"
-                        partial[keyPath: \.stringG] = "Value G"
-                        partial[keyPath: \.stringH] = "Value H"
-                        partial[keyPath: \.stringI] = "Value I"
-                        partial[keyPath: \.stringJ] = "Value J"
-                        partial[keyPath: \.stringK] = "Value K"
-                        partial[keyPath: \.stringL] = "Value L"
-                        partial[keyPath: \.stringM] = "Value M"
+                        partial.setValue("Value A", for: \.stringA)
+                        partial.setValue("Value B", for: \.stringB)
+                        partial.setValue("Value C", for: \.stringC)
+                        partial.setValue("Value D", for: \.stringD)
+                        partial.setValue("Value E", for: \.stringE)
+                        partial.setValue("Value F", for: \.stringF)
+                        partial.setValue("Value G", for: \.stringG)
+                        partial.setValue("Value H", for: \.stringH)
+                        partial.setValue("Value I", for: \.stringI)
+                        partial.setValue("Value J", for: \.stringJ)
+                        partial.setValue("Value K", for: \.stringK)
+                        partial.setValue("Value L", for: \.stringL)
+                        partial.setValue("Value M", for: \.stringM)
                     }
 
                     context("the encoded data") {
@@ -1502,19 +1502,19 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(CodableType.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
-                                expect(decodedValue[keyPath: \.stringG]) == "Value G"
-                                expect(decodedValue[keyPath: \.stringH]) == "Value H"
-                                expect(decodedValue[keyPath: \.stringI]) == "Value I"
-                                expect(decodedValue[keyPath: \.stringJ]) == "Value J"
-                                expect(decodedValue[keyPath: \.stringK]) == "Value K"
-                                expect(decodedValue[keyPath: \.stringL]) == "Value L"
-                                expect(decodedValue[keyPath: \.stringM]) == "Value M"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                                expect(decodedValue.stringI) == "Value I"
+                                expect(decodedValue.stringJ) == "Value J"
+                                expect(decodedValue.stringK) == "Value K"
+                                expect(decodedValue.stringL) == "Value L"
+                                expect(decodedValue.stringM) == "Value M"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -1525,19 +1525,19 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(Partial<CodableType>.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
-                                expect(decodedValue[keyPath: \.stringG]) == "Value G"
-                                expect(decodedValue[keyPath: \.stringH]) == "Value H"
-                                expect(decodedValue[keyPath: \.stringI]) == "Value I"
-                                expect(decodedValue[keyPath: \.stringJ]) == "Value J"
-                                expect(decodedValue[keyPath: \.stringK]) == "Value K"
-                                expect(decodedValue[keyPath: \.stringL]) == "Value L"
-                                expect(decodedValue[keyPath: \.stringM]) == "Value M"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                                expect(decodedValue.stringI) == "Value I"
+                                expect(decodedValue.stringJ) == "Value J"
+                                expect(decodedValue.stringK) == "Value K"
+                                expect(decodedValue.stringL) == "Value L"
+                                expect(decodedValue.stringM) == "Value M"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -1549,19 +1549,19 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
-                                expect(decodedValue[keyPath: \.stringG]) == "Value G"
-                                expect(decodedValue[keyPath: \.stringH]) == "Value H"
-                                expect(decodedValue[keyPath: \.stringI]) == "Value I"
-                                expect(decodedValue[keyPath: \.stringJ]) == "Value J"
-                                expect(decodedValue[keyPath: \.stringK]) == "Value K"
-                                expect(decodedValue[keyPath: \.stringL]) == "Value L"
-                                expect(decodedValue[keyPath: \.stringM]) == "Value M"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                                expect(decodedValue.stringI) == "Value I"
+                                expect(decodedValue.stringJ) == "Value J"
+                                expect(decodedValue.stringK) == "Value K"
+                                expect(decodedValue.stringL) == "Value L"
+                                expect(decodedValue.stringM) == "Value M"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -1635,20 +1635,20 @@ final class PartialBuilder_CodableTests: QuickSpec {
 
                 context("with complete value") {
                     beforeEach {
-                        partial[keyPath: \.stringA] = "Value A"
-                        partial[keyPath: \.stringB] = "Value B"
-                        partial[keyPath: \.stringC] = "Value C"
-                        partial[keyPath: \.stringD] = "Value D"
-                        partial[keyPath: \.stringE] = "Value E"
-                        partial[keyPath: \.stringF] = "Value F"
-                        partial[keyPath: \.stringG] = "Value G"
-                        partial[keyPath: \.stringH] = "Value H"
-                        partial[keyPath: \.stringI] = "Value I"
-                        partial[keyPath: \.stringJ] = "Value J"
-                        partial[keyPath: \.stringK] = "Value K"
-                        partial[keyPath: \.stringL] = "Value L"
-                        partial[keyPath: \.stringM] = "Value M"
-                        partial[keyPath: \.stringN] = "Value N"
+                        partial.setValue("Value A", for: \.stringA)
+                        partial.setValue("Value B", for: \.stringB)
+                        partial.setValue("Value C", for: \.stringC)
+                        partial.setValue("Value D", for: \.stringD)
+                        partial.setValue("Value E", for: \.stringE)
+                        partial.setValue("Value F", for: \.stringF)
+                        partial.setValue("Value G", for: \.stringG)
+                        partial.setValue("Value H", for: \.stringH)
+                        partial.setValue("Value I", for: \.stringI)
+                        partial.setValue("Value J", for: \.stringJ)
+                        partial.setValue("Value K", for: \.stringK)
+                        partial.setValue("Value L", for: \.stringL)
+                        partial.setValue("Value M", for: \.stringM)
+                        partial.setValue("Value N", for: \.stringN)
                     }
 
                     context("the encoded data") {
@@ -1668,20 +1668,20 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(CodableType.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
-                                expect(decodedValue[keyPath: \.stringG]) == "Value G"
-                                expect(decodedValue[keyPath: \.stringH]) == "Value H"
-                                expect(decodedValue[keyPath: \.stringI]) == "Value I"
-                                expect(decodedValue[keyPath: \.stringJ]) == "Value J"
-                                expect(decodedValue[keyPath: \.stringK]) == "Value K"
-                                expect(decodedValue[keyPath: \.stringL]) == "Value L"
-                                expect(decodedValue[keyPath: \.stringM]) == "Value M"
-                                expect(decodedValue[keyPath: \.stringN]) == "Value N"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                                expect(decodedValue.stringI) == "Value I"
+                                expect(decodedValue.stringJ) == "Value J"
+                                expect(decodedValue.stringK) == "Value K"
+                                expect(decodedValue.stringL) == "Value L"
+                                expect(decodedValue.stringM) == "Value M"
+                                expect(decodedValue.stringN) == "Value N"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -1692,20 +1692,20 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(Partial<CodableType>.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
-                                expect(decodedValue[keyPath: \.stringG]) == "Value G"
-                                expect(decodedValue[keyPath: \.stringH]) == "Value H"
-                                expect(decodedValue[keyPath: \.stringI]) == "Value I"
-                                expect(decodedValue[keyPath: \.stringJ]) == "Value J"
-                                expect(decodedValue[keyPath: \.stringK]) == "Value K"
-                                expect(decodedValue[keyPath: \.stringL]) == "Value L"
-                                expect(decodedValue[keyPath: \.stringM]) == "Value M"
-                                expect(decodedValue[keyPath: \.stringN]) == "Value N"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                                expect(decodedValue.stringI) == "Value I"
+                                expect(decodedValue.stringJ) == "Value J"
+                                expect(decodedValue.stringK) == "Value K"
+                                expect(decodedValue.stringL) == "Value L"
+                                expect(decodedValue.stringM) == "Value M"
+                                expect(decodedValue.stringN) == "Value N"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -1717,20 +1717,20 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
-                                expect(decodedValue[keyPath: \.stringG]) == "Value G"
-                                expect(decodedValue[keyPath: \.stringH]) == "Value H"
-                                expect(decodedValue[keyPath: \.stringI]) == "Value I"
-                                expect(decodedValue[keyPath: \.stringJ]) == "Value J"
-                                expect(decodedValue[keyPath: \.stringK]) == "Value K"
-                                expect(decodedValue[keyPath: \.stringL]) == "Value L"
-                                expect(decodedValue[keyPath: \.stringM]) == "Value M"
-                                expect(decodedValue[keyPath: \.stringN]) == "Value N"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                                expect(decodedValue.stringI) == "Value I"
+                                expect(decodedValue.stringJ) == "Value J"
+                                expect(decodedValue.stringK) == "Value K"
+                                expect(decodedValue.stringL) == "Value L"
+                                expect(decodedValue.stringM) == "Value M"
+                                expect(decodedValue.stringN) == "Value N"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -1807,21 +1807,21 @@ final class PartialBuilder_CodableTests: QuickSpec {
 
                 context("with complete value") {
                     beforeEach {
-                        partial[keyPath: \.stringA] = "Value A"
-                        partial[keyPath: \.stringB] = "Value B"
-                        partial[keyPath: \.stringC] = "Value C"
-                        partial[keyPath: \.stringD] = "Value D"
-                        partial[keyPath: \.stringE] = "Value E"
-                        partial[keyPath: \.stringF] = "Value F"
-                        partial[keyPath: \.stringG] = "Value G"
-                        partial[keyPath: \.stringH] = "Value H"
-                        partial[keyPath: \.stringI] = "Value I"
-                        partial[keyPath: \.stringJ] = "Value J"
-                        partial[keyPath: \.stringK] = "Value K"
-                        partial[keyPath: \.stringL] = "Value L"
-                        partial[keyPath: \.stringM] = "Value M"
-                        partial[keyPath: \.stringN] = "Value N"
-                        partial[keyPath: \.stringO] = "Value O"
+                        partial.setValue("Value A", for: \.stringA)
+                        partial.setValue("Value B", for: \.stringB)
+                        partial.setValue("Value C", for: \.stringC)
+                        partial.setValue("Value D", for: \.stringD)
+                        partial.setValue("Value E", for: \.stringE)
+                        partial.setValue("Value F", for: \.stringF)
+                        partial.setValue("Value G", for: \.stringG)
+                        partial.setValue("Value H", for: \.stringH)
+                        partial.setValue("Value I", for: \.stringI)
+                        partial.setValue("Value J", for: \.stringJ)
+                        partial.setValue("Value K", for: \.stringK)
+                        partial.setValue("Value L", for: \.stringL)
+                        partial.setValue("Value M", for: \.stringM)
+                        partial.setValue("Value N", for: \.stringN)
+                        partial.setValue("Value O", for: \.stringO)
                     }
 
                     context("the encoded data") {
@@ -1841,21 +1841,21 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(CodableType.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
-                                expect(decodedValue[keyPath: \.stringG]) == "Value G"
-                                expect(decodedValue[keyPath: \.stringH]) == "Value H"
-                                expect(decodedValue[keyPath: \.stringI]) == "Value I"
-                                expect(decodedValue[keyPath: \.stringJ]) == "Value J"
-                                expect(decodedValue[keyPath: \.stringK]) == "Value K"
-                                expect(decodedValue[keyPath: \.stringL]) == "Value L"
-                                expect(decodedValue[keyPath: \.stringM]) == "Value M"
-                                expect(decodedValue[keyPath: \.stringN]) == "Value N"
-                                expect(decodedValue[keyPath: \.stringO]) == "Value O"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                                expect(decodedValue.stringI) == "Value I"
+                                expect(decodedValue.stringJ) == "Value J"
+                                expect(decodedValue.stringK) == "Value K"
+                                expect(decodedValue.stringL) == "Value L"
+                                expect(decodedValue.stringM) == "Value M"
+                                expect(decodedValue.stringN) == "Value N"
+                                expect(decodedValue.stringO) == "Value O"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -1866,21 +1866,21 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(Partial<CodableType>.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
-                                expect(decodedValue[keyPath: \.stringG]) == "Value G"
-                                expect(decodedValue[keyPath: \.stringH]) == "Value H"
-                                expect(decodedValue[keyPath: \.stringI]) == "Value I"
-                                expect(decodedValue[keyPath: \.stringJ]) == "Value J"
-                                expect(decodedValue[keyPath: \.stringK]) == "Value K"
-                                expect(decodedValue[keyPath: \.stringL]) == "Value L"
-                                expect(decodedValue[keyPath: \.stringM]) == "Value M"
-                                expect(decodedValue[keyPath: \.stringN]) == "Value N"
-                                expect(decodedValue[keyPath: \.stringO]) == "Value O"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                                expect(decodedValue.stringI) == "Value I"
+                                expect(decodedValue.stringJ) == "Value J"
+                                expect(decodedValue.stringK) == "Value K"
+                                expect(decodedValue.stringL) == "Value L"
+                                expect(decodedValue.stringM) == "Value M"
+                                expect(decodedValue.stringN) == "Value N"
+                                expect(decodedValue.stringO) == "Value O"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -1892,21 +1892,21 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
-                                expect(decodedValue[keyPath: \.stringG]) == "Value G"
-                                expect(decodedValue[keyPath: \.stringH]) == "Value H"
-                                expect(decodedValue[keyPath: \.stringI]) == "Value I"
-                                expect(decodedValue[keyPath: \.stringJ]) == "Value J"
-                                expect(decodedValue[keyPath: \.stringK]) == "Value K"
-                                expect(decodedValue[keyPath: \.stringL]) == "Value L"
-                                expect(decodedValue[keyPath: \.stringM]) == "Value M"
-                                expect(decodedValue[keyPath: \.stringN]) == "Value N"
-                                expect(decodedValue[keyPath: \.stringO]) == "Value O"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                                expect(decodedValue.stringI) == "Value I"
+                                expect(decodedValue.stringJ) == "Value J"
+                                expect(decodedValue.stringK) == "Value K"
+                                expect(decodedValue.stringL) == "Value L"
+                                expect(decodedValue.stringM) == "Value M"
+                                expect(decodedValue.stringN) == "Value N"
+                                expect(decodedValue.stringO) == "Value O"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -1986,22 +1986,22 @@ final class PartialBuilder_CodableTests: QuickSpec {
 
                 context("with complete value") {
                     beforeEach {
-                        partial[keyPath: \.stringA] = "Value A"
-                        partial[keyPath: \.stringB] = "Value B"
-                        partial[keyPath: \.stringC] = "Value C"
-                        partial[keyPath: \.stringD] = "Value D"
-                        partial[keyPath: \.stringE] = "Value E"
-                        partial[keyPath: \.stringF] = "Value F"
-                        partial[keyPath: \.stringG] = "Value G"
-                        partial[keyPath: \.stringH] = "Value H"
-                        partial[keyPath: \.stringI] = "Value I"
-                        partial[keyPath: \.stringJ] = "Value J"
-                        partial[keyPath: \.stringK] = "Value K"
-                        partial[keyPath: \.stringL] = "Value L"
-                        partial[keyPath: \.stringM] = "Value M"
-                        partial[keyPath: \.stringN] = "Value N"
-                        partial[keyPath: \.stringO] = "Value O"
-                        partial[keyPath: \.stringP] = "Value P"
+                        partial.setValue("Value A", for: \.stringA)
+                        partial.setValue("Value B", for: \.stringB)
+                        partial.setValue("Value C", for: \.stringC)
+                        partial.setValue("Value D", for: \.stringD)
+                        partial.setValue("Value E", for: \.stringE)
+                        partial.setValue("Value F", for: \.stringF)
+                        partial.setValue("Value G", for: \.stringG)
+                        partial.setValue("Value H", for: \.stringH)
+                        partial.setValue("Value I", for: \.stringI)
+                        partial.setValue("Value J", for: \.stringJ)
+                        partial.setValue("Value K", for: \.stringK)
+                        partial.setValue("Value L", for: \.stringL)
+                        partial.setValue("Value M", for: \.stringM)
+                        partial.setValue("Value N", for: \.stringN)
+                        partial.setValue("Value O", for: \.stringO)
+                        partial.setValue("Value P", for: \.stringP)
                     }
 
                     context("the encoded data") {
@@ -2021,22 +2021,22 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(CodableType.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
-                                expect(decodedValue[keyPath: \.stringG]) == "Value G"
-                                expect(decodedValue[keyPath: \.stringH]) == "Value H"
-                                expect(decodedValue[keyPath: \.stringI]) == "Value I"
-                                expect(decodedValue[keyPath: \.stringJ]) == "Value J"
-                                expect(decodedValue[keyPath: \.stringK]) == "Value K"
-                                expect(decodedValue[keyPath: \.stringL]) == "Value L"
-                                expect(decodedValue[keyPath: \.stringM]) == "Value M"
-                                expect(decodedValue[keyPath: \.stringN]) == "Value N"
-                                expect(decodedValue[keyPath: \.stringO]) == "Value O"
-                                expect(decodedValue[keyPath: \.stringP]) == "Value P"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                                expect(decodedValue.stringI) == "Value I"
+                                expect(decodedValue.stringJ) == "Value J"
+                                expect(decodedValue.stringK) == "Value K"
+                                expect(decodedValue.stringL) == "Value L"
+                                expect(decodedValue.stringM) == "Value M"
+                                expect(decodedValue.stringN) == "Value N"
+                                expect(decodedValue.stringO) == "Value O"
+                                expect(decodedValue.stringP) == "Value P"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -2047,22 +2047,22 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(Partial<CodableType>.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
-                                expect(decodedValue[keyPath: \.stringG]) == "Value G"
-                                expect(decodedValue[keyPath: \.stringH]) == "Value H"
-                                expect(decodedValue[keyPath: \.stringI]) == "Value I"
-                                expect(decodedValue[keyPath: \.stringJ]) == "Value J"
-                                expect(decodedValue[keyPath: \.stringK]) == "Value K"
-                                expect(decodedValue[keyPath: \.stringL]) == "Value L"
-                                expect(decodedValue[keyPath: \.stringM]) == "Value M"
-                                expect(decodedValue[keyPath: \.stringN]) == "Value N"
-                                expect(decodedValue[keyPath: \.stringO]) == "Value O"
-                                expect(decodedValue[keyPath: \.stringP]) == "Value P"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                                expect(decodedValue.stringI) == "Value I"
+                                expect(decodedValue.stringJ) == "Value J"
+                                expect(decodedValue.stringK) == "Value K"
+                                expect(decodedValue.stringL) == "Value L"
+                                expect(decodedValue.stringM) == "Value M"
+                                expect(decodedValue.stringN) == "Value N"
+                                expect(decodedValue.stringO) == "Value O"
+                                expect(decodedValue.stringP) == "Value P"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
@@ -2074,22 +2074,22 @@ final class PartialBuilder_CodableTests: QuickSpec {
                                 let decoder = JSONDecoder()
                                 let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
 
-                                expect(decodedValue[keyPath: \.stringA]) == "Value A"
-                                expect(decodedValue[keyPath: \.stringB]) == "Value B"
-                                expect(decodedValue[keyPath: \.stringC]) == "Value C"
-                                expect(decodedValue[keyPath: \.stringD]) == "Value D"
-                                expect(decodedValue[keyPath: \.stringE]) == "Value E"
-                                expect(decodedValue[keyPath: \.stringF]) == "Value F"
-                                expect(decodedValue[keyPath: \.stringG]) == "Value G"
-                                expect(decodedValue[keyPath: \.stringH]) == "Value H"
-                                expect(decodedValue[keyPath: \.stringI]) == "Value I"
-                                expect(decodedValue[keyPath: \.stringJ]) == "Value J"
-                                expect(decodedValue[keyPath: \.stringK]) == "Value K"
-                                expect(decodedValue[keyPath: \.stringL]) == "Value L"
-                                expect(decodedValue[keyPath: \.stringM]) == "Value M"
-                                expect(decodedValue[keyPath: \.stringN]) == "Value N"
-                                expect(decodedValue[keyPath: \.stringO]) == "Value O"
-                                expect(decodedValue[keyPath: \.stringP]) == "Value P"
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                                expect(decodedValue.stringI) == "Value I"
+                                expect(decodedValue.stringJ) == "Value J"
+                                expect(decodedValue.stringK) == "Value K"
+                                expect(decodedValue.stringL) == "Value L"
+                                expect(decodedValue.stringM) == "Value M"
+                                expect(decodedValue.stringN) == "Value N"
+                                expect(decodedValue.stringO) == "Value O"
+                                expect(decodedValue.stringP) == "Value P"
                             } catch {
                                 fail("Should not throw: \(error)")
                             }
