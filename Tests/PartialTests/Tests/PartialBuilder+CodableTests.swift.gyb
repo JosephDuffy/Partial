@@ -51,7 +51,7 @@ final class PartialBuilder_CodableTests: QuickSpec {
                     beforeEach {
 %     for characterIndex in parametersRange:
 %         character = string.ascii_uppercase[characterIndex]
-                        partial[\.string${character}] = "Value ${character}"
+                        partial[keyPath: \.string${character}] = "Value ${character}"
 %     end
                     }
 
@@ -74,7 +74,7 @@ final class PartialBuilder_CodableTests: QuickSpec {
 
 %     for characterIndex in parametersRange:
 %         character = string.ascii_uppercase[characterIndex]
-                                expect(decodedValue[\.string${character}]) == "Value ${character}"
+                                expect(decodedValue[keyPath: \.string${character}]) == "Value ${character}"
 %     end
                             } catch {
                                 fail("Should not throw: \(error)")
@@ -88,7 +88,7 @@ final class PartialBuilder_CodableTests: QuickSpec {
 
 %     for characterIndex in parametersRange:
 %         character = string.ascii_uppercase[characterIndex]
-                                expect(decodedValue[\.string${character}]) == "Value ${character}"
+                                expect(decodedValue[keyPath: \.string${character}]) == "Value ${character}"
 %     end
                             } catch {
                                 fail("Should not throw: \(error)")
@@ -103,7 +103,7 @@ final class PartialBuilder_CodableTests: QuickSpec {
 
 %     for characterIndex in parametersRange:
 %         character = string.ascii_uppercase[characterIndex]
-                                expect(decodedValue[\.string${character}]) == "Value ${character}"
+                                expect(decodedValue[keyPath: \.string${character}]) == "Value ${character}"
 %     end
                             } catch {
                                 fail("Should not throw: \(error)")

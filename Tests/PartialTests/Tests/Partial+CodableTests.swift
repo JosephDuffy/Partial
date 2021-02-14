@@ -36,7 +36,7 @@ final class Partial_CodableTests: QuickSpec {
 
                 context("with complete value") {
                     beforeEach {
-                        partial[\.stringA] = "Value A"
+                        partial[keyPath: \.stringA] = "Value A"
                     }
 
                     context("the encoded data") {
@@ -104,8 +104,8 @@ final class Partial_CodableTests: QuickSpec {
 
                 context("with complete value") {
                     beforeEach {
-                        partial[\.stringA] = "Value A"
-                        partial[\.stringB] = "Value B"
+                        partial[keyPath: \.stringA] = "Value A"
+                        partial[keyPath: \.stringB] = "Value B"
                     }
 
                     context("the encoded data") {
@@ -178,9 +178,9 @@ final class Partial_CodableTests: QuickSpec {
 
                 context("with complete value") {
                     beforeEach {
-                        partial[\.stringA] = "Value A"
-                        partial[\.stringB] = "Value B"
-                        partial[\.stringC] = "Value C"
+                        partial[keyPath: \.stringA] = "Value A"
+                        partial[keyPath: \.stringB] = "Value B"
+                        partial[keyPath: \.stringC] = "Value C"
                     }
 
                     context("the encoded data") {
@@ -258,10 +258,10 @@ final class Partial_CodableTests: QuickSpec {
 
                 context("with complete value") {
                     beforeEach {
-                        partial[\.stringA] = "Value A"
-                        partial[\.stringB] = "Value B"
-                        partial[\.stringC] = "Value C"
-                        partial[\.stringD] = "Value D"
+                        partial[keyPath: \.stringA] = "Value A"
+                        partial[keyPath: \.stringB] = "Value B"
+                        partial[keyPath: \.stringC] = "Value C"
+                        partial[keyPath: \.stringD] = "Value D"
                     }
 
                     context("the encoded data") {
@@ -344,11 +344,11 @@ final class Partial_CodableTests: QuickSpec {
 
                 context("with complete value") {
                     beforeEach {
-                        partial[\.stringA] = "Value A"
-                        partial[\.stringB] = "Value B"
-                        partial[\.stringC] = "Value C"
-                        partial[\.stringD] = "Value D"
-                        partial[\.stringE] = "Value E"
+                        partial[keyPath: \.stringA] = "Value A"
+                        partial[keyPath: \.stringB] = "Value B"
+                        partial[keyPath: \.stringC] = "Value C"
+                        partial[keyPath: \.stringD] = "Value D"
+                        partial[keyPath: \.stringE] = "Value E"
                     }
 
                     context("the encoded data") {
@@ -436,12 +436,12 @@ final class Partial_CodableTests: QuickSpec {
 
                 context("with complete value") {
                     beforeEach {
-                        partial[\.stringA] = "Value A"
-                        partial[\.stringB] = "Value B"
-                        partial[\.stringC] = "Value C"
-                        partial[\.stringD] = "Value D"
-                        partial[\.stringE] = "Value E"
-                        partial[\.stringF] = "Value F"
+                        partial[keyPath: \.stringA] = "Value A"
+                        partial[keyPath: \.stringB] = "Value B"
+                        partial[keyPath: \.stringC] = "Value C"
+                        partial[keyPath: \.stringD] = "Value D"
+                        partial[keyPath: \.stringE] = "Value E"
+                        partial[keyPath: \.stringF] = "Value F"
                     }
 
                     context("the encoded data") {
@@ -534,13 +534,13 @@ final class Partial_CodableTests: QuickSpec {
 
                 context("with complete value") {
                     beforeEach {
-                        partial[\.stringA] = "Value A"
-                        partial[\.stringB] = "Value B"
-                        partial[\.stringC] = "Value C"
-                        partial[\.stringD] = "Value D"
-                        partial[\.stringE] = "Value E"
-                        partial[\.stringF] = "Value F"
-                        partial[\.stringG] = "Value G"
+                        partial[keyPath: \.stringA] = "Value A"
+                        partial[keyPath: \.stringB] = "Value B"
+                        partial[keyPath: \.stringC] = "Value C"
+                        partial[keyPath: \.stringD] = "Value D"
+                        partial[keyPath: \.stringE] = "Value E"
+                        partial[keyPath: \.stringF] = "Value F"
+                        partial[keyPath: \.stringG] = "Value G"
                     }
 
                     context("the encoded data") {
@@ -638,14 +638,14 @@ final class Partial_CodableTests: QuickSpec {
 
                 context("with complete value") {
                     beforeEach {
-                        partial[\.stringA] = "Value A"
-                        partial[\.stringB] = "Value B"
-                        partial[\.stringC] = "Value C"
-                        partial[\.stringD] = "Value D"
-                        partial[\.stringE] = "Value E"
-                        partial[\.stringF] = "Value F"
-                        partial[\.stringG] = "Value G"
-                        partial[\.stringH] = "Value H"
+                        partial[keyPath: \.stringA] = "Value A"
+                        partial[keyPath: \.stringB] = "Value B"
+                        partial[keyPath: \.stringC] = "Value C"
+                        partial[keyPath: \.stringD] = "Value D"
+                        partial[keyPath: \.stringE] = "Value E"
+                        partial[keyPath: \.stringF] = "Value F"
+                        partial[keyPath: \.stringG] = "Value G"
+                        partial[keyPath: \.stringH] = "Value H"
                     }
 
                     context("the encoded data") {
@@ -748,15 +748,15 @@ final class Partial_CodableTests: QuickSpec {
 
                 context("with complete value") {
                     beforeEach {
-                        partial[\.stringA] = "Value A"
-                        partial[\.stringB] = "Value B"
-                        partial[\.stringC] = "Value C"
-                        partial[\.stringD] = "Value D"
-                        partial[\.stringE] = "Value E"
-                        partial[\.stringF] = "Value F"
-                        partial[\.stringG] = "Value G"
-                        partial[\.stringH] = "Value H"
-                        partial[\.stringI] = "Value I"
+                        partial[keyPath: \.stringA] = "Value A"
+                        partial[keyPath: \.stringB] = "Value B"
+                        partial[keyPath: \.stringC] = "Value C"
+                        partial[keyPath: \.stringD] = "Value D"
+                        partial[keyPath: \.stringE] = "Value E"
+                        partial[keyPath: \.stringF] = "Value F"
+                        partial[keyPath: \.stringG] = "Value G"
+                        partial[keyPath: \.stringH] = "Value H"
+                        partial[keyPath: \.stringI] = "Value I"
                     }
 
                     context("the encoded data") {
@@ -864,16 +864,16 @@ final class Partial_CodableTests: QuickSpec {
 
                 context("with complete value") {
                     beforeEach {
-                        partial[\.stringA] = "Value A"
-                        partial[\.stringB] = "Value B"
-                        partial[\.stringC] = "Value C"
-                        partial[\.stringD] = "Value D"
-                        partial[\.stringE] = "Value E"
-                        partial[\.stringF] = "Value F"
-                        partial[\.stringG] = "Value G"
-                        partial[\.stringH] = "Value H"
-                        partial[\.stringI] = "Value I"
-                        partial[\.stringJ] = "Value J"
+                        partial[keyPath: \.stringA] = "Value A"
+                        partial[keyPath: \.stringB] = "Value B"
+                        partial[keyPath: \.stringC] = "Value C"
+                        partial[keyPath: \.stringD] = "Value D"
+                        partial[keyPath: \.stringE] = "Value E"
+                        partial[keyPath: \.stringF] = "Value F"
+                        partial[keyPath: \.stringG] = "Value G"
+                        partial[keyPath: \.stringH] = "Value H"
+                        partial[keyPath: \.stringI] = "Value I"
+                        partial[keyPath: \.stringJ] = "Value J"
                     }
 
                     context("the encoded data") {
@@ -986,17 +986,17 @@ final class Partial_CodableTests: QuickSpec {
 
                 context("with complete value") {
                     beforeEach {
-                        partial[\.stringA] = "Value A"
-                        partial[\.stringB] = "Value B"
-                        partial[\.stringC] = "Value C"
-                        partial[\.stringD] = "Value D"
-                        partial[\.stringE] = "Value E"
-                        partial[\.stringF] = "Value F"
-                        partial[\.stringG] = "Value G"
-                        partial[\.stringH] = "Value H"
-                        partial[\.stringI] = "Value I"
-                        partial[\.stringJ] = "Value J"
-                        partial[\.stringK] = "Value K"
+                        partial[keyPath: \.stringA] = "Value A"
+                        partial[keyPath: \.stringB] = "Value B"
+                        partial[keyPath: \.stringC] = "Value C"
+                        partial[keyPath: \.stringD] = "Value D"
+                        partial[keyPath: \.stringE] = "Value E"
+                        partial[keyPath: \.stringF] = "Value F"
+                        partial[keyPath: \.stringG] = "Value G"
+                        partial[keyPath: \.stringH] = "Value H"
+                        partial[keyPath: \.stringI] = "Value I"
+                        partial[keyPath: \.stringJ] = "Value J"
+                        partial[keyPath: \.stringK] = "Value K"
                     }
 
                     context("the encoded data") {
@@ -1114,18 +1114,18 @@ final class Partial_CodableTests: QuickSpec {
 
                 context("with complete value") {
                     beforeEach {
-                        partial[\.stringA] = "Value A"
-                        partial[\.stringB] = "Value B"
-                        partial[\.stringC] = "Value C"
-                        partial[\.stringD] = "Value D"
-                        partial[\.stringE] = "Value E"
-                        partial[\.stringF] = "Value F"
-                        partial[\.stringG] = "Value G"
-                        partial[\.stringH] = "Value H"
-                        partial[\.stringI] = "Value I"
-                        partial[\.stringJ] = "Value J"
-                        partial[\.stringK] = "Value K"
-                        partial[\.stringL] = "Value L"
+                        partial[keyPath: \.stringA] = "Value A"
+                        partial[keyPath: \.stringB] = "Value B"
+                        partial[keyPath: \.stringC] = "Value C"
+                        partial[keyPath: \.stringD] = "Value D"
+                        partial[keyPath: \.stringE] = "Value E"
+                        partial[keyPath: \.stringF] = "Value F"
+                        partial[keyPath: \.stringG] = "Value G"
+                        partial[keyPath: \.stringH] = "Value H"
+                        partial[keyPath: \.stringI] = "Value I"
+                        partial[keyPath: \.stringJ] = "Value J"
+                        partial[keyPath: \.stringK] = "Value K"
+                        partial[keyPath: \.stringL] = "Value L"
                     }
 
                     context("the encoded data") {
@@ -1248,19 +1248,19 @@ final class Partial_CodableTests: QuickSpec {
 
                 context("with complete value") {
                     beforeEach {
-                        partial[\.stringA] = "Value A"
-                        partial[\.stringB] = "Value B"
-                        partial[\.stringC] = "Value C"
-                        partial[\.stringD] = "Value D"
-                        partial[\.stringE] = "Value E"
-                        partial[\.stringF] = "Value F"
-                        partial[\.stringG] = "Value G"
-                        partial[\.stringH] = "Value H"
-                        partial[\.stringI] = "Value I"
-                        partial[\.stringJ] = "Value J"
-                        partial[\.stringK] = "Value K"
-                        partial[\.stringL] = "Value L"
-                        partial[\.stringM] = "Value M"
+                        partial[keyPath: \.stringA] = "Value A"
+                        partial[keyPath: \.stringB] = "Value B"
+                        partial[keyPath: \.stringC] = "Value C"
+                        partial[keyPath: \.stringD] = "Value D"
+                        partial[keyPath: \.stringE] = "Value E"
+                        partial[keyPath: \.stringF] = "Value F"
+                        partial[keyPath: \.stringG] = "Value G"
+                        partial[keyPath: \.stringH] = "Value H"
+                        partial[keyPath: \.stringI] = "Value I"
+                        partial[keyPath: \.stringJ] = "Value J"
+                        partial[keyPath: \.stringK] = "Value K"
+                        partial[keyPath: \.stringL] = "Value L"
+                        partial[keyPath: \.stringM] = "Value M"
                     }
 
                     context("the encoded data") {
@@ -1388,20 +1388,20 @@ final class Partial_CodableTests: QuickSpec {
 
                 context("with complete value") {
                     beforeEach {
-                        partial[\.stringA] = "Value A"
-                        partial[\.stringB] = "Value B"
-                        partial[\.stringC] = "Value C"
-                        partial[\.stringD] = "Value D"
-                        partial[\.stringE] = "Value E"
-                        partial[\.stringF] = "Value F"
-                        partial[\.stringG] = "Value G"
-                        partial[\.stringH] = "Value H"
-                        partial[\.stringI] = "Value I"
-                        partial[\.stringJ] = "Value J"
-                        partial[\.stringK] = "Value K"
-                        partial[\.stringL] = "Value L"
-                        partial[\.stringM] = "Value M"
-                        partial[\.stringN] = "Value N"
+                        partial[keyPath: \.stringA] = "Value A"
+                        partial[keyPath: \.stringB] = "Value B"
+                        partial[keyPath: \.stringC] = "Value C"
+                        partial[keyPath: \.stringD] = "Value D"
+                        partial[keyPath: \.stringE] = "Value E"
+                        partial[keyPath: \.stringF] = "Value F"
+                        partial[keyPath: \.stringG] = "Value G"
+                        partial[keyPath: \.stringH] = "Value H"
+                        partial[keyPath: \.stringI] = "Value I"
+                        partial[keyPath: \.stringJ] = "Value J"
+                        partial[keyPath: \.stringK] = "Value K"
+                        partial[keyPath: \.stringL] = "Value L"
+                        partial[keyPath: \.stringM] = "Value M"
+                        partial[keyPath: \.stringN] = "Value N"
                     }
 
                     context("the encoded data") {
@@ -1534,21 +1534,21 @@ final class Partial_CodableTests: QuickSpec {
 
                 context("with complete value") {
                     beforeEach {
-                        partial[\.stringA] = "Value A"
-                        partial[\.stringB] = "Value B"
-                        partial[\.stringC] = "Value C"
-                        partial[\.stringD] = "Value D"
-                        partial[\.stringE] = "Value E"
-                        partial[\.stringF] = "Value F"
-                        partial[\.stringG] = "Value G"
-                        partial[\.stringH] = "Value H"
-                        partial[\.stringI] = "Value I"
-                        partial[\.stringJ] = "Value J"
-                        partial[\.stringK] = "Value K"
-                        partial[\.stringL] = "Value L"
-                        partial[\.stringM] = "Value M"
-                        partial[\.stringN] = "Value N"
-                        partial[\.stringO] = "Value O"
+                        partial[keyPath: \.stringA] = "Value A"
+                        partial[keyPath: \.stringB] = "Value B"
+                        partial[keyPath: \.stringC] = "Value C"
+                        partial[keyPath: \.stringD] = "Value D"
+                        partial[keyPath: \.stringE] = "Value E"
+                        partial[keyPath: \.stringF] = "Value F"
+                        partial[keyPath: \.stringG] = "Value G"
+                        partial[keyPath: \.stringH] = "Value H"
+                        partial[keyPath: \.stringI] = "Value I"
+                        partial[keyPath: \.stringJ] = "Value J"
+                        partial[keyPath: \.stringK] = "Value K"
+                        partial[keyPath: \.stringL] = "Value L"
+                        partial[keyPath: \.stringM] = "Value M"
+                        partial[keyPath: \.stringN] = "Value N"
+                        partial[keyPath: \.stringO] = "Value O"
                     }
 
                     context("the encoded data") {
@@ -1686,22 +1686,22 @@ final class Partial_CodableTests: QuickSpec {
 
                 context("with complete value") {
                     beforeEach {
-                        partial[\.stringA] = "Value A"
-                        partial[\.stringB] = "Value B"
-                        partial[\.stringC] = "Value C"
-                        partial[\.stringD] = "Value D"
-                        partial[\.stringE] = "Value E"
-                        partial[\.stringF] = "Value F"
-                        partial[\.stringG] = "Value G"
-                        partial[\.stringH] = "Value H"
-                        partial[\.stringI] = "Value I"
-                        partial[\.stringJ] = "Value J"
-                        partial[\.stringK] = "Value K"
-                        partial[\.stringL] = "Value L"
-                        partial[\.stringM] = "Value M"
-                        partial[\.stringN] = "Value N"
-                        partial[\.stringO] = "Value O"
-                        partial[\.stringP] = "Value P"
+                        partial[keyPath: \.stringA] = "Value A"
+                        partial[keyPath: \.stringB] = "Value B"
+                        partial[keyPath: \.stringC] = "Value C"
+                        partial[keyPath: \.stringD] = "Value D"
+                        partial[keyPath: \.stringE] = "Value E"
+                        partial[keyPath: \.stringF] = "Value F"
+                        partial[keyPath: \.stringG] = "Value G"
+                        partial[keyPath: \.stringH] = "Value H"
+                        partial[keyPath: \.stringI] = "Value I"
+                        partial[keyPath: \.stringJ] = "Value J"
+                        partial[keyPath: \.stringK] = "Value K"
+                        partial[keyPath: \.stringL] = "Value L"
+                        partial[keyPath: \.stringM] = "Value M"
+                        partial[keyPath: \.stringN] = "Value N"
+                        partial[keyPath: \.stringO] = "Value O"
+                        partial[keyPath: \.stringP] = "Value P"
                     }
 
                     context("the encoded data") {
