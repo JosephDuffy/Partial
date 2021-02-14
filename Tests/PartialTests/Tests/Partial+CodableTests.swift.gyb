@@ -10,7 +10,7 @@ import Partial
 
 final class PartialCodableTests: QuickSpec {
     override func spec() {
-        describe("PartialCodable") {
+        describe("Partial+Codable") {
 % parameterCountList = range(16)
 % for parameterCount in parameterCountList:
 %     parametersRange = range(parameterCount + 1)

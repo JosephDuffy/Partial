@@ -19,7 +19,14 @@ let package = Package(
     ],
     targets: [
         .target(name: "Partial", exclude: ["Codable/KeyPathCodingKeyCollectionBuilder.swift.gyb"]),
-        .testTarget(name: "PartialTests", dependencies: ["Partial", "Quick", "Nimble"], exclude: ["Tests/PartialCodableTests.swift.gyb"]),
+        .testTarget(
+            name: "PartialTests",
+            dependencies: ["Partial", "Quick", "Nimble"],
+            exclude: [
+                "Tests/Partial+CodableTests.swift.gyb",
+                "Tests/PartialBuilder+CodableTests.swift.gyb",
+            ]
+        ),
         .target(
             name: "DangerDependencies",
             dependencies: [

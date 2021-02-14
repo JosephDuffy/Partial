@@ -75,6 +75,11 @@ open class PartialBuilder<Wrapped>: PartialProtocol, CustomStringConvertible {
         self.partial = partial
     }
 
+    public required init(from decoder: Decoder) throws where Wrapped: PartialCodable {
+        let container = try decoder.singleValueContainer()
+        partial = try container.decode(Partial<Wrapped>.self)
+    }
+
     /// Adds a closure that will be called when any key path has been updated. The closure will be called with the key
     /// path that was updated and this `PartialBuilder`.
     ///
@@ -249,3 +254,10 @@ extension PartialBuilder {
 
 extension PartialBuilder.KeyPathUpdate.Kind: Equatable where Value: Equatable {}
 extension PartialBuilder.KeyPathUpdate: Equatable where Value: Equatable {}
+
+extension PartialBuilder: Codable where Wrapped: PartialCodable {
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(partial)
+    }
+}

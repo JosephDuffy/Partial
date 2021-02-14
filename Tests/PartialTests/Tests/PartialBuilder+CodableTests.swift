@@ -7,9 +7,9 @@ import Foundation
 @testable
 import Partial
 
-final class PartialCodableTests: QuickSpec {
+final class PartialBuilderCodableTests: QuickSpec {
     override func spec() {
-        describe("PartialCodable") {
+        describe("PartialBuilder+Codable") {
             context("with 1 property") {
                 struct CodableType: Codable, PartialCodable, Hashable {
                     @KeyPathCodingKeyCollectionBuilder<Self, CodingKeys>
@@ -20,10 +20,10 @@ final class PartialCodableTests: QuickSpec {
                     let stringA: String
                 }
 
-                var partial: Partial<CodableType>!
+                var partial: PartialBuilder<CodableType>!
 
                 beforeEach {
-                    partial = Partial()
+                    partial = PartialBuilder()
                 }
 
                 context("with complete value") {
@@ -79,10 +79,10 @@ final class PartialCodableTests: QuickSpec {
                     let stringB: String
                 }
 
-                var partial: Partial<CodableType>!
+                var partial: PartialBuilder<CodableType>!
 
                 beforeEach {
-                    partial = Partial()
+                    partial = PartialBuilder()
                 }
 
                 context("with complete value") {
@@ -143,10 +143,10 @@ final class PartialCodableTests: QuickSpec {
                     let stringC: String
                 }
 
-                var partial: Partial<CodableType>!
+                var partial: PartialBuilder<CodableType>!
 
                 beforeEach {
-                    partial = Partial()
+                    partial = PartialBuilder()
                 }
 
                 context("with complete value") {
@@ -212,10 +212,10 @@ final class PartialCodableTests: QuickSpec {
                     let stringD: String
                 }
 
-                var partial: Partial<CodableType>!
+                var partial: PartialBuilder<CodableType>!
 
                 beforeEach {
-                    partial = Partial()
+                    partial = PartialBuilder()
                 }
 
                 context("with complete value") {
@@ -286,10 +286,10 @@ final class PartialCodableTests: QuickSpec {
                     let stringE: String
                 }
 
-                var partial: Partial<CodableType>!
+                var partial: PartialBuilder<CodableType>!
 
                 beforeEach {
-                    partial = Partial()
+                    partial = PartialBuilder()
                 }
 
                 context("with complete value") {
@@ -365,10 +365,10 @@ final class PartialCodableTests: QuickSpec {
                     let stringF: String
                 }
 
-                var partial: Partial<CodableType>!
+                var partial: PartialBuilder<CodableType>!
 
                 beforeEach {
-                    partial = Partial()
+                    partial = PartialBuilder()
                 }
 
                 context("with complete value") {
@@ -449,10 +449,10 @@ final class PartialCodableTests: QuickSpec {
                     let stringG: String
                 }
 
-                var partial: Partial<CodableType>!
+                var partial: PartialBuilder<CodableType>!
 
                 beforeEach {
-                    partial = Partial()
+                    partial = PartialBuilder()
                 }
 
                 context("with complete value") {
@@ -538,10 +538,10 @@ final class PartialCodableTests: QuickSpec {
                     let stringH: String
                 }
 
-                var partial: Partial<CodableType>!
+                var partial: PartialBuilder<CodableType>!
 
                 beforeEach {
-                    partial = Partial()
+                    partial = PartialBuilder()
                 }
 
                 context("with complete value") {
@@ -632,10 +632,10 @@ final class PartialCodableTests: QuickSpec {
                     let stringI: String
                 }
 
-                var partial: Partial<CodableType>!
+                var partial: PartialBuilder<CodableType>!
 
                 beforeEach {
-                    partial = Partial()
+                    partial = PartialBuilder()
                 }
 
                 context("with complete value") {
@@ -731,10 +731,10 @@ final class PartialCodableTests: QuickSpec {
                     let stringJ: String
                 }
 
-                var partial: Partial<CodableType>!
+                var partial: PartialBuilder<CodableType>!
 
                 beforeEach {
-                    partial = Partial()
+                    partial = PartialBuilder()
                 }
 
                 context("with complete value") {
@@ -835,10 +835,10 @@ final class PartialCodableTests: QuickSpec {
                     let stringK: String
                 }
 
-                var partial: Partial<CodableType>!
+                var partial: PartialBuilder<CodableType>!
 
                 beforeEach {
-                    partial = Partial()
+                    partial = PartialBuilder()
                 }
 
                 context("with complete value") {
@@ -944,10 +944,10 @@ final class PartialCodableTests: QuickSpec {
                     let stringL: String
                 }
 
-                var partial: Partial<CodableType>!
+                var partial: PartialBuilder<CodableType>!
 
                 beforeEach {
-                    partial = Partial()
+                    partial = PartialBuilder()
                 }
 
                 context("with complete value") {
@@ -1058,10 +1058,10 @@ final class PartialCodableTests: QuickSpec {
                     let stringM: String
                 }
 
-                var partial: Partial<CodableType>!
+                var partial: PartialBuilder<CodableType>!
 
                 beforeEach {
-                    partial = Partial()
+                    partial = PartialBuilder()
                 }
 
                 context("with complete value") {
@@ -1177,10 +1177,10 @@ final class PartialCodableTests: QuickSpec {
                     let stringN: String
                 }
 
-                var partial: Partial<CodableType>!
+                var partial: PartialBuilder<CodableType>!
 
                 beforeEach {
-                    partial = Partial()
+                    partial = PartialBuilder()
                 }
 
                 context("with complete value") {
@@ -1301,10 +1301,10 @@ final class PartialCodableTests: QuickSpec {
                     let stringO: String
                 }
 
-                var partial: Partial<CodableType>!
+                var partial: PartialBuilder<CodableType>!
 
                 beforeEach {
-                    partial = Partial()
+                    partial = PartialBuilder()
                 }
 
                 context("with complete value") {
@@ -1430,10 +1430,10 @@ final class PartialCodableTests: QuickSpec {
                     let stringP: String
                 }
 
-                var partial: Partial<CodableType>!
+                var partial: PartialBuilder<CodableType>!
 
                 beforeEach {
-                    partial = Partial()
+                    partial = PartialBuilder()
                 }
 
                 context("with complete value") {
