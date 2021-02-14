@@ -19,11 +19,11 @@ public struct KeyPathCodingKeyCollection<Root, CodingKey: Swift.CodingKey & Hash
 
     public mutating func addPair<Value: Swift.Codable>(keyPath: KeyPath<Root, Value>, codingKey: CodingKey) {
         encoders[keyPath] = { value, container in
-            guard let value = value as? Value else {
+            guard let caseValue = value as? Value else {
                 throw EncodeError.invalidType(value: value, expectedType: Value.self)
             }
 
-            try container.encode(value, forKey: codingKey)
+            try container.encode(caseValue, forKey: codingKey)
         }
 
         decoders[codingKey] = { codingKey, container in
