@@ -7,6 +7,12 @@ public struct Partial<Wrapped>: PartialProtocol, CustomStringConvertible {
     public enum Error<Value>: Swift.Error {
         /// The key path has not been set.
         case keyPathNotSet(KeyPath<Wrapped, Value>)
+
+        /// A value has been set to an unexpected type.
+        ///
+        /// - parameter value: The set value.
+        /// - parameter keyPath: The key path the value was set against.
+        case invalidType(value: Any, keyPath: KeyPath<Wrapped, Value>)
     }
 
     /// A textual representation of the Partial's values.
@@ -33,7 +39,7 @@ public struct Partial<Wrapped>: PartialProtocol, CustomStringConvertible {
             return value
         }
 
-        preconditionFailure("Value has been set, but is not of type \(Value.self): \(value)")
+        throw Error.invalidType(value: value, keyPath: keyPath)
     }
 
     /// Updates the stored value for the given key path.
