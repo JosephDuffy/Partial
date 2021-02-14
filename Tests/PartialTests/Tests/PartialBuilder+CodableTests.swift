@@ -8,7 +8,7 @@ import Foundation
 @testable
 import Partial
 
-final class PartialBuilderCodableTests: QuickSpec {
+final class Partial_BuilderCodableTests: QuickSpec {
     override func spec() {
         describe("PartialBuilder+Codable") {
             context("with 1 property") {
