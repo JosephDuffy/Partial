@@ -1,5 +1,4 @@
 // This file is generated. Do not edit it.
-#if swift(>=5.1)
 // swiftlint:disable cyclomatic_complexity
 import Quick
 import Nimble
@@ -8,15 +7,23 @@ import Foundation
 @testable
 import Partial
 
-final class Partial_BuilderCodableTests: QuickSpec {
+final class PartialBuilder_CodableTests: QuickSpec {
     override func spec() {
         describe("PartialBuilder+Codable") {
             context("with 1 property") {
                 struct CodableType: Codable, PartialCodable, Hashable {
+                    #if swift(>=5.1)
                     @KeyPathCodingKeyCollectionBuilder<Self, CodingKeys>
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
                         (\Self.stringA, CodingKeys.stringA)
                     }
+                    #else
+                    static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
+                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        collection.addPair(keyPath: \.stringA, codingKey: .stringA)
+                        return collection
+                    }
+                    #endif
 
                     let stringA: String
                 }
@@ -83,11 +90,20 @@ final class Partial_BuilderCodableTests: QuickSpec {
             }
             context("with 2 property") {
                 struct CodableType: Codable, PartialCodable, Hashable {
+                    #if swift(>=5.1)
                     @KeyPathCodingKeyCollectionBuilder<Self, CodingKeys>
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
                         (\Self.stringA, CodingKeys.stringA)
                         (\Self.stringB, CodingKeys.stringB)
                     }
+                    #else
+                    static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
+                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        collection.addPair(keyPath: \.stringA, codingKey: .stringA)
+                        collection.addPair(keyPath: \.stringB, codingKey: .stringB)
+                        return collection
+                    }
+                    #endif
 
                     let stringA: String
                     let stringB: String
@@ -159,12 +175,22 @@ final class Partial_BuilderCodableTests: QuickSpec {
             }
             context("with 3 property") {
                 struct CodableType: Codable, PartialCodable, Hashable {
+                    #if swift(>=5.1)
                     @KeyPathCodingKeyCollectionBuilder<Self, CodingKeys>
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
                         (\Self.stringA, CodingKeys.stringA)
                         (\Self.stringB, CodingKeys.stringB)
                         (\Self.stringC, CodingKeys.stringC)
                     }
+                    #else
+                    static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
+                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        collection.addPair(keyPath: \.stringA, codingKey: .stringA)
+                        collection.addPair(keyPath: \.stringB, codingKey: .stringB)
+                        collection.addPair(keyPath: \.stringC, codingKey: .stringC)
+                        return collection
+                    }
+                    #endif
 
                     let stringA: String
                     let stringB: String
@@ -241,6 +267,7 @@ final class Partial_BuilderCodableTests: QuickSpec {
             }
             context("with 4 property") {
                 struct CodableType: Codable, PartialCodable, Hashable {
+                    #if swift(>=5.1)
                     @KeyPathCodingKeyCollectionBuilder<Self, CodingKeys>
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
                         (\Self.stringA, CodingKeys.stringA)
@@ -248,6 +275,16 @@ final class Partial_BuilderCodableTests: QuickSpec {
                         (\Self.stringC, CodingKeys.stringC)
                         (\Self.stringD, CodingKeys.stringD)
                     }
+                    #else
+                    static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
+                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        collection.addPair(keyPath: \.stringA, codingKey: .stringA)
+                        collection.addPair(keyPath: \.stringB, codingKey: .stringB)
+                        collection.addPair(keyPath: \.stringC, codingKey: .stringC)
+                        collection.addPair(keyPath: \.stringD, codingKey: .stringD)
+                        return collection
+                    }
+                    #endif
 
                     let stringA: String
                     let stringB: String
@@ -329,6 +366,7 @@ final class Partial_BuilderCodableTests: QuickSpec {
             }
             context("with 5 property") {
                 struct CodableType: Codable, PartialCodable, Hashable {
+                    #if swift(>=5.1)
                     @KeyPathCodingKeyCollectionBuilder<Self, CodingKeys>
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
                         (\Self.stringA, CodingKeys.stringA)
@@ -337,6 +375,17 @@ final class Partial_BuilderCodableTests: QuickSpec {
                         (\Self.stringD, CodingKeys.stringD)
                         (\Self.stringE, CodingKeys.stringE)
                     }
+                    #else
+                    static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
+                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        collection.addPair(keyPath: \.stringA, codingKey: .stringA)
+                        collection.addPair(keyPath: \.stringB, codingKey: .stringB)
+                        collection.addPair(keyPath: \.stringC, codingKey: .stringC)
+                        collection.addPair(keyPath: \.stringD, codingKey: .stringD)
+                        collection.addPair(keyPath: \.stringE, codingKey: .stringE)
+                        return collection
+                    }
+                    #endif
 
                     let stringA: String
                     let stringB: String
@@ -423,6 +472,7 @@ final class Partial_BuilderCodableTests: QuickSpec {
             }
             context("with 6 property") {
                 struct CodableType: Codable, PartialCodable, Hashable {
+                    #if swift(>=5.1)
                     @KeyPathCodingKeyCollectionBuilder<Self, CodingKeys>
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
                         (\Self.stringA, CodingKeys.stringA)
@@ -432,6 +482,18 @@ final class Partial_BuilderCodableTests: QuickSpec {
                         (\Self.stringE, CodingKeys.stringE)
                         (\Self.stringF, CodingKeys.stringF)
                     }
+                    #else
+                    static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
+                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        collection.addPair(keyPath: \.stringA, codingKey: .stringA)
+                        collection.addPair(keyPath: \.stringB, codingKey: .stringB)
+                        collection.addPair(keyPath: \.stringC, codingKey: .stringC)
+                        collection.addPair(keyPath: \.stringD, codingKey: .stringD)
+                        collection.addPair(keyPath: \.stringE, codingKey: .stringE)
+                        collection.addPair(keyPath: \.stringF, codingKey: .stringF)
+                        return collection
+                    }
+                    #endif
 
                     let stringA: String
                     let stringB: String
@@ -523,6 +585,7 @@ final class Partial_BuilderCodableTests: QuickSpec {
             }
             context("with 7 property") {
                 struct CodableType: Codable, PartialCodable, Hashable {
+                    #if swift(>=5.1)
                     @KeyPathCodingKeyCollectionBuilder<Self, CodingKeys>
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
                         (\Self.stringA, CodingKeys.stringA)
@@ -533,6 +596,19 @@ final class Partial_BuilderCodableTests: QuickSpec {
                         (\Self.stringF, CodingKeys.stringF)
                         (\Self.stringG, CodingKeys.stringG)
                     }
+                    #else
+                    static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
+                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        collection.addPair(keyPath: \.stringA, codingKey: .stringA)
+                        collection.addPair(keyPath: \.stringB, codingKey: .stringB)
+                        collection.addPair(keyPath: \.stringC, codingKey: .stringC)
+                        collection.addPair(keyPath: \.stringD, codingKey: .stringD)
+                        collection.addPair(keyPath: \.stringE, codingKey: .stringE)
+                        collection.addPair(keyPath: \.stringF, codingKey: .stringF)
+                        collection.addPair(keyPath: \.stringG, codingKey: .stringG)
+                        return collection
+                    }
+                    #endif
 
                     let stringA: String
                     let stringB: String
@@ -629,6 +705,7 @@ final class Partial_BuilderCodableTests: QuickSpec {
             }
             context("with 8 property") {
                 struct CodableType: Codable, PartialCodable, Hashable {
+                    #if swift(>=5.1)
                     @KeyPathCodingKeyCollectionBuilder<Self, CodingKeys>
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
                         (\Self.stringA, CodingKeys.stringA)
@@ -640,6 +717,20 @@ final class Partial_BuilderCodableTests: QuickSpec {
                         (\Self.stringG, CodingKeys.stringG)
                         (\Self.stringH, CodingKeys.stringH)
                     }
+                    #else
+                    static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
+                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        collection.addPair(keyPath: \.stringA, codingKey: .stringA)
+                        collection.addPair(keyPath: \.stringB, codingKey: .stringB)
+                        collection.addPair(keyPath: \.stringC, codingKey: .stringC)
+                        collection.addPair(keyPath: \.stringD, codingKey: .stringD)
+                        collection.addPair(keyPath: \.stringE, codingKey: .stringE)
+                        collection.addPair(keyPath: \.stringF, codingKey: .stringF)
+                        collection.addPair(keyPath: \.stringG, codingKey: .stringG)
+                        collection.addPair(keyPath: \.stringH, codingKey: .stringH)
+                        return collection
+                    }
+                    #endif
 
                     let stringA: String
                     let stringB: String
@@ -741,6 +832,7 @@ final class Partial_BuilderCodableTests: QuickSpec {
             }
             context("with 9 property") {
                 struct CodableType: Codable, PartialCodable, Hashable {
+                    #if swift(>=5.1)
                     @KeyPathCodingKeyCollectionBuilder<Self, CodingKeys>
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
                         (\Self.stringA, CodingKeys.stringA)
@@ -753,6 +845,21 @@ final class Partial_BuilderCodableTests: QuickSpec {
                         (\Self.stringH, CodingKeys.stringH)
                         (\Self.stringI, CodingKeys.stringI)
                     }
+                    #else
+                    static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
+                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        collection.addPair(keyPath: \.stringA, codingKey: .stringA)
+                        collection.addPair(keyPath: \.stringB, codingKey: .stringB)
+                        collection.addPair(keyPath: \.stringC, codingKey: .stringC)
+                        collection.addPair(keyPath: \.stringD, codingKey: .stringD)
+                        collection.addPair(keyPath: \.stringE, codingKey: .stringE)
+                        collection.addPair(keyPath: \.stringF, codingKey: .stringF)
+                        collection.addPair(keyPath: \.stringG, codingKey: .stringG)
+                        collection.addPair(keyPath: \.stringH, codingKey: .stringH)
+                        collection.addPair(keyPath: \.stringI, codingKey: .stringI)
+                        return collection
+                    }
+                    #endif
 
                     let stringA: String
                     let stringB: String
@@ -859,6 +966,7 @@ final class Partial_BuilderCodableTests: QuickSpec {
             }
             context("with 10 property") {
                 struct CodableType: Codable, PartialCodable, Hashable {
+                    #if swift(>=5.1)
                     @KeyPathCodingKeyCollectionBuilder<Self, CodingKeys>
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
                         (\Self.stringA, CodingKeys.stringA)
@@ -872,6 +980,22 @@ final class Partial_BuilderCodableTests: QuickSpec {
                         (\Self.stringI, CodingKeys.stringI)
                         (\Self.stringJ, CodingKeys.stringJ)
                     }
+                    #else
+                    static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
+                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        collection.addPair(keyPath: \.stringA, codingKey: .stringA)
+                        collection.addPair(keyPath: \.stringB, codingKey: .stringB)
+                        collection.addPair(keyPath: \.stringC, codingKey: .stringC)
+                        collection.addPair(keyPath: \.stringD, codingKey: .stringD)
+                        collection.addPair(keyPath: \.stringE, codingKey: .stringE)
+                        collection.addPair(keyPath: \.stringF, codingKey: .stringF)
+                        collection.addPair(keyPath: \.stringG, codingKey: .stringG)
+                        collection.addPair(keyPath: \.stringH, codingKey: .stringH)
+                        collection.addPair(keyPath: \.stringI, codingKey: .stringI)
+                        collection.addPair(keyPath: \.stringJ, codingKey: .stringJ)
+                        return collection
+                    }
+                    #endif
 
                     let stringA: String
                     let stringB: String
@@ -983,6 +1107,7 @@ final class Partial_BuilderCodableTests: QuickSpec {
             }
             context("with 11 property") {
                 struct CodableType: Codable, PartialCodable, Hashable {
+                    #if swift(>=5.1)
                     @KeyPathCodingKeyCollectionBuilder<Self, CodingKeys>
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
                         (\Self.stringA, CodingKeys.stringA)
@@ -997,6 +1122,23 @@ final class Partial_BuilderCodableTests: QuickSpec {
                         (\Self.stringJ, CodingKeys.stringJ)
                         (\Self.stringK, CodingKeys.stringK)
                     }
+                    #else
+                    static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
+                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        collection.addPair(keyPath: \.stringA, codingKey: .stringA)
+                        collection.addPair(keyPath: \.stringB, codingKey: .stringB)
+                        collection.addPair(keyPath: \.stringC, codingKey: .stringC)
+                        collection.addPair(keyPath: \.stringD, codingKey: .stringD)
+                        collection.addPair(keyPath: \.stringE, codingKey: .stringE)
+                        collection.addPair(keyPath: \.stringF, codingKey: .stringF)
+                        collection.addPair(keyPath: \.stringG, codingKey: .stringG)
+                        collection.addPair(keyPath: \.stringH, codingKey: .stringH)
+                        collection.addPair(keyPath: \.stringI, codingKey: .stringI)
+                        collection.addPair(keyPath: \.stringJ, codingKey: .stringJ)
+                        collection.addPair(keyPath: \.stringK, codingKey: .stringK)
+                        return collection
+                    }
+                    #endif
 
                     let stringA: String
                     let stringB: String
@@ -1113,6 +1255,7 @@ final class Partial_BuilderCodableTests: QuickSpec {
             }
             context("with 12 property") {
                 struct CodableType: Codable, PartialCodable, Hashable {
+                    #if swift(>=5.1)
                     @KeyPathCodingKeyCollectionBuilder<Self, CodingKeys>
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
                         (\Self.stringA, CodingKeys.stringA)
@@ -1128,6 +1271,24 @@ final class Partial_BuilderCodableTests: QuickSpec {
                         (\Self.stringK, CodingKeys.stringK)
                         (\Self.stringL, CodingKeys.stringL)
                     }
+                    #else
+                    static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
+                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        collection.addPair(keyPath: \.stringA, codingKey: .stringA)
+                        collection.addPair(keyPath: \.stringB, codingKey: .stringB)
+                        collection.addPair(keyPath: \.stringC, codingKey: .stringC)
+                        collection.addPair(keyPath: \.stringD, codingKey: .stringD)
+                        collection.addPair(keyPath: \.stringE, codingKey: .stringE)
+                        collection.addPair(keyPath: \.stringF, codingKey: .stringF)
+                        collection.addPair(keyPath: \.stringG, codingKey: .stringG)
+                        collection.addPair(keyPath: \.stringH, codingKey: .stringH)
+                        collection.addPair(keyPath: \.stringI, codingKey: .stringI)
+                        collection.addPair(keyPath: \.stringJ, codingKey: .stringJ)
+                        collection.addPair(keyPath: \.stringK, codingKey: .stringK)
+                        collection.addPair(keyPath: \.stringL, codingKey: .stringL)
+                        return collection
+                    }
+                    #endif
 
                     let stringA: String
                     let stringB: String
@@ -1249,6 +1410,7 @@ final class Partial_BuilderCodableTests: QuickSpec {
             }
             context("with 13 property") {
                 struct CodableType: Codable, PartialCodable, Hashable {
+                    #if swift(>=5.1)
                     @KeyPathCodingKeyCollectionBuilder<Self, CodingKeys>
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
                         (\Self.stringA, CodingKeys.stringA)
@@ -1265,6 +1427,25 @@ final class Partial_BuilderCodableTests: QuickSpec {
                         (\Self.stringL, CodingKeys.stringL)
                         (\Self.stringM, CodingKeys.stringM)
                     }
+                    #else
+                    static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
+                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        collection.addPair(keyPath: \.stringA, codingKey: .stringA)
+                        collection.addPair(keyPath: \.stringB, codingKey: .stringB)
+                        collection.addPair(keyPath: \.stringC, codingKey: .stringC)
+                        collection.addPair(keyPath: \.stringD, codingKey: .stringD)
+                        collection.addPair(keyPath: \.stringE, codingKey: .stringE)
+                        collection.addPair(keyPath: \.stringF, codingKey: .stringF)
+                        collection.addPair(keyPath: \.stringG, codingKey: .stringG)
+                        collection.addPair(keyPath: \.stringH, codingKey: .stringH)
+                        collection.addPair(keyPath: \.stringI, codingKey: .stringI)
+                        collection.addPair(keyPath: \.stringJ, codingKey: .stringJ)
+                        collection.addPair(keyPath: \.stringK, codingKey: .stringK)
+                        collection.addPair(keyPath: \.stringL, codingKey: .stringL)
+                        collection.addPair(keyPath: \.stringM, codingKey: .stringM)
+                        return collection
+                    }
+                    #endif
 
                     let stringA: String
                     let stringB: String
@@ -1391,6 +1572,7 @@ final class Partial_BuilderCodableTests: QuickSpec {
             }
             context("with 14 property") {
                 struct CodableType: Codable, PartialCodable, Hashable {
+                    #if swift(>=5.1)
                     @KeyPathCodingKeyCollectionBuilder<Self, CodingKeys>
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
                         (\Self.stringA, CodingKeys.stringA)
@@ -1408,6 +1590,26 @@ final class Partial_BuilderCodableTests: QuickSpec {
                         (\Self.stringM, CodingKeys.stringM)
                         (\Self.stringN, CodingKeys.stringN)
                     }
+                    #else
+                    static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
+                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        collection.addPair(keyPath: \.stringA, codingKey: .stringA)
+                        collection.addPair(keyPath: \.stringB, codingKey: .stringB)
+                        collection.addPair(keyPath: \.stringC, codingKey: .stringC)
+                        collection.addPair(keyPath: \.stringD, codingKey: .stringD)
+                        collection.addPair(keyPath: \.stringE, codingKey: .stringE)
+                        collection.addPair(keyPath: \.stringF, codingKey: .stringF)
+                        collection.addPair(keyPath: \.stringG, codingKey: .stringG)
+                        collection.addPair(keyPath: \.stringH, codingKey: .stringH)
+                        collection.addPair(keyPath: \.stringI, codingKey: .stringI)
+                        collection.addPair(keyPath: \.stringJ, codingKey: .stringJ)
+                        collection.addPair(keyPath: \.stringK, codingKey: .stringK)
+                        collection.addPair(keyPath: \.stringL, codingKey: .stringL)
+                        collection.addPair(keyPath: \.stringM, codingKey: .stringM)
+                        collection.addPair(keyPath: \.stringN, codingKey: .stringN)
+                        return collection
+                    }
+                    #endif
 
                     let stringA: String
                     let stringB: String
@@ -1539,6 +1741,7 @@ final class Partial_BuilderCodableTests: QuickSpec {
             }
             context("with 15 property") {
                 struct CodableType: Codable, PartialCodable, Hashable {
+                    #if swift(>=5.1)
                     @KeyPathCodingKeyCollectionBuilder<Self, CodingKeys>
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
                         (\Self.stringA, CodingKeys.stringA)
@@ -1557,6 +1760,27 @@ final class Partial_BuilderCodableTests: QuickSpec {
                         (\Self.stringN, CodingKeys.stringN)
                         (\Self.stringO, CodingKeys.stringO)
                     }
+                    #else
+                    static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
+                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        collection.addPair(keyPath: \.stringA, codingKey: .stringA)
+                        collection.addPair(keyPath: \.stringB, codingKey: .stringB)
+                        collection.addPair(keyPath: \.stringC, codingKey: .stringC)
+                        collection.addPair(keyPath: \.stringD, codingKey: .stringD)
+                        collection.addPair(keyPath: \.stringE, codingKey: .stringE)
+                        collection.addPair(keyPath: \.stringF, codingKey: .stringF)
+                        collection.addPair(keyPath: \.stringG, codingKey: .stringG)
+                        collection.addPair(keyPath: \.stringH, codingKey: .stringH)
+                        collection.addPair(keyPath: \.stringI, codingKey: .stringI)
+                        collection.addPair(keyPath: \.stringJ, codingKey: .stringJ)
+                        collection.addPair(keyPath: \.stringK, codingKey: .stringK)
+                        collection.addPair(keyPath: \.stringL, codingKey: .stringL)
+                        collection.addPair(keyPath: \.stringM, codingKey: .stringM)
+                        collection.addPair(keyPath: \.stringN, codingKey: .stringN)
+                        collection.addPair(keyPath: \.stringO, codingKey: .stringO)
+                        return collection
+                    }
+                    #endif
 
                     let stringA: String
                     let stringB: String
@@ -1693,6 +1917,7 @@ final class Partial_BuilderCodableTests: QuickSpec {
             }
             context("with 16 property") {
                 struct CodableType: Codable, PartialCodable, Hashable {
+                    #if swift(>=5.1)
                     @KeyPathCodingKeyCollectionBuilder<Self, CodingKeys>
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
                         (\Self.stringA, CodingKeys.stringA)
@@ -1712,6 +1937,28 @@ final class Partial_BuilderCodableTests: QuickSpec {
                         (\Self.stringO, CodingKeys.stringO)
                         (\Self.stringP, CodingKeys.stringP)
                     }
+                    #else
+                    static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
+                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        collection.addPair(keyPath: \.stringA, codingKey: .stringA)
+                        collection.addPair(keyPath: \.stringB, codingKey: .stringB)
+                        collection.addPair(keyPath: \.stringC, codingKey: .stringC)
+                        collection.addPair(keyPath: \.stringD, codingKey: .stringD)
+                        collection.addPair(keyPath: \.stringE, codingKey: .stringE)
+                        collection.addPair(keyPath: \.stringF, codingKey: .stringF)
+                        collection.addPair(keyPath: \.stringG, codingKey: .stringG)
+                        collection.addPair(keyPath: \.stringH, codingKey: .stringH)
+                        collection.addPair(keyPath: \.stringI, codingKey: .stringI)
+                        collection.addPair(keyPath: \.stringJ, codingKey: .stringJ)
+                        collection.addPair(keyPath: \.stringK, codingKey: .stringK)
+                        collection.addPair(keyPath: \.stringL, codingKey: .stringL)
+                        collection.addPair(keyPath: \.stringM, codingKey: .stringM)
+                        collection.addPair(keyPath: \.stringN, codingKey: .stringN)
+                        collection.addPair(keyPath: \.stringO, codingKey: .stringO)
+                        collection.addPair(keyPath: \.stringP, codingKey: .stringP)
+                        return collection
+                    }
+                    #endif
 
                     let stringA: String
                     let stringB: String
@@ -1854,4 +2101,3 @@ final class Partial_BuilderCodableTests: QuickSpec {
         }
     }
 }
-#endif

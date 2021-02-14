@@ -1,6 +1,5 @@
 % import string
 // This file is generated. Do not edit it.
-#if swift(>=5.1)
 // swiftlint:disable cyclomatic_complexity
 import Quick
 import Nimble
@@ -9,7 +8,7 @@ import Foundation
 @testable
 import Partial
 
-final class PartialCodableTests: QuickSpec {
+final class Partial_CodableTests: QuickSpec {
     override func spec() {
         describe("Partial+Codable") {
 % parameterCountList = range(16)
@@ -17,6 +16,7 @@ final class PartialCodableTests: QuickSpec {
 %     parametersRange = range(parameterCount + 1)
             context("with ${parameterCount + 1} property") {
                 struct CodableType: Codable, PartialCodable, Hashable {
+                    #if swift(>=5.1)
                     @KeyPathCodingKeyCollectionBuilder<Self, CodingKeys>
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
 %     for characterIndex in parametersRange:
@@ -24,6 +24,16 @@ final class PartialCodableTests: QuickSpec {
                         (\Self.string${character}, CodingKeys.string${character})
 %     end
                     }
+                    #else
+                    static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
+                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+%     for characterIndex in parametersRange:
+%         character = string.ascii_uppercase[characterIndex]
+                        collection.addPair(keyPath: \.string${character}, codingKey: .string${character})
+%     end
+                        return collection
+                    }
+                    #endif
 
 %     for characterIndex in parametersRange:
 %         character = string.ascii_uppercase[characterIndex]
@@ -91,4 +101,3 @@ final class PartialCodableTests: QuickSpec {
         }
     }
 }
-#endif
