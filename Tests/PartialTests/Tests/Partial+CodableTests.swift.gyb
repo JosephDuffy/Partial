@@ -51,7 +51,7 @@ final class Partial_CodableTests: QuickSpec {
                     beforeEach {
 %     for characterIndex in parametersRange:
 %         character = string.ascii_uppercase[characterIndex]
-                        partial.string${character} = "Value ${character}"
+                        partial[\.string${character}] = "Value ${character}"
 %     end
                     }
 
