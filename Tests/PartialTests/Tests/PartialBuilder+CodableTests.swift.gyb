@@ -83,6 +83,22 @@ final class PartialBuilderCodableTests: QuickSpec {
                                 fail("Should not throw: \(error)")
                             }
                         }
+
+                        #if swift(>=5.3)
+                        it("should be usable to decode PartialBuilder<Wrapped>") {
+                            do {
+                                let decoder = JSONDecoder()
+                                let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
+
+%     for characterIndex in parametersRange:
+%         character = string.ascii_uppercase[characterIndex]
+                                expect(decodedValue.string${character}) == "Value ${character}"
+%     end
+                            } catch {
+                                fail("Should not throw: \(error)")
+                            }
+                        }
+                        #endif
                     }
                 }
             }

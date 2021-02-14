@@ -64,6 +64,19 @@ final class PartialBuilderCodableTests: QuickSpec {
                                 fail("Should not throw: \(error)")
                             }
                         }
+
+                        #if swift(>=5.3)
+                        it("should be usable to decode PartialBuilder<Wrapped>") {
+                            do {
+                                let decoder = JSONDecoder()
+                                let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
+
+                                expect(decodedValue.stringA) == "Value A"
+                            } catch {
+                                fail("Should not throw: \(error)")
+                            }
+                        }
+                        #endif
                     }
                 }
             }
@@ -126,6 +139,20 @@ final class PartialBuilderCodableTests: QuickSpec {
                                 fail("Should not throw: \(error)")
                             }
                         }
+
+                        #if swift(>=5.3)
+                        it("should be usable to decode PartialBuilder<Wrapped>") {
+                            do {
+                                let decoder = JSONDecoder()
+                                let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
+
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                            } catch {
+                                fail("Should not throw: \(error)")
+                            }
+                        }
+                        #endif
                     }
                 }
             }
@@ -193,6 +220,21 @@ final class PartialBuilderCodableTests: QuickSpec {
                                 fail("Should not throw: \(error)")
                             }
                         }
+
+                        #if swift(>=5.3)
+                        it("should be usable to decode PartialBuilder<Wrapped>") {
+                            do {
+                                let decoder = JSONDecoder()
+                                let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
+
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                            } catch {
+                                fail("Should not throw: \(error)")
+                            }
+                        }
+                        #endif
                     }
                 }
             }
@@ -265,6 +307,22 @@ final class PartialBuilderCodableTests: QuickSpec {
                                 fail("Should not throw: \(error)")
                             }
                         }
+
+                        #if swift(>=5.3)
+                        it("should be usable to decode PartialBuilder<Wrapped>") {
+                            do {
+                                let decoder = JSONDecoder()
+                                let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
+
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                            } catch {
+                                fail("Should not throw: \(error)")
+                            }
+                        }
+                        #endif
                     }
                 }
             }
@@ -342,6 +400,23 @@ final class PartialBuilderCodableTests: QuickSpec {
                                 fail("Should not throw: \(error)")
                             }
                         }
+
+                        #if swift(>=5.3)
+                        it("should be usable to decode PartialBuilder<Wrapped>") {
+                            do {
+                                let decoder = JSONDecoder()
+                                let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
+
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                            } catch {
+                                fail("Should not throw: \(error)")
+                            }
+                        }
+                        #endif
                     }
                 }
             }
@@ -424,6 +499,24 @@ final class PartialBuilderCodableTests: QuickSpec {
                                 fail("Should not throw: \(error)")
                             }
                         }
+
+                        #if swift(>=5.3)
+                        it("should be usable to decode PartialBuilder<Wrapped>") {
+                            do {
+                                let decoder = JSONDecoder()
+                                let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
+
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                            } catch {
+                                fail("Should not throw: \(error)")
+                            }
+                        }
+                        #endif
                     }
                 }
             }
@@ -511,6 +604,25 @@ final class PartialBuilderCodableTests: QuickSpec {
                                 fail("Should not throw: \(error)")
                             }
                         }
+
+                        #if swift(>=5.3)
+                        it("should be usable to decode PartialBuilder<Wrapped>") {
+                            do {
+                                let decoder = JSONDecoder()
+                                let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
+
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                            } catch {
+                                fail("Should not throw: \(error)")
+                            }
+                        }
+                        #endif
                     }
                 }
             }
@@ -603,6 +715,26 @@ final class PartialBuilderCodableTests: QuickSpec {
                                 fail("Should not throw: \(error)")
                             }
                         }
+
+                        #if swift(>=5.3)
+                        it("should be usable to decode PartialBuilder<Wrapped>") {
+                            do {
+                                let decoder = JSONDecoder()
+                                let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
+
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                            } catch {
+                                fail("Should not throw: \(error)")
+                            }
+                        }
+                        #endif
                     }
                 }
             }
@@ -700,6 +832,27 @@ final class PartialBuilderCodableTests: QuickSpec {
                                 fail("Should not throw: \(error)")
                             }
                         }
+
+                        #if swift(>=5.3)
+                        it("should be usable to decode PartialBuilder<Wrapped>") {
+                            do {
+                                let decoder = JSONDecoder()
+                                let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
+
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                                expect(decodedValue.stringI) == "Value I"
+                            } catch {
+                                fail("Should not throw: \(error)")
+                            }
+                        }
+                        #endif
                     }
                 }
             }
@@ -802,6 +955,28 @@ final class PartialBuilderCodableTests: QuickSpec {
                                 fail("Should not throw: \(error)")
                             }
                         }
+
+                        #if swift(>=5.3)
+                        it("should be usable to decode PartialBuilder<Wrapped>") {
+                            do {
+                                let decoder = JSONDecoder()
+                                let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
+
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                                expect(decodedValue.stringI) == "Value I"
+                                expect(decodedValue.stringJ) == "Value J"
+                            } catch {
+                                fail("Should not throw: \(error)")
+                            }
+                        }
+                        #endif
                     }
                 }
             }
@@ -909,6 +1084,29 @@ final class PartialBuilderCodableTests: QuickSpec {
                                 fail("Should not throw: \(error)")
                             }
                         }
+
+                        #if swift(>=5.3)
+                        it("should be usable to decode PartialBuilder<Wrapped>") {
+                            do {
+                                let decoder = JSONDecoder()
+                                let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
+
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                                expect(decodedValue.stringI) == "Value I"
+                                expect(decodedValue.stringJ) == "Value J"
+                                expect(decodedValue.stringK) == "Value K"
+                            } catch {
+                                fail("Should not throw: \(error)")
+                            }
+                        }
+                        #endif
                     }
                 }
             }
@@ -1021,6 +1219,30 @@ final class PartialBuilderCodableTests: QuickSpec {
                                 fail("Should not throw: \(error)")
                             }
                         }
+
+                        #if swift(>=5.3)
+                        it("should be usable to decode PartialBuilder<Wrapped>") {
+                            do {
+                                let decoder = JSONDecoder()
+                                let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
+
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                                expect(decodedValue.stringI) == "Value I"
+                                expect(decodedValue.stringJ) == "Value J"
+                                expect(decodedValue.stringK) == "Value K"
+                                expect(decodedValue.stringL) == "Value L"
+                            } catch {
+                                fail("Should not throw: \(error)")
+                            }
+                        }
+                        #endif
                     }
                 }
             }
@@ -1138,6 +1360,31 @@ final class PartialBuilderCodableTests: QuickSpec {
                                 fail("Should not throw: \(error)")
                             }
                         }
+
+                        #if swift(>=5.3)
+                        it("should be usable to decode PartialBuilder<Wrapped>") {
+                            do {
+                                let decoder = JSONDecoder()
+                                let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
+
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                                expect(decodedValue.stringI) == "Value I"
+                                expect(decodedValue.stringJ) == "Value J"
+                                expect(decodedValue.stringK) == "Value K"
+                                expect(decodedValue.stringL) == "Value L"
+                                expect(decodedValue.stringM) == "Value M"
+                            } catch {
+                                fail("Should not throw: \(error)")
+                            }
+                        }
+                        #endif
                     }
                 }
             }
@@ -1260,6 +1507,32 @@ final class PartialBuilderCodableTests: QuickSpec {
                                 fail("Should not throw: \(error)")
                             }
                         }
+
+                        #if swift(>=5.3)
+                        it("should be usable to decode PartialBuilder<Wrapped>") {
+                            do {
+                                let decoder = JSONDecoder()
+                                let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
+
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                                expect(decodedValue.stringI) == "Value I"
+                                expect(decodedValue.stringJ) == "Value J"
+                                expect(decodedValue.stringK) == "Value K"
+                                expect(decodedValue.stringL) == "Value L"
+                                expect(decodedValue.stringM) == "Value M"
+                                expect(decodedValue.stringN) == "Value N"
+                            } catch {
+                                fail("Should not throw: \(error)")
+                            }
+                        }
+                        #endif
                     }
                 }
             }
@@ -1387,6 +1660,33 @@ final class PartialBuilderCodableTests: QuickSpec {
                                 fail("Should not throw: \(error)")
                             }
                         }
+
+                        #if swift(>=5.3)
+                        it("should be usable to decode PartialBuilder<Wrapped>") {
+                            do {
+                                let decoder = JSONDecoder()
+                                let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
+
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                                expect(decodedValue.stringI) == "Value I"
+                                expect(decodedValue.stringJ) == "Value J"
+                                expect(decodedValue.stringK) == "Value K"
+                                expect(decodedValue.stringL) == "Value L"
+                                expect(decodedValue.stringM) == "Value M"
+                                expect(decodedValue.stringN) == "Value N"
+                                expect(decodedValue.stringO) == "Value O"
+                            } catch {
+                                fail("Should not throw: \(error)")
+                            }
+                        }
+                        #endif
                     }
                 }
             }
@@ -1519,6 +1819,34 @@ final class PartialBuilderCodableTests: QuickSpec {
                                 fail("Should not throw: \(error)")
                             }
                         }
+
+                        #if swift(>=5.3)
+                        it("should be usable to decode PartialBuilder<Wrapped>") {
+                            do {
+                                let decoder = JSONDecoder()
+                                let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
+
+                                expect(decodedValue.stringA) == "Value A"
+                                expect(decodedValue.stringB) == "Value B"
+                                expect(decodedValue.stringC) == "Value C"
+                                expect(decodedValue.stringD) == "Value D"
+                                expect(decodedValue.stringE) == "Value E"
+                                expect(decodedValue.stringF) == "Value F"
+                                expect(decodedValue.stringG) == "Value G"
+                                expect(decodedValue.stringH) == "Value H"
+                                expect(decodedValue.stringI) == "Value I"
+                                expect(decodedValue.stringJ) == "Value J"
+                                expect(decodedValue.stringK) == "Value K"
+                                expect(decodedValue.stringL) == "Value L"
+                                expect(decodedValue.stringM) == "Value M"
+                                expect(decodedValue.stringN) == "Value N"
+                                expect(decodedValue.stringO) == "Value O"
+                                expect(decodedValue.stringP) == "Value P"
+                            } catch {
+                                fail("Should not throw: \(error)")
+                            }
+                        }
+                        #endif
                     }
                 }
             }
