@@ -26,7 +26,7 @@ final class PartialBuilder_CodableTests: QuickSpec {
                     }
                     #else
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
-                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        var collection = KeyPathCodingKeyCollection<CodableType, CodingKeys>()
 %     for characterIndex in parametersRange:
 %         character = string.ascii_uppercase[characterIndex]
                         collection.addPair(keyPath: \.string${character}, codingKey: .string${character})

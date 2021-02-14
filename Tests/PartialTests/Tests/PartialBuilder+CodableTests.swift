@@ -19,7 +19,7 @@ final class PartialBuilder_CodableTests: QuickSpec {
                     }
                     #else
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
-                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        var collection = KeyPathCodingKeyCollection<CodableType, CodingKeys>()
                         collection.addPair(keyPath: \.stringA, codingKey: .stringA)
                         return collection
                     }
@@ -98,7 +98,7 @@ final class PartialBuilder_CodableTests: QuickSpec {
                     }
                     #else
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
-                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        var collection = KeyPathCodingKeyCollection<CodableType, CodingKeys>()
                         collection.addPair(keyPath: \.stringA, codingKey: .stringA)
                         collection.addPair(keyPath: \.stringB, codingKey: .stringB)
                         return collection
@@ -184,7 +184,7 @@ final class PartialBuilder_CodableTests: QuickSpec {
                     }
                     #else
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
-                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        var collection = KeyPathCodingKeyCollection<CodableType, CodingKeys>()
                         collection.addPair(keyPath: \.stringA, codingKey: .stringA)
                         collection.addPair(keyPath: \.stringB, codingKey: .stringB)
                         collection.addPair(keyPath: \.stringC, codingKey: .stringC)
@@ -277,7 +277,7 @@ final class PartialBuilder_CodableTests: QuickSpec {
                     }
                     #else
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
-                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        var collection = KeyPathCodingKeyCollection<CodableType, CodingKeys>()
                         collection.addPair(keyPath: \.stringA, codingKey: .stringA)
                         collection.addPair(keyPath: \.stringB, codingKey: .stringB)
                         collection.addPair(keyPath: \.stringC, codingKey: .stringC)
@@ -377,7 +377,7 @@ final class PartialBuilder_CodableTests: QuickSpec {
                     }
                     #else
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
-                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        var collection = KeyPathCodingKeyCollection<CodableType, CodingKeys>()
                         collection.addPair(keyPath: \.stringA, codingKey: .stringA)
                         collection.addPair(keyPath: \.stringB, codingKey: .stringB)
                         collection.addPair(keyPath: \.stringC, codingKey: .stringC)
@@ -484,7 +484,7 @@ final class PartialBuilder_CodableTests: QuickSpec {
                     }
                     #else
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
-                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        var collection = KeyPathCodingKeyCollection<CodableType, CodingKeys>()
                         collection.addPair(keyPath: \.stringA, codingKey: .stringA)
                         collection.addPair(keyPath: \.stringB, codingKey: .stringB)
                         collection.addPair(keyPath: \.stringC, codingKey: .stringC)
@@ -598,7 +598,7 @@ final class PartialBuilder_CodableTests: QuickSpec {
                     }
                     #else
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
-                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        var collection = KeyPathCodingKeyCollection<CodableType, CodingKeys>()
                         collection.addPair(keyPath: \.stringA, codingKey: .stringA)
                         collection.addPair(keyPath: \.stringB, codingKey: .stringB)
                         collection.addPair(keyPath: \.stringC, codingKey: .stringC)
@@ -719,7 +719,7 @@ final class PartialBuilder_CodableTests: QuickSpec {
                     }
                     #else
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
-                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        var collection = KeyPathCodingKeyCollection<CodableType, CodingKeys>()
                         collection.addPair(keyPath: \.stringA, codingKey: .stringA)
                         collection.addPair(keyPath: \.stringB, codingKey: .stringB)
                         collection.addPair(keyPath: \.stringC, codingKey: .stringC)
@@ -847,7 +847,7 @@ final class PartialBuilder_CodableTests: QuickSpec {
                     }
                     #else
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
-                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        var collection = KeyPathCodingKeyCollection<CodableType, CodingKeys>()
                         collection.addPair(keyPath: \.stringA, codingKey: .stringA)
                         collection.addPair(keyPath: \.stringB, codingKey: .stringB)
                         collection.addPair(keyPath: \.stringC, codingKey: .stringC)
@@ -982,7 +982,7 @@ final class PartialBuilder_CodableTests: QuickSpec {
                     }
                     #else
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
-                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        var collection = KeyPathCodingKeyCollection<CodableType, CodingKeys>()
                         collection.addPair(keyPath: \.stringA, codingKey: .stringA)
                         collection.addPair(keyPath: \.stringB, codingKey: .stringB)
                         collection.addPair(keyPath: \.stringC, codingKey: .stringC)
@@ -1124,7 +1124,7 @@ final class PartialBuilder_CodableTests: QuickSpec {
                     }
                     #else
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
-                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        var collection = KeyPathCodingKeyCollection<CodableType, CodingKeys>()
                         collection.addPair(keyPath: \.stringA, codingKey: .stringA)
                         collection.addPair(keyPath: \.stringB, codingKey: .stringB)
                         collection.addPair(keyPath: \.stringC, codingKey: .stringC)
@@ -1273,7 +1273,7 @@ final class PartialBuilder_CodableTests: QuickSpec {
                     }
                     #else
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
-                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        var collection = KeyPathCodingKeyCollection<CodableType, CodingKeys>()
                         collection.addPair(keyPath: \.stringA, codingKey: .stringA)
                         collection.addPair(keyPath: \.stringB, codingKey: .stringB)
                         collection.addPair(keyPath: \.stringC, codingKey: .stringC)
@@ -1429,7 +1429,7 @@ final class PartialBuilder_CodableTests: QuickSpec {
                     }
                     #else
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
-                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        var collection = KeyPathCodingKeyCollection<CodableType, CodingKeys>()
                         collection.addPair(keyPath: \.stringA, codingKey: .stringA)
                         collection.addPair(keyPath: \.stringB, codingKey: .stringB)
                         collection.addPair(keyPath: \.stringC, codingKey: .stringC)
@@ -1592,7 +1592,7 @@ final class PartialBuilder_CodableTests: QuickSpec {
                     }
                     #else
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
-                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        var collection = KeyPathCodingKeyCollection<CodableType, CodingKeys>()
                         collection.addPair(keyPath: \.stringA, codingKey: .stringA)
                         collection.addPair(keyPath: \.stringB, codingKey: .stringB)
                         collection.addPair(keyPath: \.stringC, codingKey: .stringC)
@@ -1762,7 +1762,7 @@ final class PartialBuilder_CodableTests: QuickSpec {
                     }
                     #else
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
-                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        var collection = KeyPathCodingKeyCollection<CodableType, CodingKeys>()
                         collection.addPair(keyPath: \.stringA, codingKey: .stringA)
                         collection.addPair(keyPath: \.stringB, codingKey: .stringB)
                         collection.addPair(keyPath: \.stringC, codingKey: .stringC)
@@ -1939,7 +1939,7 @@ final class PartialBuilder_CodableTests: QuickSpec {
                     }
                     #else
                     static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
-                        var collection = KeyPathCodingKeyCollection<Self, CodingKeys>()
+                        var collection = KeyPathCodingKeyCollection<CodableType, CodingKeys>()
                         collection.addPair(keyPath: \.stringA, codingKey: .stringA)
                         collection.addPair(keyPath: \.stringB, codingKey: .stringB)
                         collection.addPair(keyPath: \.stringC, codingKey: .stringC)
