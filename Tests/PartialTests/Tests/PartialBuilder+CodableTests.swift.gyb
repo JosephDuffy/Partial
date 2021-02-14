@@ -88,7 +88,7 @@ final class PartialBuilder_CodableTests: QuickSpec {
 
 %     for characterIndex in parametersRange:
 %         character = string.ascii_uppercase[characterIndex]
-                                expect(decodedValue.string${character}) == "Value ${character}"
+                                expect(try? decodedValue.value(for: \.string${character})) == "Value ${character}"
 %     end
                             } catch {
                                 fail("Should not throw: \(error)")
