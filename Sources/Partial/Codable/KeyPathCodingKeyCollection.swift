@@ -14,7 +14,7 @@ public struct KeyPathCodingKeyCollection<Root, CodingKey: Swift.CodingKey & Hash
     }
 
     func decode(_ codingKey: CodingKey, in container: KeyedDecodingContainer<CodingKey>) throws -> (Any, PartialKeyPath<Root>)? {
-        try decoders[codingKey]?(codingKey, container)
+        return try decoders[codingKey]?(codingKey, container)
     }
 
     public mutating func addPair<Value: Swift.Codable>(keyPath: KeyPath<Root, Value>, codingKey: CodingKey) {

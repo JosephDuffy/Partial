@@ -1,4 +1,5 @@
 // This file is generated. Do not edit it.
+#if swift(>=5.1)
 // swiftlint:disable cyclomatic_complexity
 import Quick
 import Nimble
@@ -1853,3 +1854,4 @@ final class PartialBuilderCodableTests: QuickSpec {
         }
     }
 }
+#endif

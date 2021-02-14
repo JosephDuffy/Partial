@@ -44,7 +44,6 @@ public final class KeyPathCodingKeyCollectionBuilder<Root, CodingKey: Swift.Codi
 #elseif swift(>=5.1)
 @_functionBuilder
 public final class KeyPathCodingKeyCollectionBuilder<Root, CodingKey: Swift.CodingKey & Hashable> {
-%     parameterCountList = range(2)
 %     for parameterCount in parameterCountList:
 %         parametersRange = range(parameterCount + 1)
     static func buildBlock<
