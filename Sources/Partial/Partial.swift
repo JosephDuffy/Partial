@@ -82,3 +82,12 @@ extension Partial: Codable where Wrapped: PartialCodable {
         }
     }
 }
+
+extension Partial where Wrapped: PartialCodable & Codable {
+    public func decoded() throws -> Wrapped {
+        let encoder = JSONEncoder()
+        let data = try encoder.encode(self)
+        let decoder = JSONDecoder()
+        return try decoder.decode(Wrapped.self, from: data)
+    }
+}

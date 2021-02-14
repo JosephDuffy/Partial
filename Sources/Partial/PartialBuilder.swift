@@ -261,3 +261,9 @@ extension PartialBuilder: Codable where Wrapped: PartialCodable {
         try container.encode(partial)
     }
 }
+
+extension PartialBuilder where Wrapped: PartialCodable & Codable {
+    public func decoded() throws -> Wrapped {
+        return try partial.decoded()
+    }
+}
