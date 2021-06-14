@@ -3,11 +3,16 @@ import Foundation
 /// A struct that mirrors the properties of `Wrapped`, making each of the
 /// types optional.
 public struct Partial<Wrapped>: PartialProtocol, CustomStringConvertible {
-
     /// An error that can be thrown by the `value(for:)` function.
     public enum Error<Value>: Swift.Error {
         /// The key path has not been set.
         case keyPathNotSet(KeyPath<Wrapped, Value>)
+
+        /// A value has been set to an unexpected type.
+        ///
+        /// - parameter value: The set value.
+        /// - parameter keyPath: The key path the value was set against.
+        case invalidType(value: Any, keyPath: KeyPath<Wrapped, Value>)
     }
 
     /// A textual representation of the Partial's values.
@@ -16,7 +21,7 @@ public struct Partial<Wrapped>: PartialProtocol, CustomStringConvertible {
     }
 
     /// The values that have been set.
-    private var values: [PartialKeyPath<Wrapped>: Any] = [:]
+    fileprivate var values: [PartialKeyPath<Wrapped>: Any] = [:]
 
     /// Create an empty `Partial`.
     public init() {}
@@ -34,7 +39,7 @@ public struct Partial<Wrapped>: PartialProtocol, CustomStringConvertible {
             return value
         }
 
-        preconditionFailure("Value has been set, but is not of type \(Value.self): \(value)")
+        throw Error.invalidType(value: value, keyPath: keyPath)
     }
 
     /// Updates the stored value for the given key path.
@@ -51,5 +56,38 @@ public struct Partial<Wrapped>: PartialProtocol, CustomStringConvertible {
     public mutating func removeValue<Value>(for keyPath: KeyPath<Wrapped, Value>) {
         values.removeValue(forKey: keyPath)
     }
+}
 
+extension Partial: Codable where Wrapped: PartialCodable {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: Wrapped.CodingKey.self)
+        let collection = Wrapped.keyPathCodingKeyCollection
+        values = try container
+            .allKeys
+            .reduce(into: [PartialKeyPath<Wrapped>: Any](), { values, codingKey in
+                guard let (value, keyPath) = try collection.decode(codingKey, in: container) else { return }
+                values[keyPath] = value
+            })
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: Wrapped.CodingKey.self)
+
+        let collection = Wrapped.keyPathCodingKeyCollection
+
+        try values.forEach { pair in
+            let (keyPath, value) = pair
+
+            try collection.encode(value, forKey: keyPath, to: &container)
+        }
+    }
+}
+
+extension Partial where Wrapped: PartialCodable & Codable {
+    public func decoded() throws -> Wrapped {
+        let encoder = JSONEncoder()
+        let data = try encoder.encode(self)
+        let decoder = JSONDecoder()
+        return try decoder.decode(Wrapped.self, from: data)
+    }
 }

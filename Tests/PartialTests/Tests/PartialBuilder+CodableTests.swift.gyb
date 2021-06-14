@@ -1,0 +1,119 @@
+% import string
+// This file is generated. Do not edit it.
+// swiftlint:disable cyclomatic_complexity
+import Quick
+import Nimble
+import Foundation
+
+@testable
+import Partial
+
+final class PartialBuilder_CodableTests: QuickSpec {
+    override func spec() {
+        describe("PartialBuilder+Codable") {
+% parameterCountList = range(16)
+% for parameterCount in parameterCountList:
+%     parametersRange = range(parameterCount + 1)
+            context("with ${parameterCount + 1} property") {
+                struct CodableType: Codable, PartialCodable, Hashable {
+                    #if swift(>=5.1)
+                    @KeyPathCodingKeyCollectionBuilder<Self, CodingKeys>
+                    static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<Self, CodingKeys> {
+%     for characterIndex in parametersRange:
+%         character = string.ascii_uppercase[characterIndex]
+                        (\Self.string${character}, CodingKeys.string${character})
+%     end
+                    }
+                    #else
+                    static var keyPathCodingKeyCollection: KeyPathCodingKeyCollection<CodableType, CodingKeys> {
+                        var collection = KeyPathCodingKeyCollection<CodableType, CodingKeys>()
+%     for characterIndex in parametersRange:
+%         character = string.ascii_uppercase[characterIndex]
+                        collection.addPair(keyPath: \.string${character}, codingKey: .string${character})
+%     end
+                        return collection
+                    }
+                    #endif
+
+%     for characterIndex in parametersRange:
+%         character = string.ascii_uppercase[characterIndex]
+                    let string${character}: String
+%     end
+                }
+
+                var partial: PartialBuilder<CodableType>!
+
+                beforeEach {
+                    partial = PartialBuilder()
+                }
+
+                context("with complete value") {
+                    beforeEach {
+%     for characterIndex in parametersRange:
+%         character = string.ascii_uppercase[characterIndex]
+                        partial.setValue("Value ${character}", for: \.string${character})
+%     end
+                    }
+
+                    context("the encoded data") {
+                        var encodedData: Data!
+
+                        beforeEach {
+                            let encoder = JSONEncoder()
+                            encodedData = try? encoder.encode(partial)
+                        }
+
+                        it("should not be nil") {
+                            expect(encodedData).toNot(beNil())
+                        }
+
+                        it("should be usable to decode Wrapped") {
+                            do {
+                                let decoder = JSONDecoder()
+                                let decodedValue = try decoder.decode(CodableType.self, from: encodedData)
+
+%     for characterIndex in parametersRange:
+%         character = string.ascii_uppercase[characterIndex]
+                                expect(decodedValue.string${character}) == "Value ${character}"
+%     end
+                            } catch {
+                                fail("Should not throw: \(error)")
+                            }
+                        }
+
+                        it("should be usable to decode Partial<Wrapped>") {
+                            do {
+                                let decoder = JSONDecoder()
+                                let decodedValue = try decoder.decode(Partial<CodableType>.self, from: encodedData)
+
+%     for characterIndex in parametersRange:
+%         character = string.ascii_uppercase[characterIndex]
+                                expect(try? decodedValue.value(for: \.string${character})) == "Value ${character}"
+%     end
+                            } catch {
+                                fail("Should not throw: \(error)")
+                            }
+                        }
+
+                        #if swift(>=5.3)
+                        it("should be usable to decode PartialBuilder<Wrapped>") {
+                            do {
+                                let decoder = JSONDecoder()
+                                let decodedValue = try decoder.decode(PartialBuilder<CodableType>.self, from: encodedData)
+
+%     for characterIndex in parametersRange:
+%         character = string.ascii_uppercase[characterIndex]
+                                expect(decodedValue.string${character}) == "Value ${character}"
+%     end
+                            } catch {
+                                fail("Should not throw: \(error)")
+                            }
+                        }
+                        #endif
+                    }
+                }
+            }
+% end
+        }
+    }
+}

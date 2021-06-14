@@ -60,7 +60,7 @@ open class PartialBuilder<Wrapped>: PartialProtocol, CustomStringConvertible {
 
     /// A collection of objects wrapping closures that will be notified when a change to a key path occurs
     private var keyPathSubscriptions: [PartialKeyPath<Wrapped>: Set<Weak<KeyPathChangesSubscription>>] = [:]
-    
+
     private var attachedSubscription: Subscription?
 
     /// Create an empty `PartialBuilder`.
@@ -74,6 +74,13 @@ open class PartialBuilder<Wrapped>: PartialProtocol, CustomStringConvertible {
     public init(partial: Partial<Wrapped>) {
         self.partial = partial
     }
+
+    #if swift(>=5.3)
+    public required init(from decoder: Decoder) throws where Wrapped: PartialCodable {
+        let container = try decoder.singleValueContainer()
+        partial = try container.decode(Partial<Wrapped>.self)
+    }
+    #endif
 
     /// Adds a closure that will be called when any key path has been updated. The closure will be called with the key
     /// path that was updated and this `PartialBuilder`.
@@ -148,7 +155,7 @@ open class PartialBuilder<Wrapped>: PartialProtocol, CustomStringConvertible {
         keyPathSubscriptions[keyPath]?.forEach { $0.wrapped?.notifyOfRemovable(oldValue: oldValue) }
         allChangesSubscriptions.forEach { $0.wrapped?.updateListener(keyPath, self) }
     }
-    
+
     /// Creates a `PartialBuilder` for any `PartialConvertable` field in the type. It will automatically subscribe the original `PartialBuilder` to get updates made to the field's builder.
     ///
     /// - Parameter for: The `KeyPath` to create a `PartialBuilder` for.
@@ -249,3 +256,20 @@ extension PartialBuilder {
 
 extension PartialBuilder.KeyPathUpdate.Kind: Equatable where Value: Equatable {}
 extension PartialBuilder.KeyPathUpdate: Equatable where Value: Equatable {}
+
+#if swift(>=5.3)
+extension PartialBuilder: Decodable where Wrapped: PartialCodable {}
+#endif
+
+extension PartialBuilder: Encodable where Wrapped: PartialCodable {
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(partial)
+    }
+}
+
+extension PartialBuilder where Wrapped: PartialCodable & Codable {
+    public func decoded() throws -> Wrapped {
+        return try partial.decoded()
+    }
+}

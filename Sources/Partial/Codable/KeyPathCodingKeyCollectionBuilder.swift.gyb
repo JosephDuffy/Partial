@@ -1,0 +1,82 @@
+% import string
+// This file is generated. Do not edit it.
+// swiftlint:disable function_parameter_count file_length type_body_length
+#if swift(>=5.4)
+@resultBuilder
+public final class KeyPathCodingKeyCollectionBuilder<Root, CodingKey: Swift.CodingKey & Hashable> {
+%     # 16 is arbitrary, but there has to be a limit somewhere
+%     parameterCountList = range(16)
+%     for parameterCount in parameterCountList:
+%         parametersRange = range(parameterCount + 1)
+    static func buildBlock<
+%         for characterIndex in parametersRange:
+%             isLast = characterIndex == parametersRange[-1]
+%             character = string.ascii_uppercase[characterIndex]
+%             if isLast:
+        Value${character}: Codable
+%             else:
+        Value${character}: Codable,
+%             end
+%         end
+    >(
+%         for characterIndex in parametersRange:
+%             character = string.ascii_uppercase[characterIndex]
+%             isLast = characterIndex == parametersRange[-1]
+%             if isLast:
+        _ pair${character}: (keyPath: KeyPath<Root, Value${character}>, codingKey: CodingKey)
+%             else:
+        _ pair${character}: (keyPath: KeyPath<Root, Value${character}>, codingKey: CodingKey),
+%             end
+%         end
+    ) -> KeyPathCodingKeyCollection<Root, CodingKey> {
+        var collection = KeyPathCodingKeyCollection<Root, CodingKey>()
+%         for characterIndex in parametersRange:
+%             character = string.ascii_uppercase[characterIndex]
+        collection.addPair(keyPath: pair${character}.keyPath, codingKey: pair${character}.codingKey)
+%         end
+        return collection
+    }
+%         if parameterCount != parameterCountList[-1]:
+
+%         end
+%     end
+}
+#elseif swift(>=5.1)
+@_functionBuilder
+public final class KeyPathCodingKeyCollectionBuilder<Root, CodingKey: Swift.CodingKey & Hashable> {
+%     for parameterCount in parameterCountList:
+%         parametersRange = range(parameterCount + 1)
+    static func buildBlock<
+%         for characterIndex in parametersRange:
+%             isLast = characterIndex == parametersRange[-1]
+%             character = string.ascii_uppercase[characterIndex]
+%             if isLast:
+        Value${character}: Codable
+%             else:
+        Value${character}: Codable,
+%             end
+%         end
+    >(
+%         for characterIndex in parametersRange:
+%             character = string.ascii_uppercase[characterIndex]
+%             isLast = characterIndex == parametersRange[-1]
+%             if isLast:
+        _ pair${character}: (keyPath: KeyPath<Root, Value${character}>, codingKey: CodingKey)
+%             else:
+        _ pair${character}: (keyPath: KeyPath<Root, Value${character}>, codingKey: CodingKey),
+%             end
+%         end
+    ) -> KeyPathCodingKeyCollection<Root, CodingKey> {
+        var collection = KeyPathCodingKeyCollection<Root, CodingKey>()
+%         for characterIndex in parametersRange:
+%             character = string.ascii_uppercase[characterIndex]
+        collection.addPair(keyPath: pair${character}.keyPath, codingKey: pair${character}.codingKey)
+%         end
+        return collection
+    }
+%         if parameterCount != parameterCountList[-1]:
+
+%         end
+%     end
+}
+#endif

@@ -4,9 +4,12 @@ import Quick
 @testable import PartialTests
 
 QCKMain([
-    PartialTests.self,
+    Partial_CodableTests.self,
     Partial_PartialConvertibleTests.self,
-    PartialBuilderTests.self,
+    PartialBuilder_CodableTests.self,
     PartialBuilder_PartialConvertibleTests.self,
     PartialBuilderSubscriptionTests.self,
+    PartialBuilderTests.self,
+    PartialBuilderSubscriptionTests.self,
+    PartialTests.self,
 ])

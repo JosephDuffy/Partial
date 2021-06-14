@@ -114,3 +114,17 @@ jobs:
 
       - name: swift test
         run: swift test
+
+  check-gyb-run:
+    name: Check GYB has been run
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install GYB
+        run: brew install nshipster/formulae/gyb
+
+      - run: ./scripts/generate-KeyPathCodingKeyCollectionBuilder.sh
+
+      - name: Check GYB was run before commit
+        run: git diff --exit-code
