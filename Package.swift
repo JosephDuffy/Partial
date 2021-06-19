@@ -19,5 +19,3 @@ let package = Package(
     ],
     swiftLanguageVersions: [.v5]
 )
-
-// Needed to make Danger work: .library(name: "DangerDeps",
