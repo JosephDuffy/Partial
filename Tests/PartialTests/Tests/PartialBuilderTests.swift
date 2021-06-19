@@ -26,7 +26,7 @@ final class PartialBuilderTests: QuickSpec {
                 context("value(for:)") {
                     it("should throw a `keyPathNotSet` error") {
                         let expectedError = Partial<StringWrapperWrapper>.Error.keyPathNotSet(keyPath)
-                        expect(expression: { try builder.value(for: keyPath) }).to(throwError(expectedError))
+                        expect({ try builder.value(for: keyPath) }).to(throwError(expectedError))
                     }
                 }
 
@@ -51,7 +51,7 @@ final class PartialBuilderTests: QuickSpec {
                 context("value(for:)") {
                     it("should throw a `keyPathNotSet` error") {
                         let expectedError = Partial<StringWrapperWrapper>.Error.keyPathNotSet(keyPath)
-                        expect(expression: { try builder.value(for: keyPath) }).to(throwError(expectedError))
+                        expect({ try builder.value(for: keyPath) }).to(throwError(expectedError))
                     }
                 }
 
@@ -81,11 +81,11 @@ final class PartialBuilderTests: QuickSpec {
 
                 context("value(for:)") {
                     it("should not throw an error") {
-                        expect(expression: { try builder.value(for: keyPath) }).toNot(throwError())
+                        expect({ try builder.value(for: keyPath) }).toNot(throwError())
                     }
 
                     it("should return the set value") {
-                        expect(expression: { try builder.value(for: keyPath) }) == newValue
+                        expect({ try builder.value(for: keyPath) }) == newValue
                     }
                 }
 
@@ -116,7 +116,7 @@ final class PartialBuilderTests: QuickSpec {
 
                     it("should cause the value to be unset") {
                         let expectedError = Partial<StringWrapperWrapper>.Error.keyPathNotSet(keyPath)
-                        expect(expression: { try builder.value(for: keyPath) }).to(throwError(expectedError))
+                        expect({ try builder.value(for: keyPath) }).to(throwError(expectedError))
                     }
                 }
             }
@@ -132,11 +132,11 @@ final class PartialBuilderTests: QuickSpec {
 
                 context("value(for:)") {
                     it("should not throw an error") {
-                        expect(expression: { try builder.value(for: keyPath) }).toNot(throwError())
+                        expect({ try builder.value(for: keyPath) }).toNot(throwError())
                     }
 
                     it("should return the set value") {
-                        expect(expression: { try builder.value(for: keyPath) }) == newValue
+                        expect({ try builder.value(for: keyPath) }) == newValue
                     }
                 }
 
@@ -161,7 +161,7 @@ final class PartialBuilderTests: QuickSpec {
 
                     it("should cause the value to be unset") {
                         let expectedError = Partial<StringWrapperWrapper>.Error.keyPathNotSet(keyPath)
-                        expect(expression: { try builder.value(for: keyPath) }).to(throwError(expectedError))
+                        expect({ try builder.value(for: keyPath) }).to(throwError(expectedError))
                     }
                 }
             }
@@ -175,11 +175,11 @@ final class PartialBuilderTests: QuickSpec {
 
                 context("value(for:)") {
                     it("should not throw an error") {
-                        expect(expression: { try builder.value(for: keyPath) }).toNot(throwError())
+                        expect({ try builder.value(for: keyPath) }).toNot(throwError())
                     }
 
                     it("should return `nil`") {
-                        expect(expression: { try builder.value(for: keyPath) }).to(beNil())
+                        expect({ try builder.value(for: keyPath) }).to(beNil())
                     }
                 }
 
@@ -204,7 +204,7 @@ final class PartialBuilderTests: QuickSpec {
 
                     it("should cause the value to be unset") {
                         let expectedError = Partial<StringWrapperWrapper>.Error.keyPathNotSet(keyPath)
-                        expect(expression: { try builder.value(for: keyPath) }).to(throwError(expectedError))
+                        expect({ try builder.value(for: keyPath) }).to(throwError(expectedError))
                     }
                 }
             }
@@ -219,7 +219,7 @@ final class PartialBuilderTests: QuickSpec {
                 }
 
                 it("should be returned by value(for:)") {
-                    expect(expression: { try builder.value(for: keyPath) }) == newValue
+                    expect({ try builder.value(for: keyPath) }) == newValue
                 }
             }
 
@@ -233,7 +233,7 @@ final class PartialBuilderTests: QuickSpec {
                 }
 
                 it("should be returned by value(for:)") {
-                    expect(expression: { try builder.value(for: keyPath) }) == newValue
+                    expect({ try builder.value(for: keyPath) }) == newValue
                 }
             }
 
@@ -245,7 +245,7 @@ final class PartialBuilderTests: QuickSpec {
                 }
 
                 it("should be returned by value(for:)") {
-                    expect(expression: { try builder.value(for: keyPath) }).to(beNil())
+                    expect({ try builder.value(for: keyPath) }).to(beNil())
                 }
             }
 
@@ -258,7 +258,7 @@ final class PartialBuilderTests: QuickSpec {
                 }
 
                 it("should remove the value") {
-                    expect(expression: { try? builder.value(for: keyPath) }).to(beNil())
+                    expect({ try? builder.value(for: keyPath) }).to(beNil())
                 }
             }
 
@@ -271,7 +271,7 @@ final class PartialBuilderTests: QuickSpec {
                 }
 
                 it("should remove the value") {
-                    expect(expression: { try? builder.value(for: keyPath) }).to(beNil())
+                    expect({ try? builder.value(for: keyPath) }).to(beNil())
                 }
             }
 
@@ -286,7 +286,7 @@ final class PartialBuilderTests: QuickSpec {
                 }
 
                 it("should be returned by value(for:)") {
-                    expect(expression: { try builder.value(for: keyPath) }) == newValue
+                    expect({ try builder.value(for: keyPath) }) == newValue
                 }
             }
 
@@ -300,7 +300,7 @@ final class PartialBuilderTests: QuickSpec {
                 }
 
                 it("should be returned by value(for:)") {
-                    expect(expression: { try builder.value(for: keyPath) }) == newValue
+                    expect({ try builder.value(for: keyPath) }) == newValue
                 }
             }
 
@@ -312,7 +312,7 @@ final class PartialBuilderTests: QuickSpec {
                 }
 
                 it("should be returned by value(for:)") {
-                    expect(expression: { try builder.value(for: keyPath) }).to(beNil())
+                    expect({ try builder.value(for: keyPath) }).to(beNil())
                 }
             }
 
@@ -325,7 +325,7 @@ final class PartialBuilderTests: QuickSpec {
                 }
 
                 it("should remove the value") {
-                    expect(expression: { try? builder.value(for: keyPath) }).to(beNil())
+                    expect({ try? builder.value(for: keyPath) }).to(beNil())
                 }
             }
 
@@ -338,7 +338,7 @@ final class PartialBuilderTests: QuickSpec {
                 }
 
                 it("should remove the value") {
-                    expect(expression: { try? builder.value(for: keyPath) }).to(beNil())
+                    expect({ try? builder.value(for: keyPath) }).to(beNil())
                 }
             }
             #endif
