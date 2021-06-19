@@ -1,4 +1,4 @@
-internal final class Weak<Wrapped :AnyObject> {
+internal final class Weak<Wrapped: AnyObject> {
     private(set) weak var wrapped: Wrapped?
 
     init(_ wrapped: Wrapped) {
