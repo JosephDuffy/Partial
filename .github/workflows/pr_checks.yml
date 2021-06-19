@@ -6,6 +6,9 @@ jobs:
   danger:
     name: Danger (Xcode ${{ matrix.xcode }})
     runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: Danger
     strategy:
       matrix:
         xcode:
@@ -15,8 +18,6 @@ jobs:
 
       - name: Select Xcode ${{ matrix.xcode }}
         run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
-
-      - run: cd Danger
 
       - name: Read .node-version
         id: node-version
