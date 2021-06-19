@@ -15,6 +15,15 @@
 		D92E76D1229D8A66003EBC25 /* PartialProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92E76CF229D8A0D003EBC25 /* PartialProtocol.swift */; };
 		D92E76D2229D8A67003EBC25 /* PartialProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92E76CF229D8A0D003EBC25 /* PartialProtocol.swift */; };
 		D92E76D3229D8A67003EBC25 /* PartialProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92E76CF229D8A0D003EBC25 /* PartialProtocol.swift */; };
+		D95F898C267EB42C004B1B4D /* PartialBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9651ACA22D26EFB008DBB0E /* PartialBuilderTests.swift */; };
+		D95F898D267EB42C004B1B4D /* Partial+PartialConvertibleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9651AD022D27BE7008DBB0E /* Partial+PartialConvertibleTests.swift */; };
+		D95F898E267EB42C004B1B4D /* PartialBuilder+PartialConvertibleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9651AD422D28374008DBB0E /* PartialBuilder+PartialConvertibleTests.swift */; };
+		D95F898F267EB42C004B1B4D /* PartiallyBuiltTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5673B25D86C5400F7055F /* PartiallyBuiltTests.swift */; };
+		D95F8990267EB42C004B1B4D /* PartialBuilderSubscriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5673725D86C1F00F7055F /* PartialBuilderSubscriptionTests.swift */; };
+		D95F8991267EB42C004B1B4D /* PartialTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9651AC622D26A53008DBB0E /* PartialTests.swift */; };
+		D95F8992267EB431004B1B4D /* beNilWrappedInOptional.swift in Sources */ = {isa = PBXBuildFile; fileRef = D992471422C15D1800A2B079 /* beNilWrappedInOptional.swift */; };
+		D95F8993267EB437004B1B4D /* StringWrapperWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9651ABF22D24673008DBB0E /* StringWrapperWrapper.swift */; };
+		D95F8994267EB437004B1B4D /* StringWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9651ABD22D24606008DBB0E /* StringWrapper.swift */; };
 		D9651AC022D24673008DBB0E /* StringWrapperWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9651ABF22D24673008DBB0E /* StringWrapperWrapper.swift */; };
 		D9651AC122D24673008DBB0E /* StringWrapperWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9651ABF22D24673008DBB0E /* StringWrapperWrapper.swift */; };
 		D9651AC222D24673008DBB0E /* StringWrapperWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9651ABF22D24673008DBB0E /* StringWrapperWrapper.swift */; };
@@ -50,7 +59,6 @@
 		D9A5673C25D86C5400F7055F /* PartiallyBuiltTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5673B25D86C5400F7055F /* PartiallyBuiltTests.swift */; };
 		D9A5673D25D86C5400F7055F /* PartiallyBuiltTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5673B25D86C5400F7055F /* PartiallyBuiltTests.swift */; };
 		D9A5673E25D86C5400F7055F /* PartiallyBuiltTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5673B25D86C5400F7055F /* PartiallyBuiltTests.swift */; };
-		D9A5674625D8973D00F7055F /* watchOS_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5674525D8973D00F7055F /* watchOS_Tests.swift */; };
 		D9A5674825D8973D00F7055F /* Partial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D933B4223492FD00E94AAE /* Partial.framework */; };
 		D9C039B1224263610031B393 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9C039AF224263610031B393 /* Nimble.framework */; };
 		D9C039B4224263610031B393 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9C039B0224263610031B393 /* Quick.framework */; };
@@ -127,8 +135,6 @@
 		D9A5673725D86C1F00F7055F /* PartialBuilderSubscriptionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartialBuilderSubscriptionTests.swift; sourceTree = "<group>"; };
 		D9A5673B25D86C5400F7055F /* PartiallyBuiltTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartiallyBuiltTests.swift; sourceTree = "<group>"; };
 		D9A5674325D8973D00F7055F /* PartialTests-watchOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PartialTests-watchOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D9A5674525D8973D00F7055F /* watchOS_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = watchOS_Tests.swift; sourceTree = "<group>"; };
-		D9A5674725D8973D00F7055F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D9C039AF224263610031B393 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = SOURCE_ROOT; };
 		D9C039B0224263610031B393 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = SOURCE_ROOT; };
 		D9CA4437222FF3CD000E424B /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = SOURCE_ROOT; };
@@ -213,7 +219,6 @@
 				D91505B1221E024900EB5215 /* Sources */,
 				D91505BC221E024900EB5215 /* Tests */,
 				D9CA4436222FF3B5000E424B /* Resources */,
-				D9A5674425D8973D00F7055F /* watchOS-Tests */,
 				D91505B0221E024900EB5215 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -305,15 +310,6 @@
 				D992471422C15D1800A2B079 /* beNilWrappedInOptional.swift */,
 			);
 			path = Matchers;
-			sourceTree = "<group>";
-		};
-		D9A5674425D8973D00F7055F /* watchOS-Tests */ = {
-			isa = PBXGroup;
-			children = (
-				D9A5674525D8973D00F7055F /* watchOS_Tests.swift */,
-				D9A5674725D8973D00F7055F /* Info.plist */,
-			);
-			path = "watchOS-Tests";
 			sourceTree = "<group>";
 		};
 		D9C039AE224263140031B393 /* Frameworks */ = {
@@ -672,7 +668,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D9A5674625D8973D00F7055F /* watchOS_Tests.swift in Sources */,
+				D95F8994267EB437004B1B4D /* StringWrapper.swift in Sources */,
+				D95F8990267EB42C004B1B4D /* PartialBuilderSubscriptionTests.swift in Sources */,
+				D95F8992267EB431004B1B4D /* beNilWrappedInOptional.swift in Sources */,
+				D95F8993267EB437004B1B4D /* StringWrapperWrapper.swift in Sources */,
+				D95F898D267EB42C004B1B4D /* Partial+PartialConvertibleTests.swift in Sources */,
+				D95F898C267EB42C004B1B4D /* PartialBuilderTests.swift in Sources */,
+				D95F898F267EB42C004B1B4D /* PartiallyBuiltTests.swift in Sources */,
+				D95F898E267EB42C004B1B4D /* PartialBuilder+PartialConvertibleTests.swift in Sources */,
+				D95F8991267EB42C004B1B4D /* PartialTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1004,6 +1008,7 @@
 		D9A5674C25D8973D00F7055F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/watchOS";
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1021,6 +1026,7 @@
 		D9A5674D25D8973D00F7055F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/watchOS";
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
