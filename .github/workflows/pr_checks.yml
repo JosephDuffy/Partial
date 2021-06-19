@@ -6,10 +6,13 @@ jobs:
   danger:
     name: Danger (Xcode ${{ matrix.xcode }})
     runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: Danger
     strategy:
       matrix:
         xcode:
-          - '12.4'
+          - "12.4"
     steps:
       - uses: actions/checkout@v2
 
@@ -25,13 +28,13 @@ jobs:
         with:
           node-version: ${{ steps.node-version.outputs.version }}
 
-      - run: npm install
+      - run: npm ci
 
       - name: Build Danger and Danger Dependencies
         run: swift build --target DangerDependencies
 
       - name: Run Danger
-        run: swift run danger-swift ci --danger-js-path $(npm bin)/danger --verbose
+        run: swift run danger-swift ci --cwd ../ --danger-js-path $(npm bin)/danger
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -41,7 +44,7 @@ jobs:
     strategy:
       matrix:
         xcode:
-          - '12.4'
+          - "12.4"
     steps:
       - uses: actions/checkout@v2
 

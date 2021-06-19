@@ -2,24 +2,6 @@
   "object": {
     "pins": [
       {
-        "package": "Commandant",
-        "repositoryURL": "https://github.com/Carthage/Commandant.git",
-        "state": {
-          "branch": null,
-          "revision": "ab68611013dec67413628ac87c1f29e8427bc8e4",
-          "version": "0.17.0"
-        }
-      },
-      {
-        "package": "Logger",
-        "repositoryURL": "https://github.com/shibapm/Logger",
-        "state": {
-          "branch": null,
-          "revision": "53c3ecca5abe8cf46697e33901ee774236d94cce",
-          "version": "0.2.3"
-        }
-      },
-      {
         "package": "Nimble",
         "repositoryURL": "https://github.com/Quick/Nimble.git",
         "state": {
@@ -29,102 +11,12 @@
         }
       },
       {
-        "package": "OctoKit",
-        "repositoryURL": "https://github.com/nerdishbynature/octokit.swift",
-        "state": {
-          "branch": null,
-          "revision": "c391cfba4d33f3f4c7d7d8fa6708970f7d30af82",
-          "version": "0.10.1"
-        }
-      },
-      {
         "package": "Quick",
         "repositoryURL": "https://github.com/Quick/Quick.git",
         "state": {
           "branch": null,
           "revision": "09b3becb37cb2163919a3842a4c5fa6ec7130792",
           "version": "2.2.1"
-        }
-      },
-      {
-        "package": "RequestKit",
-        "repositoryURL": "https://github.com/nerdishbynature/RequestKit.git",
-        "state": {
-          "branch": null,
-          "revision": "fd5e9e99aada7432170366c9e95967011ce13bad",
-          "version": "2.4.0"
-        }
-      },
-      {
-        "package": "SourceKitten",
-        "repositoryURL": "https://github.com/jpsim/SourceKitten.git",
-        "state": {
-          "branch": null,
-          "revision": "c0f960f72fa1e6151695074ffa696e4da6c45ce8",
-          "version": "0.30.1"
-        }
-      },
-      {
-        "package": "danger-swift",
-        "repositoryURL": "https://github.com/danger/swift.git",
-        "state": {
-          "branch": null,
-          "revision": "6a62b575fe550d0b4ae189740b6712f3b1c662cc",
-          "version": "3.7.2"
-        }
-      },
-      {
-        "package": "SwiftChecksDangerPlugin",
-        "repositoryURL": "https://github.com/JosephDuffy/SwiftChecksDangerPlugin.git",
-        "state": {
-          "branch": null,
-          "revision": "fd067315cf6e51c06bd6b21d29908085576a8961",
-          "version": "0.2.0"
-        }
-      },
-      {
-        "package": "SwiftLint",
-        "repositoryURL": "https://github.com/Realm/SwiftLint",
-        "state": {
-          "branch": null,
-          "revision": "4f8b7a5f480aad922beab9b3c674023e211bd177",
-          "version": "0.40.3"
-        }
-      },
-      {
-        "package": "SwiftyTextTable",
-        "repositoryURL": "https://github.com/scottrhoyt/SwiftyTextTable.git",
-        "state": {
-          "branch": null,
-          "revision": "c6df6cf533d120716bff38f8ff9885e1ce2a4ac3",
-          "version": "0.9.0"
-        }
-      },
-      {
-        "package": "SWXMLHash",
-        "repositoryURL": "https://github.com/drmohundro/SWXMLHash.git",
-        "state": {
-          "branch": null,
-          "revision": "a4931e5c3bafbedeb1601d3bb76bbe835c6d475a",
-          "version": "5.0.1"
-        }
-      },
-      {
-        "package": "Version",
-        "repositoryURL": "https://github.com/mxcl/Version",
-        "state": {
-          "branch": null,
-          "revision": "200046c93f6d5d78a6d72bfd9c0b27a95e9c0a2b",
-          "version": "1.2.0"
-        }
-      },
-      {
-        "package": "Yams",
-        "repositoryURL": "https://github.com/jpsim/Yams.git",
-        "state": {
-          "branch": null,
-          "revision": "88caa2e6fffdbef2e91c2022d038576062042907",
-          "version": "4.0.0"
         }
       }
     ]
