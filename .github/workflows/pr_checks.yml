@@ -9,12 +9,14 @@ jobs:
     strategy:
       matrix:
         xcode:
-          - '12.4'
+          - "12.4"
     steps:
       - uses: actions/checkout@v2
 
       - name: Select Xcode ${{ matrix.xcode }}
         run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
+
+      - run: cd Danger
 
       - name: Read .node-version
         id: node-version
@@ -25,13 +27,13 @@ jobs:
         with:
           node-version: ${{ steps.node-version.outputs.version }}
 
-      - run: npm install
+      - run: npm ci
 
       - name: Build Danger and Danger Dependencies
         run: swift build --target DangerDependencies
 
       - name: Run Danger
-        run: swift run danger-swift ci --danger-js-path $(npm bin)/danger --verbose
+        run: swift run danger-swift ci --cwd ../ --danger-js-path $(npm bin)/danger
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -41,7 +43,7 @@ jobs:
     strategy:
       matrix:
         xcode:
-          - '12.4'
+          - "12.4"
     steps:
       - uses: actions/checkout@v2
 
