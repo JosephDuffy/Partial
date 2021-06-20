@@ -1014,6 +1014,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"$(FRAMEWORK_SEARCH_PATHS)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)Tests-watchOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1033,6 +1034,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"$(FRAMEWORK_SEARCH_PATHS)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)Tests-watchOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
