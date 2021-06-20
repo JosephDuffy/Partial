@@ -121,7 +121,7 @@ jobs:
           GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Test ${{ matrix.platform }}
-        run: bundle exec fastlane scan --clean --scheme "Partial-${{ matrix.platform }}"
+        run: bundle exec fastlane scan --clean --scheme "Partial-${{ matrix.platform }}" --device "Apple Watch Series 6 - 40mm"
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
