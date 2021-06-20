@@ -10,7 +10,7 @@ let package = Package(
         .library(name: "Partial", targets: ["Partial"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/Quick/Quick.git", from: "4.0.0"),
+        .package(url: "https://github.com/JosephDuffy/Quick.git", .branch("main")),
         .package(url: "https://github.com/JosephDuffy/Nimble.git", .branch("master")),
     ],
     targets: [

@@ -30,11 +30,11 @@
       },
       {
         "package": "Quick",
-        "repositoryURL": "https://github.com/Quick/Quick.git",
+        "repositoryURL": "https://github.com/JosephDuffy/Quick.git",
         "state": {
-          "branch": null,
-          "revision": "bd86ca0141e3cfb333546de5a11ede63f0c4a0e6",
-          "version": "4.0.0"
+          "branch": "main",
+          "revision": "2556e761cdcd96e7b4d8dbc1c2b404f409503258",
+          "version": null
         }
       }
     ]

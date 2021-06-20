@@ -1,2 +1,2 @@
-github "Quick/Quick"
+github "JosephDuffy/Quick" "main"
 github "JosephDuffy/Nimble" "master"
