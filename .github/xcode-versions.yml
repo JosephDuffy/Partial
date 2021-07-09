@@ -31,14 +31,12 @@ workflows:
         strategy:
           matrix:
             xcode:
-              - last-major
               - latest
               - latest-beta
       xcode_tests:
         strategy:
           matrix:
             xcode:
-              - last-major
               - latest
               - latest-beta
       carthage_archive:

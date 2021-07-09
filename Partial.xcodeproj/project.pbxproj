@@ -15,6 +15,15 @@
 		D92E76D1229D8A66003EBC25 /* PartialProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92E76CF229D8A0D003EBC25 /* PartialProtocol.swift */; };
 		D92E76D2229D8A67003EBC25 /* PartialProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92E76CF229D8A0D003EBC25 /* PartialProtocol.swift */; };
 		D92E76D3229D8A67003EBC25 /* PartialProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92E76CF229D8A0D003EBC25 /* PartialProtocol.swift */; };
+		D95F898C267EB42C004B1B4D /* PartialBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9651ACA22D26EFB008DBB0E /* PartialBuilderTests.swift */; };
+		D95F898D267EB42C004B1B4D /* Partial+PartialConvertibleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9651AD022D27BE7008DBB0E /* Partial+PartialConvertibleTests.swift */; };
+		D95F898E267EB42C004B1B4D /* PartialBuilder+PartialConvertibleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9651AD422D28374008DBB0E /* PartialBuilder+PartialConvertibleTests.swift */; };
+		D95F898F267EB42C004B1B4D /* PartiallyBuiltTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5673B25D86C5400F7055F /* PartiallyBuiltTests.swift */; };
+		D95F8990267EB42C004B1B4D /* PartialBuilderSubscriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5673725D86C1F00F7055F /* PartialBuilderSubscriptionTests.swift */; };
+		D95F8991267EB42C004B1B4D /* PartialTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9651AC622D26A53008DBB0E /* PartialTests.swift */; };
+		D95F8992267EB431004B1B4D /* beNilWrappedInOptional.swift in Sources */ = {isa = PBXBuildFile; fileRef = D992471422C15D1800A2B079 /* beNilWrappedInOptional.swift */; };
+		D95F8993267EB437004B1B4D /* StringWrapperWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9651ABF22D24673008DBB0E /* StringWrapperWrapper.swift */; };
+		D95F8994267EB437004B1B4D /* StringWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9651ABD22D24606008DBB0E /* StringWrapper.swift */; };
 		D9651AC022D24673008DBB0E /* StringWrapperWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9651ABF22D24673008DBB0E /* StringWrapperWrapper.swift */; };
 		D9651AC122D24673008DBB0E /* StringWrapperWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9651ABF22D24673008DBB0E /* StringWrapperWrapper.swift */; };
 		D9651AC222D24673008DBB0E /* StringWrapperWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9651ABF22D24673008DBB0E /* StringWrapperWrapper.swift */; };
@@ -50,6 +59,7 @@
 		D9A5673C25D86C5400F7055F /* PartiallyBuiltTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5673B25D86C5400F7055F /* PartiallyBuiltTests.swift */; };
 		D9A5673D25D86C5400F7055F /* PartiallyBuiltTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5673B25D86C5400F7055F /* PartiallyBuiltTests.swift */; };
 		D9A5673E25D86C5400F7055F /* PartiallyBuiltTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5673B25D86C5400F7055F /* PartiallyBuiltTests.swift */; };
+		D9A5674825D8973D00F7055F /* Partial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D933B4223492FD00E94AAE /* Partial.framework */; };
 		D9C039B1224263610031B393 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9C039AF224263610031B393 /* Nimble.framework */; };
 		D9C039B4224263610031B393 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9C039B0224263610031B393 /* Quick.framework */; };
 		D9E601CF2233E99D00B36B1E /* Partial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9E601C62233E99D00B36B1E /* Partial.framework */; };
@@ -80,6 +90,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = D91505AE221E024900EB5215;
 			remoteInfo = Partial;
+		};
+		D9A5674925D8973D00F7055F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D91505A6221E024900EB5215 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D9D933B3223492FD00E94AAE;
+			remoteInfo = "Partial-watchOS";
 		};
 		D9E601D02233E99D00B36B1E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -117,6 +134,7 @@
 		D9A5673225D86BE600F7055F /* PartiallyBuilt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartiallyBuilt.swift; sourceTree = "<group>"; };
 		D9A5673725D86C1F00F7055F /* PartialBuilderSubscriptionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartialBuilderSubscriptionTests.swift; sourceTree = "<group>"; };
 		D9A5673B25D86C5400F7055F /* PartiallyBuiltTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartiallyBuiltTests.swift; sourceTree = "<group>"; };
+		D9A5674325D8973D00F7055F /* PartialTests-watchOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PartialTests-watchOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9C039AF224263610031B393 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = SOURCE_ROOT; };
 		D9C039B0224263610031B393 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = SOURCE_ROOT; };
 		D9CA4437222FF3CD000E424B /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = SOURCE_ROOT; };
@@ -144,6 +162,14 @@
 				D91505B9221E024900EB5215 /* Partial.framework in Frameworks */,
 				D9C039B1224263610031B393 /* Nimble.framework in Frameworks */,
 				D9C039B4224263610031B393 /* Quick.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9A5674025D8973D00F7055F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9A5674825D8973D00F7055F /* Partial.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,6 +233,7 @@
 				D9D933B4223492FD00E94AAE /* Partial.framework */,
 				D9FFA6202235A223005D9A4D /* Partial.framework */,
 				D9FFA6282235A223005D9A4D /* PartialTests-tvOS.xctest */,
+				D9A5674325D8973D00F7055F /* PartialTests-watchOS.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -376,6 +403,24 @@
 			productReference = D91505B8221E024900EB5215 /* PartialTests-iOS.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		D9A5674225D8973D00F7055F /* PartialTests-watchOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D9A5674B25D8973D00F7055F /* Build configuration list for PBXNativeTarget "PartialTests-watchOS" */;
+			buildPhases = (
+				D9A5673F25D8973D00F7055F /* Sources */,
+				D9A5674025D8973D00F7055F /* Frameworks */,
+				D9A5674125D8973D00F7055F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D9A5674A25D8973D00F7055F /* PBXTargetDependency */,
+			);
+			name = "PartialTests-watchOS";
+			productName = "watchOS-Tests";
+			productReference = D9A5674325D8973D00F7055F /* PartialTests-watchOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		D9D933B3223492FD00E94AAE /* Partial-watchOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D9D933BB223492FD00E94AAE /* Build configuration list for PBXNativeTarget "Partial-watchOS" */;
@@ -472,8 +517,8 @@
 		D91505A6221E024900EB5215 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 1220;
+				LastSwiftUpdateCheck = 1250;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = "Joseph Duffy";
 				TargetAttributes = {
 					D91505AE221E024900EB5215 = {
@@ -483,6 +528,9 @@
 					D91505B7221E024900EB5215 = {
 						CreatedOnToolsVersion = 10.1;
 						LastSwiftMigration = 1020;
+					};
+					D9A5674225D8973D00F7055F = {
+						CreatedOnToolsVersion = 12.5;
 					};
 					D9D933B3223492FD00E94AAE = {
 						CreatedOnToolsVersion = 10.1;
@@ -519,6 +567,7 @@
 				D9E601C52233E99D00B36B1E /* Partial-macOS */,
 				D9E601CD2233E99D00B36B1E /* PartialTests-macOS */,
 				D9D933B3223492FD00E94AAE /* Partial-watchOS */,
+				D9A5674225D8973D00F7055F /* PartialTests-watchOS */,
 				D9FFA61F2235A223005D9A4D /* Partial-tvOS */,
 				D9FFA6272235A223005D9A4D /* PartialTests-tvOS */,
 			);
@@ -534,6 +583,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D91505B6221E024900EB5215 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9A5674125D8973D00F7055F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -605,6 +661,22 @@
 				D9651AD122D27BE7008DBB0E /* Partial+PartialConvertibleTests.swift in Sources */,
 				D9651AD522D28374008DBB0E /* PartialBuilder+PartialConvertibleTests.swift in Sources */,
 				D9651AC722D26A53008DBB0E /* PartialTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9A5673F25D8973D00F7055F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D95F8994267EB437004B1B4D /* StringWrapper.swift in Sources */,
+				D95F8990267EB42C004B1B4D /* PartialBuilderSubscriptionTests.swift in Sources */,
+				D95F8992267EB431004B1B4D /* beNilWrappedInOptional.swift in Sources */,
+				D95F8993267EB437004B1B4D /* StringWrapperWrapper.swift in Sources */,
+				D95F898D267EB42C004B1B4D /* Partial+PartialConvertibleTests.swift in Sources */,
+				D95F898C267EB42C004B1B4D /* PartialBuilderTests.swift in Sources */,
+				D95F898F267EB42C004B1B4D /* PartiallyBuiltTests.swift in Sources */,
+				D95F898E267EB42C004B1B4D /* PartialBuilder+PartialConvertibleTests.swift in Sources */,
+				D95F8991267EB42C004B1B4D /* PartialTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -689,6 +761,11 @@
 			isa = PBXTargetDependency;
 			target = D91505AE221E024900EB5215 /* Partial-iOS */;
 			targetProxy = D91505BA221E024900EB5215 /* PBXContainerItemProxy */;
+		};
+		D9A5674A25D8973D00F7055F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D9D933B3223492FD00E94AAE /* Partial-watchOS */;
+			targetProxy = D9A5674925D8973D00F7055F /* PBXContainerItemProxy */;
 		};
 		D9E601D12233E99D00B36B1E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -928,6 +1005,46 @@
 			};
 			name = Release;
 		};
+		D9A5674C25D8973D00F7055F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/watchOS";
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+					"$(FRAMEWORK_SEARCH_PATHS)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)Tests-watchOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+			};
+			name = Debug;
+		};
+		D9A5674D25D8973D00F7055F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/watchOS";
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+					"$(FRAMEWORK_SEARCH_PATHS)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)Tests-watchOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+			};
+			name = Release;
+		};
 		D9D933B9223492FD00E94AAE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1164,6 +1281,15 @@
 			buildConfigurations = (
 				D91505C7221E024900EB5215 /* Debug */,
 				D91505C8221E024900EB5215 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D9A5674B25D8973D00F7055F /* Build configuration list for PBXNativeTarget "PartialTests-watchOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D9A5674C25D8973D00F7055F /* Debug */,
+				D9A5674D25D8973D00F7055F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

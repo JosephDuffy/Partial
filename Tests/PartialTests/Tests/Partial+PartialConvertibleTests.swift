@@ -221,7 +221,7 @@ final class Partial_PartialConvertibleTests: QuickSpec {
             context("unwrapped()") {
                 it("should throw the error thrown by Wrapped.init(partial:)") {
                     let expectedError = Partial<StringWrapperWrapper>.Error.keyPathNotSet(\.stringWrapper)
-                    expect(expression: { try partial.unwrapped() }).to(throwError(expectedError))
+                    expect({ try partial.unwrapped() }).to(throwError(expectedError))
                 }
 
                 context("when the partial is complete") {
@@ -236,11 +236,11 @@ final class Partial_PartialConvertibleTests: QuickSpec {
                     }
 
                     it("should not throw an error") {
-                        expect(expression: { try partial.unwrapped() }).toNot(throwError())
+                        expect({ try partial.unwrapped() }).toNot(throwError())
                     }
 
                     it("should return an unwrapped value") {
-                        expect(expression: { try? partial.unwrapped() }) == unwrapped
+                        expect({ try? partial.unwrapped() }) == unwrapped
                     }
                 }
             }
