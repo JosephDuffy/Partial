@@ -1,4 +1,3 @@
-#if swift(>=5.1)
 /**
  A property wrapper that projects a `PartialBuilder` for setting and retrieving specific keys and wraps a value of type `Value?` that will
  return a non-optional value when the partial can be unwrapped.
@@ -21,4 +20,3 @@ public struct PartiallyBuilt<Value: PartialConvertible> {
     }
 
 }
-#endif
