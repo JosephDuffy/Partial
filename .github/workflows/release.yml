@@ -98,16 +98,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Cache Bundler
-        uses: actions/cache@v2
+      - uses: ruby/setup-ruby@v1
         with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-bundler-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-bundler-
-
-      - name: bundle install
-        run: bundle install --deployment
+          bundler-cache: true
 
       - name: Deploy pod
         run: bundle exec pod trunk push
@@ -128,16 +121,9 @@ jobs:
       - name: Select Xcode ${{ matrix.xcode }}
         run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
 
-      - name: Cache Bundler
-        uses: actions/cache@v2
+      - uses: ruby/setup-ruby@v1
         with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-bundler-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-bundler-
-
-      - name: bundle install
-        run: bundle install --deployment
+          bundler-cache: true
 
       - name: Build docs
         run: bundle exec jazzy
