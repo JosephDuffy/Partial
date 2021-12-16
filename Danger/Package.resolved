@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/danger/swift.git",
         "state": {
           "branch": null,
-          "revision": "1af1f9ef49a858b457c0dd8c87c92c3d493037c6",
-          "version": "3.10.1"
+          "revision": "c1bba33f705ca0fd4a0022997c8b696210083755",
+          "version": "3.12.3"
         }
       },
       {
