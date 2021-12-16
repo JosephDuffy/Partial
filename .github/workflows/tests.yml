@@ -70,7 +70,7 @@ jobs:
             ${{ runner.os }}-carthage-
 
       - name: carthage bootstrap
-        run: ./scripts/carthage.sh bootstrap --cache-builds --platform ${{ matrix.platform }} --configuration Debug || (cat /var/folders/*/*/*/carthage-xcodebuild.*.log; false)
+        run: carthage bootstrap --use-xcframeworks --cache-builds --platform ${{ matrix.platform }} --configuration Debug || (cat /var/folders/*/*/*/carthage-xcodebuild.*.log; false)
         env:
           GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -96,7 +96,7 @@ jobs:
         run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
 
       - name: Build Carthage Archive
-        run: ./scripts/carthage.sh build --archive --platform iOS,macOS,tvOS,watchOS
+        run: carthage build --use-xcframeworks --archive --platform iOS,macOS,tvOS,watchOS
 
   linux_tests:
     name: Swift ${{ matrix.swift }} on ${{ matrix.os }}
