@@ -35,7 +35,7 @@ jobs:
         run: git diff --exit-code
 
   github_release:
-    name: Create GitHub Release with Prebuilt Carthage Frameworks (Xcode ${{ matrix.xcode }})
+    name: Create GitHub Release
     needs: validate_release
     runs-on: macos-latest
     strategy:
@@ -47,9 +47,6 @@ jobs:
 
       - name: Select Xcode ${{ matrix.xcode }}
         run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
-
-      - name: Build carthage archive
-        run: ./scripts/carthage.sh build --archive --platform iOS,macOS,tvOS,watchOS
 
       - name: Fetch tag
         run: git fetch --depth=1 origin +${{ github.ref }}:${{ github.ref }}
@@ -79,16 +76,6 @@ jobs:
           release_name: ${{ steps.release_version.outputs.version }}
           body: ${{ steps.release_description.outputs.description }}
           prerelease: ${{ startsWith(steps.release_version.outputs.version, 'v0.') || contains(steps.release_version.outputs.version, '-') }}
-
-      - name: Upload Carthage Archive
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./Partial.framework.zip
-          asset_name: Partial.framework.zip
-          asset_content_type: application/zip
 
   cocoa_pods_release:
     name: CocoaPods

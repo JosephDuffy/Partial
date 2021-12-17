@@ -75,8 +75,8 @@ jobs:
         with:
           fail_ci_if_error: true
 
-  carthage_archive:
-    name: Carthage Archive on Xcode ${{ matrix.xcode }}
+  carthage_build:
+    name: Carthage Build on Xcode ${{ matrix.xcode }}
     runs-on: macos-latest
     strategy:
       matrix:
@@ -88,8 +88,8 @@ jobs:
       - name: Select Xcode ${{ matrix.xcode }}
         run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
 
-      - name: Build Carthage Archive
-        run: carthage build --use-xcframeworks --archive --platform iOS,macOS,tvOS,watchOS
+      - name: carthage build
+        run: carthage build --no-skip-current --use-xcframeworks --platform iOS,macOS,tvOS,watchOS
 
   linux_tests:
     name: Swift ${{ matrix.swift }} on ${{ matrix.os }}
