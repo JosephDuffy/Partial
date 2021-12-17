@@ -24,6 +24,7 @@ jobs:
         with:
           node-version-file: "Danger/.node-version"
           cache: "npm"
+          cache-dependency-path: "Danger/package-lock.json"
 
       - run: npm ci
 
