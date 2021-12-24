@@ -32,7 +32,7 @@ jobs:
         run: swift build --target DangerDependencies
 
       - name: Run Danger
-        run: swift run danger-swift ci --cwd ../ --danger-js-path $(npm bin)/danger
+        run: swift run danger-swift ci --cwd ../ --danger-js-path $(npm bin)/danger --failOnErrors --no-publish-check
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
