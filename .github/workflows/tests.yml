@@ -14,8 +14,8 @@ jobs:
       fail-fast: false
       matrix:
         xcode:
-          - '11.7'
-          - '12.4'
+          - "12.5.1"
+          - "13.2"
     steps:
       - uses: actions/checkout@v2
 
@@ -40,8 +40,8 @@ jobs:
       fail-fast: false
       matrix:
         xcode:
-          - '11.7'
-          - '12.4'
+          - "12.5.1"
+          - "13.2"
         platform: ["iOS", "tvOS", "macOS"]
 
     steps:
@@ -50,16 +50,9 @@ jobs:
       - name: Select Xcode ${{ matrix.xcode }}
         run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
 
-      - name: Cache Bundler
-        uses: actions/cache@v2
+      - uses: ruby/setup-ruby@v1
         with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-bundler-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-bundler-
-
-      - name: bundle install
-        run: bundle install --deployment
+          bundler-cache: true
 
       - name: Cache Carthage
         uses: actions/cache@v2
@@ -70,7 +63,7 @@ jobs:
             ${{ runner.os }}-carthage-
 
       - name: carthage bootstrap
-        run: ./scripts/carthage.sh bootstrap --cache-builds --platform ${{ matrix.platform }} --configuration Debug || (cat /var/folders/*/*/*/carthage-xcodebuild.*.log; false)
+        run: carthage bootstrap --use-xcframeworks --cache-builds --platform ${{ matrix.platform }} --configuration Debug || (cat /var/folders/*/*/*/carthage-xcodebuild.*.log; false)
         env:
           GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -82,21 +75,21 @@ jobs:
         with:
           fail_ci_if_error: true
 
-  carthage_archive:
-    name: Carthage Archive on Xcode ${{ matrix.xcode }}
+  carthage_build:
+    name: Carthage Build on Xcode ${{ matrix.xcode }}
     runs-on: macos-latest
     strategy:
       matrix:
         xcode:
-          - '12.4'
+          - "13.2"
     steps:
       - uses: actions/checkout@v2
 
       - name: Select Xcode ${{ matrix.xcode }}
         run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
 
-      - name: Build Carthage Archive
-        run: ./scripts/carthage.sh build --archive --platform iOS,macOS,tvOS,watchOS
+      - name: carthage build
+        run: carthage build --no-skip-current --use-xcframeworks --platform iOS,macOS,tvOS,watchOS
 
   linux_tests:
     name: Swift ${{ matrix.swift }} on ${{ matrix.os }}
@@ -107,7 +100,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        swift: ['5.0', '5.1', '5.2', '5.3']
+        swift: ["5.2", "5.3", "5.4", "5.5"]
 
     steps:
       - uses: actions/checkout@v2

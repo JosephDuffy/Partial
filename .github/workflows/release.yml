@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         xcode:
-          - '12.4'
+          - "13.2"
     steps:
       - uses: actions/checkout@v2
 
@@ -35,21 +35,18 @@ jobs:
         run: git diff --exit-code
 
   github_release:
-    name: Create GitHub Release with Prebuilt Carthage Frameworks (Xcode ${{ matrix.xcode }})
+    name: Create GitHub Release
     needs: validate_release
     runs-on: macos-latest
     strategy:
       matrix:
         xcode:
-          - '12.4'
+          - "13.2"
     steps:
       - uses: actions/checkout@v2
 
       - name: Select Xcode ${{ matrix.xcode }}
         run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
-
-      - name: Build carthage archive
-        run: ./scripts/carthage.sh build --archive --platform iOS,macOS,tvOS,watchOS
 
       - name: Fetch tag
         run: git fetch --depth=1 origin +${{ github.ref }}:${{ github.ref }}
@@ -80,16 +77,6 @@ jobs:
           body: ${{ steps.release_description.outputs.description }}
           prerelease: ${{ startsWith(steps.release_version.outputs.version, 'v0.') || contains(steps.release_version.outputs.version, '-') }}
 
-      - name: Upload Carthage Archive
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./Partial.framework.zip
-          asset_name: Partial.framework.zip
-          asset_content_type: application/zip
-
   cocoa_pods_release:
     name: CocoaPods
     needs: validate_release
@@ -98,16 +85,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Cache Bundler
-        uses: actions/cache@v2
+      - uses: ruby/setup-ruby@v1
         with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-bundler-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-bundler-
-
-      - name: bundle install
-        run: bundle install --deployment
+          bundler-cache: true
 
       - name: Deploy pod
         run: bundle exec pod trunk push
@@ -121,23 +101,16 @@ jobs:
     strategy:
       matrix:
         xcode:
-          - '12.4'
+          - "13.2"
     steps:
       - uses: actions/checkout@v2
 
       - name: Select Xcode ${{ matrix.xcode }}
         run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
 
-      - name: Cache Bundler
-        uses: actions/cache@v2
+      - uses: ruby/setup-ruby@v1
         with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-bundler-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-bundler-
-
-      - name: bundle install
-        run: bundle install --deployment
+          bundler-cache: true
 
       - name: Build docs
         run: bundle exec jazzy
