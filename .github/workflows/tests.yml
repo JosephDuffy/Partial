@@ -80,6 +80,8 @@ jobs:
         with:
           format: lcov
           output: coverage.lcov
+          ignore-conversion-failures: true
+          fail-on-empty-output: true
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2.1.0
