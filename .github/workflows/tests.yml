@@ -119,6 +119,8 @@ jobs:
       - name: swift test
         run: swift test
 
-  ci_passes:
-    name: CI Passes
+  tests_pass:
+    name: Tests pass
     needs: [swiftpm_tests, xcode_tests, carthage_build, linux_tests]
+    steps:
+      - run: echo "Tests have passed"
