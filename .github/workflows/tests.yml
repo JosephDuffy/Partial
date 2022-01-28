@@ -118,3 +118,7 @@ jobs:
 
       - name: swift test
         run: swift test
+
+  ci_passes:
+    name: CI Passes
+    needs: [swiftpm_tests, xcode_tests, carthage_build, linux_tests]
