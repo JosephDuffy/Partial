@@ -25,8 +25,12 @@ jobs:
       - name: SwiftPM tests
         run: swift test --enable-code-coverage
 
-      - name: Convert coverage to lcov
-        run: xcrun llvm-cov export -format="lcov" .build/debug/PartialPackageTests.xctest/Contents/MacOS/PartialPackageTests -instr-profile .build/debug/codecov/default.profdata > coverage.lcov
+      - name: Convert coverage for Codecov
+        id: convert-coverage
+        uses: sersoft-gmbh/swift-coverage-action@v2.0.1
+        with:
+          format: lcov
+          output: coverage.lcov
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
@@ -69,6 +73,13 @@ jobs:
 
       - name: Test ${{ matrix.platform }}
         run: bundle exec fastlane scan --clean --scheme "Partial-${{ matrix.platform }}"
+
+      - name: Convert coverage for Codecov
+        id: convert-coverage
+        uses: sersoft-gmbh/swift-coverage-action@v2.0.1
+        with:
+          format: lcov
+          output: coverage.lcov
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2.1.0
