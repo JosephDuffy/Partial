@@ -55,3 +55,10 @@ jobs:
 
       - name: pod lib lint
         run: bundle exec pod lib lint
+
+  checks_pass:
+    name: Checks pass
+    runs-on: ubuntu-latest
+    needs: [danger, pod_lib_lint]
+    steps:
+      - run: echo "Checks have passed"
