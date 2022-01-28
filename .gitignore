@@ -27,3 +27,8 @@ docs/
 
 # Tests
 test_output
+
+# VS Code
+
+## This file is used by VS Code to configure tasks that can be run, e.g. tests. However is relies on the Xcode path which can change between computers.
+/.vscode/launch.json
