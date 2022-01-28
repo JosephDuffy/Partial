@@ -121,6 +121,7 @@ jobs:
 
   tests_pass:
     name: Tests pass
+    runs-on: ubuntu-latest
     needs: [swiftpm_tests, xcode_tests, carthage_build, linux_tests]
     steps:
       - run: echo "Tests have passed"
