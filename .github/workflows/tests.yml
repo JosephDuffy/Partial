@@ -30,11 +30,13 @@ jobs:
         uses: sersoft-gmbh/swift-coverage-action@v2.0.1
         with:
           format: lcov
-          output: coverage.lcov
+          ignore-conversion-failures: true
+          fail-on-empty-output: true
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
         with:
+          files: ${{ join(fromJSON(steps.convert-coverage.outputs.files), ',') }}
           fail_ci_if_error: true
 
   xcode_tests:
@@ -80,13 +82,13 @@ jobs:
         uses: sersoft-gmbh/swift-coverage-action@v2.0.1
         with:
           format: lcov
-          output: coverage.lcov
           ignore-conversion-failures: true
           fail-on-empty-output: true
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2.1.0
         with:
+          files: ${{ join(fromJSON(steps.convert-coverage.outputs.files), ',') }}
           fail_ci_if_error: true
 
   carthage_build:
