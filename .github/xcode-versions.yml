@@ -5,6 +5,10 @@ workflows:
         strategy:
           matrix:
             xcode: latest
+      swiftlint:
+        strategy:
+          matrix:
+            xcode: latest
       pod_lib_lint:
         strategy:
           matrix:

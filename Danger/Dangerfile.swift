@@ -1,13 +1,7 @@
 import Foundation
-import Danger
 import SwiftChecksDangerPlugin
 
 let projectName = "Partial"
-let danger = Danger()
-// Danger only run for PRs, so if `github` isn't `nil` then
-// this is a PR on GitHub. This bool is used to check for
-// `swift run danger-swift ci` vs `swift run danger-swift local`
-let isPR = danger.github != nil
 
 func checkSwiftVersions() {
     SwiftChecks.check(
@@ -43,4 +37,3 @@ func checkProjectVersions() {
 
 checkSwiftVersions()
 checkProjectVersions()
-SwiftLint.lint(inline: isPR)
