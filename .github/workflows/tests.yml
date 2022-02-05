@@ -54,9 +54,8 @@ jobs:
       - name: Select Xcode ${{ matrix.xcode }}
         run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
 
-      - uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
+      - name: Install Mint
+        run: brew install mint
 
       - name: Cache Carthage
         uses: actions/cache@v2
@@ -72,7 +71,9 @@ jobs:
           GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Test ${{ matrix.platform }}
-        run: bundle exec fastlane scan --clean --scheme "Partial-${{ matrix.platform }}"
+        run: |
+          set -e -o pipefail
+          mint run xcutils test exec ${{ matrix.platform }} --scheme "Partial-${{ matrix.platform }}" --enable-code-coverage | $(mint which xcbeautify)
 
       - name: Convert coverage for Codecov
         id: convert-coverage
