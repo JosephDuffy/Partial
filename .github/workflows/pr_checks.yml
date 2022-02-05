@@ -49,6 +49,9 @@ jobs:
       - name: Select Xcode ${{ matrix.xcode }}
         run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
 
+      - name: Install Mint
+        run: brew install mint
+
       - name: Run SwiftLint
         run: mint run swiftlint
 
