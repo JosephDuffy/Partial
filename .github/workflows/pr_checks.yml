@@ -67,7 +67,7 @@ jobs:
     name: Upload Documentation
     runs-on: ubuntu-latest
     container:
-      image: swift:nightly-5.6-xenial-slim
+      image: swiftlang/swift:nightly-5.6-xenial
     steps:
       - uses: actions/checkout@v2
 
