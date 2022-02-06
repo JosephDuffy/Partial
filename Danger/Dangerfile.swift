@@ -1,3 +1,4 @@
+import Danger
 import Foundation
 import SwiftChecksDangerPlugin
 
