@@ -59,6 +59,8 @@ jobs:
       - name: Install Mint
         run: brew install mint
 
+      - run: mint bootstrap
+
       - name: Cache Carthage
         uses: actions/cache@v2
         with:
