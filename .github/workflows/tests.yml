@@ -73,8 +73,10 @@ jobs:
         uses: actions/cache@v2
         with:
           path: Carthage
-          key: ${{ runner.os }}-xcode_${{ matrix.xcode }}-${{ matrix.platform }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
+          key: ${{ runner.os }}-carthage-xcode_${{ matrix.xcode }}-${{ matrix.platform }}-${{ hashFiles('**/Cartfile.resolved') }}
           restore-keys: |
+            ${{ runner.os }}-carthage-xcode_${{ matrix.xcode }}-${{ matrix.platform }}-
+            ${{ runner.os }}-carthage-xcode_${{ matrix.xcode }}-
             ${{ runner.os }}-carthage-
 
       - name: carthage bootstrap
