@@ -60,7 +60,7 @@ open class PartialBuilder<Wrapped>: PartialProtocol, CustomStringConvertible {
 
     /// A collection of objects wrapping closures that will be notified when a change to a key path occurs
     private var keyPathSubscriptions: [PartialKeyPath<Wrapped>: Set<Weak<KeyPathChangesSubscription>>] = [:]
-    
+
     private var attachedSubscription: Subscription?
 
     /// Create an empty `PartialBuilder`.
@@ -148,7 +148,7 @@ open class PartialBuilder<Wrapped>: PartialProtocol, CustomStringConvertible {
         keyPathSubscriptions[keyPath]?.forEach { $0.wrapped?.notifyOfRemovable(oldValue: oldValue) }
         allChangesSubscriptions.forEach { $0.wrapped?.updateListener(keyPath, self) }
     }
-    
+
     /// Creates a `PartialBuilder` for any `PartialConvertable` field in the type. It will automatically subscribe the original `PartialBuilder` to get updates made to the field's builder.
     ///
     /// - Parameter for: The `KeyPath` to create a `PartialBuilder` for.
