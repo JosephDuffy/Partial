@@ -77,7 +77,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-carthage-xcode_${{ matrix.xcode }}-${{ matrix.platform }}-
             ${{ runner.os }}-carthage-xcode_${{ matrix.xcode }}-
-            ${{ runner.os }}-carthage-
 
       - name: carthage bootstrap
         run: carthage bootstrap --use-xcframeworks --cache-builds --platform ${{ matrix.platform }} --configuration Debug
