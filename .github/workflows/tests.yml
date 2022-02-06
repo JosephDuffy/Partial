@@ -56,25 +56,37 @@ jobs:
       - name: Select Xcode ${{ matrix.xcode }}
         run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
 
-      - uses: ruby/setup-ruby@v1
+      - name: Install Mint
+        run: brew install mint
+
+      - name: Cache Mint
+        uses: actions/cache@v2
         with:
-          bundler-cache: true
+          path: ~/.mint
+          key: ${{ runner.os }}-mint-xcode_${{ matrix.xcode }}-${{ hashFiles('**/Mintfile') }}
+          restore-keys: |
+            ${{ runner.os }}-mint-xcode_${{ matrix.xcode }}
+
+      - run: mint bootstrap
 
       - name: Cache Carthage
         uses: actions/cache@v2
         with:
           path: Carthage
-          key: ${{ runner.os }}-xcode_${{ matrix.xcode }}-${{ matrix.platform }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
+          key: ${{ runner.os }}-carthage-xcode_${{ matrix.xcode }}-${{ matrix.platform }}-${{ hashFiles('**/Cartfile.resolved') }}
           restore-keys: |
-            ${{ runner.os }}-carthage-
+            ${{ runner.os }}-carthage-xcode_${{ matrix.xcode }}-${{ matrix.platform }}-
+            ${{ runner.os }}-carthage-xcode_${{ matrix.xcode }}-
 
       - name: carthage bootstrap
-        run: carthage bootstrap --use-xcframeworks --cache-builds --platform ${{ matrix.platform }} --configuration Debug || (cat /var/folders/*/*/*/carthage-xcodebuild.*.log; false)
+        run: carthage bootstrap --use-xcframeworks --cache-builds --platform ${{ matrix.platform }} --configuration Debug
         env:
           GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Test ${{ matrix.platform }}
-        run: bundle exec fastlane scan --clean --scheme "Partial-${{ matrix.platform }}"
+        run: |
+          set -e -o pipefail
+          mint run xcutils test ${{ matrix.platform }} --scheme "Partial-${{ matrix.platform }}" --enable-code-coverage | $(mint which xcbeautify)
 
       - name: Convert coverage for Codecov
         id: convert-coverage
