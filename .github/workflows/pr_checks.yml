@@ -52,6 +52,14 @@ jobs:
       - name: Install Mint
         run: brew install mint
 
+      - name: Cache Mint
+        uses: actions/cache@v2
+        with:
+          path: ~/.mint
+          key: ${{ runner.os }}-mint-xcode_${{ matrix.xcode }}-${{ hashFiles('**/Mintfile') }}
+          restore-keys: |
+            ${{ runner.os }}-mint-xcode_${{ matrix.xcode }}
+
       - name: Run SwiftLint
         run: mint run swiftlint
 
