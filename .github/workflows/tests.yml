@@ -77,7 +77,7 @@ jobs:
       - name: Test ${{ matrix.platform }}
         run: |
           set -e -o pipefail
-          mint run xcutils test exec ${{ matrix.platform }} --scheme "Partial-${{ matrix.platform }}" --enable-code-coverage | $(mint which xcbeautify)
+          mint run xcutils test ${{ matrix.platform }} --scheme "Partial-${{ matrix.platform }}" --enable-code-coverage | $(mint which xcbeautify)
 
       - name: Convert coverage for Codecov
         id: convert-coverage
