@@ -3,12 +3,9 @@ name: PR Checks
 on: [pull_request]
 
 jobs:
-  danger:
-    name: Danger (Xcode ${{ matrix.xcode }})
+  check_versions:
+    name: Check Versions (Xcode ${{ matrix.xcode }})
     runs-on: macos-latest
-    defaults:
-      run:
-        working-directory: Danger
     strategy:
       matrix:
         xcode:
@@ -19,22 +16,7 @@ jobs:
       - name: Select Xcode ${{ matrix.xcode }}
         run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version-file: "Danger/.node-version"
-          cache: "npm"
-          cache-dependency-path: "Danger/package-lock.json"
-
-      - run: npm ci
-
-      - name: Build Danger and Danger Dependencies
-        run: swift build --target DangerDependencies
-
-      - name: Run Danger
-        run: swift run danger-swift ci --cwd ../ --danger-js-path $(npm bin)/danger --failOnErrors --use-github-checks
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: ./scripts/check_all_versions_match.swift
 
   swiftlint:
     name: SwiftLint (Xcode ${{ matrix.xcode }})
@@ -86,6 +68,6 @@ jobs:
   checks_pass:
     name: Checks pass
     runs-on: ubuntu-latest
-    needs: [danger, swiftlint, pod_lib_lint]
+    needs: [check_versions, swiftlint, pod_lib_lint]
     steps:
       - run: echo "Checks have passed"
