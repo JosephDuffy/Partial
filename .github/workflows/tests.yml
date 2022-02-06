@@ -80,7 +80,7 @@ jobs:
             ${{ runner.os }}-carthage-
 
       - name: carthage bootstrap
-        run: carthage bootstrap --use-xcframeworks --cache-builds --platform ${{ matrix.platform }} --configuration Debug || (cat /var/folders/*/*/*/carthage-xcodebuild.*.log; false)
+        run: carthage bootstrap --use-xcframeworks --cache-builds --platform ${{ matrix.platform }} --configuration Debug
         env:
           GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
