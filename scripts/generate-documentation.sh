@@ -1,6 +1,7 @@
 #!/bin/sh
 
-/Library/Developer/Toolchains/swift-5.6-DEVELOPMENT-SNAPSHOT-2022-01-11-a.xctoolchain/usr/bin/swift package \
+export DEVELOPER_DIR=/Applications/Xcode_13.3-beta.3.app/
+swift package \
     --allow-writing-to-directory "$1" \
     generate-documentation \
     --target Partial \
