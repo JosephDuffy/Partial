@@ -12,7 +12,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/Quick/Quick.git", from: "4.0.0"),
         .package(url: "https://github.com/Quick/Nimble.git", from: "9.2.1"),
-        .package(url: "https://github.com/apple/swift-docc-plugin.git", branch: "main"),
+        .package(url: "https://github.com/ethan-kusters/swift-docc-plugin.git", branch: "adopt-new-argument-parsing-api"),
     ],
     targets: [
         .target(name: "Partial"),
