@@ -103,14 +103,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Cache Mint
-        id: mint-cache
-        uses: actions/cache@v2
-        with:
-          path: /usr/local/lib/mint
-          key: ${{ runner.os }}-mint-${{ hashFiles("**/Mintfile") }}
-          restore-keys: ${{ runner.os }}-mint-
-
       - name: Generate Documentation
         run: ./scripts/generate-documentation.sh ./docs
 
