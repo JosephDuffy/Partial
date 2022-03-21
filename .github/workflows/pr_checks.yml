@@ -35,7 +35,7 @@ jobs:
         run: brew install mint
 
       - name: Cache Mint
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.mint
           key: ${{ runner.os }}-mint-xcode_${{ matrix.xcode }}-${{ hashFiles('**/Mintfile') }}
