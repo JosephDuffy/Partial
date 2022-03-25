@@ -1,7 +1,5 @@
 #!/bin/sh
 
-export DEVELOPER_DIR=/Applications/Xcode_13.3-beta.3.app/
-
 if [ "$#" -lt 1 ]; then
     echo "Usage: $0 <directory> [base-path]" >&2
      exit 1
