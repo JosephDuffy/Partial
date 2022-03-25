@@ -72,8 +72,8 @@ jobs:
     steps:
       - run: echo "Checks have passed"
 
-  upload_docs:
-    name: Upload Documentation
+  generate_docs:
+    name: Generate Documentation
     runs-on: ubuntu-latest
     container:
       image: swiftlang/swift:nightly-5.6-xenial
@@ -82,9 +82,3 @@ jobs:
 
       - name: Generate Documentation
         run: ./scripts/generate-documentation.sh ./docs Partial
-
-      - name: Upload Documentation
-        uses: actions/upload-artifact@v2
-        with:
-          name: docs
-          path: ./docs/
