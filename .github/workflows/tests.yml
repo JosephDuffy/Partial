@@ -17,7 +17,7 @@ jobs:
           - "12.5.1"
           - "13.2.1"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Select Xcode ${{ matrix.xcode }}
         run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
@@ -51,7 +51,7 @@ jobs:
         platform: ["iOS", "tvOS", "macOS"]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Select Xcode ${{ matrix.xcode }}
         run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
@@ -60,7 +60,7 @@ jobs:
         run: brew install mint
 
       - name: Cache Mint
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.mint
           key: ${{ runner.os }}-mint-xcode_${{ matrix.xcode }}-${{ hashFiles('**/Mintfile') }}
@@ -70,7 +70,7 @@ jobs:
       - run: mint bootstrap
 
       - name: Cache Carthage
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: Carthage
           key: ${{ runner.os }}-carthage-xcode_${{ matrix.xcode }}-${{ matrix.platform }}-${{ hashFiles('**/Cartfile.resolved') }}
@@ -110,7 +110,7 @@ jobs:
         xcode:
           - "13.2"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Select Xcode ${{ matrix.xcode }}
         run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
@@ -130,7 +130,7 @@ jobs:
         swift: ["5.2", "5.3", "5.4", "5.5"]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: swift test
         run: swift test
