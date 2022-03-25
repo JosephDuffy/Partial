@@ -99,7 +99,7 @@ jobs:
     needs: validate_release
     runs-on: ubuntu-latest
     container:
-      image: swiftlang/swift:nightly-5.6-xenial
+      image: swift:5.6
     steps:
       - uses: actions/checkout@v3
 
