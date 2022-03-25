@@ -9,13 +9,15 @@ on:
 jobs:
   swiftpm_tests:
     name: SwiftPM on Xcode ${{ matrix.xcode }}
-    runs-on: macos-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        xcode:
-          - "12.5.1"
-          - "13.2.1"
+        include:
+          - xcode: "12.5.1"
+            os: macos-11
+          - xcode: "13.3"
+            os: macos-12
     steps:
       - uses: actions/checkout@v3
 
@@ -41,14 +43,16 @@ jobs:
 
   xcode_tests:
     name: ${{ matrix.platform }} on Xcode ${{ matrix.xcode }}
-    runs-on: macos-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        xcode:
-          - "12.5.1"
-          - "13.2.1"
         platform: ["iOS", "tvOS", "macOS"]
+        include:
+          - xcode: "12.5.1"
+            os: macos-11
+          - xcode: "13.3"
+            os: macos-12
 
     steps:
       - uses: actions/checkout@v3
@@ -104,11 +108,15 @@ jobs:
 
   carthage_build:
     name: Carthage Build on Xcode ${{ matrix.xcode }}
-    runs-on: macos-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        xcode:
-          - "13.2"
+        include:
+          - xcode: "12.5.1"
+            os: macos-11
+          - xcode: "13.3"
+            os: macos-12
+
     steps:
       - uses: actions/checkout@v3
 
@@ -127,7 +135,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        swift: ["5.2", "5.3", "5.4", "5.5"]
+        swift: ["5.2", "5.3", "5.4", "5.5", "5.6"]
 
     steps:
       - uses: actions/checkout@v3
