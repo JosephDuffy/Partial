@@ -71,3 +71,14 @@ jobs:
     needs: [check_versions, swiftlint, pod_lib_lint]
     steps:
       - run: echo "Checks have passed"
+
+  generate_docs:
+    name: Generate Documentation
+    runs-on: ubuntu-latest
+    container:
+      image: swift:5.6
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Generate Documentation
+        run: ./scripts/generate-documentation.sh ./docs Partial

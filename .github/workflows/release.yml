@@ -95,25 +95,16 @@ jobs:
           COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
 
   build_docs:
-    name: Build Docs
+    name: Build Documentation
     needs: validate_release
-    runs-on: macos-latest
-    strategy:
-      matrix:
-        xcode:
-          - "13.2.1"
+    runs-on: ubuntu-latest
+    container:
+      image: swift:5.6
     steps:
       - uses: actions/checkout@v3
 
-      - name: Select Xcode ${{ matrix.xcode }}
-        run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
-
-      - uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-
-      - name: Build docs
-        run: bundle exec jazzy
+      - name: Generate Documentation
+        run: ./scripts/generate-documentation.sh ./docs Partial
 
       - name: Upload Docs
         uses: peaceiris/actions-gh-pages@v3
