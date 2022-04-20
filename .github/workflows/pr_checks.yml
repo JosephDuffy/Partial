@@ -5,11 +5,11 @@ on: [pull_request]
 jobs:
   check_versions:
     name: Check Versions (Xcode ${{ matrix.xcode }})
-    runs-on: macos-latest
+    runs-on: macos-12
     strategy:
       matrix:
         xcode:
-          - "13.2.1"
+          - "13.3"
     steps:
       - uses: actions/checkout@v3
 
@@ -20,11 +20,11 @@ jobs:
 
   swiftlint:
     name: SwiftLint (Xcode ${{ matrix.xcode }})
-    runs-on: macos-latest
+    runs-on: macos-12
     strategy:
       matrix:
         xcode:
-          - "13.2.1"
+          - "13.3"
     steps:
       - uses: actions/checkout@v3
 
@@ -47,11 +47,11 @@ jobs:
 
   pod_lib_lint:
     name: pod lib lint
-    runs-on: macos-latest
+    runs-on: macos-12
     strategy:
       matrix:
         xcode:
-          - "13.2.1"
+          - "13.3"
     steps:
       - uses: actions/checkout@v3
 
