@@ -1,4 +1,4 @@
-name: Release
+name: Update Documentation
 
 on:
   workflow_dispatch:
@@ -9,7 +9,6 @@ on:
 jobs:
   build_docs:
     name: Build Documentation
-    needs: validate_release
     runs-on: ubuntu-latest
     container:
       image: swift:5.6
