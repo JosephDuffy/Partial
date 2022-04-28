@@ -1,49 +1,26 @@
-import Quick
-import Nimble
+@testable import Partial
+import XCTest
 
-@testable
-import Partial
-
-final class PartiallyBuiltTests: QuickSpec {
-
-    override func spec() {
-        describe("PartiallyBuilt") {
-            var partiallyBuilt: PartiallyBuilt<StringWrapper>!
-
-            beforeEach {
-                partiallyBuilt = PartiallyBuilt()
-            }
-
-            context("with an incomplete partial value") {
-                it("wrappedValue should be nil") {
-                    expect(partiallyBuilt.wrappedValue).to(beNil())
-                }
-            }
-
-            context("with a complete partial value") {
-                let setValue = StringWrapper(stringLiteral: "test")
-                beforeEach {
-                    partiallyBuilt.projectedValue.string = "test"
-                }
-
-                it("wrappedValue should return the unwrapped value") {
-                    expect(partiallyBuilt.wrappedValue).to(equal(setValue))
-                }
-            }
-
-            context("initialised with a complete partial") {
-                let setValue = StringWrapper(stringLiteral: "test")
-                beforeEach {
-                    var partial = Partial<StringWrapper>()
-                    partial.string = setValue.string
-                    partiallyBuilt = PartiallyBuilt(partial: partial)
-                }
-
-                it("wrappedValue should return the unwrapped value") {
-                    expect(partiallyBuilt.wrappedValue).to(equal(setValue))
-                }
-            }
-        }
+final class PartiallyBuiltTests: XCTestCase {
+    func testIncompletePartialValue() {
+        let partiallyBuilt = PartiallyBuilt<StringWrapper>()
+        XCTAssertNil(partiallyBuilt.wrappedValue)
     }
 
+    func testCompletePartialValue() {
+        var partiallyBuilt = PartiallyBuilt<StringWrapper>()
+        let expectedValue = StringWrapper(stringLiteral: "test")
+        partiallyBuilt.projectedValue.string = expectedValue.string
+
+        XCTAssertEqual(partiallyBuilt.wrappedValue, expectedValue)
+    }
+
+    func testInitialisedWithACompletePartial() {
+        let expectedValue = StringWrapper(stringLiteral: "test")
+        var partial = Partial<StringWrapper>()
+        partial.string = expectedValue.string
+        let partiallyBuilt = PartiallyBuilt(partial: partial)
+
+        XCTAssertEqual(partiallyBuilt.wrappedValue, expectedValue)
+    }
 }
