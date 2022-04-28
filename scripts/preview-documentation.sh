@@ -1,3 +1,3 @@
 #!/bin/sh
 
-swift package --disable-sandbox --target Partial preview-documentation
+swift package --disable-sandbox preview-documentation --target Partial
