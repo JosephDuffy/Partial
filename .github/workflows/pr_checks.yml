@@ -76,7 +76,7 @@ jobs:
     name: Generate Documentation
     runs-on: ubuntu-latest
     container:
-      image: swift:5.6
+      image: swift:5.6.1
     steps:
       - uses: actions/checkout@v2
 
