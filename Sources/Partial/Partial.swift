@@ -5,7 +5,7 @@ import Foundation
 public struct Partial<Wrapped>: PartialProtocol, CustomStringConvertible {
 
     /// An error that can be thrown by the `value(for:)` function.
-    public enum Error<Value>: Swift.Error {
+    public enum Error<Value>: Swift.Error, Equatable {
         /// The key path has not been set.
         case keyPathNotSet(KeyPath<Wrapped, Value>)
     }
