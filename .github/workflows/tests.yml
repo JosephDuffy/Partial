@@ -27,7 +27,7 @@ jobs:
 
       - name: Convert coverage for Codecov
         id: convert-coverage
-        uses: sersoft-gmbh/swift-coverage-action@v3.0.0
+        uses: sersoft-gmbh/swift-coverage-action@v3.0.1
         with:
           ignore-conversion-failures: true
           fail-on-empty-output: true
@@ -89,7 +89,7 @@ jobs:
 
       - name: Convert coverage for Codecov
         id: convert-coverage
-        uses: sersoft-gmbh/swift-coverage-action@v3.0.0
+        uses: sersoft-gmbh/swift-coverage-action@v3.0.1
         with:
           ignore-conversion-failures: true
           fail-on-empty-output: true
